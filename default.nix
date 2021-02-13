@@ -24,6 +24,7 @@ in
       sha256 = "196026a89pizj8p0hqdgkyllj2spx2qwpynsaqjq17s8v15vk5dg";
     }] ++ [
       nixpkgs.vscode-extensions.bbenoist.Nix
+      nixpkgs.vscode-extensions.ms-azuretools.vscode-docker
       nixpkgs.vscode-extensions.ms-python.python
     ];
   })
