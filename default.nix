@@ -23,6 +23,12 @@ in
         sha256 = "1hq41fy2v1grjrw77mbs9k6ps6gncwlydm03ipawjnsinxc9rdkp";
       }
       {
+        name = "gitlens";
+        publisher = "eamodio";
+        version = "11.2.1";
+        sha256 = "1ba72sr7mv9c0xzlqlxbv1x8p6jjvdjkkf7dn174v8b8345164v6";
+      }
+      {
         name = "terraform";
         publisher = "4ops";
         version = "0.2.1";
