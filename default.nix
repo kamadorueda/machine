@@ -10,6 +10,7 @@ let
 in
 [
   (nixpkgs.git)
+  (nixpkgs.gnupg)
   (nixpkgs.google-chrome)
   (nixpkgs.nixpkgs-fmt)
   (nixpkgs.vim)
