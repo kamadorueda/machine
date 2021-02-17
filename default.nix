@@ -9,9 +9,11 @@ let
   };
 in
 [
+  (nixpkgs.awscli)
   (nixpkgs.git)
   (nixpkgs.gnupg)
   (nixpkgs.google-chrome)
+  (nixpkgs.kubectl)
   (nixpkgs.nixpkgs-fmt)
   (nixpkgs.vim)
   (nixpkgs.vscode-with-extensions.override {
@@ -40,4 +42,5 @@ in
       nixpkgs.vscode-extensions.ms-python.python
     ];
   })
+  (nixpkgs.tree)
 ]
