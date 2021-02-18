@@ -13,6 +13,7 @@ in
   (nixpkgs.git)
   (nixpkgs.gnupg)
   (nixpkgs.google-chrome)
+  (nixpkgs.jq)
   (nixpkgs.kubectl)
   (nixpkgs.nixpkgs-fmt)
   (nixpkgs.vim)
@@ -43,4 +44,5 @@ in
     ];
   })
   (nixpkgs.tree)
+  (nixpkgs.yq)
 ]
