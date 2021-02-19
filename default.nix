@@ -15,6 +15,7 @@ in
   (nixpkgs.google-chrome)
   (nixpkgs.jq)
   (nixpkgs.kubectl)
+  (nixpkgs.libreoffice)
   (nixpkgs.nixpkgs-fmt)
   (nixpkgs.vim)
   (nixpkgs.vscode-with-extensions.override {
