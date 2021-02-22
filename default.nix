@@ -23,20 +23,26 @@ in
       {
         name = "bash-ide-vscode";
         publisher = "mads-hartmann";
-        version = "1.11.0";
         sha256 = "1hq41fy2v1grjrw77mbs9k6ps6gncwlydm03ipawjnsinxc9rdkp";
+        version = "1.11.0";
       }
       {
         name = "gitlens";
         publisher = "eamodio";
-        version = "11.2.1";
         sha256 = "1ba72sr7mv9c0xzlqlxbv1x8p6jjvdjkkf7dn174v8b8345164v6";
+        version = "11.2.1";
+      }
+      {
+        name = "vscode-pylance";
+        publisher = "ms-python";
+        sha256 = "07zapnindwi79k5a2v5ywgwfiqzgs79li73y56rpq0n3a287z4q6";
+        version = "2021.2.3";
       }
       {
         name = "terraform";
         publisher = "4ops";
-        version = "0.2.1";
         sha256 = "196026a89pizj8p0hqdgkyllj2spx2qwpynsaqjq17s8v15vk5dg";
+        version = "0.2.1";
       }
     ] ++ [
       nixpkgs.vscode-extensions.bbenoist.Nix
