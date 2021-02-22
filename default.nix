@@ -10,6 +10,7 @@ let
 in
 [
   (nixpkgs.awscli)
+  (nixpkgs.fswatch)
   (nixpkgs.git)
   (nixpkgs.gnupg)
   (nixpkgs.google-chrome)
@@ -17,6 +18,7 @@ in
   (nixpkgs.kubectl)
   (nixpkgs.libreoffice)
   (nixpkgs.nixpkgs-fmt)
+  (nixpkgs.python38Packages.pykwalify)
   (nixpkgs.vim)
   (nixpkgs.vscode-with-extensions.override {
     vscodeExtensions = nixpkgs.vscode-utils.extensionsFromVscodeMarketplace [
