@@ -22,6 +22,7 @@ in
   (nixpkgs.python38Packages.pykwalify)
   (nixpkgs.skopeo)
   (nixpkgs.vim)
+  (nixpkgs.vlc)
   (nixpkgs.vscode-with-extensions.override {
     vscodeExtensions = nixpkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
