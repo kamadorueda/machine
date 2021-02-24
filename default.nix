@@ -18,7 +18,9 @@ in
   (nixpkgs.kubectl)
   (nixpkgs.libreoffice)
   (nixpkgs.nixpkgs-fmt)
+  (nixpkgs.podman)
   (nixpkgs.python38Packages.pykwalify)
+  (nixpkgs.skopeo)
   (nixpkgs.vim)
   (nixpkgs.vscode-with-extensions.override {
     vscodeExtensions = nixpkgs.vscode-utils.extensionsFromVscodeMarketplace [
