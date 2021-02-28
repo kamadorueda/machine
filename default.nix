@@ -10,6 +10,145 @@ let
 in
 [
   (nixpkgs.awscli)
+  (nixpkgs.buildFHSUserEnv {
+    name = "td";
+    multiPkgs = pkgs: with pkgs; [
+      glib
+      gtk2
+      patchelf
+      libcanberra #-gtk3
+
+      go-font
+      perlPackages.Mojolicious
+
+      appimageTools.appimage-exec
+
+      gtk3
+      bashInteractive
+      gnome3.zenity
+      python2
+      xorg.xrandr
+      which
+      perl
+      xdg_utils
+      iana-etc
+      krb5
+
+      desktop-file-utils
+      xorg.libXcomposite
+      xorg.libXtst
+      xorg.libXrandr
+      xorg.libXext
+      xorg.libX11
+      xorg.libXfixes
+      libGL
+
+      gst_all_1.gstreamer
+      gst_all_1.gst-plugins-ugly
+      gst_all_1.gst-plugins-base
+      libdrm
+      xorg.xkeyboardconfig
+      xorg.libpciaccess
+
+      glib
+      gtk2
+      bzip2
+      zlib
+      gdk-pixbuf
+
+      xorg.libXinerama
+      xorg.libXdamage
+      xorg.libXcursor
+      xorg.libXrender
+      xorg.libXScrnSaver
+      xorg.libXxf86vm
+      xorg.libXi
+      xorg.libSM
+      xorg.libICE
+      gnome2.GConf
+      freetype
+      (curl.override { gnutlsSupport = true; sslSupport = false; })
+      nspr
+      nss
+      fontconfig
+      cairo
+      pango
+      expat
+      dbus
+      cups
+      libcap
+      SDL2
+      libusb1
+      udev
+      dbus-glib
+      atk
+      at-spi2-atk
+      libudev0-shim
+      networkmanager098
+
+      xorg.libXt
+      xorg.libXmu
+      xorg.libxcb
+      xorg.xcbutil
+      xorg.xcbutilwm
+      xorg.xcbutilimage
+      xorg.xcbutilkeysyms
+      xorg.xcbutilrenderutil
+      libGLU
+      libuuid
+      libogg
+      libvorbis
+      SDL
+      SDL2_image
+      glew110
+      openssl
+      libidn
+      tbb
+      wayland
+      mesa
+      libxkbcommon
+
+      flac
+      freeglut
+      libjpeg
+      libpng12
+      libsamplerate
+      libmikmod
+      libtheora
+      libtiff
+      pixman
+      speex
+      SDL_image
+      SDL_ttf
+      SDL_mixer
+      SDL2_ttf
+      SDL2_mixer
+      libappindicator-gtk2
+      libcaca
+      libcanberra
+      libgcrypt
+      libvpx
+      librsvg
+      xorg.libXft
+      libvdpau
+      alsaLib
+
+      harfbuzz
+      e2fsprogs
+      libgpgerror
+      keyutils.lib
+      libjack2
+      fribidi
+      p11-kit
+
+      libtool.lib
+      at-spi2-core
+    ];
+    runScript = "appimage-exec.sh -w ${nixpkgs.appimageTools.extract {
+      name = "td";
+      src = /home/kamado/Documents/timedoctor.AppImage;
+    }}";
+  })
   (nixpkgs.fswatch)
   (nixpkgs.git)
   (nixpkgs.gnupg)
@@ -17,7 +156,9 @@ in
   (nixpkgs.jq)
   (nixpkgs.kubectl)
   (nixpkgs.libreoffice)
+  (nixpkgs.ngrok)
   (nixpkgs.nixpkgs-fmt)
+  (nixpkgs.nodejs)
   (nixpkgs.podman)
   (nixpkgs.python38Packages.pykwalify)
   (nixpkgs.skopeo)
