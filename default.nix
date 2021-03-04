@@ -20,6 +20,8 @@ in
   (nixpkgs.ngrok)
   (nixpkgs.nixpkgs-fmt)
   (nixpkgs.nodejs)
+  (nixpkgs.optipng)
+  (nixpkgs.pcre)
   (nixpkgs.podman)
   (nixpkgs.python38Packages.pykwalify)
   (nixpkgs.skopeo)
