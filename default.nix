@@ -9,7 +9,6 @@ let
 in
 [
   (nixpkgs.awscli)
-  (nixpkgs.fswatch)
   (nixpkgs.git)
   (nixpkgs.gnupg)
   (nixpkgs.google-chrome)
@@ -22,7 +21,6 @@ in
   (nixpkgs.optipng)
   (nixpkgs.pcre)
   (nixpkgs.podman)
-  (nixpkgs.python38Packages.pykwalify)
   (nixpkgs.skopeo)
   (nixpkgs.vim)
   (nixpkgs.vlc)
