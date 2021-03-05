@@ -1,8 +1,7 @@
 let
   nixpkgsSource = (import <nixpkgs> { }).fetchzip {
-    # HEAD of release-20.09
-    url = "https://github.com/nixos/nixpkgs/archive/2118cf551b9944cfdb929b8ea03556f097dd0381.zip";
-    sha256 = "0ajsxh1clbf3q643gi8v6b0i0nn358hak0f265j7c1lrsbxyw457";
+    url = "https://github.com/nixos/nixpkgs/archive/7138a338b58713e0dea22ddab6a6785abec7376a.tar.gz";
+    sha256 = "1asgl1hxj2bgrxdixp3yigp7xn25m37azwkf3ppb248vcfc5kil3";
   };
   nixpkgs = import nixpkgsSource {
     config.allowUnfree = true;
