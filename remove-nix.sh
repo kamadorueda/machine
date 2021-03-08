@@ -1,7 +1,7 @@
-# /usr/bin/env bash
+#! /usr/bin/env bash
 
 function main {
-  sudo rm -rf /nix/store
+  sudo rm -rf /nix
 }
 
 main "${@}"
