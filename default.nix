@@ -56,8 +56,7 @@ let
     libreoffice
     ngrok nixpkgs-fmt nodejs
     optipng
-    pcre podman
-    skopeo
+    pcre
     vim vlc
     tree
     yq
