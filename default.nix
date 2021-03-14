@@ -51,6 +51,8 @@ let
 
   extra = with nixpkgs; [
     awscli
+    cabal-install
+    ghc
     gnupg
     kubectl
     libreoffice
