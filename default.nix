@@ -30,6 +30,12 @@ let
           version = "11.2.1";
         }
         {
+          name = "haskell";
+          publisher = "haskell";
+          sha256 = "0vxsn4s27n1aqp5pp4cipv804c9cwd7d9677chxl0v18j8bf7zly";
+          version = "1.2.0";
+        }
+        {
           name = "vscode-pylance";
           publisher = "ms-python";
           sha256 = "07zapnindwi79k5a2v5ywgwfiqzgs79li73y56rpq0n3a287z4q6";
