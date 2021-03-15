@@ -36,6 +36,12 @@ let
           version = "1.2.0";
         }
         {
+          name = "language-haskell";
+          publisher = "justusadam";
+          sha256 = "0ab7m5jzxakjxaiwmg0jcck53vnn183589bbxh3iiylkpicrv67y";
+          version = "3.4.0";
+        }
+        {
           name = "vscode-pylance";
           publisher = "ms-python";
           sha256 = "07zapnindwi79k5a2v5ywgwfiqzgs79li73y56rpq0n3a287z4q6";
@@ -58,6 +64,7 @@ let
   extra = with nixpkgs; [
     awscli
     cabal-install
+    diction
     ghc
     gnupg
     kubectl
