@@ -63,17 +63,19 @@ let
 
   extra = with nixpkgs; [
     awscli
-    cabal-install
-    diction
-    ghc
-    gnupg
+    cabal-install cargo
+    diction diffoscope
+    gcc ghc gnumake gnupg
     kubectl
     libreoffice
     ngrok nixpkgs-fmt nodejs
     optipng
-    pcre
+    pcre (python38.withPackages (pkgs: with pkgs; [
+      requests
+    ]))
     vim vlc
     tree
+    xclip
     yq
   ];
 in
