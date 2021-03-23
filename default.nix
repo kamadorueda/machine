@@ -70,10 +70,10 @@ let
     libreoffice
     ngrok nixpkgs-fmt nodejs
     optipng
-    pcre (python38.withPackages (pkgs: with pkgs; [
-      requests
+    pcre
+    (python38.withPackages (pkgs: with pkgs; [
     ]))
-    vim vlc
+    vim
     tree
     xclip
     yq
