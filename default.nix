@@ -1,13 +1,20 @@
 { flavor ? "all"
 }:
 let
-  nixpkgsSource = (import <nixpkgs> { }).fetchzip {
-    url = "https://github.com/nixos/nixpkgs/archive/932941b79c3dbbef2de9440e1631dfec43956261.tar.gz";
-    sha256 = "F5+ESAMGMumeYuBx7qi9YnE9aeRhEE9JTjtvTb30lrQ=";
-  };
-  nixpkgs = import nixpkgsSource {
-    config.allowUnfree = true;
-  };
+  fetchzip = (import <nixpkgs> { }).fetchzip;
+
+  remoteImport = { sha256, url }:
+    let source = fetchzip { inherit sha256 url; };
+    in import source;
+
+  nixpkgs = remoteImport
+    {
+      url = "https://github.com/nixos/nixpkgs/archive/932941b79c3dbbef2de9440e1631dfec43956261.tar.gz";
+      sha256 = "F5+ESAMGMumeYuBx7qi9YnE9aeRhEE9JTjtvTb30lrQ=";
+    }
+    {
+      config.allowUnfree = true;
+    };
 
   base = with nixpkgs; [
     curl
@@ -63,18 +70,26 @@ let
 
   extra = with nixpkgs; [
     awscli
-    cabal-install cargo
-    diction diffoscope
-    gcc ghc gnumake gnupg
+    cabal-install
+    cargo
+    diction
+    diffoscope
+    direnv
+    gcc
+    ghc
+    gnumake
+    gnupg
     kubectl
     libreoffice
-    ngrok nixpkgs-fmt nodejs
+    ngrok
+    nixpkgs-fmt
+    nodejs
     optipng
     pcre
     (python38.withPackages (pkgs: with pkgs; [
     ]))
-    vim
     tree
+    vim
     xclip
     yq
   ];

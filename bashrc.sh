@@ -38,3 +38,5 @@ function use_fluid_aws_var {
   &&  export AWS_SECRET_ACCESS_KEY="${!var}" \
   &&  export PROD_AWS_SECRET_ACCESS_KEY="${!var}"
 }
+
+eval "$(direnv hook bash)"
