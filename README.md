@@ -1,10 +1,14 @@
 # Kamadorueda's development machine, as code
 
-Just clone and install with:
-`$ nix-env -if .`
+1.  Install nix as explained in the
+    [Nix's download page](https://nixos.org/download):
 
-Alternatively over HTTP with:
-`$ nix-env -if https://github.com/kamadorueda/machine/archive/main.tar.gz`
+    `$ curl -L nixos.org/nix/install | sh`
 
-Add the following line to your ~/.bashrc:
-`$ source ~/.nix-profile/etc/profile.d/bashrc`
+1.  Install with:
+
+    `$ nix-env -if https://github.com/kamadorueda/machine/archive/main.tar.gz`
+
+1.  Add the following line to your ~/.bashrc:
+
+    `$ source ~/.nix-profile/etc/profile.d/bashrc`
