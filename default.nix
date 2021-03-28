@@ -17,8 +17,8 @@ let
     };
 
   product = remoteImport {
-    url = "https://gitlab.com/fluidattacks/product/-/archive/4bf8cfc844d927e5904f039a060309acf4f780ea.tar.gz";
-    sha256 = "1zh29gb5ls25399dcr4g310gvlg3b1ngh35lbd0592wms0vjc5jg";
+    url = "https://gitlab.com/fluidattacks/product/-/archive/c04415b77e7870b8ebb238135644f257eae15f9e.tar.gz";
+    sha256 = "09zywsqww4y9y2g40qyyd4ks8f2k8sxasvayw8ffmvv5fvwrr41h";
   };
 
   base = with nixpkgs; [
