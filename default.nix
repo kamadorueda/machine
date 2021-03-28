@@ -51,6 +51,7 @@ let
     (python38.withPackages (pkgs: with pkgs; [
     ]))
     python39
+    python310
     tree
     vim
     xclip
