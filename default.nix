@@ -50,6 +50,7 @@ let
     pcre
     (python38.withPackages (pkgs: with pkgs; [
     ]))
+    python39
     tree
     vim
     xclip
