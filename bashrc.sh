@@ -6,6 +6,7 @@ alias today='git log --format=%aI --author kamado@fluidattacks.com | sed -E "s/T
 alias graph='TZ=UTC git rev-list --date=iso-local --pretty="!%H!!%ad!!%cd!!%aN!!%P!" --graph HEAD'
 alias a='git add -p'
 alias c='git commit --allow-empty'
+alias cm='git log -n 1 --format=%s%n%n%b'
 alias f='git fetch --all'
 alias l='git log'
 alias m='git commit --amend --no-edit --allow-empty'
