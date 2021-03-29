@@ -3,18 +3,18 @@
 let
   fetchzip = (import <nixpkgs> { }).fetchzip;
 
-  remoteImport = { sha256, url }:
+  remoteImport = { sha256, url, args ? null }:
     let source = fetchzip { inherit sha256 url; };
-    in import source;
+    in
+    if args == null
+    then import source
+    else import source args;
 
-  nixpkgs = remoteImport
-    {
-      url = "https://github.com/nixos/nixpkgs/archive/932941b79c3dbbef2de9440e1631dfec43956261.tar.gz";
-      sha256 = "F5+ESAMGMumeYuBx7qi9YnE9aeRhEE9JTjtvTb30lrQ=";
-    }
-    {
-      config.allowUnfree = true;
-    };
+  nixpkgs = remoteImport {
+    args.config.allowUnfree = true;
+    url = "https://github.com/nixos/nixpkgs/archive/932941b79c3dbbef2de9440e1631dfec43956261.tar.gz";
+    sha256 = "F5+ESAMGMumeYuBx7qi9YnE9aeRhEE9JTjtvTb30lrQ=";
+  };
 
   product = remoteImport {
     url = "https://gitlab.com/fluidattacks/product/-/archive/c04415b77e7870b8ebb238135644f257eae15f9e.tar.gz";
@@ -49,10 +49,11 @@ let
     nodejs
     optipng
     pcre
-    (python38.withPackages (pkgs: with pkgs; [
-    ]))
-    python39
-    python310
+    (python38.withPackages (pkgs: with pkgs; [ ]))
+    (python39.withPackages (pkgs: with pkgs; [ ]))
+    (python310.withPackages (pkgs: with pkgs; [ ]))
+    sops
+    tokei
     tree
     vim
     xclip
