@@ -43,6 +43,7 @@ let
     gnupg
     kubectl
     libreoffice
+    maven
     ngrok
     nixpkgs-fmt
     nodejs
