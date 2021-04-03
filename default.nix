@@ -18,7 +18,7 @@ let
 
   product = remoteImport {
     url = "https://gitlab.com/fluidattacks/product/-/archive/13600d1f2317361d1c13d1a74f9399ce73510ff0.tar.gz";
-    sha256 = "08zywsqww4y9y2g40qyyd4ks8f2k8sxasvayw8ffmvv5fvwrr41h";
+    sha256 = "0bxbvb7v7mlh4vm1z7qfp9m4mzj8qb86ashhdwdfwagr0pbm1hha";
   };
 
   base = with nixpkgs; [
