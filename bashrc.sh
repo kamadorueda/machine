@@ -7,6 +7,7 @@ alias graph='TZ=UTC git rev-list --date=iso-local --pretty="!%H!!%ad!!%cd!!%aN!!
 alias a='git add -p'
 alias c='git commit --allow-empty'
 alias cm='git log -n 1 --format=%s%n%n%b'
+alias cr='git commit -m "$(cm)"'
 alias f='git fetch --all'
 alias l='git log'
 alias m='git commit --amend --no-edit --allow-empty'
@@ -32,11 +33,13 @@ function use_fluid_aws_var {
       do use_fluid_var "${var}"
       done \
   &&  export AWS_ACCESS_KEY_ID="${!var}" \
+  &&  export DEV_AWS_ACCESS_KEY_ID="${!var}" \
   &&  export PROD_AWS_ACCESS_KEY_ID="${!var}" \
   &&  for var in "${1^^}_DEV_AWS_SECRET_ACCESS_KEY" "${1^^}_PROD_AWS_SECRET_ACCESS_KEY"
       do use_fluid_var "${var}"
       done \
   &&  export AWS_SECRET_ACCESS_KEY="${!var}" \
+  &&  export DEV_AWS_SECRET_ACCESS_KEY="${!var}" \
   &&  export PROD_AWS_SECRET_ACCESS_KEY="${!var}"
 }
 
