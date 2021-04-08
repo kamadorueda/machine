@@ -48,6 +48,7 @@ let
     nixpkgs-fmt
     nodejs
     optipng
+    parallel
     pcre
     (python38.withPackages (pkgs: with pkgs; [ ]))
     (python39.withPackages (pkgs: with pkgs; [ ]))
