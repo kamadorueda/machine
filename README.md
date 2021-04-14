@@ -28,6 +28,7 @@ Applies to myself only:
 1.  Configure git:
 
     ```bash
+    git config --global commit.gpgsign true
     git config --global user.signingkey FFF341057F503148
     git config --global user.email kamadorueda@gmail.com
     git config --global user.name 'Kevin Amado'
