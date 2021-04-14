@@ -25,6 +25,16 @@
 
 Applies to myself only:
 
+1.  Configure git:
+
+    ```bash
+    git config --global user.signingkey FFF341057F503148
+    git config --global user.email kamadorueda@gmail.com
+    git config --global user.name 'Kevin Amado'
+    git config --global gpg.sign true
+    git config --global gpg.progam gpg2
+    ```
+
 1.  Clone repositories:
 
     - `$ git clone https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/secrets`
