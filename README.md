@@ -29,6 +29,7 @@ Applies to myself only:
 
     ```bash
     git config --global commit.gpgsign true
+    git config --global init.defaultBranch main
     git config --global user.signingkey FFF341057F503148
     git config --global user.email kamadorueda@gmail.com
     git config --global user.name 'Kevin Amado'
