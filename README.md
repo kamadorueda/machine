@@ -21,7 +21,7 @@
     This step is required to be done in the host as timedoctor
     is not compatible with Nix at the moment
 
-# Aditional deployment steps for kamadorueda
+# Additional deployment steps for kamadorueda
 
 Applies to myself only:
 
