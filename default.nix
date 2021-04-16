@@ -32,6 +32,7 @@ let
 
   extra = with nixpkgs; [
     awscli
+    burpsuite
     cabal-install
     cargo
     diction
