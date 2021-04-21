@@ -62,7 +62,9 @@ function configure_code {
           "python.languageServer": "Pylance",
           "telemetry.enableTelemetry": false,
           "update.mode": "none",
-          "window.zoomLevel": 1,
+          "window.zoomLevel": 2,
+          "workbench.startupEditor": "none",
+          "workbench.editor.enablePreview": false,
         }
       ' > "${config_path}"
 }
