@@ -2,11 +2,15 @@
 
 source ~/.nix-profile/etc/profile.d/nix.sh
 
+export MACHINE_STATE_DIR=~/Documents/.state
+export CODE_USER_DATA_DIR="${MACHINE_STATE_DIR}/code"
+
 alias today='git log --format=%aI --author kamado@fluidattacks.com | sed -E "s/T.*$//g" | uniq -c | head -n 7 | tac'
 alias graph='TZ=UTC git rev-list --date=iso-local --pretty="!%H!!%ad!!%cd!!%aN!!%P!" --graph HEAD'
 alias a='git add -p'
 alias c='git commit --allow-empty'
 alias cm='git log -n 1 --format=%s%n%n%b'
+alias code='code --user-data-dir "${CODE_USER_DATA_DIR}"'
 alias cr='git commit -m "$(cm)"'
 alias f='git fetch --all'
 alias l='git log --show-signature'
@@ -44,4 +48,24 @@ function use_fluid_aws_var {
   &&  export PROD_AWS_SECRET_ACCESS_KEY="${!var}"
 }
 
+function configure_code {
+  local config_path="${CODE_USER_DATA_DIR}/User/settings.json"
+
+      mkdir -p "$(dirname "${config_path}")" \
+  &&  echo '
+        {
+          "editor.rulers": [ 80 ],
+          "extensions.autoUpdate": false,
+          "files.insertFinalNewline": true,
+          "files.trimFinalNewlines": true,
+          "files.trimTrailingWhitespace": true,
+          "python.languageServer": "Pylance",
+          "telemetry.enableTelemetry": false,
+          "update.mode": "none",
+          "window.zoomLevel": 1,
+        }
+      ' > "${config_path}"
+}
+
 eval "$(direnv hook bash)"
+configure_code
