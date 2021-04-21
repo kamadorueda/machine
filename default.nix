@@ -17,8 +17,8 @@ let
   };
 
   product = remoteImport {
-    url = "https://gitlab.com/fluidattacks/product/-/archive/13600d1f2317361d1c13d1a74f9399ce73510ff0.tar.gz";
-    sha256 = "0bxbvb7v7mlh4vm1z7qfp9m4mzj8qb86ashhdwdfwagr0pbm1hha";
+    url = "https://gitlab.com/fluidattacks/product/-/archive/e3f9decfcacbe410caf36d53053e824aff9e57cc.tar.gz";
+    sha256 = "0l7ray17fnhfz8l3clc1r6wp3xi8y652a0dnzaj6pmmlijdlrl9z";
   };
 
   base = with nixpkgs; [
@@ -51,6 +51,8 @@ let
     optipng
     parallel
     pcre
+    peek
+    product.melts
     (python38.withPackages (pkgs: with pkgs; [ ]))
     (python39.withPackages (pkgs: with pkgs; [ ]))
     (python310.withPackages (pkgs: with pkgs; [ ]))
