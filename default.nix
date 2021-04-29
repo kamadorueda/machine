@@ -17,23 +17,26 @@ let
   };
 
   productSource = fetchzip {
-    url = "https://gitlab.com/fluidattacks/product/-/archive/e3f9decfcacbe410caf36d53053e824aff9e57cc.tar.gz";
-    sha256 = "0l7ray17fnhfz8l3clc1r6wp3xi8y652a0dnzaj6pmmlijdlrl9z";
+    url = "https://gitlab.com/fluidattacks/product/-/archive/41aa1c5caf9e4122ffbf9690cb14a552ce3f7b23.tar.gz";
+    sha256 = "1rvn9akx4v2mxpnxm99dcmd35il4yjdd856b51mhgzx6cmsqwpk1";
   };
   product = remoteImport {
     source = productSource;
   };
 
-  base = with nixpkgs; [
+  base = [
+    product.makes-dev-vscode
+  ] ++ (with nixpkgs; [
     curl
     jq
     git
     google-chrome
-    product.makes-dev-vscode
     (writeTextDir "etc/profile.d/bashrc" (builtins.readFile ./bashrc.sh))
-  ];
+  ]);
 
-  extra = with nixpkgs; [
+  extra = [
+    productSource
+  ] ++ (with nixpkgs; [
     awscli
     burpsuite
     cabal-install
@@ -55,8 +58,6 @@ let
     parallel
     pcre
     peek
-    product.melts
-    productSource
     python38
     python39
     python310
@@ -66,7 +67,7 @@ let
     vim
     xclip
     yq
-  ];
+  ]);
 in
 if (flavor == "all") then (base ++ extra)
 else if (flavor == "base") then (base)
