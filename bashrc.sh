@@ -64,17 +64,17 @@ function configure_code {
           "python.languageServer": "Pylance",
           "python.linting.mypyArgs": [
             "--config-file",
-            "'"${MACHINE_PROFILE}"'/makes/utils/lint-python/settings-mypy.cfg"
+            "'"${MACHINE_PROFILE}"'/product/makes/utils/lint-python/settings-mypy.cfg"
           ],
           "python.linting.mypyEnabled": true,
           "python.linting.prospectorArgs": [
             "--profile",
-            "'"${MACHINE_PROFILE}"'/makes/utils/lint-python/settings-prospector.yaml",
+            "'"${MACHINE_PROFILE}"'/product/makes/utils/lint-python/settings-prospector.yaml",
           ],
           "python.linting.prospectorEnabled": true,
           "python.formatting.blackArgs": [
             "--config",
-            "'"${MACHINE_PROFILE}"'/makes/utils/python-format/settings-black.toml",
+            "'"${MACHINE_PROFILE}"'/product/makes/utils/python-format/settings-black.toml",
           ],
           "python.formatting.provider": "black",
           "telemetry.enableTelemetry": false,
