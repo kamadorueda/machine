@@ -3,22 +3,25 @@
 let
   fetchzip = (import <nixpkgs> { }).fetchzip;
 
-  remoteImport = { sha256, url, args ? null }:
-    let source = fetchzip { inherit sha256 url; };
-    in
+  remoteImport = { args ? null, source }:
     if args == null
     then import source
     else import source args;
 
   nixpkgs = remoteImport {
     args.config.allowUnfree = true;
-    url = "https://github.com/nixos/nixpkgs/archive/932941b79c3dbbef2de9440e1631dfec43956261.tar.gz";
-    sha256 = "F5+ESAMGMumeYuBx7qi9YnE9aeRhEE9JTjtvTb30lrQ=";
+    source = fetchzip {
+      url = "https://github.com/nixos/nixpkgs/archive/932941b79c3dbbef2de9440e1631dfec43956261.tar.gz";
+      sha256 = "F5+ESAMGMumeYuBx7qi9YnE9aeRhEE9JTjtvTb30lrQ=";
+    };
   };
 
-  product = remoteImport {
+  productSource = fetchzip {
     url = "https://gitlab.com/fluidattacks/product/-/archive/e3f9decfcacbe410caf36d53053e824aff9e57cc.tar.gz";
     sha256 = "0l7ray17fnhfz8l3clc1r6wp3xi8y652a0dnzaj6pmmlijdlrl9z";
+  };
+  product = remoteImport {
+    source = productSource;
   };
 
   base = with nixpkgs; [
@@ -53,9 +56,10 @@ let
     pcre
     peek
     product.melts
-    (python38.withPackages (pkgs: with pkgs; [ ]))
-    (python39.withPackages (pkgs: with pkgs; [ ]))
-    (python310.withPackages (pkgs: with pkgs; [ ]))
+    productSource
+    python38
+    python39
+    python310
     sops
     tokei
     tree

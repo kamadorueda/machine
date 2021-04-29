@@ -1,8 +1,10 @@
 # shellcheck shell=bash
 
-source ~/.nix-profile/etc/profile.d/nix.sh
-
+export MACHINE_PROFILE=~/.nix-profile
 export MACHINE_STATE_DIR=~/Documents/.state
+
+source "${MACHINE_PROFILE}/etc/profile.d/nix.sh"
+
 export CODE_USER_DATA_DIR="${MACHINE_STATE_DIR}/code"
 
 alias today='git log --format=%aI --author kamado@fluidattacks.com | sed -E "s/T.*$//g" | uniq -c | head -n 7 | tac'
@@ -60,6 +62,21 @@ function configure_code {
           "files.trimFinalNewlines": true,
           "files.trimTrailingWhitespace": true,
           "python.languageServer": "Pylance",
+          "python.linting.mypyArgs": [
+            "--config-file",
+            "'"${MACHINE_PROFILE}"'/makes/utils/lint-python/settings-mypy.cfg"
+          ],
+          "python.linting.mypyEnabled": true,
+          "python.linting.prospectorArgs": [
+            "--profile",
+            "'"${MACHINE_PROFILE}"'/makes/utils/lint-python/settings-prospector.yaml",
+          ],
+          "python.linting.prospectorEnabled": true,
+          "python.formatting.blackArgs": [
+            "--config",
+            "'"${MACHINE_PROFILE}"'/makes/utils/python-format/settings-black.toml",
+          ],
+          "python.formatting.provider": "black",
           "telemetry.enableTelemetry": false,
           "update.mode": "none",
           "window.zoomLevel": 2,
