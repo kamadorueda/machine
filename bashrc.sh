@@ -54,36 +54,42 @@ function configure_code {
   local config_path="${CODE_USER_DATA_DIR}/User/settings.json"
 
       mkdir -p "$(dirname "${config_path}")" \
-  &&  echo '
-        {
-          "editor.rulers": [ 80 ],
-          "extensions.autoUpdate": false,
-          "files.insertFinalNewline": true,
-          "files.trimFinalNewlines": true,
-          "files.trimTrailingWhitespace": true,
-          "python.languageServer": "Pylance",
-          "python.linting.mypyArgs": [
-            "--config-file",
-            "'"${MACHINE_PROFILE}"'/product/makes/utils/lint-python/settings-mypy.cfg"
-          ],
-          "python.linting.mypyEnabled": true,
-          "python.linting.prospectorArgs": [
-            "--profile",
-            "'"${MACHINE_PROFILE}"'/product/makes/utils/lint-python/settings-prospector.yaml",
-          ],
-          "python.linting.prospectorEnabled": true,
-          "python.formatting.blackArgs": [
-            "--config",
-            "'"${MACHINE_PROFILE}"'/product/makes/utils/python-format/settings-black.toml",
-          ],
-          "python.formatting.provider": "black",
-          "telemetry.enableTelemetry": false,
-          "update.mode": "none",
-          "window.zoomLevel": 2,
-          "workbench.startupEditor": "none",
-          "workbench.editor.enablePreview": false,
-        }
-      ' > "${config_path}"
+  &&  echo '{
+        "editor.formatOnSave": true,
+        "editor.rulers": [
+          80
+        ],
+        "extensions.autoUpdate": false,
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true,
+        "files.trimTrailingWhitespace": true,
+        "python.defaultInterpreterPath": "/home/kamado/.nix-profile/bin/python",
+        "python.formatting.blackArgs": [
+          "--config",
+          "/home/kamado/.nix-profile/product/makes/utils/python-format/settings-black.toml"
+        ],
+        "python.formatting.blackPath": "/home/kamado/.nix-profile/bin/black",
+        "python.formatting.provider": "black",
+        "python.languageServer": "Pylance",
+        "python.linting.enabled": true,
+        "python.linting.lintOnSave": true,
+        "python.linting.mypyArgs": [
+          "--config-file",
+          "/home/kamado/.nix-profile/product/makes/utils/lint-python/settings-mypy.cfg"
+        ],
+        "python.linting.mypyEnabled": true,
+        "python.linting.prospectorArgs": [
+          "--profile",
+          "/home/kamado/.nix-profile/product/makes/utils/lint-python/settings-prospector.yaml"
+        ],
+        "python.linting.prospectorEnabled": true,
+        "python.linting.pylintEnabled": false,
+        "telemetry.enableTelemetry": false,
+        "update.mode": "none",
+        "window.zoomLevel": 2,
+        "workbench.startupEditor": "none",
+        "workbench.editor.enablePreview": false
+      }' | jq > "${config_path}"
 }
 
 eval "$(direnv hook bash)"

@@ -77,8 +77,6 @@ let
     pcre
     peek
     python38
-    python39
-    python310
     sops
     tokei
     tree
