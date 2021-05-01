@@ -81,6 +81,7 @@ let
     tokei
     tree
     vim
+    vlc
     xclip
     yq
   ]);
