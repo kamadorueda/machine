@@ -65,6 +65,7 @@ let
     ghc
     gnumake
     gnupg
+    hugo
     kubectl
     libreoffice
     maven
