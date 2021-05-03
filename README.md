@@ -1,6 +1,6 @@
 # Kamadorueda's development machine, as code
 
-1.  Make youre your system has `curl` installed
+1.  Make sure your system has `curl` installed
 
 1.  Install nix as explained in the
     [Nix's download page](https://nixos.org/download):
@@ -15,7 +15,7 @@
 
     `$ source ~/.nix-profile/etc/profile.d/bashrc`
 
-1.  Install timedoctor as explained in the
+1.  Install Timedoctor as explained in the
     [Timedoctor's download page](https://www.timedoctor.com/es/download.html)
 
     This step is required to be done in the host as timedoctor
@@ -39,7 +39,19 @@ Applies to myself only:
 
 1.  Clone repositories:
 
-    - `$ git clone https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/secrets`
-    - Perform secrets installation (mostly SSH and GPG keys)
-    - `$ git clone git@github.com:kamadorueda/machine`
-    - `$ git clone git@gitlab.com:fluidattacks/product`
+    1.  Enhance your bashrc with your
+        [base secrets](https://github.com/kamadorueda/secrets/blob/master/machine/bashrc)
+
+    2.  ```bash
+            mkdir -p ~/Documents/github/kamadorueda \
+        &&  pushd    ~/Documents/github/kamadorueda \
+        &&  git clone "https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/secrets" \
+        &&  pushd secrets/machine \
+          &&  install.sh \
+        &&  popd \
+        &&  git clone git@github.com:kamadorueda/machine \
+        &&  mkdir -p ~/Documents/gitlab/fluidattacks \
+        &&  pushd    ~/Documents/gitlab/fluidattacks \
+          &&  git clone git@gitlab.com:fluidattacks/product \
+        &&  popd
+        ```
