@@ -55,6 +55,9 @@ function configure_code {
 
       mkdir -p "$(dirname "${config_path}")" \
   &&  echo '{
+        "[html]": {
+          "editor.formatOnSave": false
+        },
         "editor.formatOnSave": true,
         "editor.rulers": [
           80
