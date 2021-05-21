@@ -108,7 +108,7 @@ with import ./utils.nix;
         "files.insertFinalNewline" = true;
         "files.trimFinalNewlines" = true;
         "files.trimTrailingWhitespace" = true;
-        "python.defaultInterpreterPath" = "${packages.nixpkgs.python38}/bin/python";
+        "python.defaultInterpreterPath" = "~/.nix-profile/bin/python3.8";
         "python.formatting.blackArgs" = [
           "--config"
           "${sources.product}/makes/utils/python-format/settings-black.toml"
@@ -129,11 +129,17 @@ with import ./utils.nix;
         ];
         "python.linting.prospectorEnabled" = true;
         "python.linting.pylintEnabled" = false;
+        "python.pythonPath" = "${packages.nixpkgs.python38}/bin/python";
         "telemetry.enableTelemetry" = false;
         "update.mode" = "none";
         "window.zoomLevel" = 2;
         "workbench.editor.enablePreview" = false;
-        "workbench.editorAssociations" = [ ];
+        "workbench.editorAssociations" = [
+          {
+            "filenamePattern" = "*.ipynb";
+            "viewType" = "jupyter.notebook.ipynb";
+          }
+        ];
         "workbench.startupEditor" = "none";
       };
     };
