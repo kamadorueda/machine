@@ -46,7 +46,6 @@ function use_fluid_aws_var {
 }
 
 source ~/Documents/github/kamadorueda/secrets/machine/secrets.sh
-eval "$(direnv hook bash)"
 
     cd ~/Documents/gitlab/fluidattacks/product \
 &&  source .envrc* \

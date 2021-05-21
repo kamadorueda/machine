@@ -15,7 +15,6 @@ with import ./utils.nix;
       (packages.nixpkgs.curl)
       (packages.nixpkgs.diction)
       (packages.nixpkgs.diffoscope)
-      (packages.nixpkgs.direnv)
       (packages.nixpkgs.gcc)
       (packages.nixpkgs.ghc)
       (packages.nixpkgs.gnumake)
@@ -54,6 +53,10 @@ with import ./utils.nix;
       bashrcExtra = builtins.readFile ./bashrc.sh;
       enable = true;
       profileExtra = ". ~/.nix-profile/etc/profile.d/nix.sh";
+    };
+    direnv = {
+      enable = true;
+      enableBashIntegration = true;
     };
     git = {
       enable = true;
@@ -105,12 +108,12 @@ with import ./utils.nix;
         "files.insertFinalNewline" = true;
         "files.trimFinalNewlines" = true;
         "files.trimTrailingWhitespace" = true;
-        "python.defaultInterpreterPath" = packages.nixpkgs.python38;
+        "python.defaultInterpreterPath" = "${packages.nixpkgs.python38}/bin/python";
         "python.formatting.blackArgs" = [
           "--config"
           "${sources.product}/makes/utils/python-format/settings-black.toml"
         ];
-        "python.formatting.blackPath" = packages.nixpkgs.black;
+        "python.formatting.blackPath" = "${packages.nixpkgs.black}/bin/black";
         "python.formatting.provider" = "black";
         "python.languageServer" = "Pylance";
         "python.linting.enabled" = true;
@@ -129,8 +132,9 @@ with import ./utils.nix;
         "telemetry.enableTelemetry" = false;
         "update.mode" = "none";
         "window.zoomLevel" = 2;
-        "workbench.startupEditor" = "none";
         "workbench.editor.enablePreview" = false;
+        "workbench.editorAssociations" = [ ];
+        "workbench.startupEditor" = "none";
       };
     };
   };
