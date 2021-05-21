@@ -17,7 +17,6 @@ with import ./utils.nix;
     (packages.nixpkgs.direnv)
     (packages.nixpkgs.gcc)
     (packages.nixpkgs.ghc)
-    (packages.nixpkgs.git)
     (packages.nixpkgs.gnumake)
     (packages.nixpkgs.gnupg)
     (packages.nixpkgs.google-chrome)
@@ -47,4 +46,13 @@ with import ./utils.nix;
     (packages.product.makes-dev-vscode)
     (utils.directory "product" sources.product)
   ];
+  programs.git.enable = true;
+  programs.git.extraConfig.commit.gpgsign = true;
+  programs.git.extraConfig.gpg.progam = "gpg2";
+  programs.git.extraConfig.gpg.sign = true;
+  programs.git.extraConfig.init.defaultBranch = "main";
+  programs.git.extraConfig.user.email = "kamadorueda@gmail.com";
+  programs.git.extraConfig.user.name = "Kevin Amado";
+  programs.git.extraConfig.user.signingkey = "FFF341057F503148";
+  programs.git.package = packages.nixpkgs.git;
 }

@@ -35,18 +35,6 @@
 
 Applies to myself only:
 
-1.  Configure git:
-
-    ```bash
-    git config --global commit.gpgsign true
-    git config --global init.defaultBranch main
-    git config --global user.signingkey FFF341057F503148
-    git config --global user.email kamadorueda@gmail.com
-    git config --global user.name 'Kevin Amado'
-    git config --global gpg.sign true
-    git config --global gpg.progam gpg2
-    ```
-
 1.  Clone repositories:
 
     1.  Enhance your bashrc with your
