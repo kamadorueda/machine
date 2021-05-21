@@ -93,10 +93,9 @@ function configure_code {
       }' | jq > "${config_path}"
 }
 
+source ~/Documents/github/kamadorueda/secrets/machine/secrets.sh
 eval "$(direnv hook bash)"
 configure_code
-
-source ~/Documents/github/kamadorueda/secrets/machine/secrets.sh
 
     cd ~/Documents/gitlab/fluidattacks/product \
 &&  source .envrc* \
