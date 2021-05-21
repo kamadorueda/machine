@@ -5,11 +5,21 @@
 1.  Install nix as explained in the
     [Nix's download page](https://nixos.org/download):
 
-    `$ curl -L nixos.org/nix/install | sh`
+    ```bash
+    curl -L nixos.org/nix/install | sh
+    ```
 
-1.  Install with:
+1.  Execute:
 
-    `$ nix-env -if https://github.com/kamadorueda/machine/archive/main.tar.gz`
+    ```bash
+    # Optional:
+    # mkdir -p ~/Documents/github/kamadorueda
+    # pushd    ~/Documents/github/kamadorueda
+    git clone https://kamadorueda@github.com/kamadorueda/machine
+    cd machine
+    nix-env -if ./home-manager.nix
+    home-manager -f ./home.nix switch
+    ```
 
 1.  Add the following line to your ~/.bashrc:
 
