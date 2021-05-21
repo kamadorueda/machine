@@ -1,4 +1,4 @@
-# Kamadorueda's development machine, as code
+# My development machine, as code
 
 1.  Make sure your system has `curl` installed
 
@@ -15,8 +15,8 @@
     # Optional:
     # mkdir -p ~/Documents/github/kamadorueda
     # pushd    ~/Documents/github/kamadorueda
-    git clone https://kamadorueda@github.com/kamadorueda/machine
-    cd machine
+    # git clone https://kamadorueda@github.com/kamadorueda/machine
+    # cd machine
     nix-env -if ./home-manager.nix
     home-manager -f ./home.nix switch
     ```
