@@ -105,24 +105,24 @@ with import ./utils.nix;
         "files.insertFinalNewline" = true;
         "files.trimFinalNewlines" = true;
         "files.trimTrailingWhitespace" = true;
-        "python.defaultInterpreterPath" = "/home/kamado/.nix-profile/bin/python";
+        "python.defaultInterpreterPath" = packages.nixpkgs.python38;
         "python.formatting.blackArgs" = [
           "--config"
-          "/home/kamado/.nix-profile/product/makes/utils/python-format/settings-black.toml"
+          "${sources.product}/makes/utils/python-format/settings-black.toml"
         ];
-        "python.formatting.blackPath" = "/home/kamado/.nix-profile/bin/black";
+        "python.formatting.blackPath" = packages.nixpkgs.black;
         "python.formatting.provider" = "black";
         "python.languageServer" = "Pylance";
         "python.linting.enabled" = true;
         "python.linting.lintOnSave" = true;
         "python.linting.mypyArgs" = [
           "--config-file"
-          "/home/kamado/.nix-profile/product/makes/utils/lint-python/settings-mypy.cfg"
+          "${sources.product}/makes/utils/lint-python/settings-mypy.cfg"
         ];
         "python.linting.mypyEnabled" = true;
         "python.linting.prospectorArgs" = [
           "--profile"
-          "/home/kamado/.nix-profile/product/makes/utils/lint-python/settings-prospector.yaml"
+          "${sources.product}/makes/utils/lint-python/settings-prospector.yaml"
         ];
         "python.linting.prospectorEnabled" = true;
         "python.linting.pylintEnabled" = false;
