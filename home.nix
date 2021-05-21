@@ -47,12 +47,14 @@ with import ./utils.nix;
     (utils.directory "product" sources.product)
   ];
   programs.git.enable = true;
-  programs.git.extraConfig.commit.gpgsign = true;
-  programs.git.extraConfig.gpg.progam = "gpg2";
-  programs.git.extraConfig.gpg.sign = true;
-  programs.git.extraConfig.init.defaultBranch = "main";
-  programs.git.extraConfig.user.email = "kamadorueda@gmail.com";
-  programs.git.extraConfig.user.name = "Kevin Amado";
-  programs.git.extraConfig.user.signingkey = "FFF341057F503148";
+  programs.git.extraConfig = {
+    commit.gpgsign = true;
+    gpg.progam = "gpg2";
+    gpg.sign = true;
+    init.defaultBranch = "main";
+    user.email = "kamadorueda@gmail.com";
+    user.name = "Kevin Amado";
+    user.signingkey = "FFF341057F503148";
+  };
   programs.git.package = packages.nixpkgs.git;
 }
