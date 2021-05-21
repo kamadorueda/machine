@@ -2,10 +2,8 @@
 
 export MACHINE_PROFILE=~/.nix-profile
 export MACHINE_STATE_DIR=~/Documents/.state
-
-source "${MACHINE_PROFILE}/etc/profile.d/nix.sh"
-
 export CODE_USER_DATA_DIR="${MACHINE_STATE_DIR}/code"
+export PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ ";
 
 alias today='git log --format=%aI --author kamado@fluidattacks.com | sed -E "s/T.*$//g" | uniq -c | head -n 7 | tac'
 alias graph='TZ=UTC git rev-list --date=iso-local --pretty="!%H!!%ad!!%cd!!%aN!!%P!" --graph HEAD'
@@ -97,3 +95,10 @@ function configure_code {
 
 eval "$(direnv hook bash)"
 configure_code
+
+source ~/Documents/github/kamadorueda/secrets/machine/secrets.sh
+
+    cd ~/Documents/gitlab/fluidattacks/product \
+&&  source .envrc* \
+&&  CACHIX_FLUIDATTACKS_TOKEN= ./m makes.dev.skims \
+&&  source out/makes-dev-skims

@@ -41,7 +41,6 @@ with import ./utils.nix;
       (packages.nixpkgs.tree)
       (packages.nixpkgs.vim)
       (packages.nixpkgs.vlc)
-      (packages.nixpkgs.writeTextDir "etc/profile.d/bashrc" (builtins.readFile ./bashrc.sh))
       (packages.nixpkgs.xclip)
       (packages.nixpkgs.yq)
       (packages.product.makes-dev-vscode)
@@ -49,6 +48,11 @@ with import ./utils.nix;
     ];
   };
   programs = {
+    bash = {
+      bashrcExtra = builtins.readFile ./bashrc.sh;
+      enable = true;
+      profileExtra = ". ~/.nix-profile/etc/profile.d/nix.sh";
+    };
     git = {
       enable = true;
       extraConfig = {

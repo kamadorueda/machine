@@ -13,17 +13,13 @@
 
     ```bash
     # Optional:
-    # mkdir -p ~/Documents/github/kamadorueda
-    # pushd    ~/Documents/github/kamadorueda
-    # git clone https://kamadorueda@github.com/kamadorueda/machine
-    # cd machine
+    #   mkdir -p ~/Documents/github/kamadorueda
+    #   pushd    ~/Documents/github/kamadorueda
+    #   git clone https://kamadorueda@github.com/kamadorueda/machine
+    #   cd machine
     nix-env -if ./home-manager.nix
     home-manager -f ./home.nix switch
     ```
-
-1.  Add the following line to your ~/.bashrc:
-
-    `$ source ~/.nix-profile/etc/profile.d/bashrc`
 
 1.  Install Timedoctor as explained in the
     [Timedoctor's download page](https://www.timedoctor.com/es/download.html)
@@ -37,10 +33,7 @@ Applies to myself only:
 
 1.  Clone repositories:
 
-    1.  Enhance your bashrc with your
-        [base secrets](https://github.com/kamadorueda/secrets/blob/master/machine/bashrc)
-
-    2.  ```bash
+    1.  ```bash
             mkdir -p ~/Documents/github/kamadorueda \
         &&  pushd    ~/Documents/github/kamadorueda \
         &&  git clone "https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/secrets" \
