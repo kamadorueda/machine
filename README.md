@@ -9,16 +9,31 @@
     curl -L nixos.org/nix/install | sh
     ```
 
-1.  Execute:
+1. Get your GitHub API token from the
+    [secrets file](https://github.com/kamadorueda/secrets/blob/master/machine/secrets.sh)
+    and export it into the terminal
+
+1. Execute:
 
     ```bash
-    # Optional:
-    #   mkdir -p ~/Documents/github/kamadorueda
-    #   pushd    ~/Documents/github/kamadorueda
-    #   git clone https://kamadorueda@github.com/kamadorueda/machine
-    #   cd machine
-    nix-env -if ./home-manager.nix
-    home-manager -f ./home.nix switch
+        nix-env -i git \
+    &&  mkdir -p ~/Documents/github/kamadorueda \
+    &&  pushd    ~/Documents/github/kamadorueda \
+      &&  git clone "https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/secrets" \
+      &&  pushd secrets/machine \
+        &&  install.sh \
+      &&  popd \
+      &&  git clone git@github.com:kamadorueda/machine \
+      &&  pushd machine \
+        &&  nix-env -e git \
+        &&  nix-env -if ./home-manager.nix \
+        &&  home-manager -f ./home.nix switch \
+      &&  popd \
+    &&  popd \
+    &&  mkdir -p ~/Documents/gitlab/fluidattacks \
+    &&  pushd    ~/Documents/gitlab/fluidattacks \
+      &&  git clone git@gitlab.com:fluidattacks/product \
+    &&  popd
     ```
 
 1.  Install Timedoctor as explained in the
@@ -26,23 +41,3 @@
 
     This step is required to be done in the host as timedoctor
     is not compatible with Nix at the moment
-
-# Additional deployment steps for kamadorueda
-
-Applies to myself only:
-
-1.  Clone repositories:
-
-    1.  ```bash
-            mkdir -p ~/Documents/github/kamadorueda \
-        &&  pushd    ~/Documents/github/kamadorueda \
-        &&  git clone "https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/secrets" \
-        &&  pushd secrets/machine \
-          &&  install.sh \
-        &&  popd \
-        &&  git clone git@github.com:kamadorueda/machine \
-        &&  mkdir -p ~/Documents/gitlab/fluidattacks \
-        &&  pushd    ~/Documents/gitlab/fluidattacks \
-          &&  git clone git@gitlab.com:fluidattacks/product \
-        &&  popd
-        ```
