@@ -52,6 +52,26 @@ with import ./utils.nix;
     bash = {
       bashrcExtra = builtins.readFile ./bashrc.sh;
       enable = true;
+      shellAliases = {
+        "a" = "git add -p";
+        "c" = "git commit --allow-empty";
+        "cat" = "bat --show-all --theme=ansi";
+        "cm" = "git log -n 1 --format=%s%n%n%b";
+        "cr" = "git commit -m \"$(cm)\"";
+        "f" = "git fetch --all";
+        "graph" = "TZ=UTC git rev-list --date=iso-local --pretty='!%H!!%ad!!%cd!!%aN!!%P!' --graph HEAD";
+        "l" = "git log --show-signature";
+        "m" = "git commit --amend --no-edit --allow-empty";
+        "melts" = "CI=true CI_COMMIT_REF_NAME=master melts";
+        "p" = "git push -f";
+        "r" = "git pull --autostash --progress --rebase --stat origin master";
+        "rp" = "r && p";
+        "s" = "git status";
+        "today" = "git log --format=%aI --author kamado@fluidattacks.com | sed -E 's/T.*$//g' | uniq -c | head -n 7 | tac";
+      };
+    };
+    bat = {
+      enable = true;
     };
     direnv = {
       enable = true;
