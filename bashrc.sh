@@ -1,6 +1,9 @@
 # shellcheck shell=bash
 
-export MACHINE_PROFILE=~/.nix-profile
+export MACHINE=~/Documents/github/kamadorueda/machine
+export PRODUCT=~/Documents/gitlab/fluidattacks/product
+export SECRETS=~/Documents/github/kamadorueda/secrets
+
 export PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ ";
 
 alias today='git log --format=%aI --author kamado@fluidattacks.com | sed -E "s/T.*$//g" | uniq -c | head -n 7 | tac'
@@ -45,9 +48,15 @@ function use_fluid_aws_var {
   &&  export PROD_AWS_SECRET_ACCESS_KEY="${!var}"
 }
 
-source ~/Documents/github/kamadorueda/secrets/machine/secrets.sh
+function home_switch {
+      cd "${MACHINE}" \
+  &&  nix-env -if home-manager.nix \
+  &&  home-manager -f home.nix switch
+}
 
-    cd ~/Documents/gitlab/fluidattacks/product \
+source "${SECRETS}/machine/secrets.sh"
+
+    cd "${PRODUCT}" \
 &&  source .envrc* \
 &&  CACHIX_FLUIDATTACKS_TOKEN= ./m makes.dev.skims \
 &&  source out/makes-dev-skims
