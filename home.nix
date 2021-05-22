@@ -148,4 +148,16 @@ with import ./utils.nix;
       enable = true;
     };
   };
+  xdg = {
+    mimeApps = {
+      defaultApplications = {
+        "application/xhtml+xml" = "google-chrome.desktop";
+        "text/html" = "google-chrome.desktop";
+        "x-scheme-handler/http" = "google-chrome.desktop";
+        "x-scheme-handler/https" = "google-chrome.desktop";
+      };
+      enable = true;
+    };
+    enable = true;
+  };
 }
