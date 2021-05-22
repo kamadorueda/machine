@@ -35,6 +35,7 @@ with import ./utils.nix;
       (packages.nixpkgs.peek)
       (packages.nixpkgs.python38)
       (packages.nixpkgs.sops)
+      (packages.nixpkgs.traceroute)
       (packages.nixpkgs.terraform)
       (packages.nixpkgs.tokei)
       (packages.nixpkgs.tree)
@@ -52,7 +53,6 @@ with import ./utils.nix;
     bash = {
       bashrcExtra = builtins.readFile ./bashrc.sh;
       enable = true;
-      profileExtra = ". ~/.nix-profile/etc/profile.d/nix.sh";
     };
     direnv = {
       enable = true;
@@ -108,7 +108,7 @@ with import ./utils.nix;
         "files.insertFinalNewline" = true;
         "files.trimFinalNewlines" = true;
         "files.trimTrailingWhitespace" = true;
-        "python.defaultInterpreterPath" = "~/.nix-profile/bin/python3.8";
+        "python.defaultInterpreterPath" = "${packages.nixpkgs.python38}/bin/python";
         "python.formatting.blackArgs" = [
           "--config"
           "${sources.product}/makes/utils/python-format/settings-black.toml"
@@ -142,6 +142,11 @@ with import ./utils.nix;
         ];
         "workbench.startupEditor" = "none";
       };
+    };
+  };
+  targets = {
+    genericLinux = {
+      enable = true;
     };
   };
 }
