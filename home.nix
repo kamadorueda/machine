@@ -35,15 +35,14 @@ with import ./utils.nix;
       (packages.nixpkgs.peek)
       (packages.nixpkgs.python38)
       (packages.nixpkgs.sops)
-      (packages.nixpkgs.traceroute)
       (packages.nixpkgs.terraform)
       (packages.nixpkgs.tokei)
+      (packages.nixpkgs.traceroute)
       (packages.nixpkgs.tree)
       (packages.nixpkgs.vim)
       (packages.nixpkgs.vlc)
       (packages.nixpkgs.xclip)
       (packages.nixpkgs.yq)
-      (utils.directory "product" sources.product)
     ];
   };
   nixpkgs = {
