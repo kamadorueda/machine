@@ -29,6 +29,7 @@ with import ./utils.nix;
       (packages.nixpkgs.ngrok)
       (packages.nixpkgs.nixpkgs-fmt)
       (packages.nixpkgs.nodejs)
+      (packages.nixpkgs.openjdk)
       (packages.nixpkgs.optipng)
       (packages.nixpkgs.parallel)
       (packages.nixpkgs.pcre)
