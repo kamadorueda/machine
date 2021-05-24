@@ -82,6 +82,7 @@ with import ./utils.nix;
       enable = true;
       extraConfig = {
         commit.gpgsign = true;
+        diff.sopsdiffer.textconv = "sops -d";
         gpg.progam = "gpg2";
         gpg.sign = true;
         init.defaultBranch = "main";
