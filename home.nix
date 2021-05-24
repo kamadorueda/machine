@@ -35,7 +35,6 @@ with import ./utils.nix;
       (packages.nixpkgs.pcre)
       (packages.nixpkgs.peek)
       (packages.nixpkgs.python38)
-      (packages.nixpkgs.sops)
       (packages.nixpkgs.terraform)
       (packages.nixpkgs.tokei)
       (packages.nixpkgs.traceroute)
@@ -44,6 +43,7 @@ with import ./utils.nix;
       (packages.nixpkgs.vlc)
       (packages.nixpkgs.xclip)
       (packages.nixpkgs.yq)
+      (packages.nixpkgs3.sops)
     ];
   };
   nixpkgs = {
@@ -82,7 +82,11 @@ with import ./utils.nix;
       enable = true;
       extraConfig = {
         commit.gpgsign = true;
-        diff.sopsdiffer.textconv = "sops -d";
+        diff.sopsdiffer.textconv =
+          (packages.nixpkgs.writeScript "sopsdiffer.sh" ''
+            #! ${packages.nixpkgs.bash}/bin/bash
+            sops -d "$1" || cat "$1"
+          '').outPath;
         gpg.progam = "gpg2";
         gpg.sign = true;
         init.defaultBranch = "main";
