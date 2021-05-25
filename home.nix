@@ -44,6 +44,7 @@ with import ./utils.nix;
       (packages.nixpkgs.vlc)
       (packages.nixpkgs.xclip)
       (packages.nixpkgs.yq)
+      (packages.nixpkgs3.tilix)
     ];
   };
   nixpkgs = {
