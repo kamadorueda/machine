@@ -43,6 +43,7 @@ function fetch_fluid_var {
 
 function switch {
       cd "${MACHINE}" \
+  &&  nixpkgs-fmt . \
   &&  nix-env -if home-manager.nix \
   &&  home-manager -f home.nix switch
 }
