@@ -45,6 +45,7 @@ function switch {
       cd "${MACHINE}" \
   &&  nixpkgs-fmt . \
   &&  nix-env -if home-manager.nix \
+  &&  home-manager expire-generations "$(date +%Y-%m-%d)" \
   &&  home-manager -f home.nix switch
 }
 
