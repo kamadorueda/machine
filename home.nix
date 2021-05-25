@@ -35,6 +35,7 @@ with import ./utils.nix;
       (packages.nixpkgs.pcre)
       (packages.nixpkgs.peek)
       (packages.nixpkgs.python38)
+      (packages.nixpkgs.sops)
       (packages.nixpkgs.terraform)
       (packages.nixpkgs.tokei)
       (packages.nixpkgs.traceroute)
@@ -43,7 +44,6 @@ with import ./utils.nix;
       (packages.nixpkgs.vlc)
       (packages.nixpkgs.xclip)
       (packages.nixpkgs.yq)
-      (packages.nixpkgs3.sops)
     ];
   };
   nixpkgs = {
