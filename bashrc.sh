@@ -46,7 +46,8 @@ function switch {
   &&  nixpkgs-fmt . \
   &&  nix-env -if home-manager.nix \
   &&  home-manager -f home.nix switch \
-  &&  home-manager expire-generations "$(date +%Y-%m-%d)"
+  &&  home-manager expire-generations "$(date +%Y-%m-%d)" \
+  &&  chmod +w "$(readlink -f ~/.config/Code/User/settings.json)"
 }
 
 source "${SECRETS}/machine/secrets.sh"

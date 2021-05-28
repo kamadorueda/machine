@@ -8,6 +8,7 @@ with import ./utils.nix;
   home = {
     packages = [
       (packages.nixpkgs.acpi)
+      (packages.nixpkgs.age)
       (packages.nixpkgs.awscli)
       (packages.nixpkgs.beep)
       (packages.nixpkgs.bind)
@@ -49,6 +50,7 @@ with import ./utils.nix;
       (packages.nixpkgs.peek)
       (packages.nixpkgs.python38)
       (packages.nixpkgs.qemu)
+      (packages.nixpkgs.shadow)
       (packages.nixpkgs.sops)
       (packages.nixpkgs.terraform)
       (packages.nixpkgs.tokei)
@@ -58,6 +60,7 @@ with import ./utils.nix;
       (packages.nixpkgs.vlc)
       (packages.nixpkgs.xclip)
       (packages.nixpkgs.yq)
+      (packages.nixpkgs3.nix-bundle)
       (packages.nixpkgs3.tilix)
     ];
   };
@@ -71,6 +74,7 @@ with import ./utils.nix;
       shellAliases = {
         "a" = "git add -p";
         "c" = "git commit --allow-empty";
+        "csv" = "column -s, -t";
         "cat" = "bat --show-all --theme=ansi";
         "cm" = "git log -n 1 --format=%s%n%n%b";
         "cr" = "git commit -m \"$(cm)\"";
