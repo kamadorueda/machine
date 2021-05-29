@@ -1,7 +1,11 @@
 with import ./utils.nix;
 with import ./sources.nix;
 {
-  packages = {
+  packages = rec {
+    homeManager = utils.remoteImport {
+      args.pkgs = nixpkgs3;
+      source = sources.homeManager;
+    };
     nixpkgs = utils.remoteImport {
       args.config = { allowUnfree = true; };
       source = sources.nixpkgs;

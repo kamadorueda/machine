@@ -61,7 +61,6 @@ with import ./utils.nix;
       (packages.nixpkgs.xclip)
       (packages.nixpkgs.yq)
       (packages.nixpkgs3.nix-bundle)
-      (packages.nixpkgs3.tilix)
     ];
   };
   nixpkgs = {
@@ -114,6 +113,65 @@ with import ./utils.nix;
         user.signingkey = "FFF341057F503148";
       };
       package = packages.nixpkgs.git;
+    };
+    gnome-terminal = {
+      enable = true;
+      profile = {
+        "e0b782ed-6aca-44eb-8c75-62b3706b6220" = {
+          allowBold = true;
+          audibleBell = true;
+          backspaceBinding = "ascii-delete";
+          boldIsBright = true;
+          colors = {
+            backgroundColor = "#2E3436";
+            foregroundColor = "#D3D7C1";
+            palette = [
+              "#000000"
+              "#AA0000"
+              "#00AA00"
+              "#AA5500"
+              "#0000AA"
+              "#AA00AA"
+              "#00AAAA"
+              "#AAAAAA"
+              "#555555"
+              "#FF5555"
+              "#55FF55"
+              "#FFFF55"
+              "#5555FF"
+              "#FF55FF"
+              "#55FFFF"
+              "#FFFFFF"
+            ];
+          };
+          cursorBlinkMode = "off";
+          cursorShape = "underline";
+          default = true;
+          deleteBinding = "delete-sequence";
+          font = "Monospace Regular 22";
+          scrollbackLines = 1000000;
+          scrollOnOutput = false;
+          showScrollbar = false;
+          transparencyPercent = 8;
+          visibleName = "kamadorueda";
+        };
+      };
+      showMenubar = false;
+      themeVariant = "dark";
+    };
+    powerline-go = {
+      enable = true;
+      modules = [
+        "aws"
+        "cwd"
+        "gitlite"
+        "time"
+        "nix-shell"
+      ];
+      newline = true;
+      settings = {
+        mode = "flat";
+      };
     };
     vscode = {
       enable = true;
