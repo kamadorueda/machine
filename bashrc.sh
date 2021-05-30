@@ -45,9 +45,9 @@ function switch {
       clear \
   &&  cd "${MACHINE}" \
   &&  nixpkgs-fmt . \
-  &&  nix-env -if home-manager.nix \
-  &&  home-manager -f home.nix -n -v switch \
-  &&  home-manager -f home.nix switch \
+  &&  nix-env -iA packages.homeManager.home-manager -f . \
+  &&  home-manager -A config -f . -n -v switch \
+  &&  home-manager -A config -f . switch \
   &&  home-manager expire-generations "$(date +%Y-%m-%d)" \
   &&  chmod +w "$(readlink -f ~/.config/Code/User/settings.json)" \
   &&  source ~/.bashrc
