@@ -83,6 +83,7 @@ rec {
         (packages.nixpkgs.xclip)
         (packages.nixpkgs.yq)
         (packages.nixpkgs3.nix-bundle)
+        (packages.timedoctor)
       ];
     };
     nixpkgs = {
@@ -304,6 +305,41 @@ rec {
     product = utils.remoteImport {
       source = sources.product;
     };
+    timedoctor = nixpkgs.buildFHSUserEnv rec {
+      name = "timedoctor";
+      multiPkgs = targetPkgs;
+      runScript = "appimage-exec.sh -w ${sources.timedoctor.extracted}";
+      targetPkgs = pkgs: with pkgs; [
+        alsaLib
+        appimageTools.appimage-exec
+        at-spi2-atk
+        at-spi2-core
+        atk
+        cairo
+        cups
+        dbus.lib
+        expat.dev
+        gdk-pixbuf
+        glib
+        gtk3
+        nss
+        nspr
+        pango
+        utillinux
+        xorg.libxcb
+        xorg.libX11
+        xorg.libXcomposite
+        xorg.libXcursor
+        xorg.libXdamage
+        xorg.libXext
+        xorg.libXi
+        xorg.libXfixes
+        xorg.libXrandr
+        xorg.libXrender
+        xorg.libXtst
+        xorg.libXScrnSaver
+      ];
+    };
   };
   sources =
     let
@@ -328,10 +364,16 @@ rec {
         url = "https://gitlab.com/fluidattacks/product/-/archive/41aa1c5caf9e4122ffbf9690cb14a552ce3f7b23.tar.gz";
         sha256 = "1rvn9akx4v2mxpnxm99dcmd35il4yjdd856b51mhgzx6cmsqwpk1";
       };
-      timedoctor = fetchurl {
-        # https://repo2.timedoctor.com/td-desktop-hybrid/prod/
-        url = "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v3.12.9/timedoctor-desktop_3.12.9_linux-x86_64.AppImage";
-        sha256 = "0li6w0y80k1ci8vi5xa0ihq6ay5xr266l3d74rbazkbx8g4vv1g9";
+      timedoctor = {
+        appimage = fetchurl {
+          # https://repo2.timedoctor.com/td-desktop-hybrid/prod/
+          url = "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v3.12.9/timedoctor-desktop_3.12.9_linux-x86_64.AppImage";
+          sha256 = "0li6w0y80k1ci8vi5xa0ihq6ay5xr266l3d74rbazkbx8g4vv1g9";
+        };
+        extracted = packages.nixpkgs.appimageTools.extract {
+          name = "timedoctor-src";
+          src = sources.timedoctor.appimage;
+        };
       };
     };
   utils = {
