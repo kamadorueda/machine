@@ -67,6 +67,7 @@ rec {
         (packages.nixpkgs.optipng)
         (packages.nixpkgs.parallel)
         (packages.nixpkgs.parted)
+        (packages.nixpkgs.patchelf)
         (packages.nixpkgs.pciutils)
         (packages.nixpkgs.pcre)
         (packages.nixpkgs.peek)
@@ -290,6 +291,23 @@ rec {
     };
   };
   packages = rec {
+    desktime = packages.nixpkgs.stdenv.mkDerivation {
+      autoPatchelfIgnoreMissingDeps = true;
+      buildInputs = with packages.nixpkgs; [
+        alsaLib
+        ffmpeg-full
+        gtk3
+        nspr
+        nss
+        xorg.libXtst
+        xorg.libXScrnSaver
+      ];
+      installPhase = "install -m755 -D $src/usr/bin/desktime-linux $out/bin/desktime";
+      name = "desktime";
+      nativeBuildInputs = [ packages.nixpkgs.autoPatchelfHook ];
+      runtimeDependencies = [ sources.desktime.extracted ];
+      src = sources.desktime.extracted;
+    };
     homeManager = utils.remoteImport {
       args.pkgs = nixpkgs3;
       source = sources.homeManager;
@@ -348,6 +366,16 @@ rec {
       fetchurl = (import <nixpkgs> { }).fetchurl;
     in
     {
+      desktime = {
+        deb = fetchurl {
+          url = "https://desktime.com/updates/linux/update";
+          sha256 = "0rs0f9m20943fg3bc7q9rj6nig9x3pw0ridh9syid6v86nzlv82h";
+        };
+        extracted = packages.nixpkgs.runCommandLocal "desktime-src" { } ''
+          ${packages.nixpkgs.dpkg}/bin/dpkg-deb -x ${sources.desktime.deb} $out
+          ln -s $out/usr/lib/desktime-linux $out/lib
+        '';
+      };
       homeManager = /home/kamado/Documents/github/nix-community/home-manager;
       # homeManager = fetchzip {
       #   url = "https://github.com/nix-community/home-manager/archive/0e6c61a44092e98ba1d75b41f4f947843dc7814d.tar.gz";
