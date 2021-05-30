@@ -305,7 +305,7 @@ rec {
     product = utils.remoteImport {
       source = sources.product;
     };
-    timedoctor = nixpkgs.buildFHSUserEnv rec {
+    timedoctor = nixpkgs.buildFHSUserEnvBubblewrap rec {
       name = "timedoctor";
       multiPkgs = targetPkgs;
       runScript = "appimage-exec.sh -w ${sources.timedoctor.extracted}";
