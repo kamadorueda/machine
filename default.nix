@@ -308,6 +308,40 @@ rec {
       runtimeDependencies = [ sources.desktime.extracted ];
       src = sources.desktime.extracted;
     };
+    desktime2 = nixpkgs.buildFHSUserEnvBubblewrap rec {
+      name = "desktime";
+      runScript = "${sources.desktime.extracted}/usr/bin/desktime-linux";
+      targetPkgs = pkgs: with pkgs; [
+        at-spi2-atk
+        atk
+        alsaLib
+        cairo
+        cups
+        dbus
+        expat.dev
+        ffmpeg-full
+        fontconfig.lib
+        glib
+        gdk-pixbuf
+        gtk3
+        nspr
+        nss
+        pango
+        xlibs.libX11
+        xlibs.xprop
+        xorg.libxcb
+        xorg.libXcomposite
+        xorg.libXcursor
+        xorg.libXdamage
+        xorg.libXext
+        xorg.libXfixes
+        xorg.libXrandr
+        xorg.libXrender
+        xorg.libXi
+        xorg.libXtst
+        xorg.libXScrnSaver
+      ];
+    };
     homeManager = utils.remoteImport {
       args.pkgs = nixpkgs3;
       source = sources.homeManager;
