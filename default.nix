@@ -60,6 +60,7 @@ rec {
         (packages.nixpkgs.maven)
         (packages.nixpkgs.mypy)
         (packages.nixpkgs.ngrok)
+        (packages.nixpkgs.nix-index)
         (packages.nixpkgs.nixpkgs-fmt)
         (packages.nixpkgs.nodejs)
         (packages.nixpkgs.openjdk)
@@ -307,6 +308,7 @@ rec {
   sources =
     let
       fetchzip = (import <nixpkgs> { }).fetchzip;
+      fetchurl = (import <nixpkgs> { }).fetchurl;
     in
     {
       homeManager = /home/kamado/Documents/github/nix-community/home-manager;
@@ -325,6 +327,11 @@ rec {
       product = fetchzip {
         url = "https://gitlab.com/fluidattacks/product/-/archive/41aa1c5caf9e4122ffbf9690cb14a552ce3f7b23.tar.gz";
         sha256 = "1rvn9akx4v2mxpnxm99dcmd35il4yjdd856b51mhgzx6cmsqwpk1";
+      };
+      timedoctor = fetchurl {
+        # https://repo2.timedoctor.com/td-desktop-hybrid/prod/
+        url = "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v3.12.9/timedoctor-desktop_3.12.9_linux-x86_64.AppImage";
+        sha256 = "0li6w0y80k1ci8vi5xa0ihq6ay5xr266l3d74rbazkbx8g4vv1g9";
       };
     };
   utils = {
