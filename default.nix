@@ -12,6 +12,7 @@ rec {
           '';
         };
       };
+      enableDebugInfo = true;
       language = {
         address = "en_US.UTF-8";
         base = "en_US.UTF-8";
@@ -85,6 +86,9 @@ rec {
     };
     nixpkgs = {
       config = { };
+      overlays = [
+        (self: super: { })
+      ];
     };
     programs = {
       bash = {

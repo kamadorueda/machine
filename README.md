@@ -26,8 +26,9 @@
       &&  git clone git@github.com:kamadorueda/machine \
       &&  pushd machine \
         &&  nix-env -e git \
-        &&  nix-env -if ./home-manager.nix \
-        &&  home-manager -f ./home.nix switch \
+        &&  nix-env -iA packages.homeManager.home-manager -f . \
+        &&  home-manager -A config -f . switch \
+        &&  source ~/.bashrc \
       &&  popd \
     &&  popd \
     &&  mkdir -p ~/Documents/gitlab/fluidattacks \
