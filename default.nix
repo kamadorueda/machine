@@ -317,6 +317,7 @@ rec {
         atk
         cairo
         cups
+        desktop-file-utils
         dbus.lib
         expat.dev
         gdk-pixbuf
