@@ -49,7 +49,6 @@ function switch {
   &&  home-manager -A config -f . -n -v switch \
   &&  home-manager -A config -f . switch \
   &&  home-manager expire-generations "$(date +%Y-%m-%d)" \
-  &&  chmod +w "$(readlink -f ~/.config/Code/User/settings.json)" \
   &&  source ~/.bashrc
 }
 
