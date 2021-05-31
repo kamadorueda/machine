@@ -13,7 +13,7 @@ rec {
           after = [ "writeBoundary" ];
           before = [ ];
           data = ''
-            $DRY_RUN_CMD chmod +w "$(readlink -f ~/.config/Code/User/settings.json)"
+            $DRY_RUN_CMD chmod --recursive +w "$(readlink -f ~/.config/Code)"
           '';
         };
       };
