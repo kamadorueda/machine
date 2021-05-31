@@ -2,6 +2,11 @@ rec {
   # Home manager configuration:
   # https://nix-community.github.io/home-manager/options.html
   config = {
+    fonts = {
+      fontconfig = {
+        enable = true;
+      };
+    };
     home = {
       activation = {
         afterWriteBoundary = {
@@ -71,6 +76,7 @@ rec {
         (packages.nixpkgs.pciutils)
         (packages.nixpkgs.pcre)
         (packages.nixpkgs.peek)
+        (packages.nixpkgs.powerline-fonts)
         (packages.nixpkgs.python38)
         (packages.nixpkgs.qemu)
         (packages.nixpkgs.shadow)
@@ -175,7 +181,7 @@ rec {
             cursorShape = "underline";
             default = true;
             deleteBinding = "delete-sequence";
-            font = "Monospace Regular 22";
+            font = "Anonymous Pro for Powerline 22";
             scrollbackLines = 1000000;
             scrollOnOutput = false;
             showScrollbar = false;
@@ -195,9 +201,6 @@ rec {
           "nix-shell"
         ];
         newline = true;
-        settings = {
-          mode = "flat";
-        };
       };
       vscode = {
         enable = true;
