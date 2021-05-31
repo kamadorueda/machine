@@ -244,6 +244,8 @@ rec {
             "editor.tabSize" = 4;
           };
           "editor.formatOnSave" = true;
+          "editor.fontFamily" = "'ProFont for Powerline'";
+          "editor.fontSize" = 17;
           "editor.rulers" = [ 80 ];
           "editor.tabSize" = 2;
           "extensions.autoUpdate" = false;
