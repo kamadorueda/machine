@@ -156,24 +156,24 @@ rec {
             backspaceBinding = "ascii-delete";
             boldIsBright = true;
             colors = {
-              backgroundColor = "#2E3436";
-              foregroundColor = "#D3D7C1";
+              backgroundColor = "#000000";
+              foregroundColor = "#FFFFFF";
               palette = [
                 "#000000"
-                "#AA0000"
-                "#00AA00"
-                "#AA5500"
-                "#0000AA"
-                "#AA00AA"
-                "#00AAAA"
-                "#AAAAAA"
-                "#555555"
-                "#FF5555"
-                "#55FF55"
-                "#FFFF55"
-                "#5555FF"
-                "#FF55FF"
-                "#55FFFF"
+                "#CD0000"
+                "#00CD00"
+                "#CDCD00"
+                "#0000EE"
+                "#CD00CD"
+                "#00CDCD"
+                "#E5E5E5"
+                "#7F7F7F"
+                "#FF0000"
+                "#00FF00"
+                "#FFFF00"
+                "#5C5CFF"
+                "#FF00FF"
+                "#00FFFF"
                 "#FFFFFF"
               ];
             };
@@ -181,11 +181,11 @@ rec {
             cursorShape = "underline";
             default = true;
             deleteBinding = "delete-sequence";
-            font = "Anonymous Pro for Powerline 22";
+            font = "ProFont for Powerline 26";
             scrollbackLines = 1000000;
             scrollOnOutput = false;
             showScrollbar = false;
-            transparencyPercent = 8;
+            transparencyPercent = 4;
             visibleName = "kamadorueda";
           };
         };
@@ -196,11 +196,22 @@ rec {
         enable = true;
         modules = [
           "cwd"
-          "gitlite"
+          "git"
           "time"
           "nix-shell"
         ];
         newline = true;
+        pathAliases = {
+          "\\~/Documents/github/kamadorueda/machine" = "@machine";
+          "\\~/Documents/github/kamadorueda/secrets" = "@secrets";
+          "\\~/Documents/gitlab/fluidattacks/product" = "@product";
+        };
+        settings = {
+          cwd-max-depth = "3";
+          cwd-max-dir-size = "16";
+          git-mode = "compact";
+          shell = "bash";
+        };
       };
       vscode = {
         enable = true;
