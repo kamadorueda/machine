@@ -101,8 +101,8 @@ rec {
     };
     programs = {
       bash = {
-        bashrcExtra = builtins.readFile ./bashrc.sh;
         enable = true;
+        initExtra = builtins.readFile ./bashrc.sh;
         shellAliases = {
           "a" = "git add -p";
           "c" = "git commit --allow-empty";

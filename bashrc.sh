@@ -58,6 +58,6 @@ source "${SECRETS}/machine/secrets.sh"
 # dev_env integrates.back
 
 # export_fluid_aws_vars skims
-# dev_env skims
+dev_env skims
 
-# export_fluid_aws_vars makes
+export_fluid_aws_vars makes
