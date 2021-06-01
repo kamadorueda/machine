@@ -65,6 +65,7 @@ rec {
         (packages.nixpkgs.google-chrome)
         (packages.nixpkgs.hugo)
         (packages.nixpkgs.inxi)
+        (packages.nixpkgs.python38Packages.isort)
         (packages.nixpkgs.jq)
         (packages.nixpkgs.kubectl)
         (packages.nixpkgs.libreoffice)
@@ -237,6 +238,7 @@ rec {
             (ext "4ops" "terraform" "0.2.1" "r5W5S9hIn4AlVtr6y7HoVwtJqZ+vYQgukj/ehJQRwKQ=")
             (ext "coenraads" "bracket-pair-colorizer" "1.0.61" "0r3bfp8kvhf9zpbiil7acx7zain26grk133f0r0syxqgml12i652")
             (ext "eamodio" "gitlens" "11.3.0" "m2Zn+e6hj59SujcW5ptdrYDrc4CviZ4wyCndO2BhyF8=")
+            (ext "jkillian" "custom-local-formatters" "0.0.4" "1pmqnc759fq86g2z3scx5xqpni9khcqi5z2kpl1kb7yygsv314gm")
             (ext "mads-hartmann" "bash-ide-vscode" "1.11.0" "d7acWLdRW8nVjQPU5iln9hl9zUx61XN4lvmFLbwLBMM=")
             (ext "shardulm94" "trailing-spaces" "0.3.1" "0h30zmg5rq7cv7kjdr5yzqkkc1bs20d72yz9rjqag32gwf46s8b8")
           ] ++ [
@@ -258,6 +260,22 @@ rec {
           "[py]" = {
             "editor.tabSize" = 4;
           };
+          "customLocalFormatters.formatters" = [
+            {
+              command = "${packages.nixpkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
+              languages = [ "nix" ];
+            }
+            {
+              command = ''
+                ${packages.nixpkgs.python38Packages.isort}/bin/isort \
+                  --settings-path \
+                  ${sources.product}/makes/utils/python-format/settings-isort.toml \
+                  -
+              '';
+              languages = [ "python" ];
+            }
+          ];
+          "editor.defaultFormatter" = "jkillian.custom-local-formatters";
           "editor.formatOnSave" = true;
           "editor.fontFamily" = "'ProFont for Powerline'";
           "editor.fontSize" = 17;
