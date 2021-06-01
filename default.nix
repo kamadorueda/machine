@@ -25,6 +25,25 @@ rec {
         };
       };
       enableDebugInfo = true;
+      file = {
+        timedoctor = {
+          executable = true;
+          source = sources.timedoctor.appimage;
+          target = "timedoctor.AppImage";
+        };
+        timedoctorDesktopEntry = {
+          text = ''
+            [Desktop Entry]
+            Categories=Office;
+            Comment=Time Doctor
+            Exec=${abs.home}/${config.home.file.timedoctor.target}
+            Name=Time Doctor
+            Terminal=false
+            Type=Application
+          '';
+          target = ".local/share/applications/timedoctor.desktop";
+        };
+      };
       homeDirectory = abs.home;
       language = {
         address = "en_US.UTF-8";
