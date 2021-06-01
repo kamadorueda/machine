@@ -54,10 +54,10 @@ function switch {
 
 source "${SECRETS}/machine/secrets.sh"
 
-# export_fluid_aws_vars integrates
-# dev_env integrates.back
-
-# export_fluid_aws_vars skims
-dev_env skims
-
 export_fluid_aws_vars makes
+# export_fluid_aws_vars integrates
+# export_fluid_aws_vars skims
+
+# dev_env integrates.back
+dev_env melts
+# dev_env skims
