@@ -1,4 +1,11 @@
 rec {
+  abs = {
+    email = "kamadorueda@gmail.com";
+    emailAtWork = "kamado@fluidattacks.com";
+    home = "/home/kamado";
+    name = "Kevin Amado";
+    username = "kamadorueda";
+  };
   # Home manager configuration:
   # https://nix-community.github.io/home-manager/options.html
   config = {
@@ -18,6 +25,7 @@ rec {
         };
       };
       enableDebugInfo = true;
+      homeDirectory = abs.home;
       language = {
         address = "en_US.UTF-8";
         base = "en_US.UTF-8";
@@ -92,6 +100,8 @@ rec {
         (packages.nixpkgs3.nix-bundle)
         (packages.timedoctor)
       ];
+      stateVersion = "21.05";
+      username = abs.username;
     };
     nixpkgs = {
       config = { };
@@ -121,7 +131,7 @@ rec {
           r = "git pull --autostash --progress --rebase --stat origin master";
           rp = "r && p";
           s = "git status";
-          today = "git log --format=%aI --author kamado@fluidattacks.com | sed -E 's/T.*$//g' | uniq -c | head -n 7 | tac";
+          today = "git log --format=%aI --author ${abs.emailAtWork} | sed -E 's/T.*$//g' | uniq -c | head -n 7 | tac";
         };
       };
       bat = {
@@ -143,8 +153,8 @@ rec {
           gpg.progam = "gpg2";
           gpg.sign = true;
           init.defaultBranch = "main";
-          user.email = "kamadorueda@gmail.com";
-          user.name = "Kevin Amado";
+          user.email = abs.email;
+          user.name = abs.name;
           user.signingkey = "FFF341057F503148";
         };
         package = packages.nixpkgs.git;
@@ -188,7 +198,7 @@ rec {
             scrollOnOutput = false;
             showScrollbar = false;
             transparencyPercent = 4;
-            visibleName = "kamadorueda";
+            visibleName = abs.username;
           };
         };
         showMenubar = false;
@@ -326,7 +336,7 @@ rec {
       runtimeDependencies = [ sources.desktime.extracted ];
       src = sources.desktime.extracted;
     };
-    desktime2 = nixpkgs.buildFHSUserEnvBubblewrap rec {
+    desktime2 = nixpkgs.buildFHSUserEnvBubblewrap {
       name = "desktime";
       runScript = "${sources.desktime.extracted}/usr/bin/desktime-linux";
       targetPkgs = pkgs: with pkgs; [
