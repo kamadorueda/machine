@@ -38,8 +38,6 @@ rec {
         timedoctorDesktopEntry = {
           text = ''
             [Desktop Entry]
-            Categories=Office;
-            Comment=Time Doctor
             Exec=${abs.home}/${config.home.file.timedoctor.target}
             Name=Time Doctor
             Terminal=false
