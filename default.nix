@@ -20,7 +20,7 @@ rec {
           after = [ "writeBoundary" ];
           before = [ ];
           data = ''
-            $DRY_RUN_CMD chmod --recursive +w "$(readlink -f ~/.config/Code)"
+            $DRY_RUN_CMD chmod --recursive +w "$(readlink -f ~/.config/VSCodium)"
           '';
         };
       };
@@ -115,8 +115,9 @@ rec {
         initExtra = builtins.readFile ./bashrc.sh;
         shellAliases = {
           a = "git add -p";
-          bashrc = "code $MACHINE/bashrc.sh";
+          bashrc = "codium $MACHINE/bashrc.sh";
           c = "git commit --allow-empty";
+          code = "codium";
           csv = "column -s, -t";
           cat = "bat --show-all --theme=ansi";
           cm = "git log -n 1 --format=%s%n%n%b";
@@ -125,7 +126,7 @@ rec {
           graph = "TZ=UTC git rev-list --date=iso-local --pretty='!%H!!%ad!!%cd!!%aN!!%P!' --graph HEAD";
           l = "git log --show-signature";
           m = "git commit --amend --no-edit --allow-empty";
-          machine = "code $MACHINE/default.nix";
+          machine = "codium $MACHINE/default.nix";
           melts = "CI=true CI_COMMIT_REF_NAME=master melts";
           p = "git push -f";
           r = "git pull --autostash --progress --rebase --stat origin master";
@@ -233,11 +234,11 @@ rec {
               { inherit name publisher sha256 version; };
           in
           packages.nixpkgs3.vscode-utils.extensionsFromVscodeMarketplace [
+            (ext "4ops" "terraform" "0.2.1" "r5W5S9hIn4AlVtr6y7HoVwtJqZ+vYQgukj/ehJQRwKQ=")
+            (ext "coenraads" "bracket-pair-colorizer" "1.0.61" "0r3bfp8kvhf9zpbiil7acx7zain26grk133f0r0syxqgml12i652")
             (ext "eamodio" "gitlens" "11.3.0" "m2Zn+e6hj59SujcW5ptdrYDrc4CviZ4wyCndO2BhyF8=")
             (ext "mads-hartmann" "bash-ide-vscode" "1.11.0" "d7acWLdRW8nVjQPU5iln9hl9zUx61XN4lvmFLbwLBMM=")
-            (ext "4ops" "terraform" "0.2.1" "r5W5S9hIn4AlVtr6y7HoVwtJqZ+vYQgukj/ehJQRwKQ=")
             (ext "shardulm94" "trailing-spaces" "0.3.1" "0h30zmg5rq7cv7kjdr5yzqkkc1bs20d72yz9rjqag32gwf46s8b8")
-            (ext "coenraads" "bracket-pair-colorizer" "1.0.61" "0r3bfp8kvhf9zpbiil7acx7zain26grk133f0r0syxqgml12i652")
           ] ++ [
             packages.nixpkgs3.vscode-extensions.bbenoist.Nix
             packages.nixpkgs3.vscode-extensions.haskell.haskell
@@ -247,7 +248,9 @@ rec {
             packages.nixpkgs3.vscode-extensions.ms-python.vscode-pylance
             packages.nixpkgs3.vscode-extensions.streetsidesoftware.code-spell-checker
           ];
-        package = packages.nixpkgs3.vscode;
+        keybindings = [
+        ];
+        package = packages.nixpkgs3.vscodium;
         userSettings = {
           "[html]" = {
             "editor.formatOnSave" = false;
@@ -264,7 +267,6 @@ rec {
           "files.insertFinalNewline" = true;
           "files.trimFinalNewlines" = true;
           "files.trimTrailingWhitespace" = true;
-          "python.defaultInterpreterPath" = "${packages.nixpkgs.python38}/bin/python";
           "python.formatting.blackArgs" = [
             "--config"
             "${sources.product}/makes/utils/python-format/settings-black.toml"
@@ -279,23 +281,19 @@ rec {
             "${sources.product}/makes/utils/lint-python/settings-mypy.cfg"
           ];
           "python.linting.mypyEnabled" = true;
+          "python.linting.mypyPath" = "${packages.nixpkgs.mypy}/bin/mypy";
           "python.linting.prospectorArgs" = [
             "--profile"
             "${sources.product}/makes/utils/lint-python/settings-prospector.yaml"
           ];
           "python.linting.prospectorEnabled" = true;
+          "python.linting.prospectorPath" = "prospector";
           "python.linting.pylintEnabled" = false;
           "python.pythonPath" = "${packages.nixpkgs.python38}/bin/python";
           "telemetry.enableTelemetry" = false;
           "update.mode" = "none";
           "window.zoomLevel" = 2;
           "workbench.editor.enablePreview" = false;
-          "workbench.editorAssociations" = [
-            {
-              "filenamePattern" = "*.ipynb";
-              "viewType" = "jupyter.notebook.ipynb";
-            }
-          ];
           "workbench.startupEditor" = "none";
         };
       };
@@ -452,8 +450,8 @@ rec {
         sha256 = "0gifxf5n9s0xrwcqgmpvibqa9ab3asx1jm65dsglgfgj9hg2qb0q";
       };
       product = fetchzip {
-        url = "https://gitlab.com/fluidattacks/product/-/archive/41aa1c5caf9e4122ffbf9690cb14a552ce3f7b23.tar.gz";
-        sha256 = "1rvn9akx4v2mxpnxm99dcmd35il4yjdd856b51mhgzx6cmsqwpk1";
+        url = "https://gitlab.com/fluidattacks/product/-/archive/f7b285ced92122484b5e0db1682195be8003c131.tar.gz";
+        sha256 = "026qww363a8ybm25yq1zvkwym4lm8i3s3pgg5mpacd4851kzjwwi";
       };
       timedoctor = {
         appimage = fetchurl {

@@ -46,7 +46,10 @@ function switch {
   &&  cd "${MACHINE}" \
   &&  nixpkgs-fmt . \
   &&  nix-env -iA packages.homeManager.home-manager -f . \
-  &&  home-manager -A config -f . -n -v switch \
+  &&  if test -v DEBUG
+      then
+        home-manager -A config -f . -n -v switch
+      fi \
   &&  home-manager -A config -f . switch \
   &&  home-manager expire-generations "$(date +%Y-%m-%d)" \
   &&  source ~/.bashrc
