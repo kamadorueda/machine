@@ -2,11 +2,14 @@ rec {
   abs = {
     email = "kamadorueda@gmail.com";
     emailAtWork = "kamado@fluidattacks.com";
+    font = "ProFont for Powerline";
     home = "/home/kamado";
     locale = "en_US.UTF-8";
     name = "Kevin Amado";
+    signingkey = "FFF341057F503148";
     username = "kamadorueda";
   };
+
   # Home manager configuration:
   # https://nix-community.github.io/home-manager/options.html
   config = {
@@ -47,18 +50,18 @@ rec {
       };
       homeDirectory = abs.home;
       language = {
-        address = locale;
-        base = locale;
-        collate = locale;
-        ctype = locale;
-        name = locale;
-        numeric = locale;
-        measurement = locale;
-        messages = locale;
-        monetary = locale;
-        paper = locale;
-        telephone = locale;
-        time = locale;
+        address = abs.locale;
+        base = abs.locale;
+        collate = abs.locale;
+        ctype = abs.locale;
+        name = abs.locale;
+        numeric = abs.locale;
+        measurement = abs.locale;
+        messages = abs.locale;
+        monetary = abs.locale;
+        paper = abs.locale;
+        telephone = abs.locale;
+        time = abs.locale;
       };
       packages = [
         packages.nixpkgs.acpi
@@ -172,12 +175,12 @@ rec {
               #! ${packages.nixpkgs.bash}/bin/bash
               sops -d "$1" || cat "$1"
             '').outPath;
-          gpg.progam = "gpg2";
+          gpg.progam = "${packages.nixpkgs.gnupg}/bin/gpg2";
           gpg.sign = true;
           init.defaultBranch = "main";
           user.email = abs.email;
           user.name = abs.name;
-          user.signingkey = "FFF341057F503148";
+          user.signingkey = abs.signingkey;
         };
         package = packages.nixpkgs.git;
       };
@@ -215,7 +218,7 @@ rec {
             cursorShape = "underline";
             default = true;
             deleteBinding = "delete-sequence";
-            font = "ProFont for Powerline 26";
+            font = "${abs.font} 26";
             scrollbackLines = 1000000;
             scrollOnOutput = false;
             showScrollbar = false;
@@ -228,12 +231,7 @@ rec {
       };
       powerline-go = {
         enable = true;
-        modules = [
-          "cwd"
-          "git"
-          "time"
-          "nix-shell"
-        ];
+        modules = [ "cwd" "exit" "git" "time" ];
         newline = true;
         pathAliases = {
           "\\~/Documents/github/kamadorueda/machine" = "@machine";
@@ -243,8 +241,10 @@ rec {
         settings = {
           cwd-max-depth = "3";
           cwd-max-dir-size = "16";
-          git-mode = "compact";
+          git-mode = "fancy";
+          numeric-exit-codes = true;
           shell = "bash";
+          theme = "default";
         };
       };
       vscode = {
@@ -274,12 +274,8 @@ rec {
         ];
         package = packages.nixpkgs3.vscodium;
         userSettings = {
-          "[html]" = {
-            "editor.formatOnSave" = false;
-          };
-          "[py]" = {
-            "editor.tabSize" = 4;
-          };
+          "[html]" = { "editor.formatOnSave" = false; };
+          "[py]" = { "editor.tabSize" = 4; };
           "customLocalFormatters.formatters" = [
             {
               command = "${packages.nixpkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
@@ -297,7 +293,7 @@ rec {
           ];
           "editor.defaultFormatter" = "jkillian.custom-local-formatters";
           "editor.formatOnSave" = true;
-          "editor.fontFamily" = "'ProFont for Powerline'";
+          "editor.fontFamily" = "'${abs.font}'";
           "editor.fontSize" = 17;
           "editor.rulers" = [ 80 ];
           "editor.tabSize" = 2;
