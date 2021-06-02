@@ -24,7 +24,10 @@ rec {
           after = [ "writeBoundary" ];
           before = [ ];
           data = ''
-            $DRY_RUN_CMD chmod --recursive +w "$(readlink -f ~/.config/VSCodium)"
+            find ~/.config/Code | while read -r path
+            do
+              $DRY_RUN_CMD chmod --recursive +w "$path"
+            done
           '';
         };
       };
@@ -137,9 +140,8 @@ rec {
         initExtra = builtins.readFile ./bashrc.sh;
         shellAliases = {
           a = "git add -p";
-          bashrc = "codium $MACHINE/bashrc.sh";
+          bashrc = "code $MACHINE/bashrc.sh";
           c = "git commit --allow-empty";
-          code = "codium";
           csv = "column -s, -t";
           cat = "bat --show-all --theme=ansi";
           cm = "git log -n 1 --format=%s%n%n%b";
@@ -148,7 +150,7 @@ rec {
           graph = "TZ=UTC git rev-list --date=iso-local --pretty='!%H!!%ad!!%cd!!%aN!!%P!' --graph HEAD";
           l = "git log --show-signature";
           m = "git commit --amend --no-edit --allow-empty";
-          machine = "codium $MACHINE/default.nix";
+          machine = "code $MACHINE/default.nix";
           melts = "CI=true CI_COMMIT_REF_NAME=master melts";
           p = "git push -f";
           r = "git pull --autostash --progress --rebase --stat origin master";
@@ -271,22 +273,32 @@ rec {
           ];
         keybindings = [
         ];
-        package = packages.nixpkgs3.vscodium;
+        package = packages.nixpkgs3.vscode;
         userSettings = {
           "[html]" = { "editor.formatOnSave" = false; };
-          "[py]" = { "editor.tabSize" = 4; };
+          "[python]" = { "editor.tabSize" = 4; };
           "customLocalFormatters.formatters" = [
             {
               command = "${packages.nixpkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
               languages = [ "nix" ];
             }
             {
-              command = ''
-                ${packages.nixpkgs.python38Packages.isort}/bin/isort \
-                  --settings-path \
-                  ${sources.product}/makes/utils/python-format/settings-isort.toml \
-                  -
-              '';
+              command =
+                (packages.nixpkgs.writeScript "python-fmt" ''
+                  #! ${packages.nixpkgs.bash}/bin/bash
+
+                  PYTHONPATH=/pythonpath/not/set
+
+                  ${packages.nixpkgs.black}/bin/black \
+                    --config \
+                    ${sources.product}/makes/utils/python-format/settings-black.toml \
+                    - \
+                    | \
+                  ${packages.nixpkgs.python38Packages.isort}/bin/isort \
+                    --settings-path \
+                    ${sources.product}/makes/utils/python-format/settings-isort.toml \
+                    -
+                '').outPath;
               languages = [ "python" ];
             }
           ];
@@ -297,15 +309,13 @@ rec {
           "editor.rulers" = [ 80 ];
           "editor.tabSize" = 2;
           "extensions.autoUpdate" = false;
+          "files.eol" = "\n";
           "files.insertFinalNewline" = true;
           "files.trimFinalNewlines" = true;
           "files.trimTrailingWhitespace" = true;
-          "python.formatting.blackArgs" = [
-            "--config"
-            "${sources.product}/makes/utils/python-format/settings-black.toml"
-          ];
-          "python.formatting.blackPath" = "${packages.nixpkgs.black}/bin/black";
-          "python.formatting.provider" = "black";
+          "python.analysis.autoSearchPaths" = false;
+          "python.analysis.diagnosticMode" = "workspace";
+          "python.formatting.provider" = "none";
           "python.languageServer" = "Pylance";
           "python.linting.enabled" = true;
           "python.linting.lintOnSave" = true;
@@ -323,10 +333,16 @@ rec {
           "python.linting.prospectorPath" = "prospector";
           "python.linting.pylintEnabled" = false;
           "python.pythonPath" = "${packages.nixpkgs.python38}/bin/python";
+          "telemetry.enableCrashReporter" = false;
           "telemetry.enableTelemetry" = false;
           "update.mode" = "none";
+          "update.showReleaseNotes" = false;
           "window.zoomLevel" = 2;
+          "workbench.colorTheme" = "Default High Contrast";
           "workbench.editor.enablePreview" = false;
+          "workbench.editor.focusRecentEditorAfterClose" = false;
+          "workbench.editor.openPositioning" = "last";
+          "workbench.settings.editor" = "json";
           "workbench.startupEditor" = "none";
         };
       };
@@ -483,8 +499,8 @@ rec {
         sha256 = "0gifxf5n9s0xrwcqgmpvibqa9ab3asx1jm65dsglgfgj9hg2qb0q";
       };
       product = fetchzip {
-        url = "https://gitlab.com/fluidattacks/product/-/archive/f7b285ced92122484b5e0db1682195be8003c131.tar.gz";
-        sha256 = "026qww363a8ybm25yq1zvkwym4lm8i3s3pgg5mpacd4851kzjwwi";
+        url = "https://gitlab.com/fluidattacks/product/-/archive/e0a77b8bf17a9b6114e1ccb7d799a6246d9605c1.tar.gz";
+        sha256 = "05nnnkhq0lxrdhsk83v33shrvpykj4j6i12c81mnlqfmibcaspy9";
       };
       timedoctor = {
         appimage = fetchurl {

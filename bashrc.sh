@@ -62,5 +62,5 @@ export_fluid_aws_vars makes
 # export_fluid_aws_vars skims
 
 # dev_env integrates.back
+dev_env skims
 dev_env melts
-# dev_env skims
