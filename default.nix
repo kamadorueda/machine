@@ -26,7 +26,7 @@ rec {
           data = ''
             find ~/.config/Code | while read -r path
             do
-              $DRY_RUN_CMD chmod --recursive +w "$path"
+              $DRY_RUN_CMD chmod --recursive +w "$(readlink --canonicalize "$path")"
             done
           '';
         };
@@ -302,10 +302,19 @@ rec {
               languages = [ "python" ];
             }
           ];
+          "diffEditor.ignoreTrimWhitespace" = false;
+          "diffEditor.maxComputationTime" = 0;
+          "diffEditor.renderSideBySide" = false;
+          "editor.cursorStyle" = "underline";
           "editor.defaultFormatter" = "jkillian.custom-local-formatters";
           "editor.formatOnSave" = true;
           "editor.fontFamily" = "'${abs.font}'";
-          "editor.fontSize" = 17;
+          "editor.fontSize" = 18;
+          "editor.minimap.maxColumn" = 80;
+          "editor.minimap.renderCharacters" = false;
+          "editor.minimap.showSlider" = "always";
+          "editor.minimap.side" = "left";
+          "editor.minimap.size" = "fill";
           "editor.rulers" = [ 80 ];
           "editor.tabSize" = 2;
           "extensions.autoUpdate" = false;
