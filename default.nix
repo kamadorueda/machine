@@ -75,6 +75,7 @@ rec {
         packages.nixpkgs.burpsuite
         packages.nixpkgs.cabal-install
         packages.nixpkgs.cargo
+        packages.nixpkgs.coreutils
         packages.nixpkgs.curl
         packages.nixpkgs.diction
         packages.nixpkgs.diffoscope
@@ -154,6 +155,7 @@ rec {
           melts = "CI=true CI_COMMIT_REF_NAME=master melts";
           p = "git push -f";
           r = "git pull --autostash --progress --rebase --stat origin master";
+          ru = "git pull --autostash --progress --rebase --stat upstream master";
           rp = "r && p";
           s = "git status";
           today = "git log --format=%aI --author ${abs.emailAtWork} | sed -E 's/T.*$//g' | uniq -c | head -n 7 | tac";
