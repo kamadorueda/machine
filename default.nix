@@ -140,6 +140,7 @@ rec {
           m = "git commit --amend --no-edit --allow-empty";
           machine = "code $MACHINE/default.nix";
           melts = "CI=true CI_COMMIT_REF_NAME=master melts";
+          nix-flakes = "nix --experimental-features 'nix-command flakes'";
           p = "git push -f";
           r = "git pull --autostash --progress --rebase --stat origin master";
           ru = "git pull --autostash --progress --rebase --stat upstream master";
