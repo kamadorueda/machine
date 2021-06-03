@@ -65,7 +65,7 @@ function diffm {
 
       current="$(home-manager generations | tac | grep -Pom 1 '/nix/store/.*')" \
   &&  next="$(home-manager -A config -f "${MACHINE}" build)" \
-  &&  diff --color=always --recursive "${current}" "${next}"
+  &&  diff --color=always --paginate --recursive --side-by-side "${current}" "${next}"
 }
 
 source "${SECRETS}/machine/secrets.sh"
