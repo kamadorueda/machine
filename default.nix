@@ -76,7 +76,7 @@ rec {
         packages.nixpkgs.git-sizer
         packages.nixpkgs.gimp
         packages.nixpkgs.gnumake
-        packages.nixpkgs.gnupg
+
         packages.nixpkgs.google-chrome
         packages.nixpkgs.hugo
         packages.nixpkgs.inxi
@@ -219,6 +219,10 @@ rec {
         };
         showMenubar = false;
         themeVariant = "dark";
+      };
+      gpg = {
+        enable = true;
+        package = packages.nixpkgs.gnupg;
       };
       powerline-go = {
         enable = true;
