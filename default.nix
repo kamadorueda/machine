@@ -109,7 +109,6 @@ rec {
         packages.nixpkgs.tokei
         packages.nixpkgs.traceroute
         packages.nixpkgs.tree
-        packages.nixpkgs.vim
         packages.nixpkgs.vlc
         packages.nixpkgs.xclip
         packages.nixpkgs.yq
@@ -132,9 +131,9 @@ rec {
         shellAliases = {
           a = "git add -p";
           bashrc = "code $MACHINE/bashrc.sh";
+          bat = "bat --show-all --theme=ansi";
           c = "git commit --allow-empty";
           csv = "column -s, -t";
-          cat = "bat --show-all --theme=ansi";
           cm = "git log -n 1 --format=%s%n%n%b";
           cr = "git commit -m \"$(cm)\"";
           f = "git fetch --all";
@@ -248,6 +247,15 @@ rec {
             };
             identityFile = "~/.ssh/id_ed25519";
           };
+        };
+      };
+      vim = {
+        enable = true;
+        extraConfig = ''
+        '';
+        plugins = [ ];
+        settings = {
+          background = "dark";
         };
       };
       vscode = {
