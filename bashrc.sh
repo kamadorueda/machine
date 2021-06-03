@@ -4,6 +4,11 @@ export MACHINE=~/Documents/github/kamadorueda/machine
 export PRODUCT=~/Documents/gitlab/fluidattacks/product
 export SECRETS=~/Documents/github/kamadorueda/secrets
 
+for completion_script in ~/.nix-profile/share/bash-completion/completions/*
+do
+  source "${completion_script}"
+done
+
 export PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ ";
 
 function dev_env {
@@ -43,16 +48,24 @@ function fetch_fluid_var {
 
 function switch {
       clear \
-  &&  cd "${MACHINE}" \
-  &&  nixpkgs-fmt . \
-  &&  nix-env -iA packages.homeManager.home-manager -f . \
+  &&  nixpkgs-fmt "${MACHINE}" \
+  &&  nix-env -iA packages.homeManager.home-manager -f "${MACHINE}" \
   &&  if test -v DEBUG
       then
-        home-manager -A config -f . -n -v switch
+        home-manager -A config -f "${MACHINE}" -n -v switch
       fi \
-  &&  home-manager -A config -f . switch \
+  &&  home-manager -A config -f "${MACHINE}" switch \
   &&  home-manager expire-generations "$(date +%Y-%m-%d)" \
   &&  source ~/.bashrc
+}
+
+function diffm {
+  local current
+  local next
+
+      current="$(home-manager generations | tac | grep -Pom 1 '/nix/store/.*')" \
+  &&  next="$(home-manager -A config -f "${MACHINE}" build)" \
+  &&  diff --color=always --recursive "${current}" "${next}"
 }
 
 source "${SECRETS}/machine/secrets.sh"
@@ -63,4 +76,4 @@ export_fluid_aws_vars makes
 
 # dev_env integrates.back
 dev_env skims
-dev_env melts
+# dev_env melts

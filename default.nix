@@ -38,16 +38,6 @@ rec {
           source = sources.timedoctor.appimage;
           target = "timedoctor.AppImage";
         };
-        timedoctorDesktopEntry = {
-          text = ''
-            [Desktop Entry]
-            Exec=${abs.home}/${config.home.file.timedoctor.target}
-            Name=Time Doctor
-            Terminal=false
-            Type=Application
-          '';
-          target = ".local/share/applications/timedoctor.desktop";
-        };
       };
       homeDirectory = abs.home;
       language = {
@@ -364,6 +354,13 @@ rec {
       };
     };
     xdg = {
+      desktopEntries = {
+        timedoctor = {
+          name = "TimeDoctor";
+          exec = "${abs.home}/${config.home.file.timedoctor.target}";
+          terminal = false;
+        };
+      };
       mimeApps = {
         defaultApplications = {
           "application/xhtml+xml" = "google-chrome.desktop";
