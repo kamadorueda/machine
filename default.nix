@@ -26,7 +26,8 @@ rec {
           data = ''
             find ~/.config/Code | while read -r path
             do
-              $DRY_RUN_CMD chmod --recursive +w "$(readlink --canonicalize "$path")"
+              $DRY_RUN_CMD chmod --recursive +w \
+                "$(readlink --canonicalize "$path")"
             done
           '';
         };
@@ -157,18 +158,26 @@ rec {
       git = {
         enable = true;
         extraConfig = {
-          commit.gpgsign = true;
+          commit = {
+            gpgsign = true;
+          };
           diff.sopsdiffer.textconv =
             (packages.nixpkgs.writeScript "sopsdiffer.sh" ''
               #! ${packages.nixpkgs.bash}/bin/bash
               sops -d "$1" || cat "$1"
             '').outPath;
-          gpg.progam = "${packages.nixpkgs.gnupg}/bin/gpg2";
-          gpg.sign = true;
-          init.defaultBranch = "main";
-          user.email = abs.email;
-          user.name = abs.name;
-          user.signingkey = abs.signingkey;
+          gpg = {
+            progam = "${packages.nixpkgs.gnupg}/bin/gpg2";
+            sign = true;
+          };
+          init = {
+            defaultBranch = "main";
+          };
+          user = {
+            email = abs.email;
+            name = abs.name;
+            signingkey = abs.signingkey;
+          };
         };
         package = packages.nixpkgs.git;
       };
@@ -449,15 +458,25 @@ rec {
       ];
     };
     homeManager = utils.remoteImport {
-      args.pkgs = nixpkgs3;
+      args = {
+        pkgs = nixpkgs3;
+      };
       source = sources.homeManager;
     };
     nixpkgs = utils.remoteImport {
-      args.config = { allowUnfree = true; };
+      args = {
+        config = {
+          allowUnfree = true;
+        };
+      };
       source = sources.nixpkgs;
     };
     nixpkgs3 = utils.remoteImport {
-      args.config = { allowUnfree = true; };
+      args = {
+        config = {
+          allowUnfree = true;
+        };
+      };
       source = sources.nixpkgs3;
     };
     product = utils.remoteImport {
