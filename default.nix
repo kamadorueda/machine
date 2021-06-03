@@ -76,12 +76,10 @@ rec {
         packages.nixpkgs.git-sizer
         packages.nixpkgs.gimp
         packages.nixpkgs.gnumake
-
         packages.nixpkgs.google-chrome
         packages.nixpkgs.hugo
         packages.nixpkgs.inxi
         packages.nixpkgs.python38Packages.isort
-        packages.nixpkgs.jq
         packages.nixpkgs.kubectl
         packages.nixpkgs.libreoffice
         packages.nixpkgs.lshw
@@ -113,7 +111,6 @@ rec {
         packages.nixpkgs.xclip
         packages.nixpkgs.yq
         packages.nixpkgs3.nix-bundle
-        packages.timedoctor
       ];
       stateVersion = "21.05";
       username = abs.username;
@@ -223,6 +220,9 @@ rec {
       gpg = {
         enable = true;
         package = packages.nixpkgs.gnupg;
+      };
+      jq = {
+        enable = true;
       };
       powerline-go = {
         enable = true;
