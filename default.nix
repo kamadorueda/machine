@@ -80,7 +80,6 @@ rec {
         packages.nixpkgs.google-chrome
         packages.nixpkgs.hugo
         packages.nixpkgs.inxi
-        packages.nixpkgs.python38Packages.isort
         packages.nixpkgs.kubectl
         packages.nixpkgs.libreoffice
         packages.nixpkgs.lshw
@@ -101,13 +100,16 @@ rec {
         packages.nixpkgs.peek
         packages.nixpkgs.powerline-fonts
         packages.nixpkgs.python38
+        packages.nixpkgs.python38Packages.isort
         packages.nixpkgs.qemu
         packages.nixpkgs.shadow
+        packages.nixpkgs.shfmt
         packages.nixpkgs.sops
         packages.nixpkgs.terraform
         packages.nixpkgs.tokei
         packages.nixpkgs.traceroute
         packages.nixpkgs.tree
+        packages.nixpkgs.vim
         packages.nixpkgs.vlc
         packages.nixpkgs.xclip
         packages.nixpkgs.yq
@@ -140,7 +142,7 @@ rec {
           m = "git commit --amend --no-edit --allow-empty";
           machine = "code $MACHINE/default.nix";
           melts = "CI=true CI_COMMIT_REF_NAME=master melts";
-          nix-flakes = "nix --experimental-features 'nix-command flakes'";
+          nix-flakes = "${packages.nixpkgs.nixUnstable}/bin/nix --experimental-features 'nix-command flakes'";
           p = "git push -f";
           r = "git pull --autostash --progress --rebase --stat origin master";
           ru = "git pull --autostash --progress --rebase --stat upstream master";
@@ -306,6 +308,10 @@ rec {
           "[html]" = { "editor.formatOnSave" = false; };
           "[python]" = { "editor.tabSize" = 4; };
           "customLocalFormatters.formatters" = [
+            {
+              command = "${packages.nixpkgs.shfmt}/bin/shfmt -bn -ci -i 2 -s -sr -";
+              languages = [ "shellscript" ];
+            }
             {
               command = "${packages.nixpkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
               languages = [ "nix" ];
