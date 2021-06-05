@@ -109,7 +109,6 @@ rec {
         packages.nixpkgs.tokei
         packages.nixpkgs.traceroute
         packages.nixpkgs.tree
-        packages.nixpkgs.vim
         packages.nixpkgs.vlc
         packages.nixpkgs.xclip
         packages.nixpkgs.yq
@@ -275,6 +274,7 @@ rec {
         plugins = [ ];
         settings = {
           background = "dark";
+          mouse = "a";
         };
       };
       vscode = {
