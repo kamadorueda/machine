@@ -309,10 +309,6 @@ rec {
           "[python]" = { "editor.tabSize" = 4; };
           "customLocalFormatters.formatters" = [
             {
-              command = "${packages.nixpkgs.shfmt}/bin/shfmt -bn -ci -i 2 -s -sr -";
-              languages = [ "shellscript" ];
-            }
-            {
               command = "${packages.nixpkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
               languages = [ "nix" ];
             }
@@ -334,6 +330,10 @@ rec {
                     -
                 '').outPath;
               languages = [ "python" ];
+            }
+            {
+              command = "${packages.nixpkgs.shfmt}/bin/shfmt -bn -ci -i 2 -s -sr -";
+              languages = [ "shellscript" ];
             }
           ];
           "diffEditor.ignoreTrimWhitespace" = false;
