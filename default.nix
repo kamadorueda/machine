@@ -112,9 +112,9 @@ rec {
         packages.nixpkgs.vlc
         packages.nixpkgs.xclip
         packages.nixpkgs.yq
-        packages.nixpkgs3.nix-bundle
-        packages.nixpkgs3.tor
-        packages.nixpkgs3.torbrowser
+        packages.nixpkgsMaster.nix-bundle
+        packages.nixpkgsMaster.tor
+        packages.nixpkgsMaster.torbrowser
       ];
       stateVersion = "21.05";
       username = abs.username;
@@ -286,7 +286,7 @@ rec {
             ext = publisher: name: version: sha256:
               { inherit name publisher sha256 version; };
           in
-          packages.nixpkgs3.vscode-utils.extensionsFromVscodeMarketplace [
+          packages.nixpkgsMaster.vscode-utils.extensionsFromVscodeMarketplace [
             (ext "4ops" "terraform" "0.2.1" "r5W5S9hIn4AlVtr6y7HoVwtJqZ+vYQgukj/ehJQRwKQ=")
             (ext "coenraads" "bracket-pair-colorizer" "1.0.61" "0r3bfp8kvhf9zpbiil7acx7zain26grk133f0r0syxqgml12i652")
             (ext "eamodio" "gitlens" "11.3.0" "m2Zn+e6hj59SujcW5ptdrYDrc4CviZ4wyCndO2BhyF8=")
@@ -295,17 +295,17 @@ rec {
             (ext "shardulm94" "trailing-spaces" "0.3.1" "0h30zmg5rq7cv7kjdr5yzqkkc1bs20d72yz9rjqag32gwf46s8b8")
             (ext "tamasfe" "even-better-toml" "0.12.2" "1vz1sxkg24hsn4zfwzjdry4pp1hrc1fp516xpcyvq3ajr1xddlvs")
           ] ++ [
-            packages.nixpkgs3.vscode-extensions.bbenoist.Nix
-            packages.nixpkgs3.vscode-extensions.haskell.haskell
-            packages.nixpkgs3.vscode-extensions.justusadam.language-haskell
-            packages.nixpkgs3.vscode-extensions.ms-azuretools.vscode-docker
-            packages.nixpkgs3.vscode-extensions.ms-python.python
-            packages.nixpkgs3.vscode-extensions.ms-python.vscode-pylance
-            packages.nixpkgs3.vscode-extensions.streetsidesoftware.code-spell-checker
+            packages.nixpkgsMaster.vscode-extensions.bbenoist.Nix
+            packages.nixpkgsMaster.vscode-extensions.haskell.haskell
+            packages.nixpkgsMaster.vscode-extensions.justusadam.language-haskell
+            packages.nixpkgsMaster.vscode-extensions.ms-azuretools.vscode-docker
+            packages.nixpkgsMaster.vscode-extensions.ms-python.python
+            packages.nixpkgsMaster.vscode-extensions.ms-python.vscode-pylance
+            packages.nixpkgsMaster.vscode-extensions.streetsidesoftware.code-spell-checker
           ];
         keybindings = [
         ];
-        package = packages.nixpkgs3.vscode;
+        package = packages.nixpkgsMaster.vscode;
         userSettings = {
           "[html]" = { "editor.formatOnSave" = false; };
           "[python]" = { "editor.tabSize" = 4; };
@@ -471,7 +471,7 @@ rec {
     };
     homeManager = utils.remoteImport {
       args = {
-        pkgs = nixpkgs3;
+        pkgs = nixpkgsMaster;
       };
       source = sources.homeManager;
     };
@@ -483,13 +483,13 @@ rec {
       };
       source = sources.nixpkgs;
     };
-    nixpkgs3 = utils.remoteImport {
+    nixpkgsMaster = utils.remoteImport {
       args = {
         config = {
           allowUnfree = true;
         };
       };
-      source = sources.nixpkgs3;
+      source = sources.nixpkgsMaster;
     };
     product = utils.remoteImport {
       source = sources.product;
@@ -556,9 +556,9 @@ rec {
         url = "https://github.com/nixos/nixpkgs/archive/932941b79c3dbbef2de9440e1631dfec43956261.tar.gz";
         sha256 = "1d4nyjylsvrv9r4ly431wilkswb2pnlfwwg0cagfjch60d4897qp";
       };
-      nixpkgs3 = fetchzip {
-        url = "https://github.com/nixos/nixpkgs/archive/a1d64d9419422ae9779ab5cada5828127a24e100.tar.gz";
-        sha256 = "0gifxf5n9s0xrwcqgmpvibqa9ab3asx1jm65dsglgfgj9hg2qb0q";
+      nixpkgsMaster = fetchzip {
+        url = "https://github.com/nixos/nixpkgs/archive/master.tar.gz";
+        sha256 = "1199snzv66xyg0153fnsjgchpc468sg693v6q2s6xm5blaaww73q";
       };
       product = fetchzip {
         url = "https://gitlab.com/fluidattacks/product/-/archive/e0a77b8bf17a9b6114e1ccb7d799a6246d9605c1.tar.gz";
