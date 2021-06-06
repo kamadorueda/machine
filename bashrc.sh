@@ -1,12 +1,9 @@
 # shellcheck shell=bash
 
 export MACHINE=~/Documents/github/kamadorueda/machine
+export NIX_PROFILE=~/.nix-profile
 export PRODUCT=~/Documents/gitlab/fluidattacks/product
 export SECRETS=~/Documents/github/kamadorueda/secrets
-
-for completion_script in ~/.nix-profile/share/bash-completion/completions/*; do
-  source "${completion_script}"
-done
 
 export PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
 
@@ -61,18 +58,34 @@ function diffm {
   local current
   local next
 
+  function diffm_copy {
+    find -L "${1}" -type f | sort | while read -r source; do
+      target="${source/${1}/${2}}" \
+        && echo "${target}" \
+        && mkdir -p "$(dirname "${target}")" \
+        && cp --dereference --no-target-directory "${source}" "${target}"
+    done
+  }
+
   current="$(home-manager generations | tac | grep -Pom 1 '/nix/store/.*')" \
     && next="$(home-manager -A config -f "${MACHINE}" build)" \
-    && pushd "$(mktemp -d)"
-
+    && pushd "$(mktemp -d)" \
+    && diffm_copy "${current}" "${PWD}/current" \
+    && diffm_copy "${next}" "${PWD}/next" \
+    && git diff --no-index -- /tmp/tmp.z4SM83ak3z/{current,next} \
+    && return 0
+  popd
 }
 
 source "${SECRETS}/machine/secrets.sh"
+for completion_script in "${NIX_PROFILE}/share/bash-completion/completions/"*; do
+  source "${completion_script}"
+done
 
-export_fluid_aws_vars makes
+# export_fluid_aws_vars makes
 # export_fluid_aws_vars integrates
 # export_fluid_aws_vars skims
 
 # dev_env integrates.back
-dev_env skims
+# dev_env skims
 # dev_env melts
