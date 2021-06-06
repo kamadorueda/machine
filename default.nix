@@ -113,6 +113,8 @@ rec {
         packages.nixpkgs.xclip
         packages.nixpkgs.yq
         packages.nixpkgs3.nix-bundle
+        packages.nixpkgs3.tor
+        packages.nixpkgs3.torbrowser
       ];
       stateVersion = "21.05";
       username = abs.username;
