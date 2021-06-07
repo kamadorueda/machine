@@ -421,50 +421,35 @@ rec {
       };
       source = sources.nixpkgs;
     };
-    nixpkgs = utils.remoteImport {
-      args = {
-        config = {
-          allowUnfree = true;
-        };
-      };
-      source = sources.nixpkgs;
-    };
     product = utils.remoteImport {
       source = sources.product;
     };
   };
-  sources =
-    let
-      fetchzip = (import <nixpkgs> { }).fetchzip;
-      fetchurl = (import <nixpkgs> { }).fetchurl;
-    in
-    {
-      homeManager = /home/kamado/Documents/github/nix-community/home-manager;
-      # homeManager = fetchzip {
-      #   url = "https://github.com/nix-community/home-manager/archive/0e6c61a44092e98ba1d75b41f4f947843dc7814d.tar.gz";
-      #   sha256 = "0i6qjkyvxbnnvk984781wgkycdrgwf6cpbln7w35gfab18h7mnzy";
-      # };
-      nixpkgs = fetchzip {
-        url = "https://github.com/nixos/nixpkgs/archive/dd03217d4944e2ce7f1991dbeacb482e8d5cc2ff.tar.gz";
-        sha256 = "160hbbmjjv0nf2ycgzaajx2blcfqnc90gg6nwlc0dvigip82z0as";
-      };
-      product = fetchzip {
-        url = "https://gitlab.com/fluidattacks/product/-/archive/e0a77b8bf17a9b6114e1ccb7d799a6246d9605c1.tar.gz";
-        sha256 = "05nnnkhq0lxrdhsk83v33shrvpykj4j6i12c81mnlqfmibcaspy9";
-      };
-      timedoctor = {
-        appimage = fetchurl {
-          # https://repo2.timedoctor.com/td-desktop-hybrid/prod/
-          url = "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v3.12.9/timedoctor-desktop_3.12.9_linux-x86_64.AppImage";
-          sha256 = "0li6w0y80k1ci8vi5xa0ihq6ay5xr266l3d74rbazkbx8g4vv1g9";
-        };
-        extracted = packages.nixpkgs.appimageTools.extract {
-          name = "timedoctor-src";
-          src = sources.timedoctor.appimage;
-        };
+  sources = {
+    homeManager = /home/kamado/Documents/github/nix-community/home-manager;
+    # homeManager = utils.fetchzip {
+    #   url = "https://github.com/nix-community/home-manager/archive/0e6c61a44092e98ba1d75b41f4f947843dc7814d.tar.gz";
+    #   sha256 = "0i6qjkyvxbnnvk984781wgkycdrgwf6cpbln7w35gfab18h7mnzy";
+    # };
+    nixpkgs = utils.fetchzip {
+      url = "https://github.com/nixos/nixpkgs/archive/dd03217d4944e2ce7f1991dbeacb482e8d5cc2ff.tar.gz";
+      sha256 = "160hbbmjjv0nf2ycgzaajx2blcfqnc90gg6nwlc0dvigip82z0as";
+    };
+    product = utils.fetchzip {
+      url = "https://gitlab.com/fluidattacks/product/-/archive/e0a77b8bf17a9b6114e1ccb7d799a6246d9605c1.tar.gz";
+      sha256 = "05nnnkhq0lxrdhsk83v33shrvpykj4j6i12c81mnlqfmibcaspy9";
+    };
+    timedoctor = {
+      appimage = utils.fetchurl {
+        # https://repo2.timedoctor.com/td-desktop-hybrid/prod/
+        url = "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v3.12.9/timedoctor-desktop_3.12.9_linux-x86_64.AppImage";
+        sha256 = "0li6w0y80k1ci8vi5xa0ihq6ay5xr266l3d74rbazkbx8g4vv1g9";
       };
     };
+  };
   utils = {
+    fetchzip = (import <nixpkgs> { }).fetchzip;
+    fetchurl = (import <nixpkgs> { }).fetchurl;
     remoteImport = { args ? null, source }:
       if args == null
       then import source
