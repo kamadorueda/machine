@@ -61,11 +61,11 @@ rec {
         packages.nixpkgs.evtest
         packages.nixpkgs.gcc
         packages.nixpkgs.ghc
-        packages.nixpkgs.gptfdisk
-        packages.nixpkgs.git-sizer
         packages.nixpkgs.gimp
+        packages.nixpkgs.git-sizer
         packages.nixpkgs.gnumake
         packages.nixpkgs.google-chrome
+        packages.nixpkgs.gptfdisk
         packages.nixpkgs.hugo
         packages.nixpkgs.inxi
         packages.nixpkgs.kubectl
@@ -75,7 +75,9 @@ rec {
         packages.nixpkgs.maven
         packages.nixpkgs.mypy
         packages.nixpkgs.ngrok
+        packages.nixpkgs.nix-bundle
         packages.nixpkgs.nix-index
+        packages.nixpkgs.nixops
         packages.nixpkgs.nixpkgs-fmt
         packages.nixpkgs.nodejs
         packages.nixpkgs.openjdk
@@ -95,14 +97,13 @@ rec {
         packages.nixpkgs.sops
         packages.nixpkgs.terraform
         packages.nixpkgs.tokei
+        packages.nixpkgs.tor
+        packages.nixpkgs.torbrowser
         packages.nixpkgs.traceroute
         packages.nixpkgs.tree
         packages.nixpkgs.vlc
         packages.nixpkgs.xclip
         packages.nixpkgs.yq
-        packages.nixpkgsMaster.nix-bundle
-        packages.nixpkgsMaster.tor
-        packages.nixpkgsMaster.torbrowser
       ];
       stateVersion = "21.05";
       username = abs.username;
@@ -274,7 +275,7 @@ rec {
             ext = publisher: name: version: sha256:
               { inherit name publisher sha256 version; };
           in
-          packages.nixpkgsMaster.vscode-utils.extensionsFromVscodeMarketplace [
+          packages.nixpkgs.vscode-utils.extensionsFromVscodeMarketplace [
             (ext "4ops" "terraform" "0.2.1" "r5W5S9hIn4AlVtr6y7HoVwtJqZ+vYQgukj/ehJQRwKQ=")
             (ext "coenraads" "bracket-pair-colorizer" "1.0.61" "0r3bfp8kvhf9zpbiil7acx7zain26grk133f0r0syxqgml12i652")
             (ext "eamodio" "gitlens" "11.3.0" "m2Zn+e6hj59SujcW5ptdrYDrc4CviZ4wyCndO2BhyF8=")
@@ -283,17 +284,17 @@ rec {
             (ext "shardulm94" "trailing-spaces" "0.3.1" "0h30zmg5rq7cv7kjdr5yzqkkc1bs20d72yz9rjqag32gwf46s8b8")
             (ext "tamasfe" "even-better-toml" "0.12.2" "1vz1sxkg24hsn4zfwzjdry4pp1hrc1fp516xpcyvq3ajr1xddlvs")
           ] ++ [
-            packages.nixpkgsMaster.vscode-extensions.bbenoist.Nix
-            packages.nixpkgsMaster.vscode-extensions.haskell.haskell
-            packages.nixpkgsMaster.vscode-extensions.justusadam.language-haskell
-            packages.nixpkgsMaster.vscode-extensions.ms-azuretools.vscode-docker
-            packages.nixpkgsMaster.vscode-extensions.ms-python.python
-            packages.nixpkgsMaster.vscode-extensions.ms-python.vscode-pylance
-            packages.nixpkgsMaster.vscode-extensions.streetsidesoftware.code-spell-checker
+            packages.nixpkgs.vscode-extensions.bbenoist.Nix
+            packages.nixpkgs.vscode-extensions.haskell.haskell
+            packages.nixpkgs.vscode-extensions.justusadam.language-haskell
+            packages.nixpkgs.vscode-extensions.ms-azuretools.vscode-docker
+            packages.nixpkgs.vscode-extensions.ms-python.python
+            packages.nixpkgs.vscode-extensions.ms-python.vscode-pylance
+            packages.nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
           ];
         keybindings = [
         ];
-        package = packages.nixpkgsMaster.vscode;
+        package = packages.nixpkgs.vscode;
         userSettings = {
           "[html]" = { "editor.formatOnSave" = false; };
           "[python]" = { "editor.tabSize" = 4; };
@@ -408,7 +409,7 @@ rec {
   packages = {
     homeManager = utils.remoteImport {
       args = {
-        pkgs = packages.nixpkgsMaster;
+        pkgs = packages.nixpkgs;
       };
       source = sources.homeManager;
     };
@@ -420,13 +421,13 @@ rec {
       };
       source = sources.nixpkgs;
     };
-    nixpkgsMaster = utils.remoteImport {
+    nixpkgs = utils.remoteImport {
       args = {
         config = {
           allowUnfree = true;
         };
       };
-      source = sources.nixpkgsMaster;
+      source = sources.nixpkgs;
     };
     product = utils.remoteImport {
       source = sources.product;
@@ -444,10 +445,6 @@ rec {
       #   sha256 = "0i6qjkyvxbnnvk984781wgkycdrgwf6cpbln7w35gfab18h7mnzy";
       # };
       nixpkgs = fetchzip {
-        url = "https://github.com/nixos/nixpkgs/archive/932941b79c3dbbef2de9440e1631dfec43956261.tar.gz";
-        sha256 = "1d4nyjylsvrv9r4ly431wilkswb2pnlfwwg0cagfjch60d4897qp";
-      };
-      nixpkgsMaster = fetchzip {
         url = "https://github.com/nixos/nixpkgs/archive/dd03217d4944e2ce7f1991dbeacb482e8d5cc2ff.tar.gz";
         sha256 = "160hbbmjjv0nf2ycgzaajx2blcfqnc90gg6nwlc0dvigip82z0as";
       };
