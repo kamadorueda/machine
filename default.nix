@@ -19,19 +19,7 @@ rec {
       };
     };
     home = {
-      activation = {
-        afterWriteBoundary = {
-          after = [ "writeBoundary" ];
-          before = [ ];
-          data = ''
-            find ~/.config/Code | while read -r path
-            do
-              $DRY_RUN_CMD chmod --recursive +w \
-                "$(readlink --canonicalize "$path")"
-            done
-          '';
-        };
-      };
+      activation = { };
       enableDebugInfo = true;
       file = {
         timedoctor = {
@@ -417,61 +405,10 @@ rec {
       enable = true;
     };
   };
-  packages = rec {
-    desktime = packages.nixpkgs.stdenv.mkDerivation {
-      autoPatchelfIgnoreMissingDeps = true;
-      buildInputs = with packages.nixpkgs; [
-        alsaLib
-        ffmpeg-full
-        gtk3
-        nspr
-        nss
-        xorg.libXtst
-        xorg.libXScrnSaver
-      ];
-      installPhase = "install -m755 -D $src/usr/bin/desktime-linux $out/bin/desktime";
-      name = "desktime";
-      nativeBuildInputs = [ packages.nixpkgs.autoPatchelfHook ];
-      runtimeDependencies = [ sources.desktime.extracted ];
-      src = sources.desktime.extracted;
-    };
-    desktime2 = nixpkgs.buildFHSUserEnvBubblewrap {
-      name = "desktime";
-      runScript = "${sources.desktime.extracted}/usr/bin/desktime-linux";
-      targetPkgs = pkgs: with pkgs; [
-        at-spi2-atk
-        atk
-        alsaLib
-        cairo
-        cups
-        dbus
-        expat.dev
-        ffmpeg-full
-        fontconfig.lib
-        glib
-        gdk-pixbuf
-        gtk3
-        nspr
-        nss
-        pango
-        xlibs.libX11
-        xlibs.xprop
-        xorg.libxcb
-        xorg.libXcomposite
-        xorg.libXcursor
-        xorg.libXdamage
-        xorg.libXext
-        xorg.libXfixes
-        xorg.libXrandr
-        xorg.libXrender
-        xorg.libXi
-        xorg.libXtst
-        xorg.libXScrnSaver
-      ];
-    };
+  packages = {
     homeManager = utils.remoteImport {
       args = {
-        pkgs = nixpkgsMaster;
+        pkgs = packages.nixpkgsMaster;
       };
       source = sources.homeManager;
     };
@@ -494,42 +431,6 @@ rec {
     product = utils.remoteImport {
       source = sources.product;
     };
-    timedoctor = nixpkgs.buildFHSUserEnvBubblewrap rec {
-      name = "timedoctor";
-      multiPkgs = targetPkgs;
-      runScript = "appimage-exec.sh -w ${sources.timedoctor.extracted}";
-      targetPkgs = pkgs: with pkgs; [
-        alsaLib
-        appimageTools.appimage-exec
-        at-spi2-atk
-        at-spi2-core
-        atk
-        cairo
-        cups
-        desktop-file-utils
-        dbus.lib
-        expat.dev
-        gdk-pixbuf
-        glib
-        gtk3
-        nss
-        nspr
-        pango
-        utillinux
-        xorg.libxcb
-        xorg.libX11
-        xorg.libXcomposite
-        xorg.libXcursor
-        xorg.libXdamage
-        xorg.libXext
-        xorg.libXi
-        xorg.libXfixes
-        xorg.libXrandr
-        xorg.libXrender
-        xorg.libXtst
-        xorg.libXScrnSaver
-      ];
-    };
   };
   sources =
     let
@@ -537,16 +438,6 @@ rec {
       fetchurl = (import <nixpkgs> { }).fetchurl;
     in
     {
-      desktime = {
-        deb = fetchurl {
-          url = "https://desktime.com/updates/linux/update";
-          sha256 = "0rs0f9m20943fg3bc7q9rj6nig9x3pw0ridh9syid6v86nzlv82h";
-        };
-        extracted = packages.nixpkgs.runCommandLocal "desktime-src" { } ''
-          ${packages.nixpkgs.dpkg}/bin/dpkg-deb -x ${sources.desktime.deb} $out
-          ln -s $out/usr/lib/desktime-linux $out/lib
-        '';
-      };
       homeManager = /home/kamado/Documents/github/nix-community/home-manager;
       # homeManager = fetchzip {
       #   url = "https://github.com/nix-community/home-manager/archive/0e6c61a44092e98ba1d75b41f4f947843dc7814d.tar.gz";
@@ -557,8 +448,8 @@ rec {
         sha256 = "1d4nyjylsvrv9r4ly431wilkswb2pnlfwwg0cagfjch60d4897qp";
       };
       nixpkgsMaster = fetchzip {
-        url = "https://github.com/nixos/nixpkgs/archive/master.tar.gz";
-        sha256 = "1199snzv66xyg0153fnsjgchpc468sg693v6q2s6xm5blaaww73q";
+        url = "https://github.com/nixos/nixpkgs/archive/dd03217d4944e2ce7f1991dbeacb482e8d5cc2ff.tar.gz";
+        sha256 = "160hbbmjjv0nf2ycgzaajx2blcfqnc90gg6nwlc0dvigip82z0as";
       };
       product = fetchzip {
         url = "https://gitlab.com/fluidattacks/product/-/archive/e0a77b8bf17a9b6114e1ccb7d799a6246d9605c1.tar.gz";
