@@ -154,11 +154,24 @@ rec {
           commit = {
             gpgsign = true;
           };
-          diff.sopsdiffer.textconv =
-            (packages.nixpkgs.writeScript "sopsdiffer.sh" ''
-              #! ${packages.nixpkgs.bash}/bin/bash
-              sops -d "$1" || cat "$1"
-            '').outPath;
+          core = {
+            editor = "${packages.nixpkgs.vscode}/bin/code --wait";
+          };
+          diff = {
+            sopsdiffer = {
+              textconv =
+                (packages.nixpkgs.writeScript "sopsdiffer.sh" ''
+                  #! ${packages.nixpkgs.bash}/bin/bash
+                  sops -d "$1" || cat "$1"
+                '').outPath;
+            };
+            tool = "vscode";
+          };
+          difftool = {
+            vscode = {
+              cmd = "${packages.nixpkgs.vscode}/bin/code --diff $LOCAL $REMOTE --wait";
+            };
+          };
           init = {
             defaultbranch = "main";
           };
@@ -168,6 +181,14 @@ rec {
           };
           init = {
             defaultBranch = "main";
+          };
+          merge = {
+            tool = "vscode";
+          };
+          mergetool = {
+            vscode = {
+              cmd = "${packages.nixpkgs.vscode}/bin/code --wait $MERGED";
+            };
           };
           user = {
             email = abs.email;
@@ -313,6 +334,7 @@ rec {
                   ${packages.nixpkgs.black}/bin/black \
                     --config \
                     ${sources.product}/makes/utils/python-format/settings-black.toml \
+                    --skip-magic-trailing-comma \
                     - \
                     | \
                   ${packages.nixpkgs.python38Packages.isort}/bin/isort \

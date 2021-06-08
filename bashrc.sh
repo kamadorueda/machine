@@ -93,10 +93,10 @@ source "${SECRETS}/machine/secrets.sh"
 _bash_completion
 _make_vscode_writeable
 
-# export_fluid_aws_vars makes
+export_fluid_aws_vars makes
 # export_fluid_aws_vars integrates
 # export_fluid_aws_vars skims
 
 # dev_env integrates.back
-# dev_env skims
+dev_env skims
 # dev_env melts
