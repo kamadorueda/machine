@@ -413,6 +413,10 @@ rec {
       };
       source = sources.homeManager;
     };
+    libjpeg8d = packages.nixpkgs.stdenv.mkDerivation {
+      name = "libjpeg8d";
+      src = sources.libjpeg8d;
+    };
     nixpkgs = utils.remoteImport {
       args = {
         config = {
@@ -424,6 +428,65 @@ rec {
     product = utils.remoteImport {
       source = sources.product;
     };
+    timedoctor = packages.nixpkgs.buildFHSUserEnvBubblewrap rec {
+      name = "timedoctor";
+      runScript = "${sources.timedoctor.extracted}/AppRun";
+      targetPkgs = _: [
+        packages.libjpeg8d
+        packages.nixpkgs.alsaLib
+        packages.nixpkgs.atk
+        packages.nixpkgs.at-spi2-atk
+        packages.nixpkgs.at-spi2-core
+        packages.nixpkgs.cairo
+        packages.nixpkgs.cups
+        packages.nixpkgs.dbus
+        packages.nixpkgs.dbus.lib
+        packages.nixpkgs.desktop-file-utils
+        packages.nixpkgs.expat
+        packages.nixpkgs.expat.dev
+        packages.nixpkgs.file
+        packages.nixpkgs.fontconfig
+        packages.nixpkgs.freetype
+        packages.nixpkgs.gdb
+        packages.nixpkgs.gdk-pixbuf
+        packages.nixpkgs.git
+        packages.nixpkgs.glib
+        packages.nixpkgs.gnome.gdk_pixbuf
+        packages.nixpkgs.gnome.gtk
+        packages.nixpkgs.gtk3
+        packages.nixpkgs.libexif
+        packages.nixpkgs.libnotify
+        packages.nixpkgs.libpng
+        packages.nixpkgs.libxml2
+        packages.nixpkgs.libxslt
+        packages.nixpkgs.netcat
+        packages.nixpkgs.nspr
+        packages.nixpkgs.nss
+        packages.nixpkgs.openjdk
+        packages.nixpkgs.pango
+        packages.nixpkgs.strace
+        packages.nixpkgs.udev
+        packages.nixpkgs.utillinux
+        packages.nixpkgs.watch
+        packages.nixpkgs.wget
+        packages.nixpkgs.which
+        packages.nixpkgs.xorg.libX11
+        packages.nixpkgs.xorg.libxcb
+        packages.nixpkgs.xorg.libXcomposite
+        packages.nixpkgs.xorg.libXcursor
+        packages.nixpkgs.xorg.libXdamage
+        packages.nixpkgs.xorg.libXext
+        packages.nixpkgs.xorg.libXfixes
+        packages.nixpkgs.xorg.libXi
+        packages.nixpkgs.xorg.libXrandr
+        packages.nixpkgs.xorg.libXrender
+        packages.nixpkgs.xorg.libXScrnSaver
+        packages.nixpkgs.xorg.libXtst
+        packages.nixpkgs.xorg.xcbutilkeysyms
+        packages.nixpkgs.zlib
+        packages.nixpkgs.zsh
+      ];
+    };
   };
   sources = {
     homeManager = /home/kamado/Documents/github/nix-community/home-manager;
@@ -431,6 +494,10 @@ rec {
     #   url = "https://github.com/nix-community/home-manager/archive/0e6c61a44092e98ba1d75b41f4f947843dc7814d.tar.gz";
     #   sha256 = "0i6qjkyvxbnnvk984781wgkycdrgwf6cpbln7w35gfab18h7mnzy";
     # };
+    libjpeg8d = utils.fetchurl {
+      url = "http://www.ijg.org/files/jpegsrc.v8d.tar.gz";
+      sha256 = "131ia3dlnrah0sba5lxzj448zq6xx100nfyd62zkd83m6dmss9fn";
+    };
     nixpkgs = utils.fetchzip {
       url = "https://github.com/nixos/nixpkgs/archive/dd03217d4944e2ce7f1991dbeacb482e8d5cc2ff.tar.gz";
       sha256 = "160hbbmjjv0nf2ycgzaajx2blcfqnc90gg6nwlc0dvigip82z0as";
@@ -444,6 +511,10 @@ rec {
         # https://repo2.timedoctor.com/td-desktop-hybrid/prod/
         url = "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v3.12.9/timedoctor-desktop_3.12.9_linux-x86_64.AppImage";
         sha256 = "0li6w0y80k1ci8vi5xa0ihq6ay5xr266l3d74rbazkbx8g4vv1g9";
+      };
+      extracted = packages.nixpkgs.appimageTools.extract {
+        name = "timedoctor-src";
+        src = sources.timedoctor.appimage;
       };
     };
   };
