@@ -9,6 +9,10 @@
     curl -L nixos.org/nix/install | sh
     ```
 
+1. Get your GitHub API token from the
+    [secrets file](https://github.com/kamadorueda/secrets/blob/master/machine/secrets.sh)
+    and export it into the terminal
+
 1. Execute:
 
     ```bash
@@ -18,26 +22,36 @@
     &&  source ~/.bashrc
     ```
 
-1. Get your GitHub API token from the
-    [secrets file](https://github.com/kamadorueda/secrets/blob/master/machine/secrets.sh)
-    and export it into the terminal
-
 1. Setup the state:
 
     ```bash
-        pushd ~/Documents
-      &&  mkdir -p github/kamadorueda \
-      &&  pushd github/kamadorueda \
-        &&  git clone "https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/secrets" \
-        &&  pushd secrets/machine \
-          &&  install.sh \
-        &&  popd \
-        &&  git clone git@github.com:kamadorueda/machine \
+    # github/kamadorueda
+        mkdir -p ~/Documents/github/kamadorueda \
+    &&  pushd ~/Documents/github/kamadorueda \
+      &&  git clone "https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/secrets" \
+      &&  pushd ~/Documents/secrets/machine \
+        &&  install.sh \
       &&  popd \
-      &&  mkdir -p gitlab/fluidattacks \
-      &&  pushd gitlab/fluidattacks \
-        &&  git clone git@gitlab.com:fluidattacks/product \
-        &&  git clone git@gitlab.com:fluidattacks/services \
-      &&  popd \
+      &&  git clone git@github.com:kamadorueda/machine \
     &&  popd
     ```
+
+    ```bash
+    # gitlab/fluidattacks
+        mkdir -p ~/Documents/gitlab/fluidattacks \
+    &&  pushd ~/Documents/gitlab/fluidattacks \
+      &&  git clone git@gitlab.com:fluidattacks/product \
+      &&  git clone git@gitlab.com:fluidattacks/services \
+    &&  popd
+    ```
+
+# Timedoctor
+
+You may find useful to install [Timedoctor](https://www.timedoctor.com/)
+via [Nix](https://nixos.org).
+
+1. `$ nix-build -A packages.timedoctor https://github.com/kamadorueda/machine/archive/main.tar.gz`
+
+2. `$ ./result/bin/timedoctor`
+
+Source: [a8547c04](https://github.com/kamadorueda/machine/commit/a8547c048cfe34bc78475a8c8621b226426b81ab)
