@@ -79,7 +79,9 @@ rec {
         packages.nixpkgs.nix-index
         packages.nixpkgs.nixops
         packages.nixpkgs.nixpkgs-fmt
+        packages.nixpkgs.nixpkgs-review
         packages.nixpkgs.nodejs
+        packages.nixpkgs.nodePackages.asar
         packages.nixpkgs.openjdk
         packages.nixpkgs.optipng
         packages.nixpkgs.parallel
@@ -334,7 +336,6 @@ rec {
                   ${packages.nixpkgs.black}/bin/black \
                     --config \
                     ${sources.product}/makes/utils/python-format/settings-black.toml \
-                    --skip-magic-trailing-comma \
                     - \
                     | \
                   ${packages.nixpkgs.python38Packages.isort}/bin/isort \
@@ -352,6 +353,7 @@ rec {
           "diffEditor.ignoreTrimWhitespace" = false;
           "diffEditor.maxComputationTime" = 0;
           "diffEditor.renderSideBySide" = false;
+          "diffEditor.wordWrap" = "on";
           "editor.cursorStyle" = "underline";
           "editor.defaultFormatter" = "jkillian.custom-local-formatters";
           "editor.formatOnSave" = true;
@@ -364,6 +366,7 @@ rec {
           "editor.minimap.size" = "fill";
           "editor.rulers" = [ 80 ];
           "editor.tabSize" = 2;
+          "editor.wordWrap" = "on";
           "extensions.autoUpdate" = false;
           "files.eol" = "\n";
           "files.insertFinalNewline" = true;
@@ -412,7 +415,7 @@ rec {
       desktopEntries = {
         timedoctor = {
           name = "TimeDoctor";
-          exec = "${abs.home}/${config.home.file.timedoctor.target}";
+          exec = "${packages.timedoctor}/bin/timedoctor";
           terminal = false;
         };
       };
@@ -435,9 +438,25 @@ rec {
       };
       source = sources.homeManager;
     };
-    libjpeg8d = packages.nixpkgs.stdenv.mkDerivation {
-      name = "libjpeg8d";
-      src = sources.libjpeg8d;
+    libjpeg = packages.nixpkgs.stdenv.mkDerivation {
+      cmakeFlags = [
+        "-DENABLE_STATIC=0"
+        "-DENABLE_SHARED=1"
+        "-DWITH_JAVA=1"
+        "-DWITH_JPEG8=1"
+      ];
+      doInstallCheck = true;
+      installCheckTarget = "test";
+      name = "libjpeg-turbo";
+      nativeBuildInputs = [
+        packages.nixpkgs.cmake
+        packages.nixpkgs.nasm
+        packages.nixpkgs.openjdk
+      ];
+      outputs = [ "bin" "dev" "dev_private" "out" "man" "doc" ];
+      postFixup = "moveToOutput include/transupp.h $dev_private";
+      patches = sources.libjpeg.patches;
+      src = sources.libjpeg.src;
     };
     nixpkgs = utils.remoteImport {
       args = {
@@ -450,16 +469,19 @@ rec {
     product = utils.remoteImport {
       source = sources.product;
     };
-    timedoctor = packages.nixpkgs.buildFHSUserEnvBubblewrap rec {
+    timedoctor = packages.nixpkgs.buildFHSUserEnvBubblewrap {
       name = "timedoctor";
-      runScript = "${sources.timedoctor.extracted}/AppRun";
+      # DEBUG=true ELECTRON_ENABLE_LOGGING=true I18NEXT_LNG=en
+      runScript = "appimage-exec.sh -w ${sources.timedoctor.extracted}";
       targetPkgs = _: [
-        packages.libjpeg8d
+        packages.libjpeg.out
         packages.nixpkgs.alsaLib
+        packages.nixpkgs.appimageTools.appimage-exec
         packages.nixpkgs.atk
         packages.nixpkgs.at-spi2-atk
         packages.nixpkgs.at-spi2-core
         packages.nixpkgs.cairo
+        packages.nixpkgs.coreutils
         packages.nixpkgs.cups
         packages.nixpkgs.dbus
         packages.nixpkgs.dbus.lib
@@ -469,42 +491,86 @@ rec {
         packages.nixpkgs.file
         packages.nixpkgs.fontconfig
         packages.nixpkgs.freetype
+        packages.nixpkgs.gcc
+        packages.nixpkgs.gcc-unwrapped.lib
         packages.nixpkgs.gdb
         packages.nixpkgs.gdk-pixbuf
         packages.nixpkgs.git
         packages.nixpkgs.glib
+        packages.nixpkgs.glibc
         packages.nixpkgs.gnome.gdk_pixbuf
         packages.nixpkgs.gnome.gtk
+        packages.nixpkgs.gnome.gtk.dev
+        packages.nixpkgs.gnome.zenity
+        packages.nixpkgs.gnome2.GConf
+        packages.nixpkgs.gnumake
+        packages.nixpkgs.gnutar
+        packages.nixpkgs.gpsd
         packages.nixpkgs.gtk3
+        packages.nixpkgs.gtk3.dev
+        packages.nixpkgs.gtk3-x11
+        packages.nixpkgs.gtk3-x11.dev
+        packages.nixpkgs.kdialog
+        packages.nixpkgs.libappindicator-gtk2.out
         packages.nixpkgs.libexif
         packages.nixpkgs.libnotify
         packages.nixpkgs.libpng
         packages.nixpkgs.libxml2
         packages.nixpkgs.libxslt
         packages.nixpkgs.netcat
+        packages.nixpkgs.nettools
+        packages.nixpkgs.nodePackages.asar
         packages.nixpkgs.nspr
         packages.nixpkgs.nss
         packages.nixpkgs.openjdk
         packages.nixpkgs.pango
+        packages.nixpkgs.patchelf
+        packages.nixpkgs.python38
         packages.nixpkgs.strace
+        packages.nixpkgs.sqlite
+        packages.nixpkgs.sqlite.dev
         packages.nixpkgs.udev
+        packages.nixpkgs.unzip
         packages.nixpkgs.utillinux
         packages.nixpkgs.watch
         packages.nixpkgs.wget
         packages.nixpkgs.which
+        packages.nixpkgs.wrapGAppsHook
+        packages.nixpkgs.xdg_utils
         packages.nixpkgs.xorg.libX11
+        packages.nixpkgs.xorg.libXau
+        packages.nixpkgs.xorg.libXaw
+        packages.nixpkgs.xorg.libXaw3d
         packages.nixpkgs.xorg.libxcb
         packages.nixpkgs.xorg.libXcomposite
         packages.nixpkgs.xorg.libXcursor
         packages.nixpkgs.xorg.libXdamage
+        packages.nixpkgs.xorg.libXdmcp
         packages.nixpkgs.xorg.libXext
         packages.nixpkgs.xorg.libXfixes
+        packages.nixpkgs.xorg.libXfont
+        packages.nixpkgs.xorg.libXfont2
+        packages.nixpkgs.xorg.libXft
         packages.nixpkgs.xorg.libXi
+        packages.nixpkgs.xorg.libXinerama
+        packages.nixpkgs.xorg.libXmu
+        packages.nixpkgs.xorg.libXp
+        packages.nixpkgs.xorg.libXpm
+        packages.nixpkgs.xorg.libXpresent
         packages.nixpkgs.xorg.libXrandr
         packages.nixpkgs.xorg.libXrender
+        packages.nixpkgs.xorg.libXres
         packages.nixpkgs.xorg.libXScrnSaver
+        packages.nixpkgs.xorg.libXt
+        packages.nixpkgs.xorg.libXTrap
         packages.nixpkgs.xorg.libXtst
+        packages.nixpkgs.xorg.libXv
+        packages.nixpkgs.xorg.libXvMC
+        packages.nixpkgs.xorg.libXxf86dga
+        packages.nixpkgs.xorg.libXxf86misc
+        packages.nixpkgs.xorg.libXxf86vm
         packages.nixpkgs.xorg.xcbutilkeysyms
+        packages.nixpkgs.zip
         packages.nixpkgs.zlib
         packages.nixpkgs.zsh
       ];
@@ -516,9 +582,16 @@ rec {
     #   url = "https://github.com/nix-community/home-manager/archive/0e6c61a44092e98ba1d75b41f4f947843dc7814d.tar.gz";
     #   sha256 = "0i6qjkyvxbnnvk984781wgkycdrgwf6cpbln7w35gfab18h7mnzy";
     # };
-    libjpeg8d = utils.fetchurl {
-      url = "http://www.ijg.org/files/jpegsrc.v8d.tar.gz";
-      sha256 = "131ia3dlnrah0sba5lxzj448zq6xx100nfyd62zkd83m6dmss9fn";
+    libjpeg = {
+      src = packages.nixpkgs.fetchFromGitHub {
+        owner = "libjpeg-turbo";
+        repo = "libjpeg-turbo";
+        rev = "2.1.0";
+        sha256 = "16wpnxcl98idca4va60zj3mv34qwbgajd646k883ngh96gzx1b9i";
+      };
+      patches = [
+        "${sources.nixpkgs}/pkgs/development/libraries/libjpeg-turbo/0001-Compile-transupp.c-as-part-of-the-library.patch"
+      ];
     };
     nixpkgs = utils.fetchzip {
       url = "https://github.com/nixos/nixpkgs/archive/dd03217d4944e2ce7f1991dbeacb482e8d5cc2ff.tar.gz";
@@ -533,6 +606,15 @@ rec {
         # https://repo2.timedoctor.com/td-desktop-hybrid/prod/
         url = "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v3.12.9/timedoctor-desktop_3.12.9_linux-x86_64.AppImage";
         sha256 = "0li6w0y80k1ci8vi5xa0ihq6ay5xr266l3d74rbazkbx8g4vv1g9";
+      };
+      asar = packages.nixpkgs.stdenv.mkDerivation {
+        name = "timedoctor-asar";
+        builder = builtins.toFile "builder.sh" ''
+          source $stdenv/setup
+          asar e $envSrc/resources/app.asar $out
+        '';
+        buildInputs = [ packages.nixpkgs.nodePackages.asar ];
+        envSrc = sources.timedoctor.extracted;
       };
       extracted = packages.nixpkgs.appimageTools.extract {
         name = "timedoctor-src";
