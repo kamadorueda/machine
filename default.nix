@@ -21,7 +21,14 @@ rec {
     home = {
       activation = { };
       enableDebugInfo = true;
-      file = { };
+      file = {
+        # Inpure Appimage backup just in case I need it
+        timedoctor = {
+          executable = true;
+          source = sources.timedoctor.appimage;
+          target = "timedoctor.AppImage";
+        };
+      };
       homeDirectory = abs.home;
       language = {
         address = abs.locale;
