@@ -295,28 +295,22 @@ rec {
       };
       vscode = {
         enable = true;
-        extensions =
-          let
-            ext = publisher: name: version: sha256:
-              { inherit name publisher sha256 version; };
-          in
-          packages.nixpkgs.vscode-utils.extensionsFromVscodeMarketplace [
-            (ext "4ops" "terraform" "0.2.1" "r5W5S9hIn4AlVtr6y7HoVwtJqZ+vYQgukj/ehJQRwKQ=")
-            (ext "jkillian" "custom-local-formatters" "0.0.4" "1pmqnc759fq86g2z3scx5xqpni9khcqi5z2kpl1kb7yygsv314gm")
-            (ext "mads-hartmann" "bash-ide-vscode" "1.11.0" "d7acWLdRW8nVjQPU5iln9hl9zUx61XN4lvmFLbwLBMM=")
-            (ext "shardulm94" "trailing-spaces" "0.3.1" "0h30zmg5rq7cv7kjdr5yzqkkc1bs20d72yz9rjqag32gwf46s8b8")
-          ] ++ [
-            packages.nixpkgs.vscode-extensions.bbenoist.Nix
-            packages.nixpkgs.vscode-extensions.coenraads.bracket-pair-colorizer-2
-            packages.nixpkgs.vscode-extensions.eamodio.gitlens
-            packages.nixpkgs.vscode-extensions.haskell.haskell
-            packages.nixpkgs.vscode-extensions.justusadam.language-haskell
-            packages.nixpkgs.vscode-extensions.ms-azuretools.vscode-docker
-            packages.nixpkgs.vscode-extensions.ms-python.python
-            packages.nixpkgs.vscode-extensions.ms-python.vscode-pylance
-            packages.nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
-            packages.nixpkgs.vscode-extensions.tamasfe.even-better-toml
-          ];
+        extensions = [
+          packages.nixpkgs.vscode-extensions._4ops.terraform
+          packages.nixpkgs.vscode-extensions.bbenoist.Nix
+          packages.nixpkgs.vscode-extensions.coenraads.bracket-pair-colorizer-2
+          packages.nixpkgs.vscode-extensions.eamodio.gitlens
+          packages.nixpkgs.vscode-extensions.jkillian.custom-local-formatters
+          packages.nixpkgs.vscode-extensions.haskell.haskell
+          packages.nixpkgs.vscode-extensions.justusadam.language-haskell
+          packages.nixpkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
+          packages.nixpkgs.vscode-extensions.ms-azuretools.vscode-docker
+          packages.nixpkgs.vscode-extensions.ms-python.python
+          packages.nixpkgs.vscode-extensions.ms-python.vscode-pylance
+          packages.nixpkgs.vscode-extensions.shardulm94.trailing-spaces
+          packages.nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
+          packages.nixpkgs.vscode-extensions.tamasfe.even-better-toml
+        ];
         keybindings = [
         ];
         package = packages.nixpkgs.vscode;
