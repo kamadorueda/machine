@@ -67,4 +67,4 @@ Source: [a8547c04](https://github.com/kamadorueda/machine/commit/a8547c048cfe34b
 
 # Notes to myself
 
-- Update all sources: `$ nix-flakes flake update`
+- Update all sources: `$ nix3 flake update`
