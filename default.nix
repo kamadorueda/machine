@@ -575,10 +575,7 @@ rec {
     #   sha256 = "0i6qjkyvxbnnvk984781wgkycdrgwf6cpbln7w35gfab18h7mnzy";
     # };
     nixpkgs = utils.fromGithub flake.lock.nodes.nixpkgs.locked;
-    product = utils.fetchzip {
-      url = "https://gitlab.com/fluidattacks/product/-/archive/e0a77b8bf17a9b6114e1ccb7d799a6246d9605c1.tar.gz";
-      sha256 = "05nnnkhq0lxrdhsk83v33shrvpykj4j6i12c81mnlqfmibcaspy9";
-    };
+    product = utils.fromGitlab flake.lock.nodes.product.locked;
     timedoctor = {
       appimage = utils.fetchurl {
         # https://repo2.timedoctor.com/td-desktop-hybrid/prod/
@@ -605,6 +602,10 @@ rec {
     fetchurl = (import <nixpkgs> { }).fetchurl;
     fromGithub = { narHash, owner, repo, rev, ... }: utils.fetchzip {
       url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
+      hash = narHash;
+    };
+    fromGitlab = { narHash, owner, repo, rev, ... }: utils.fetchzip {
+      url = "https://gitlab.com/${owner}/${repo}/-/archive/${rev}.tar.gz";
       hash = narHash;
     };
     fromJSON = path: builtins.fromJSON (builtins.readFile path);
