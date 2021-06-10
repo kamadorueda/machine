@@ -23,11 +23,11 @@ rec {
       enableDebugInfo = true;
       file = {
         # Inpure Appimage backup just in case I need it
-        timedoctor = {
-          executable = true;
-          source = sources.timedoctor.appimage;
-          target = "timedoctor.AppImage";
-        };
+        # timedoctor = {
+        #   executable = true;
+        #   source = sources.timedoctor.appimage;
+        #   target = "timedoctor.AppImage";
+        # };
       };
       homeDirectory = abs.home;
       language = {
@@ -440,31 +440,18 @@ rec {
       };
       source = sources.homeManager;
     };
-    libjpeg = packages.nixpkgs.stdenv.mkDerivation {
-      cmakeFlags = [
-        "-DENABLE_STATIC=0"
-        "-DENABLE_SHARED=1"
-        "-DWITH_JAVA=1"
-        "-DWITH_JPEG8=1"
-      ];
-      doInstallCheck = true;
-      installCheckTarget = "test";
-      name = "libjpeg";
-      nativeBuildInputs = [
-        packages.nixpkgs.cmake
-        packages.nixpkgs.nasm
-        packages.nixpkgs.openjdk
-      ];
-      outputs = [ "bin" "dev" "dev_private" "out" "man" "doc" ];
-      postFixup = "moveToOutput include/transupp.h $dev_private";
-      patches = sources.libjpeg.patches;
-      src = sources.libjpeg.src;
-    };
     nixpkgs = utils.remoteImport {
       args = {
         config = {
           allowUnfree = true;
         };
+        overlays = [
+          (self: super: {
+            libjpeg8 = super.libjpeg.override {
+              enableJpeg8 = true;
+            };
+          })
+        ];
       };
       source = sources.nixpkgs;
     };
@@ -476,7 +463,6 @@ rec {
       # DEBUG=true ELECTRON_ENABLE_LOGGING=true I18NEXT_LNG=en
       runScript = "appimage-exec.sh -w ${sources.timedoctor.extracted}";
       targetPkgs = _: [
-        packages.libjpeg.out
         packages.nixpkgs.alsaLib
         packages.nixpkgs.appimageTools.appimage-exec
         packages.nixpkgs.atk
@@ -515,6 +501,7 @@ rec {
         packages.nixpkgs.kdialog
         packages.nixpkgs.libappindicator-gtk2.out
         packages.nixpkgs.libexif
+        packages.nixpkgs.libjpeg8.out
         packages.nixpkgs.libnotify
         packages.nixpkgs.libpng
         packages.nixpkgs.libxml2
@@ -584,20 +571,9 @@ rec {
     #   url = "https://github.com/nix-community/home-manager/archive/0e6c61a44092e98ba1d75b41f4f947843dc7814d.tar.gz";
     #   sha256 = "0i6qjkyvxbnnvk984781wgkycdrgwf6cpbln7w35gfab18h7mnzy";
     # };
-    libjpeg = {
-      patches = [
-        "${sources.nixpkgs}/pkgs/development/libraries/libjpeg-turbo/0001-Compile-transupp.c-as-part-of-the-library.patch"
-      ];
-      src = packages.nixpkgs.fetchFromGitHub {
-        owner = "libjpeg-turbo";
-        repo = "libjpeg-turbo";
-        rev = "2.1.0";
-        sha256 = "16wpnxcl98idca4va60zj3mv34qwbgajd646k883ngh96gzx1b9i";
-      };
-    };
     nixpkgs = utils.fetchzip {
-      url = "https://github.com/nixos/nixpkgs/archive/dd03217d4944e2ce7f1991dbeacb482e8d5cc2ff.tar.gz";
-      sha256 = "160hbbmjjv0nf2ycgzaajx2blcfqnc90gg6nwlc0dvigip82z0as";
+      url = "https://github.com/nixos/nixpkgs/archive/19411a458ce8d6cefd20ce27b856f15dba2edced.tar.gz";
+      sha256 = "1n700grqi2xp7817lrq008xdhs32va2rx57z33gs6klx4fclkb23";
     };
     product = utils.fetchzip {
       url = "https://gitlab.com/fluidattacks/product/-/archive/e0a77b8bf17a9b6114e1ccb7d799a6246d9605c1.tar.gz";
