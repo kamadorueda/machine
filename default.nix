@@ -433,6 +433,9 @@ rec {
       enable = true;
     };
   };
+  flake = {
+    lock = utils.fromJSON ./flake.lock;
+  };
   packages = {
     homeManager = utils.remoteImport {
       args = {
@@ -571,10 +574,7 @@ rec {
     #   url = "https://github.com/nix-community/home-manager/archive/0e6c61a44092e98ba1d75b41f4f947843dc7814d.tar.gz";
     #   sha256 = "0i6qjkyvxbnnvk984781wgkycdrgwf6cpbln7w35gfab18h7mnzy";
     # };
-    nixpkgs = utils.fetchzip {
-      url = "https://github.com/nixos/nixpkgs/archive/19411a458ce8d6cefd20ce27b856f15dba2edced.tar.gz";
-      sha256 = "1n700grqi2xp7817lrq008xdhs32va2rx57z33gs6klx4fclkb23";
-    };
+    nixpkgs = utils.fromGithub flake.lock.nodes.nixpkgs.locked;
     product = utils.fetchzip {
       url = "https://gitlab.com/fluidattacks/product/-/archive/e0a77b8bf17a9b6114e1ccb7d799a6246d9605c1.tar.gz";
       sha256 = "05nnnkhq0lxrdhsk83v33shrvpykj4j6i12c81mnlqfmibcaspy9";
@@ -603,6 +603,11 @@ rec {
   utils = {
     fetchzip = (import <nixpkgs> { }).fetchzip;
     fetchurl = (import <nixpkgs> { }).fetchurl;
+    fromGithub = { narHash, owner, repo, rev, ... }: utils.fetchzip {
+      url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
+      hash = narHash;
+    };
+    fromJSON = path: builtins.fromJSON (builtins.readFile path);
     remoteImport = { args ? null, source }:
       if args == null
       then import source
