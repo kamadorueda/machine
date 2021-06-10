@@ -76,7 +76,6 @@ rec {
         packages.nixpkgs.maven
         packages.nixpkgs.mypy
         packages.nixpkgs.ngrok
-        packages.nixpkgs.nix-bundle
         packages.nixpkgs.nix-index
         packages.nixpkgs.nixops
         packages.nixpkgs.nixpkgs-fmt
