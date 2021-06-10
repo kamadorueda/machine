@@ -24,26 +24,35 @@
 
 1. Setup the state:
 
-    ```bash
-    # github/kamadorueda
-        mkdir -p ~/Documents/github/kamadorueda \
-    &&  pushd ~/Documents/github/kamadorueda \
-      &&  git clone "https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/secrets" \
-      &&  pushd ~/Documents/secrets/machine \
-        &&  install.sh \
-      &&  popd \
-      &&  git clone git@github.com:kamadorueda/machine \
-    &&  popd
-    ```
+    - github/kamadorueda/secrets:
 
-    ```bash
-    # gitlab/fluidattacks
-        mkdir -p ~/Documents/gitlab/fluidattacks \
-    &&  pushd ~/Documents/gitlab/fluidattacks \
-      &&  git clone git@gitlab.com:fluidattacks/product \
-      &&  git clone git@gitlab.com:fluidattacks/services \
-    &&  popd
-    ```
+      ```bash
+          mkdir -p ~/Documents/github/kamadorueda \
+      &&  pushd ~/Documents/github/kamadorueda \
+        &&  git clone "https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/secrets" \
+        &&  cd secrets/machine \
+          &&  install.sh \
+      &&  popd
+      ```
+
+    - github/kamadorueda/machine:
+
+      ```bash
+          mkdir -p ~/Documents/github/kamadorueda \
+      &&  pushd ~/Documents/github/kamadorueda \
+        &&  git clone git@github.com:kamadorueda/machine \
+      &&  popd
+      ```
+
+    - gitlab/fluidattacks:
+
+      ```bash
+          mkdir -p ~/Documents/gitlab/fluidattacks \
+      &&  pushd ~/Documents/gitlab/fluidattacks \
+        &&  git clone git@gitlab.com:fluidattacks/product \
+        &&  git clone git@gitlab.com:fluidattacks/services \
+      &&  popd
+      ```
 
 # Timedoctor
 
