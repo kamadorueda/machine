@@ -302,20 +302,20 @@ rec {
           in
           packages.nixpkgs.vscode-utils.extensionsFromVscodeMarketplace [
             (ext "4ops" "terraform" "0.2.1" "r5W5S9hIn4AlVtr6y7HoVwtJqZ+vYQgukj/ehJQRwKQ=")
-            (ext "coenraads" "bracket-pair-colorizer" "1.0.61" "0r3bfp8kvhf9zpbiil7acx7zain26grk133f0r0syxqgml12i652")
-            (ext "eamodio" "gitlens" "11.3.0" "m2Zn+e6hj59SujcW5ptdrYDrc4CviZ4wyCndO2BhyF8=")
             (ext "jkillian" "custom-local-formatters" "0.0.4" "1pmqnc759fq86g2z3scx5xqpni9khcqi5z2kpl1kb7yygsv314gm")
             (ext "mads-hartmann" "bash-ide-vscode" "1.11.0" "d7acWLdRW8nVjQPU5iln9hl9zUx61XN4lvmFLbwLBMM=")
             (ext "shardulm94" "trailing-spaces" "0.3.1" "0h30zmg5rq7cv7kjdr5yzqkkc1bs20d72yz9rjqag32gwf46s8b8")
-            (ext "tamasfe" "even-better-toml" "0.12.2" "1vz1sxkg24hsn4zfwzjdry4pp1hrc1fp516xpcyvq3ajr1xddlvs")
           ] ++ [
             packages.nixpkgs.vscode-extensions.bbenoist.Nix
+            packages.nixpkgs.vscode-extensions.coenraads.bracket-pair-colorizer-2
+            packages.nixpkgs.vscode-extensions.eamodio.gitlens
             packages.nixpkgs.vscode-extensions.haskell.haskell
             packages.nixpkgs.vscode-extensions.justusadam.language-haskell
             packages.nixpkgs.vscode-extensions.ms-azuretools.vscode-docker
             packages.nixpkgs.vscode-extensions.ms-python.python
             packages.nixpkgs.vscode-extensions.ms-python.vscode-pylance
             packages.nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
+            packages.nixpkgs.vscode-extensions.tamasfe.even-better-toml
           ];
         keybindings = [
         ];
