@@ -25,7 +25,7 @@ rec {
         # Inpure Appimage backup just in case I need it
         # timedoctor = {
         #   executable = true;
-        #   source = sources.timedoctor.appimage;
+        #   source = sources.timedoctor;
         #   target = "timedoctor.AppImage";
         # };
       };
@@ -433,9 +433,6 @@ rec {
       enable = true;
     };
   };
-  flake = {
-    lock = utils.fromJSON ./flake.lock;
-  };
   packages = {
     homeManager = utils.remoteImport {
       args = {
@@ -464,7 +461,7 @@ rec {
     timedoctor = packages.nixpkgs.buildFHSUserEnvBubblewrap {
       name = "timedoctor";
       # DEBUG=true ELECTRON_ENABLE_LOGGING=true I18NEXT_LNG=en
-      runScript = "appimage-exec.sh -w ${sources.timedoctor.extracted}";
+      runScript = "appimage-exec.sh -w ${packages.timedoctorExtracted}";
       targetPkgs = _: [
         packages.nixpkgs.alsaLib
         packages.nixpkgs.appimageTools.appimage-exec
@@ -567,35 +564,17 @@ rec {
         packages.nixpkgs.zsh
       ];
     };
-  };
-  sources = {
-    homeManager = /home/kamado/Documents/github/nix-community/home-manager;
-    # homeManager = utils.fromGithub flake.lock.nodes.homeManager.locked;
-    nixpkgs = utils.fromGithub flake.lock.nodes.nixpkgs.locked;
-    product = utils.fromGitlab flake.lock.nodes.product.locked;
-    timedoctor = {
-      appimage = utils.fetchurl {
-        # https://repo2.timedoctor.com/td-desktop-hybrid/prod/
-        url = "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v3.12.9/timedoctor-desktop_3.12.9_linux-x86_64.AppImage";
-        sha256 = "0li6w0y80k1ci8vi5xa0ihq6ay5xr266l3d74rbazkbx8g4vv1g9";
-      };
-      extracted = packages.nixpkgs.appimageTools.extract {
-        name = "timedoctor-extracted";
-        src = sources.timedoctor.appimage;
-      };
+    timedoctorExtracted = packages.nixpkgs.appimageTools.extract {
+      name = "timedoctor-extracted";
+      src = sources.timedoctor;
     };
+  };
+  sources = (import ./nix/sources.nix) // {
+    homeManager = /home/kamado/Documents/github/nix-community/home-manager;
   };
   utils = {
     fetchzip = (import <nixpkgs> { }).fetchzip;
     fetchurl = (import <nixpkgs> { }).fetchurl;
-    fromGithub = { narHash, owner, repo, rev, ... }: utils.fetchzip {
-      url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
-      hash = narHash;
-    };
-    fromGitlab = { narHash, owner, repo, rev, ... }: utils.fetchzip {
-      url = "https://gitlab.com/${owner}/${repo}/-/archive/${rev}.tar.gz";
-      hash = narHash;
-    };
     fromJSON = path: builtins.fromJSON (builtins.readFile path);
     remoteImport = { args ? null, source }:
       if args == null

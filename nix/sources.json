@@ -1,4 +1,16 @@
 {
+    "homeManager": {
+        "branch": "master",
+        "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
+        "homepage": "https://nix-community.github.io/home-manager/",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "42847469b3f65a363dc52b66be09d0ac4edcc55c",
+        "sha256": "1d8imciqfapaycwj13bl8gih77xas243n4yph32kq0sp2awjl8vq",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/home-manager/archive/42847469b3f65a363dc52b66be09d0ac4edcc55c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "niv": {
         "branch": "master",
         "description": "Easy dependency management for Nix projects",
@@ -10,5 +22,36 @@
         "type": "tarball",
         "url": "https://github.com/nmattia/niv/archive/527494090f7075ed5e3aa15ef7093846e5e25d52.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs": {
+        "branch": "master",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "9269ea2b53afb0f68d7b38b0a8b1ce677192c4b6",
+        "sha256": "0a7x3p7iym7yh9ps0bc9wzrwlgnfaiccgrf7sksyzygfkbxz4dig",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nixpkgs/archive/9269ea2b53afb0f68d7b38b0a8b1ce677192c4b6.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "product": {
+        "branch": "master",
+        "description": "WARNING: This is mirror of https://gitlab.com/fluidattacks/product",
+        "homepage": "",
+        "owner": "fluidattacks",
+        "repo": "product",
+        "rev": "0abbf2e95c44a6b857ffaadae34b1d84d1e04bb2",
+        "sha256": "07hzfp46mirhc39y9v2idbxhl0hzx3q3276lb02ql6zjlrnma05b",
+        "type": "tarball",
+        "url": "https://gitlab.com/fluidattacks/product/-/archive/0abbf2e95c44a6b857ffaadae34b1d84d1e04bb2.tar.gz",
+        "url_template": "https://gitlab.com/<owner>/<repo>/-/archive/<rev>.tar.gz"
+    },
+    "timedoctor": {
+        "sha256": "0li6w0y80k1ci8vi5xa0ihq6ay5xr266l3d74rbazkbx8g4vv1g9",
+        "type": "file",
+        "url": "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v3.12.9/timedoctor-desktop_3.12.9_linux-x86_64.AppImage",
+        "url_template": "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v<version>/timedoctor-desktop_<version>_linux-x86_64.AppImage",
+        "version": "3.12.9"
     }
 }
