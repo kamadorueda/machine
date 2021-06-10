@@ -570,10 +570,7 @@ rec {
   };
   sources = {
     homeManager = /home/kamado/Documents/github/nix-community/home-manager;
-    # homeManager = utils.fetchzip {
-    #   url = "https://github.com/nix-community/home-manager/archive/0e6c61a44092e98ba1d75b41f4f947843dc7814d.tar.gz";
-    #   sha256 = "0i6qjkyvxbnnvk984781wgkycdrgwf6cpbln7w35gfab18h7mnzy";
-    # };
+    # homeManager = utils.fromGithub flake.lock.nodes.homeManager.locked;
     nixpkgs = utils.fromGithub flake.lock.nodes.nixpkgs.locked;
     product = utils.fromGitlab flake.lock.nodes.product.locked;
     timedoctor = {

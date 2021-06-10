@@ -16,19 +16,21 @@
         "type": "github"
       }
     },
-    "flakeCompat_2": {
-      "flake": false,
+    "homeManager": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
       "locked": {
-        "lastModified": 1606424373,
-        "narHash": "sha256-oq8d4//CJOrVj+EcOaSXvMebvuTkmBJuT5tzlfewUnQ=",
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "rev": "99f1c2157fba4bfe6211a321fd0ee43199025dbf",
+        "lastModified": 1623251710,
+        "narHash": "sha256-eCMquRJXAzzFgNcTO4jQqp8D40N0jSA58+oqhyOrEbU=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "42847469b3f65a363dc52b66be09d0ac4edcc55c",
         "type": "github"
       },
       "original": {
-        "owner": "edolstra",
-        "repo": "flake-compat",
+        "owner": "nix-community",
+        "repo": "home-manager",
         "type": "github"
       }
     },
@@ -36,15 +38,14 @@
       "locked": {
         "lastModified": 1623288349,
         "narHash": "sha256-/jTEXleEvw0XHS4zw16OT514pk7vdZCDW++VxJBpgWg=",
-        "owner": "nixos",
+        "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "5a29c4d3bfdaa9e77ba86d47f22cb116fc6c9d96",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "type": "github"
+        "id": "nixpkgs",
+        "type": "indirect"
       }
     },
     "nixpkgsSource": {
@@ -83,9 +84,24 @@
         "url": "https://github.com/nixos/nixpkgs/archive/a1d64d9419422ae9779ab5cada5828127a24e100.tar.gz"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1623288349,
+        "narHash": "sha256-/jTEXleEvw0XHS4zw16OT514pk7vdZCDW++VxJBpgWg=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "5a29c4d3bfdaa9e77ba86d47f22cb116fc6c9d96",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "product": {
       "inputs": {
-        "flakeCompat": "flakeCompat_2",
+        "flakeCompat": "flakeCompat",
         "nixpkgsSource": "nixpkgsSource",
         "nixpkgsSource2": "nixpkgsSource2",
         "nixpkgsSource3": "nixpkgsSource3"
@@ -106,8 +122,8 @@
     },
     "root": {
       "inputs": {
-        "flakeCompat": "flakeCompat",
-        "nixpkgs": "nixpkgs",
+        "homeManager": "homeManager",
+        "nixpkgs": "nixpkgs_2",
         "product": "product"
       }
     }

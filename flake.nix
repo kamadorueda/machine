@@ -1,7 +1,7 @@
 {
   description = "kamadorueda's machine, as code";
   inputs = {
-    flakeCompat = { url = "github:edolstra/flake-compat"; flake = false; };
+    homeManager = { url = "github:nix-community/home-manager"; };
     nixpkgs = { url = "github:nixos/nixpkgs"; };
     product = { url = "gitlab:fluidattacks/product"; };
   };
