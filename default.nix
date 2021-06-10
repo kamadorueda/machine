@@ -579,15 +579,6 @@ rec {
         url = "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v3.12.9/timedoctor-desktop_3.12.9_linux-x86_64.AppImage";
         sha256 = "0li6w0y80k1ci8vi5xa0ihq6ay5xr266l3d74rbazkbx8g4vv1g9";
       };
-      asar = packages.nixpkgs.stdenv.mkDerivation {
-        name = "timedoctor-asar";
-        builder = builtins.toFile "builder.sh" ''
-          source $stdenv/setup
-          asar e $envSrc/resources/app.asar $out
-        '';
-        buildInputs = [ packages.nixpkgs.nodePackages.asar ];
-        envSrc = sources.timedoctor.extracted;
-      };
       extracted = packages.nixpkgs.appimageTools.extract {
         name = "timedoctor-extracted";
         src = sources.timedoctor.appimage;
