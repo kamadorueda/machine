@@ -51,6 +51,70 @@ rec {
         s = "git status";
         today = "git log --format=%aI --author ${abs.emailAtWork} | sed -E 's/T.*$//g' | uniq -c | head -n 7 | tac";
       };
+      systemPackages = [
+        packages.nixpkgs.acpi
+        packages.nixpkgs.age
+        packages.nixpkgs.awscli
+        packages.nixpkgs.beep
+        packages.nixpkgs.bind
+        packages.nixpkgs.binutils
+        packages.nixpkgs.black
+        packages.nixpkgs.burpsuite
+        packages.nixpkgs.cabal-install
+        packages.nixpkgs.cargo
+        packages.nixpkgs.coreutils
+        packages.nixpkgs.curl
+        packages.nixpkgs.diction
+        packages.nixpkgs.diffoscope
+        packages.nixpkgs.evtest
+        packages.nixpkgs.gcc
+        packages.nixpkgs.ghc
+        packages.nixpkgs.gimp
+        packages.nixpkgs.git-sizer
+        packages.nixpkgs.gnumake
+        packages.nixpkgs.google-chrome
+        packages.nixpkgs.gptfdisk
+        packages.nixpkgs.hugo
+        packages.nixpkgs.inxi
+        packages.nixpkgs.kubectl
+        packages.nixpkgs.libreoffice
+        packages.nixpkgs.lshw
+        packages.nixpkgs.lsof
+        packages.nixpkgs.maven
+        packages.nixpkgs.mypy
+        packages.nixpkgs.ngrok
+        packages.nixpkgs.niv
+        packages.nixpkgs.nix-index
+        packages.nixpkgs.nixops
+        packages.nixpkgs.nixpkgs-fmt
+        packages.nixpkgs.nixpkgs-review
+        packages.nixpkgs.nodejs
+        packages.nixpkgs.nodePackages.asar
+        packages.nixpkgs.openjdk
+        packages.nixpkgs.optipng
+        packages.nixpkgs.parallel
+        packages.nixpkgs.parted
+        packages.nixpkgs.patchelf
+        packages.nixpkgs.pciutils
+        packages.nixpkgs.pcre
+        packages.nixpkgs.peek
+        packages.nixpkgs.powerline-fonts
+        packages.nixpkgs.python38
+        packages.nixpkgs.python38Packages.isort
+        packages.nixpkgs.qemu
+        packages.nixpkgs.shadow
+        packages.nixpkgs.shfmt
+        packages.nixpkgs.sops
+        packages.nixpkgs.terraform
+        packages.nixpkgs.tokei
+        packages.nixpkgs.tor
+        packages.nixpkgs.torbrowser
+        packages.nixpkgs.traceroute
+        packages.nixpkgs.tree
+        packages.nixpkgs.vlc
+        packages.nixpkgs.xclip
+        packages.nixpkgs.yq
+      ];
     };
     home-manager = {
       useUserPackages = true;
@@ -88,70 +152,6 @@ rec {
               telephone = abs.locale;
               time = abs.locale;
             };
-            packages = [
-              packages.nixpkgs.acpi
-              packages.nixpkgs.age
-              packages.nixpkgs.awscli
-              packages.nixpkgs.beep
-              packages.nixpkgs.bind
-              packages.nixpkgs.binutils
-              packages.nixpkgs.black
-              packages.nixpkgs.burpsuite
-              packages.nixpkgs.cabal-install
-              packages.nixpkgs.cargo
-              packages.nixpkgs.coreutils
-              packages.nixpkgs.curl
-              packages.nixpkgs.diction
-              packages.nixpkgs.diffoscope
-              packages.nixpkgs.evtest
-              packages.nixpkgs.gcc
-              packages.nixpkgs.ghc
-              packages.nixpkgs.gimp
-              packages.nixpkgs.git-sizer
-              packages.nixpkgs.gnumake
-              packages.nixpkgs.google-chrome
-              packages.nixpkgs.gptfdisk
-              packages.nixpkgs.hugo
-              packages.nixpkgs.inxi
-              packages.nixpkgs.kubectl
-              packages.nixpkgs.libreoffice
-              packages.nixpkgs.lshw
-              packages.nixpkgs.lsof
-              packages.nixpkgs.maven
-              packages.nixpkgs.mypy
-              packages.nixpkgs.ngrok
-              packages.nixpkgs.niv
-              packages.nixpkgs.nix-index
-              packages.nixpkgs.nixops
-              packages.nixpkgs.nixpkgs-fmt
-              packages.nixpkgs.nixpkgs-review
-              packages.nixpkgs.nodejs
-              packages.nixpkgs.nodePackages.asar
-              packages.nixpkgs.openjdk
-              packages.nixpkgs.optipng
-              packages.nixpkgs.parallel
-              packages.nixpkgs.parted
-              packages.nixpkgs.patchelf
-              packages.nixpkgs.pciutils
-              packages.nixpkgs.pcre
-              packages.nixpkgs.peek
-              packages.nixpkgs.powerline-fonts
-              packages.nixpkgs.python38
-              packages.nixpkgs.python38Packages.isort
-              packages.nixpkgs.qemu
-              packages.nixpkgs.shadow
-              packages.nixpkgs.shfmt
-              packages.nixpkgs.sops
-              packages.nixpkgs.terraform
-              packages.nixpkgs.tokei
-              packages.nixpkgs.tor
-              packages.nixpkgs.torbrowser
-              packages.nixpkgs.traceroute
-              packages.nixpkgs.tree
-              packages.nixpkgs.vlc
-              packages.nixpkgs.xclip
-              packages.nixpkgs.yq
-            ];
             stateVersion = "21.05";
             username = abs.username;
           };
