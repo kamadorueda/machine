@@ -1,10 +1,8 @@
-let
-  machine = import ./default.nix;
-in
+with import ./default.nix;
 { config, pkgs, ... }: {
   imports = [
-    ./hardware-configuration.nix
+    ./hardware.nix
     "${sources.homeManager}/nixos"
-    machine.config
+    config
   ];
 }
