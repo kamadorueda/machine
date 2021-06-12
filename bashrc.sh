@@ -83,11 +83,11 @@ function _bash_completion {
   done
 }
 
-function _make_vscode_writeable {
-  find ~/.config/Code | while read -r path; do
-    chmod --recursive +w "$(readlink --canonicalize "${path}")"
-  done
-}
+# function _make_vscode_writeable {
+#   find ~/.config/Code | while read -r path; do
+#     chmod --recursive +w "$(readlink --canonicalize "${path}")"
+#   done
+# }
 
 source "${SECRETS}/machine/secrets.sh"
 _bash_completion

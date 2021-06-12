@@ -1,7 +1,7 @@
 with import ./default.nix;
-{ config, pkgs, ... }: {
+{
   imports = [
-    ./hardware.nix
+    ./hardware-configuration.nix
     "${sources.homeManager}/nixos"
     config
   ];
