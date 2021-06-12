@@ -469,9 +469,6 @@ machine: rec {
   };
   sources = import ../nix/sources.nix;
   utils = {
-    fetchzip = (import <nixpkgs> { }).fetchzip;
-    fetchurl = (import <nixpkgs> { }).fetchurl;
-    fromJSON = path: builtins.fromJSON (builtins.readFile path);
     remoteImport = { args ? null, source }:
       if args == null
       then import source
