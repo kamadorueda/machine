@@ -13,11 +13,18 @@ rec {
   # NixOS: https://nixos.org/manual/nixos/stable/options.html
   # Home Manager: https://nix-community.github.io/home-manager/options.html
   config = {
-    # Use the systemd-boot EFI boot loader.
     boot = {
-      loader.systemd-boot.enable = true;
-      loader.efi.canTouchEfiVariables = true;
-      loader.grub.useOSProber = true;
+      loader = {
+        efi = {
+          canTouchEfiVariables = true;
+        };
+        grub = {
+          useOSProber = true;
+        };
+        systemd-boot = {
+          enable = true;
+        };
+      };
     };
     home-manager = {
       useUserPackages = true;
