@@ -3,7 +3,7 @@ rec {
     email = "kamadorueda@gmail.com";
     emailAtWork = "kamado@fluidattacks.com";
     font = "ProFont for Powerline";
-    home = "/home/kamadorueda";
+    home = "/home/${abs.username}";
     locale = "en_US.UTF-8";
     name = "Kevin Amado";
     signingkey = "FFF341057F503148";
@@ -99,7 +99,6 @@ rec {
         packages.nixpkgs.pciutils
         packages.nixpkgs.pcre
         packages.nixpkgs.peek
-        packages.nixpkgs.powerline-fonts
         packages.nixpkgs.python38
         packages.nixpkgs.python38Packages.isort
         packages.nixpkgs.qemu
@@ -117,16 +116,20 @@ rec {
         packages.nixpkgs.yq
       ];
     };
+    fonts = {
+      enableDefaultFonts = true;
+      fonts = [
+        packages.nixpkgs.powerline-fonts
+      ];
+      fontconfig = {
+        enable = true;
+      };
+    };
     home-manager = {
       useUserPackages = true;
       useGlobalPkgs = true;
       users = {
-        kamadorueda = {
-          fonts = {
-            fontconfig = {
-              enable = true;
-            };
-          };
+        "${abs.username}" = {
           home = {
             activation = { };
             enableDebugInfo = true;
@@ -461,6 +464,7 @@ rec {
         persistent = true;
       };
       nixPath = [
+        "nixos-config=${abs.home}/Documents/github/kamadorueda/machine/configuration.nix"
         "nixpkgs=${sources.nixpkgs}"
       ];
       optimise = {
@@ -472,6 +476,12 @@ rec {
         "root"
       ];
       useSandbox = true;
+    };
+    nixpkgs = {
+      config = {
+        allowUnfree = true;
+        allowBroken = false;
+      };
     };
     services = {
       xserver = {
@@ -492,10 +502,10 @@ rec {
       };
     };
     system = {
-      stateVersion = "21.05";
       autoUpgrade = {
         enable = false;
       };
+      stateVersion = "21.05";
     };
     time = {
       timeZone = "America/Bogota";
@@ -506,7 +516,7 @@ rec {
         root = {
           password = "";
         };
-        kamadorueda = {
+        "${abs.username}" = {
           extraGroups = [ "wheel" ];
           home = abs.home;
           isNormalUser = true;
@@ -559,7 +569,6 @@ rec {
         packages.nixpkgs.expat
         packages.nixpkgs.expat.dev
         packages.nixpkgs.file
-        packages.nixpkgs.fontconfig
         packages.nixpkgs.freetype
         packages.nixpkgs.gcc
         packages.nixpkgs.gcc-unwrapped.lib

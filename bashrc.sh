@@ -1,11 +1,9 @@
 # shellcheck shell=bash
 
 export MACHINE=~/Documents/github/kamadorueda/machine
-export NIX_PROFILE=~/.nix-profile
+export NIX_PROFILE=/etc/profiles/per-user/kamadorueda
 export PRODUCT=~/Documents/gitlab/fluidattacks/product
 export SECRETS=~/Documents/github/kamadorueda/secrets
-
-export PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
 
 function dev_env {
   local code="${1}"
