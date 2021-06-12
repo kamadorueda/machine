@@ -1,4 +1,4 @@
-machine: {
+_: with _; {
   a = "git add -p";
   bashrc = "code $MACHINE/bashrc.sh";
   bat = "bat --show-all --theme=ansi";
@@ -12,12 +12,12 @@ machine: {
   m = "git commit --amend --no-edit --allow-empty";
   machine = "code $MACHINE/default.nix";
   melts = "CI=true CI_COMMIT_REF_NAME=master melts";
-  nix3 = "${machine.packages.nixpkgs.nixUnstable}/bin/nix --experimental-features 'nix-command flakes'";
+  nix3 = "${packages.nixpkgs.nixUnstable}/bin/nix --experimental-features 'nix-command flakes'";
   now = "date --iso-8601=seconds --utc";
   p = "git push -f";
   r = "git pull --autostash --progress --rebase --stat origin master";
   ru = "git pull --autostash --progress --rebase --stat upstream master";
   rp = "r && p";
   s = "git status";
-  today = "git log --format=%aI --author ${machine.abs.emailAtWork} | sed -E 's/T.*$//g' | uniq -c | head -n 7 | tac";
+  today = "git log --format=%aI --author ${abs.emailAtWork} | sed -E 's/T.*$//g' | uniq -c | head -n 7 | tac";
 }

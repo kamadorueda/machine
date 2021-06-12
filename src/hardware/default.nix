@@ -1,4 +1,4 @@
-machine:
+_: with _;
 
 { lib
 , modulesPath

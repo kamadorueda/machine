@@ -1,5 +1,5 @@
 let
-  sources = import ./nix/sources.nix;
+  sources = import ./src/sources/default.nix { };
   nixpkgs = import sources.nixpkgs { };
   machine = mergeConfig ./src [ ];
   mergeConfig = path: pos:

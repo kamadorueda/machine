@@ -63,7 +63,3 @@ via [Nix](https://nixos.org).
 2. `$ ./result/bin/timedoctor`
 
 Source: [a8547c04](https://github.com/kamadorueda/machine/commit/a8547c048cfe34bc78475a8c8621b226426b81ab)
-
-# Notes to myself
-
-- Update all sources: `$ niv update`
