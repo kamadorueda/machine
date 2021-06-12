@@ -444,11 +444,16 @@ rec {
       timeZone = "America/Bogota";
     };
     users = {
+      mutableUsers = false;
       users = {
+        root = {
+          password = "";
+        };
         kamadorueda = {
           extraGroups = [ "wheel" ];
           home = abs.home;
           isNormalUser = true;
+          password = "";
         };
       };
     };

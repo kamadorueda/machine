@@ -42,41 +42,6 @@ function fetch_fluid_var {
     && curl -s -H "private-token: ${GITLAB_API_TOKEN}" "${url}" | jq -r '.value'
 }
 
-function switch {
-  clear \
-    && nixpkgs-fmt "${MACHINE}" \
-    && nix-env -iA packages.homeManager.home-manager -f "${MACHINE}" \
-    && if test -v DEBUG; then
-      home-manager -A config -f "${MACHINE}" -n -v switch
-    fi \
-    && home-manager -A config -f "${MACHINE}" switch \
-    && home-manager expire-generations "$(date +%Y-%m-%d)" \
-    && source ~/.bashrc
-}
-
-function diffm {
-  local current
-  local next
-
-  function diffm_copy {
-    find -L "${1}" -type f | sort | while read -r source; do
-      target="${source/${1}/${2}}" \
-        && echo "${target}" \
-        && mkdir -p "$(dirname "${target}")" \
-        && cp --dereference --no-target-directory "${source}" "${target}"
-    done
-  }
-
-  current="$(home-manager generations | tac | grep -Pom 1 '/nix/store/.*')" \
-    && next="$(home-manager -A config -f "${MACHINE}" build)" \
-    && pushd "$(mktemp -d)" \
-    && diffm_copy "${current}" "${PWD}/current" \
-    && diffm_copy "${next}" "${PWD}/next" \
-    && git diff --no-index -- /tmp/tmp.z4SM83ak3z/{current,next} \
-    && return 0
-  popd
-}
-
 function _bash_completion {
   for completion_script in "${NIX_PROFILE}/share/bash-completion/completions/"*; do
     source "${completion_script}"
