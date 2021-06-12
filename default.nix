@@ -1,5 +1,6 @@
 let
-  nixpkgs = import <nixpkgs> { };
+  sources = import ./nix/sources.nix;
+  nixpkgs = import sources.nixpkgs { };
   machine = mergeConfig ./src [ ];
   mergeConfig = path: pos:
     builtins.foldl'
