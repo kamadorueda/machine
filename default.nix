@@ -10,416 +10,517 @@ rec {
     username = "kamadorueda";
   };
 
-  # Home manager configuration:
-  # https://nix-community.github.io/home-manager/options.html
+  # NixOS: https://nixos.org/manual/nixos/stable/options.html
+  # Home Manager: https://nix-community.github.io/home-manager/options.html
   config = {
-    fonts = {
-      fontconfig = {
-        enable = true;
-      };
+    users.users.kamadorueda = {
+      isNormalUser = true;
+      home = machine.abs.home;
+      extraGroups = [ "wheel" ];
     };
-    home = {
-      activation = { };
-      enableDebugInfo = true;
-      file = {
-        # Inpure Appimage backup just in case I need it
-        # timedoctor = {
-        #   executable = true;
-        #   source = sources.timedoctor;
-        #   target = "timedoctor.AppImage";
-        # };
-      };
-      homeDirectory = abs.home;
-      language = {
-        address = abs.locale;
-        base = abs.locale;
-        collate = abs.locale;
-        ctype = abs.locale;
-        name = abs.locale;
-        numeric = abs.locale;
-        measurement = abs.locale;
-        messages = abs.locale;
-        monetary = abs.locale;
-        paper = abs.locale;
-        telephone = abs.locale;
-        time = abs.locale;
-      };
-      packages = [
-        packages.nixpkgs.acpi
-        packages.nixpkgs.age
-        packages.nixpkgs.awscli
-        packages.nixpkgs.beep
-        packages.nixpkgs.bind
-        packages.nixpkgs.binutils
-        packages.nixpkgs.black
-        packages.nixpkgs.burpsuite
-        packages.nixpkgs.cabal-install
-        packages.nixpkgs.cargo
-        packages.nixpkgs.coreutils
-        packages.nixpkgs.curl
-        packages.nixpkgs.diction
-        packages.nixpkgs.diffoscope
-        packages.nixpkgs.evtest
-        packages.nixpkgs.gcc
-        packages.nixpkgs.ghc
-        packages.nixpkgs.gimp
-        packages.nixpkgs.git-sizer
-        packages.nixpkgs.gnumake
-        packages.nixpkgs.google-chrome
-        packages.nixpkgs.gptfdisk
-        packages.nixpkgs.hugo
-        packages.nixpkgs.inxi
-        packages.nixpkgs.kubectl
-        packages.nixpkgs.libreoffice
-        packages.nixpkgs.lshw
-        packages.nixpkgs.lsof
-        packages.nixpkgs.maven
-        packages.nixpkgs.mypy
-        packages.nixpkgs.ngrok
-        packages.nixpkgs.niv
-        packages.nixpkgs.nix-index
-        packages.nixpkgs.nixops
-        packages.nixpkgs.nixpkgs-fmt
-        packages.nixpkgs.nixpkgs-review
-        packages.nixpkgs.nodejs
-        packages.nixpkgs.nodePackages.asar
-        packages.nixpkgs.openjdk
-        packages.nixpkgs.optipng
-        packages.nixpkgs.parallel
-        packages.nixpkgs.parted
-        packages.nixpkgs.patchelf
-        packages.nixpkgs.pciutils
-        packages.nixpkgs.pcre
-        packages.nixpkgs.peek
-        packages.nixpkgs.powerline-fonts
-        packages.nixpkgs.python38
-        packages.nixpkgs.python38Packages.isort
-        packages.nixpkgs.qemu
-        packages.nixpkgs.shadow
-        packages.nixpkgs.shfmt
-        packages.nixpkgs.sops
-        packages.nixpkgs.terraform
-        packages.nixpkgs.tokei
-        packages.nixpkgs.tor
-        packages.nixpkgs.torbrowser
-        packages.nixpkgs.traceroute
-        packages.nixpkgs.tree
-        packages.nixpkgs.vlc
-        packages.nixpkgs.xclip
-        packages.nixpkgs.yq
-      ];
-      stateVersion = "21.05";
-      username = abs.username;
-    };
-    programs = {
-      bash = {
-        enable = true;
-        initExtra = builtins.readFile ./bashrc.sh;
-        shellAliases = {
-          a = "git add -p";
-          bashrc = "code $MACHINE/bashrc.sh";
-          bat = "bat --show-all --theme=ansi";
-          c = "git commit --allow-empty";
-          csv = "column -s, -t";
-          cm = "git log -n 1 --format=%s%n%n%b";
-          cr = "git commit -m \"$(cm)\"";
-          f = "git fetch --all";
-          graph = "TZ=UTC git rev-list --date=iso-local --pretty='!%H!!%ad!!%cd!!%aN!!%P!' --graph HEAD";
-          l = "git log --show-signature";
-          m = "git commit --amend --no-edit --allow-empty";
-          machine = "code $MACHINE/default.nix";
-          melts = "CI=true CI_COMMIT_REF_NAME=master melts";
-          nix3 = "${packages.nixpkgs.nixUnstable}/bin/nix --experimental-features 'nix-command flakes'";
-          now = "date --iso-8601=seconds --utc";
-          p = "git push -f";
-          r = "git pull --autostash --progress --rebase --stat origin master";
-          ru = "git pull --autostash --progress --rebase --stat upstream master";
-          rp = "r && p";
-          s = "git status";
-          today = "git log --format=%aI --author ${abs.emailAtWork} | sed -E 's/T.*$//g' | uniq -c | head -n 7 | tac";
+    home-manager.useUserPackages = true;
+    home-manager.useGlobalPkgs = true;
+    home-manager.users.kamadorueda = _: {
+      fonts = {
+        fontconfig = {
+          enable = true;
         };
       };
-      bat = {
-        enable = true;
+      home = {
+        activation = { };
+        enableDebugInfo = true;
+        file = {
+          # Inpure Appimage backup just in case I need it
+          # timedoctor = {
+          #   executable = true;
+          #   source = sources.timedoctor;
+          #   target = "timedoctor.AppImage";
+          # };
+        };
+        homeDirectory = abs.home;
+        language = {
+          address = abs.locale;
+          base = abs.locale;
+          collate = abs.locale;
+          ctype = abs.locale;
+          name = abs.locale;
+          numeric = abs.locale;
+          measurement = abs.locale;
+          messages = abs.locale;
+          monetary = abs.locale;
+          paper = abs.locale;
+          telephone = abs.locale;
+          time = abs.locale;
+        };
+        packages = [
+          packages.nixpkgs.acpi
+          packages.nixpkgs.age
+          packages.nixpkgs.awscli
+          packages.nixpkgs.beep
+          packages.nixpkgs.bind
+          packages.nixpkgs.binutils
+          packages.nixpkgs.black
+          packages.nixpkgs.burpsuite
+          packages.nixpkgs.cabal-install
+          packages.nixpkgs.cargo
+          packages.nixpkgs.coreutils
+          packages.nixpkgs.curl
+          packages.nixpkgs.diction
+          packages.nixpkgs.diffoscope
+          packages.nixpkgs.evtest
+          packages.nixpkgs.gcc
+          packages.nixpkgs.ghc
+          packages.nixpkgs.gimp
+          packages.nixpkgs.git-sizer
+          packages.nixpkgs.gnumake
+          packages.nixpkgs.google-chrome
+          packages.nixpkgs.gptfdisk
+          packages.nixpkgs.hugo
+          packages.nixpkgs.inxi
+          packages.nixpkgs.kubectl
+          packages.nixpkgs.libreoffice
+          packages.nixpkgs.lshw
+          packages.nixpkgs.lsof
+          packages.nixpkgs.maven
+          packages.nixpkgs.mypy
+          packages.nixpkgs.ngrok
+          packages.nixpkgs.niv
+          packages.nixpkgs.nix-index
+          packages.nixpkgs.nixops
+          packages.nixpkgs.nixpkgs-fmt
+          packages.nixpkgs.nixpkgs-review
+          packages.nixpkgs.nodejs
+          packages.nixpkgs.nodePackages.asar
+          packages.nixpkgs.openjdk
+          packages.nixpkgs.optipng
+          packages.nixpkgs.parallel
+          packages.nixpkgs.parted
+          packages.nixpkgs.patchelf
+          packages.nixpkgs.pciutils
+          packages.nixpkgs.pcre
+          packages.nixpkgs.peek
+          packages.nixpkgs.powerline-fonts
+          packages.nixpkgs.python38
+          packages.nixpkgs.python38Packages.isort
+          packages.nixpkgs.qemu
+          packages.nixpkgs.shadow
+          packages.nixpkgs.shfmt
+          packages.nixpkgs.sops
+          packages.nixpkgs.terraform
+          packages.nixpkgs.tokei
+          packages.nixpkgs.tor
+          packages.nixpkgs.torbrowser
+          packages.nixpkgs.traceroute
+          packages.nixpkgs.tree
+          packages.nixpkgs.vlc
+          packages.nixpkgs.xclip
+          packages.nixpkgs.yq
+        ];
+        stateVersion = "21.05";
+        username = abs.username;
       };
-      direnv = {
-        enable = true;
-        enableBashIntegration = true;
-      };
-      git = {
-        enable = true;
-        extraConfig = {
-          commit = {
-            gpgsign = true;
+      programs = {
+        bash = {
+          enable = true;
+          initExtra = builtins.readFile ./bashrc.sh;
+          shellAliases = {
+            a = "git add -p";
+            bashrc = "code $MACHINE/bashrc.sh";
+            bat = "bat --show-all --theme=ansi";
+            c = "git commit --allow-empty";
+            csv = "column -s, -t";
+            cm = "git log -n 1 --format=%s%n%n%b";
+            cr = "git commit -m \"$(cm)\"";
+            f = "git fetch --all";
+            graph = "TZ=UTC git rev-list --date=iso-local --pretty='!%H!!%ad!!%cd!!%aN!!%P!' --graph HEAD";
+            l = "git log --show-signature";
+            m = "git commit --amend --no-edit --allow-empty";
+            machine = "code $MACHINE/default.nix";
+            melts = "CI=true CI_COMMIT_REF_NAME=master melts";
+            nix3 = "${packages.nixpkgs.nixUnstable}/bin/nix --experimental-features 'nix-command flakes'";
+            now = "date --iso-8601=seconds --utc";
+            p = "git push -f";
+            r = "git pull --autostash --progress --rebase --stat origin master";
+            ru = "git pull --autostash --progress --rebase --stat upstream master";
+            rp = "r && p";
+            s = "git status";
+            today = "git log --format=%aI --author ${abs.emailAtWork} | sed -E 's/T.*$//g' | uniq -c | head -n 7 | tac";
           };
-          core = {
-            editor = "${packages.nixpkgs.vscode}/bin/code --wait";
-          };
-          diff = {
-            sopsdiffer = {
-              textconv =
-                (packages.nixpkgs.writeScript "sopsdiffer.sh" ''
-                  #! ${packages.nixpkgs.bash}/bin/bash
-                  sops -d "$1" || cat "$1"
-                '').outPath;
+        };
+        bat = {
+          enable = true;
+        };
+        direnv = {
+          enable = true;
+          enableBashIntegration = true;
+        };
+        git = {
+          enable = true;
+          extraConfig = {
+            commit = {
+              gpgsign = true;
             };
-            tool = "vscode";
-          };
-          difftool = {
-            vscode = {
-              cmd = "${packages.nixpkgs.vscode}/bin/code --diff $LOCAL $REMOTE --wait";
+            core = {
+              editor = "${packages.nixpkgs.vscode}/bin/code --wait";
+            };
+            diff = {
+              sopsdiffer = {
+                textconv =
+                  (packages.nixpkgs.writeScript "sopsdiffer.sh" ''
+                    #! ${packages.nixpkgs.bash}/bin/bash
+                    sops -d "$1" || cat "$1"
+                  '').outPath;
+              };
+              tool = "vscode";
+            };
+            difftool = {
+              vscode = {
+                cmd = "${packages.nixpkgs.vscode}/bin/code --diff $LOCAL $REMOTE --wait";
+              };
+            };
+            init = {
+              defaultbranch = "main";
+            };
+            gpg = {
+              progam = "${packages.nixpkgs.gnupg}/bin/gpg2";
+              sign = true;
+            };
+            init = {
+              defaultBranch = "main";
+            };
+            merge = {
+              tool = "vscode";
+            };
+            mergetool = {
+              vscode = {
+                cmd = "${packages.nixpkgs.vscode}/bin/code --wait $MERGED";
+              };
+            };
+            user = {
+              email = abs.email;
+              name = abs.name;
+              signingkey = abs.signingkey;
             };
           };
-          init = {
-            defaultbranch = "main";
-          };
-          gpg = {
-            progam = "${packages.nixpkgs.gnupg}/bin/gpg2";
-            sign = true;
-          };
-          init = {
-            defaultBranch = "main";
-          };
-          merge = {
-            tool = "vscode";
-          };
-          mergetool = {
-            vscode = {
-              cmd = "${packages.nixpkgs.vscode}/bin/code --wait $MERGED";
+          package = packages.nixpkgs.git;
+        };
+        gnome-terminal = {
+          enable = true;
+          profile = {
+            "e0b782ed-6aca-44eb-8c75-62b3706b6220" = {
+              allowBold = true;
+              audibleBell = true;
+              backspaceBinding = "ascii-delete";
+              boldIsBright = true;
+              colors = {
+                backgroundColor = "#000000";
+                foregroundColor = "#FFFFFF";
+                palette = [
+                  "#000000"
+                  "#CD0000"
+                  "#00CD00"
+                  "#CDCD00"
+                  "#0000EE"
+                  "#CD00CD"
+                  "#00CDCD"
+                  "#E5E5E5"
+                  "#7F7F7F"
+                  "#FF0000"
+                  "#00FF00"
+                  "#FFFF00"
+                  "#5C5CFF"
+                  "#FF00FF"
+                  "#00FFFF"
+                  "#FFFFFF"
+                ];
+              };
+              cursorBlinkMode = "off";
+              cursorShape = "underline";
+              default = true;
+              deleteBinding = "delete-sequence";
+              font = "${abs.font} 26";
+              scrollbackLines = 1000000;
+              scrollOnOutput = false;
+              showScrollbar = false;
+              transparencyPercent = 4;
+              visibleName = abs.username;
             };
           };
-          user = {
-            email = abs.email;
-            name = abs.name;
-            signingkey = abs.signingkey;
+          showMenubar = false;
+          themeVariant = "dark";
+        };
+        gpg = {
+          enable = true;
+          package = packages.nixpkgs.gnupg;
+        };
+        jq = {
+          enable = true;
+        };
+        powerline-go = {
+          enable = true;
+          modules = [ "cwd" "exit" "git" "time" ];
+          newline = true;
+          pathAliases = {
+            "\\~/Documents/github/kamadorueda/machine" = "@machine";
+            "\\~/Documents/github/kamadorueda/secrets" = "@secrets";
+            "\\~/Documents/gitlab/fluidattacks/product" = "@product";
+          };
+          settings = {
+            cwd-max-depth = "3";
+            cwd-max-dir-size = "16";
+            git-mode = "fancy";
+            numeric-exit-codes = true;
+            shell = "bash";
+            theme = "default";
           };
         };
-        package = packages.nixpkgs.git;
-      };
-      gnome-terminal = {
-        enable = true;
-        profile = {
-          "e0b782ed-6aca-44eb-8c75-62b3706b6220" = {
-            allowBold = true;
-            audibleBell = true;
-            backspaceBinding = "ascii-delete";
-            boldIsBright = true;
-            colors = {
-              backgroundColor = "#000000";
-              foregroundColor = "#FFFFFF";
-              palette = [
-                "#000000"
-                "#CD0000"
-                "#00CD00"
-                "#CDCD00"
-                "#0000EE"
-                "#CD00CD"
-                "#00CDCD"
-                "#E5E5E5"
-                "#7F7F7F"
-                "#FF0000"
-                "#00FF00"
-                "#FFFF00"
-                "#5C5CFF"
-                "#FF00FF"
-                "#00FFFF"
-                "#FFFFFF"
-              ];
+        ssh = {
+          enable = true;
+          matchBlocks = {
+            "gitlab.com" = {
+              extraOptions = {
+                PreferredAuthentications = "publickey";
+              };
+              identityFile = "~/.ssh/id_ed25519";
             };
-            cursorBlinkMode = "off";
-            cursorShape = "underline";
-            default = true;
-            deleteBinding = "delete-sequence";
-            font = "${abs.font} 26";
-            scrollbackLines = 1000000;
-            scrollOnOutput = false;
-            showScrollbar = false;
-            transparencyPercent = 4;
-            visibleName = abs.username;
           };
         };
-        showMenubar = false;
-        themeVariant = "dark";
-      };
-      gpg = {
-        enable = true;
-        package = packages.nixpkgs.gnupg;
-      };
-      jq = {
-        enable = true;
-      };
-      powerline-go = {
-        enable = true;
-        modules = [ "cwd" "exit" "git" "time" ];
-        newline = true;
-        pathAliases = {
-          "\\~/Documents/github/kamadorueda/machine" = "@machine";
-          "\\~/Documents/github/kamadorueda/secrets" = "@secrets";
-          "\\~/Documents/gitlab/fluidattacks/product" = "@product";
-        };
-        settings = {
-          cwd-max-depth = "3";
-          cwd-max-dir-size = "16";
-          git-mode = "fancy";
-          numeric-exit-codes = true;
-          shell = "bash";
-          theme = "default";
-        };
-      };
-      ssh = {
-        enable = true;
-        matchBlocks = {
-          "gitlab.com" = {
-            extraOptions = {
-              PreferredAuthentications = "publickey";
-            };
-            identityFile = "~/.ssh/id_ed25519";
-          };
-        };
-      };
-      vim = {
-        enable = true;
-        extraConfig = ''
+        vim = {
+          enable = true;
+          extraConfig = ''
         '';
-        plugins = [ ];
-        settings = {
-          background = "dark";
-          mouse = "a";
+          plugins = [ ];
+          settings = {
+            background = "dark";
+            mouse = "a";
+          };
         };
-      };
-      vscode = {
-        enable = true;
-        extensions = [
-          packages.nixpkgs.vscode-extensions._4ops.terraform
-          packages.nixpkgs.vscode-extensions.bbenoist.Nix
-          packages.nixpkgs.vscode-extensions.coenraads.bracket-pair-colorizer-2
-          packages.nixpkgs.vscode-extensions.eamodio.gitlens
-          packages.nixpkgs.vscode-extensions.jkillian.custom-local-formatters
-          packages.nixpkgs.vscode-extensions.haskell.haskell
-          packages.nixpkgs.vscode-extensions.justusadam.language-haskell
-          packages.nixpkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
-          packages.nixpkgs.vscode-extensions.ms-azuretools.vscode-docker
-          packages.nixpkgs.vscode-extensions.ms-python.python
-          packages.nixpkgs.vscode-extensions.ms-python.vscode-pylance
-          packages.nixpkgs.vscode-extensions.shardulm94.trailing-spaces
-          packages.nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
-          packages.nixpkgs.vscode-extensions.tamasfe.even-better-toml
-        ];
-        keybindings = [
-        ];
-        package = packages.nixpkgs.vscode;
-        userSettings = {
-          "[html]" = { "editor.formatOnSave" = false; };
-          "[python]" = { "editor.tabSize" = 4; };
-          "customLocalFormatters.formatters" = [
-            {
-              command = "${packages.nixpkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
-              languages = [ "nix" ];
-            }
-            {
-              command =
-                (packages.nixpkgs.writeScript "python-fmt" ''
-                  #! ${packages.nixpkgs.bash}/bin/bash
+        vscode = {
+          enable = true;
+          extensions = [
+            packages.nixpkgs.vscode-extensions._4ops.terraform
+            packages.nixpkgs.vscode-extensions.bbenoist.Nix
+            packages.nixpkgs.vscode-extensions.coenraads.bracket-pair-colorizer-2
+            packages.nixpkgs.vscode-extensions.eamodio.gitlens
+            packages.nixpkgs.vscode-extensions.jkillian.custom-local-formatters
+            packages.nixpkgs.vscode-extensions.haskell.haskell
+            packages.nixpkgs.vscode-extensions.justusadam.language-haskell
+            packages.nixpkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
+            packages.nixpkgs.vscode-extensions.ms-azuretools.vscode-docker
+            packages.nixpkgs.vscode-extensions.ms-python.python
+            packages.nixpkgs.vscode-extensions.ms-python.vscode-pylance
+            packages.nixpkgs.vscode-extensions.shardulm94.trailing-spaces
+            packages.nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
+            packages.nixpkgs.vscode-extensions.tamasfe.even-better-toml
+          ];
+          keybindings = [
+          ];
+          package = packages.nixpkgs.vscode;
+          userSettings = {
+            "[html]" = { "editor.formatOnSave" = false; };
+            "[python]" = { "editor.tabSize" = 4; };
+            "customLocalFormatters.formatters" = [
+              {
+                command = "${packages.nixpkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
+                languages = [ "nix" ];
+              }
+              {
+                command =
+                  (packages.nixpkgs.writeScript "python-fmt" ''
+                    #! ${packages.nixpkgs.bash}/bin/bash
 
-                  PYTHONPATH=/pythonpath/not/set
+                    PYTHONPATH=/pythonpath/not/set
 
-                  ${packages.nixpkgs.black}/bin/black \
-                    --config \
-                    ${sources.product}/makes/utils/python-format/settings-black.toml \
-                    - \
-                    | \
-                  ${packages.nixpkgs.python38Packages.isort}/bin/isort \
-                    --settings-path \
-                    ${sources.product}/makes/utils/python-format/settings-isort.toml \
-                    -
-                '').outPath;
-              languages = [ "python" ];
-            }
-            {
-              command = "${packages.nixpkgs.shfmt}/bin/shfmt -bn -ci -i 2 -s -sr -";
-              languages = [ "shellscript" ];
-            }
-          ];
-          "diffEditor.ignoreTrimWhitespace" = false;
-          "diffEditor.maxComputationTime" = 0;
-          "diffEditor.renderSideBySide" = false;
-          "diffEditor.wordWrap" = "on";
-          "editor.cursorStyle" = "underline";
-          "editor.defaultFormatter" = "jkillian.custom-local-formatters";
-          "editor.formatOnSave" = true;
-          "editor.fontFamily" = "'${abs.font}'";
-          "editor.fontSize" = 18;
-          "editor.minimap.maxColumn" = 80;
-          "editor.minimap.renderCharacters" = false;
-          "editor.minimap.showSlider" = "always";
-          "editor.minimap.side" = "left";
-          "editor.minimap.size" = "fill";
-          "editor.rulers" = [ 80 ];
-          "editor.tabSize" = 2;
-          "editor.wordWrap" = "on";
-          "extensions.autoUpdate" = false;
-          "files.eol" = "\n";
-          "files.insertFinalNewline" = true;
-          "files.trimFinalNewlines" = true;
-          "files.trimTrailingWhitespace" = true;
-          "python.analysis.autoSearchPaths" = false;
-          "python.analysis.diagnosticMode" = "workspace";
-          "python.formatting.provider" = "none";
-          "python.languageServer" = "Pylance";
-          "python.linting.enabled" = true;
-          "python.linting.lintOnSave" = true;
-          "python.linting.mypyArgs" = [
-            "--config-file"
-            "${sources.product}/makes/utils/lint-python/settings-mypy.cfg"
-          ];
-          "python.linting.mypyEnabled" = true;
-          "python.linting.mypyPath" = "${packages.nixpkgs.mypy}/bin/mypy";
-          "python.linting.prospectorArgs" = [
-            "--profile"
-            "${sources.product}/makes/utils/lint-python/settings-prospector.yaml"
-          ];
-          "python.linting.prospectorEnabled" = true;
-          "python.linting.prospectorPath" = "prospector";
-          "python.linting.pylintEnabled" = false;
-          "python.pythonPath" = "${packages.nixpkgs.python38}/bin/python";
-          "telemetry.enableCrashReporter" = false;
-          "telemetry.enableTelemetry" = false;
-          "update.mode" = "none";
-          "update.showReleaseNotes" = false;
-          "window.zoomLevel" = 2;
-          "workbench.colorTheme" = "Default High Contrast";
-          "workbench.editor.enablePreview" = false;
-          "workbench.editor.focusRecentEditorAfterClose" = false;
-          "workbench.editor.openPositioning" = "last";
-          "workbench.settings.editor" = "json";
-          "workbench.startupEditor" = "none";
+                    ${packages.nixpkgs.black}/bin/black \
+                      --config \
+                      ${sources.product}/makes/utils/python-format/settings-black.toml \
+                      - \
+                      | \
+                    ${packages.nixpkgs.python38Packages.isort}/bin/isort \
+                      --settings-path \
+                      ${sources.product}/makes/utils/python-format/settings-isort.toml \
+                      -
+                  '').outPath;
+                languages = [ "python" ];
+              }
+              {
+                command = "${packages.nixpkgs.shfmt}/bin/shfmt -bn -ci -i 2 -s -sr -";
+                languages = [ "shellscript" ];
+              }
+            ];
+            "diffEditor.ignoreTrimWhitespace" = false;
+            "diffEditor.maxComputationTime" = 0;
+            "diffEditor.renderSideBySide" = false;
+            "diffEditor.wordWrap" = "on";
+            "editor.cursorStyle" = "underline";
+            "editor.defaultFormatter" = "jkillian.custom-local-formatters";
+            "editor.formatOnSave" = true;
+            "editor.fontFamily" = "'${abs.font}'";
+            "editor.fontSize" = 18;
+            "editor.minimap.maxColumn" = 80;
+            "editor.minimap.renderCharacters" = false;
+            "editor.minimap.showSlider" = "always";
+            "editor.minimap.side" = "left";
+            "editor.minimap.size" = "fill";
+            "editor.rulers" = [ 80 ];
+            "editor.tabSize" = 2;
+            "editor.wordWrap" = "on";
+            "extensions.autoUpdate" = false;
+            "files.eol" = "\n";
+            "files.insertFinalNewline" = true;
+            "files.trimFinalNewlines" = true;
+            "files.trimTrailingWhitespace" = true;
+            "python.analysis.autoSearchPaths" = false;
+            "python.analysis.diagnosticMode" = "workspace";
+            "python.formatting.provider" = "none";
+            "python.languageServer" = "Pylance";
+            "python.linting.enabled" = true;
+            "python.linting.lintOnSave" = true;
+            "python.linting.mypyArgs" = [
+              "--config-file"
+              "${sources.product}/makes/utils/lint-python/settings-mypy.cfg"
+            ];
+            "python.linting.mypyEnabled" = true;
+            "python.linting.mypyPath" = "${packages.nixpkgs.mypy}/bin/mypy";
+            "python.linting.prospectorArgs" = [
+              "--profile"
+              "${sources.product}/makes/utils/lint-python/settings-prospector.yaml"
+            ];
+            "python.linting.prospectorEnabled" = true;
+            "python.linting.prospectorPath" = "prospector";
+            "python.linting.pylintEnabled" = false;
+            "python.pythonPath" = "${packages.nixpkgs.python38}/bin/python";
+            "telemetry.enableCrashReporter" = false;
+            "telemetry.enableTelemetry" = false;
+            "update.mode" = "none";
+            "update.showReleaseNotes" = false;
+            "window.zoomLevel" = 2;
+            "workbench.colorTheme" = "Default High Contrast";
+            "workbench.editor.enablePreview" = false;
+            "workbench.editor.focusRecentEditorAfterClose" = false;
+            "workbench.editor.openPositioning" = "last";
+            "workbench.settings.editor" = "json";
+            "workbench.startupEditor" = "none";
+          };
         };
       };
-    };
-    targets = {
-      genericLinux = {
+      targets = {
+        genericLinux = {
+          enable = true;
+        };
+      };
+      xdg = {
+        desktopEntries = {
+          timedoctor = {
+            name = "timedoctor";
+            exec = "${packages.timedoctor}/bin/timedoctor";
+            terminal = false;
+          };
+        };
+        mimeApps = {
+          defaultApplications = {
+            "application/xhtml+xml" = "google-chrome.desktop";
+            "text/html" = "google-chrome.desktop";
+            "x-scheme-handler/http" = "google-chrome.desktop";
+            "x-scheme-handler/https" = "google-chrome.desktop";
+          };
+          enable = true;
+        };
         enable = true;
       };
     };
-    xdg = {
-      desktopEntries = {
-        timedoctor = {
-          name = "timedoctor";
-          exec = "${packages.timedoctor}/bin/timedoctor";
-          terminal = false;
-        };
-      };
-      mimeApps = {
-        defaultApplications = {
-          "application/xhtml+xml" = "google-chrome.desktop";
-          "text/html" = "google-chrome.desktop";
-          "x-scheme-handler/http" = "google-chrome.desktop";
-          "x-scheme-handler/https" = "google-chrome.desktop";
-        };
-        enable = true;
-      };
-      enable = true;
-    };
+
+    # Use the systemd-boot EFI boot loader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.grub.useOSProber = true;
+    # networking.hostName = "nixos"; # Define your hostname.
+    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+    # Set your time zone.
+    # time.timeZone = "Europe/Amsterdam";
+
+    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
+    # Per-interface useDHCP will be mandatory in the future, so this generated config
+    # replicates the default behaviour.
+    networking.useDHCP = false;
+    networking.interfaces.enp0s31f6.useDHCP = true;
+    networking.interfaces.wlp0s20f3.useDHCP = true;
+
+    # Configure network proxy if necessary
+    # networking.proxy.default = "http://user:password@proxy:port/";
+    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+    # Select internationalisation properties.
+    # i18n.defaultLocale = "en_US.UTF-8";
+    # console = {
+    #   font = "Lat2-Terminus16";
+    #   keyMap = "us";
+    # };
+
+    # Enable the X11 windowing system.
+    services.xserver.enable = true;
+
+
+    # Enable the GNOME 3 Desktop Environment.
+    services.xserver.displayManager.gdm.enable = true;
+    services.xserver.desktopManager.gnome.enable = true;
+
+
+    # Configure keymap in X11
+    # services.xserver.layout = "us";
+    # services.xserver.xkbOptions = "eurosign:e";
+
+    # Enable CUPS to print documents.
+    # services.printing.enable = true;
+
+    # Enable sound.
+    # sound.enable = true;
+    # hardware.pulseaudio.enable = true;
+
+    # Enable touchpad support (enabled default in most desktopManager).
+    # services.xserver.libinput.enable = true;
+
+    # Define a user account. Don't forget to set a password with ‘passwd’.
+    # users.users.jane = {
+    #   isNormalUser = true;
+    #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    # };
+
+    # List packages installed in system profile. To search, run:
+    # $ nix search wget
+    # environment.systemPackages = with pkgs; [
+    #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #   wget
+    #   firefox
+    # ];
+
+    # Some programs need SUID wrappers, can be configured further or are
+    # started in user sessions.
+    # programs.mtr.enable = true;
+    # programs.gnupg.agent = {
+    #   enable = true;
+    #   enableSSHSupport = true;
+    # };
+
+    # List services that you want to enable:
+
+    # Enable the OpenSSH daemon.
+    # services.openssh.enable = true;
+
+    # Open ports in the firewall.
+    # networking.firewall.allowedTCPPorts = [ ... ];
+    # networking.firewall.allowedUDPPorts = [ ... ];
+    # Or disable the firewall altogether.
+    # networking.firewall.enable = false;
+
+    # This value determines the NixOS release from which the default
+    # settings for stateful data, like file locations and database versions
+    # on your system were taken. It‘s perfectly fine and recommended to leave
+    # this value at the release version of the first install of this system.
+    # Before changing this value read the documentation for this option
+    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+    system.stateVersion = "21.05"; # Did you read the comment?
   };
   packages = {
     homeManager = utils.remoteImport {
@@ -557,8 +658,7 @@ rec {
       src = sources.timedoctor;
     };
   };
-  sources = (import ./nix/sources.nix) // {
-  };
+  sources = import ./nix/sources.nix;
   utils = {
     fetchzip = (import <nixpkgs> { }).fetchzip;
     fetchurl = (import <nixpkgs> { }).fetchurl;
