@@ -3,7 +3,7 @@ rec {
     email = "kamadorueda@gmail.com";
     emailAtWork = "kamado@fluidattacks.com";
     font = "ProFont for Powerline";
-    home = "/home/kamado";
+    home = "/home/kamadorueda";
     locale = "en_US.UTF-8";
     name = "Kevin Amado";
     signingkey = "FFF341057F503148";
@@ -110,12 +110,6 @@ rec {
       ];
       stateVersion = "21.05";
       username = abs.username;
-    };
-    nixpkgs = {
-      config = { };
-      overlays = [
-        (self: super: { })
-      ];
     };
     programs = {
       bash = {
@@ -564,7 +558,6 @@ rec {
     };
   };
   sources = (import ./nix/sources.nix) // {
-    homeManager = /home/kamado/Documents/github/nix-community/home-manager;
   };
   utils = {
     fetchzip = (import <nixpkgs> { }).fetchzip;
