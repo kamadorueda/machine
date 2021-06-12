@@ -31,7 +31,7 @@
       &&  pushd ~/Documents/github/kamadorueda \
         &&  git clone "https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/secrets" \
         &&  cd secrets/machine \
-          &&  install.sh \
+          &&  ./install.sh \
       &&  popd
       ```
 
