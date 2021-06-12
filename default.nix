@@ -26,6 +26,7 @@ rec {
           enable = true;
         };
       };
+      tmpOnTmpfs = true;
     };
     environment = {
       shellAliases = {
@@ -443,25 +444,8 @@ rec {
         };
       };
     };
-    system = {
-      stateVersion = "21.05";
-    };
-    time = {
-      timeZone = "America/Bogota";
-    };
-    users = {
-      mutableUsers = false;
-      users = {
-        root = {
-          password = "";
-        };
-        kamadorueda = {
-          extraGroups = [ "wheel" ];
-          home = abs.home;
-          isNormalUser = true;
-          password = "";
-        };
-      };
+    i18n = {
+      defaultLocale = "en_US.UTF-8";
     };
     networking = {
       interfaces = {
@@ -469,6 +453,25 @@ rec {
         wlp0s20f3 = { useDHCP = true; };
       };
       useDHCP = false;
+    };
+    nix = {
+      gc = {
+        automatic = true;
+        dates = "00:00";
+        persistent = true;
+      };
+      nixPath = [
+        "nixpkgs=${sources.nixpkgs}"
+      ];
+      optimise = {
+        automatic = true;
+        dates = [ "00:00" ];
+      };
+      readOnlyStore = true;
+      trustedUsers = [
+        "root"
+      ];
+      useSandbox = true;
     };
     services = {
       xserver = {
@@ -485,6 +488,29 @@ rec {
         enable = true;
         libinput = {
           enable = true;
+        };
+      };
+    };
+    system = {
+      stateVersion = "21.05";
+      autoUpgrade = {
+        enable = false;
+      };
+    };
+    time = {
+      timeZone = "America/Bogota";
+    };
+    users = {
+      mutableUsers = false;
+      users = {
+        root = {
+          password = "";
+        };
+        kamadorueda = {
+          extraGroups = [ "wheel" ];
+          home = abs.home;
+          isNormalUser = true;
+          password = "";
         };
       };
     };
