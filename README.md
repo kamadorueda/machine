@@ -1,26 +1,34 @@
 # My development machine, as code
 
-1.  Make sure your system has `curl` installed
+1. Boot NixOS as explained in the
+    [NixOS's download page](https://nixos.org/download).
 
-1.  Install nix as explained in the
-    [Nix's download page](https://nixos.org/download):
-
-    ```bash
-    curl -L nixos.org/nix/install | sh
-    ```
+1. Login as root.
 
 1. Get your GitHub API token from the
     [secrets file](https://github.com/kamadorueda/secrets/blob/master/machine/secrets.sh)
     and export it into the terminal
 
-1. Execute:
+1. Install git with `nix-env -i git`
+
+1. Clone this repository:
 
     ```bash
-        src='https://github.com/kamadorueda/machine/archive/refs/heads/main.tar.gz' \
-    &&  nix-env -iA packages.homeManager.home-manager -f "${src}" \
-    &&  home-manager -A config -f "${src}" switch \
-    &&  source ~/.bashrc
+          mkdir -p ~/Documents/github/kamadorueda \
+      &&  pushd ~/Documents/github/kamadorueda \
+        &&  git clone "https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/machine" \
+      &&  popd
     ```
+
+1. Link to /etc/nixos and generate hardware configurations:
+
+    ```bash
+        rm -rf /etc/nixos \
+    &&  ln -s ~/Documents/github/kamadorueda /etc/nixos \
+    &&  nixos-generate-config
+    ```
+
+1. Rebuild with: `nixos-rebuild switch`
 
 1. Setup the state:
 
@@ -32,15 +40,6 @@
         &&  git clone "https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/secrets" \
         &&  cd secrets/machine \
           &&  ./install.sh \
-      &&  popd
-      ```
-
-    - github/kamadorueda/machine:
-
-      ```bash
-          mkdir -p ~/Documents/github/kamadorueda \
-      &&  pushd ~/Documents/github/kamadorueda \
-        &&  git clone git@github.com:kamadorueda/machine \
       &&  popd
       ```
 
