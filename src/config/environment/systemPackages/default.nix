@@ -11,6 +11,7 @@ _: with _; [
   packages.nixpkgs.cargo
   packages.nixpkgs.coreutils
   packages.nixpkgs.curl
+  packages.nixpkgs.dconf2nix
   packages.nixpkgs.diction
   packages.nixpkgs.diffoscope
   packages.nixpkgs.evtest

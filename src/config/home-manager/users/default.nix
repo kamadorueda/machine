@@ -1,10 +1,68 @@
 _: with _;{
-  "${abs.username}" = {
+  "${abs.username}" = { lib, ... }: {
     dconf = {
-      settings = {
+      settings = with lib.hm.gvariant; {
+        "org/gnome/desktop/a11y/applications" = {
+          screen-magnifier-enabled = false;
+        };
+        "org/gnome/desktop/a11y/magnifier" = {
+          lens-mode = true;
+          mag-factor = 1.5;
+          mouse-tracking = "proportional";
+          screen-position = "full-screen";
+          scroll-at-edges = false;
+        };
         "org/gnome/desktop/input-sources" = {
-          sources = "[('xkb', 'us+altgr-intl')]";
-          xkb-options = "['terminate:ctrl_alt_bksp', 'lv3:ralt_switch']";
+          current = mkUint32 0;
+          per-window = false;
+          sources = [ (mkTuple [ "xkb" "us+altgr-intl" ]) ];
+          xkb-options = [
+            "terminate:ctrl_alt_bksp"
+            "lv3:ralt_switch"
+          ];
+        };
+        "org/gnome/desktop/interface" = {
+          gtk-im-module = "ibus";
+          gtk-theme = "HighContrast";
+          icon-theme = "HighContrast";
+          show-battery-percentage = true;
+          text-scaling-factor = 1.0;
+        };
+        "org/gnome/desktop/peripherals/mouse" = {
+          natural-scroll = false;
+        };
+        "org/gnome/desktop/peripherals/touchpad" = {
+          tap-to-click = true;
+          two-finger-scrolling-enabled = true;
+        };
+        "org/gnome/desktop/session" = {
+          idle-delay = mkUint32 0;
+        };
+        "org/gnome/desktop/wm/preferences" = {
+          theme = "HighContrast";
+        };
+        "org/gnome/settings-daemon/plugins/color" = {
+          night-light-enabled = true;
+          night-light-schedule-automatic = false;
+          night-light-schedule-from = 12.0;
+          night-light-schedule-to = 11.99;
+          night-light-temperature = mkUint32 3659;
+        };
+        "org/gnome/settings-daemon/plugins/media-keys" = {
+          custom-keybindings = [
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+          ];
+          help = [ ];
+        };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+          binding = "<Primary><Alt>t";
+          command = "gnome-terminal";
+          name = "gnome-terminal";
+        };
+        "org/gnome/settings-daemon/plugins/power" = {
+          idle-dim = false;
+          sleep-inactive-ac-type = "nothing";
+          sleep-inactive-battery-type = "nothing";
         };
       };
     };
