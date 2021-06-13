@@ -155,7 +155,7 @@ _: with _;{
             extraOptions = {
               PreferredAuthentications = "publickey";
             };
-            identityFile = "~/.ssh/id_ed25519";
+            identityFile = "~/.ssh/${abs.username}";
           };
         };
       };
@@ -277,11 +277,6 @@ _: with _;{
           "workbench.settings.editor" = "json";
           "workbench.startupEditor" = "none";
         };
-      };
-    };
-    targets = {
-      genericLinux = {
-        enable = true;
       };
     };
     xdg = {
