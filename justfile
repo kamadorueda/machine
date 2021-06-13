@@ -7,5 +7,8 @@ diff:
 switch:
   sudo nixos-rebuild switch
 
+test:
+  sudo nixos-rebuild test
+
 update:
   niv -s src/sources/sources.json
