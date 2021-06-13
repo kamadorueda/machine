@@ -3,6 +3,8 @@ _: with _; {
     desktopManager = {
       gnome = {
         enable = true;
+        extraGSettingsOverrides = ''
+        '';
       };
     };
     displayManager = {
@@ -11,8 +13,10 @@ _: with _; {
       };
     };
     enable = true;
+    layout = "us";
     libinput = {
       enable = true;
     };
+    xkbVariant = "altgr-intl";
   };
 }

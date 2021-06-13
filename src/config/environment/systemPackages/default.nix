@@ -18,6 +18,7 @@ _: with _; [
   packages.nixpkgs.ghc
   packages.nixpkgs.gimp
   packages.nixpkgs.git-sizer
+  packages.nixpkgs.gnome.dconf-editor
   packages.nixpkgs.gnumake
   packages.nixpkgs.google-chrome
   packages.nixpkgs.gptfdisk

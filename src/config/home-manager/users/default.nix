@@ -1,5 +1,13 @@
 _: with _;{
   "${abs.username}" = {
+    dconf = {
+      settings = {
+        "org/gnome/desktop/input-sources" = {
+          sources = "[('xkb', 'us+altgr-intl')]";
+          xkb-options = "['terminate:ctrl_alt_bksp', 'lv3:ralt_switch']";
+        };
+      };
+    };
     home = {
       enableDebugInfo = true;
       homeDirectory = abs.home;
