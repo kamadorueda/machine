@@ -7,28 +7,30 @@
 
 1. Get your GitHub API token from the
     [secrets file](https://github.com/kamadorueda/secrets/blob/master/machine/secrets.sh)
-    and export it into the terminal
+    and export it into the terminal.
 
-1. Install git with `nix-env -i git`
+1. Install git with `nix-env -i git`.
 
 1. Clone this repository:
 
     ```bash
-          mkdir -p ~/Documents/github/kamadorueda \
-      &&  pushd ~/Documents/github/kamadorueda \
+          mkdir -p /home/kamadorueda/Documents/github/kamadorueda \
+      &&  pushd /home/kamadorueda/Documents/github/kamadorueda \
         &&  git clone "https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/machine" \
       &&  popd
     ```
 
-1. Link to /etc/nixos and generate hardware configurations:
+1. Update your hardware configuration at `src/hardware/default.nix`
+    with the results of: `nixos-generate-config --show-hardware-config`.
+
+1. Rebuild with:
 
     ```bash
-        rm -rf /etc/nixos \
-    &&  ln -s ~/Documents/github/kamadorueda /etc/nixos \
-    &&  nixos-generate-config
+    NIX_PATH="nixos-config=/home/kamadorueda/Documents/github/kamadorueda/machine/configuration.nix:${NIX_PATH}" \
+    nixos-rebuild switch
     ```
 
-1. Rebuild with: `nixos-rebuild switch`
+1. Reboot and login as user.
 
 1. Setup the state:
 
