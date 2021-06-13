@@ -40,20 +40,7 @@ function fetch_fluid_var {
     && curl -s -H "private-token: ${GITLAB_API_TOKEN}" "${url}" | jq -r '.value'
 }
 
-function _bash_completion {
-  for completion_script in "${NIX_PROFILE}/share/bash-completion/completions/"*; do
-    source "${completion_script}"
-  done
-}
-
-# function _make_vscode_writeable {
-#   find ~/.config/Code | while read -r path; do
-#     chmod --recursive +w "$(readlink --canonicalize "${path}")"
-#   done
-# }
-
 source "${SECRETS}/machine/secrets.sh"
-_bash_completion
 
 # export_fluid_aws_vars makes
 # export_fluid_aws_vars integrates

@@ -21,6 +21,10 @@ _: with _;{
       username = abs.username;
     };
     programs = {
+      bash = {
+        enable = true;
+        initExtra = builtins.readFile ./bashrc.sh;
+      };
       bat = {
         enable = true;
       };
