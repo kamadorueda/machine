@@ -10,6 +10,7 @@ _: with _; [
   packages.nixpkgs.cabal-install
   packages.nixpkgs.cargo
   packages.nixpkgs.coreutils
+  packages.nixpkgs.cuneiform
   packages.nixpkgs.curl
   packages.nixpkgs.dconf2nix
   packages.nixpkgs.diction
@@ -24,6 +25,7 @@ _: with _; [
   packages.nixpkgs.google-chrome
   packages.nixpkgs.gptfdisk
   packages.nixpkgs.hugo
+  packages.nixpkgs.imagemagick7Big
   packages.nixpkgs.inxi
   packages.nixpkgs.just
   packages.nixpkgs.kubectl
@@ -40,6 +42,8 @@ _: with _; [
   packages.nixpkgs.nixpkgs-review
   packages.nixpkgs.nodejs
   packages.nixpkgs.nodePackages.asar
+  packages.nixpkgs.ocrad
+  packages.nixpkgs.ocrfeeder
   packages.nixpkgs.openjdk
   packages.nixpkgs.optipng
   packages.nixpkgs.parallel
