@@ -9,6 +9,9 @@ build:
 diff:
   nixos-rebuild dry-activate
 
+niv *ARGS:
+  niv -s src/sources/sources.json {{ARGS}}
+
 switch:
   sudo nixos-rebuild switch
 
@@ -17,9 +20,13 @@ test:
 
 td_latest := "https://repo2.timedoctor.com/td-desktop-hybrid/prod/latest-linux.yml"
 
-
 update:
-  @td_version="$(curl -Ls {{td_latest}} | yq -r .version)" \
+  @true \
+    && just niv update homeManager --rev a6370ec40c8ed6e963093081c83f9982d532e49b \
+    && just niv update niv \
+    && just niv update nixpkgs \
+    && just niv update nixpkgsNixos \
+    && just niv update product \
+    && td_version="$(curl -Ls {{td_latest}} | yq -r .version)" \
     && echo "Time Doctor version: ${td_version}" \
-    && niv -s src/sources/sources.json update timedoctor -v "${td_version}" \
-    && niv -s src/sources/sources.json update \
+    && just niv update timedoctor -v "${td_version}" \

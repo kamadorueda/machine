@@ -244,6 +244,7 @@ _: with _;{
           packages.nixpkgs.vscode-extensions._4ops.terraform
           packages.nixpkgs.vscode-extensions.bbenoist.Nix
           packages.nixpkgs.vscode-extensions.coenraads.bracket-pair-colorizer-2
+          packages.nixpkgs.vscode-extensions.coolbear.systemd-unit-file
           packages.nixpkgs.vscode-extensions.eamodio.gitlens
           packages.nixpkgs.vscode-extensions.jkillian.custom-local-formatters
           packages.nixpkgs.vscode-extensions.haskell.haskell
