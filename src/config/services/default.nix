@@ -17,6 +17,7 @@ _: with _; {
     libinput = {
       enable = true;
     };
+    updateDbusEnvironment = true;
     xkbVariant = "altgr-intl";
   };
 }
