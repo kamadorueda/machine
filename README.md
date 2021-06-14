@@ -30,7 +30,7 @@
     nixos-rebuild switch
     ```
 
-1. Reboot and login as user.
+1. Logout and login as the new user.
 
 1. Setup the state:
 
@@ -65,3 +65,9 @@ via [Nix](https://nixos.org).
 2. `$ ./result/bin/timedoctor`
 
 Source: [a8547c04](https://github.com/kamadorueda/machine/commit/a8547c048cfe34bc78475a8c8621b226426b81ab)
+
+# Useful links
+
+- [NixOS options](https://nixos.org/manual/nixos/stable/options.html)
+- [NixOS options search](https://search.nixos.org/options)
+- [Home Manager options](https://nix-community.github.io/home-manager/options.html)
