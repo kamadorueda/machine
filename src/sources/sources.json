@@ -29,10 +29,10 @@
         "homepage": "",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "395cb272c30e2c772d0a2176d486af4c51cc35ac",
-        "sha256": "1hpx9wkqmv14n575z9i3lzyz4mv6q2sj7hmhsx4q4jvdvvw0j46z",
+        "rev": "dab87a5bac0459886d1ab68fa52f71bcc42c396a",
+        "sha256": "0pc9f5fr7k4sa91bhggcnp96f5j9hi136kczd2f6wanqwd9ggwi3",
         "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/395cb272c30e2c772d0a2176d486af4c51cc35ac.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs/archive/dab87a5bac0459886d1ab68fa52f71bcc42c396a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgsNixos": {
@@ -41,10 +41,10 @@
         "homepage": "",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "cedcf2565c6b982d703d67455199b09a3d905d86",
-        "sha256": "0kp83g57p494xi744i6p8niff22kn6y3c1ba8bx6mf84qdcmr5ai",
+        "rev": "1f91fd1040667e9265a760b0347f8bc416249da7",
+        "sha256": "1lcfcwgal9fpaiq71981abyzz160r6nx1y4pyy1dnvaf951xkdcj",
         "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/cedcf2565c6b982d703d67455199b09a3d905d86.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs/archive/1f91fd1040667e9265a760b0347f8bc416249da7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "product": {
@@ -53,17 +53,17 @@
         "homepage": "",
         "owner": "fluidattacks",
         "repo": "product",
-        "rev": "0abbf2e95c44a6b857ffaadae34b1d84d1e04bb2",
-        "sha256": "07hzfp46mirhc39y9v2idbxhl0hzx3q3276lb02ql6zjlrnma05b",
+        "rev": "ee3db4be7c282c4a49fcab12507ad65db4227f37",
+        "sha256": "0xjgv3m0cf05wli7czlj5czna2hhfjv3wjvc1myz47z3xycx4ffs",
         "type": "tarball",
-        "url": "https://gitlab.com/fluidattacks/product/-/archive/0abbf2e95c44a6b857ffaadae34b1d84d1e04bb2.tar.gz",
+        "url": "https://gitlab.com/fluidattacks/product/-/archive/ee3db4be7c282c4a49fcab12507ad65db4227f37.tar.gz",
         "url_template": "https://gitlab.com/<owner>/<repo>/-/archive/<rev>.tar.gz"
     },
     "timedoctor": {
-        "sha256": "0li6w0y80k1ci8vi5xa0ihq6ay5xr266l3d74rbazkbx8g4vv1g9",
+        "sha256": "01j149c6lacgysll3sajxlb43m1al08kdcwc6zyzw80nrp4iagf6",
         "type": "file",
-        "url": "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v3.12.9/timedoctor-desktop_3.12.9_linux-x86_64.AppImage",
+        "url": "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v3.12.12/timedoctor-desktop_3.12.12_linux-x86_64.AppImage",
         "url_template": "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v<version>/timedoctor-desktop_<version>_linux-x86_64.AppImage",
-        "version": "3.12.9"
+        "version": "3.12.12"
     }
 }
