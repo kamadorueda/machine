@@ -1,4 +1,7 @@
 _: with _; {
+  dbus = {
+    enable = true;
+  };
   xserver = {
     desktopManager = {
       gnome = {

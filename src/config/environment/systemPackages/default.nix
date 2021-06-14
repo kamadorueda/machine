@@ -55,6 +55,7 @@ _: with _; [
   packages.nixpkgs.shfmt
   packages.nixpkgs.sops
   packages.nixpkgs.terraform
+  packages.nixpkgs.tesseract4
   packages.nixpkgs.tokei
   packages.nixpkgs.tor
   packages.nixpkgs.torbrowser
