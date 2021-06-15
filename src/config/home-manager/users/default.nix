@@ -2,6 +2,9 @@ _: with _;{
   "${abs.username}" = { lib, ... }: {
     dconf = {
       settings = with lib.hm.gvariant; {
+        "org/gnome/desktop/a11y" = {
+          always-show-universal-access-status = true;
+        };
         "org/gnome/desktop/a11y/applications" = {
           screen-magnifier-enabled = false;
         };
@@ -46,7 +49,7 @@ _: with _;{
           night-light-schedule-automatic = false;
           night-light-schedule-from = 12.0;
           night-light-schedule-to = 11.99;
-          night-light-temperature = mkUint32 3659;
+          night-light-temperature = mkUint32 3700; # 1700 (warm) to 4700 (cold)
         };
         "org/gnome/settings-daemon/plugins/media-keys" = {
           custom-keybindings = [
