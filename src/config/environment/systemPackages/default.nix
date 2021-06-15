@@ -37,6 +37,7 @@ _: with _; [
   packages.nixpkgs.ngrok
   packages.nixpkgs.niv
   packages.nixpkgs.nix-index
+  packages.nixpkgs.nix-info
   packages.nixpkgs.nixops
   packages.nixpkgs.nixpkgs-fmt
   packages.nixpkgs.nixpkgs-review
