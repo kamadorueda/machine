@@ -15,6 +15,7 @@ _: with _; [
   packages.nixpkgs.dconf2nix
   packages.nixpkgs.diction
   packages.nixpkgs.diffoscope
+  packages.nixpkgs.dmenu
   packages.nixpkgs.evtest
   packages.nixpkgs.gcc
   packages.nixpkgs.ghc

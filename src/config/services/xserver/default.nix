@@ -5,8 +5,8 @@ _: with _; {
     };
   };
   displayManager = {
-    gdm = {
-      enable = true;
+    lightdm = {
+      background = packages.nixpkgs.nixos-artwork.wallpapers.dracula.gnomeFilePath;
     };
   };
   enable = true;
@@ -17,13 +17,11 @@ _: with _; {
   updateDbusEnvironment = true;
   windowManager = {
     i3 = {
+      configFile = ./i3.config;
       enable = true;
       extraPackages = [
         packages.nixpkgs.i3status
       ];
-      extraSessionCommands = ''
-        echo Hello from i3
-      '';
     };
   };
   xkbVariant = "altgr-intl";
