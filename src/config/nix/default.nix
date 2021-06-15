@@ -15,6 +15,7 @@ _: with _; {
   readOnlyStore = true;
   trustedUsers = [
     "root"
+    abs.username
   ];
   useSandbox = true;
 }

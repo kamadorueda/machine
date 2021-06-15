@@ -335,6 +335,7 @@ _: with _;{
             "--profile"
             "${sources.product}/makes/utils/lint-python/settings-prospector.yaml"
           ];
+          "python.defaultInterpreterPath" = "/run/current-system/sw/bin/python3.8";
           "python.linting.prospectorEnabled" = true;
           "python.linting.prospectorPath" = "prospector";
           "python.linting.pylintEnabled" = false;

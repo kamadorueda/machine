@@ -8,6 +8,7 @@ _: with _; [
   packages.nixpkgs.black
   packages.nixpkgs.burpsuite
   packages.nixpkgs.cabal-install
+  packages.nixpkgs.cachix
   packages.nixpkgs.cargo
   packages.nixpkgs.coreutils
   packages.nixpkgs.cuneiform
@@ -35,6 +36,7 @@ _: with _; [
   packages.nixpkgs.lsof
   packages.nixpkgs.maven
   packages.nixpkgs.mypy
+  packages.nixpkgs.networkmanager
   packages.nixpkgs.ngrok
   packages.nixpkgs.niv
   packages.nixpkgs.nix-index
