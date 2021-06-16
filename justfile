@@ -18,12 +18,15 @@ niv *ARGS:
   niv -s src/sources/sources.json {{ARGS}}
 
 switch:
-  sudo env "NIX_PATH=nixos-config=${PWD}/configuration.nix" nixos-rebuild switch \
-    && find -L ~/.config/Code ~/.vscode \
-      | while read -r path; do \
-        path="$(readlink -f "${path}")" \
-          && sudo chown "${USER}" "${path}" \
-          && chmod +w "${path}"; \
+  sudo env "NIX_PATH=${NIX_PATH}" nixos-rebuild switch \
+    && just switch-writeable
+
+switch-writeable:
+  find -L ~/.config/Code ~/.vscode \
+    | while read -r path; do \
+      path="$(readlink -f "${path}")" \
+        && sudo chown "${USER}" "${path}" \
+        && chmod +w "${path}"; \
     done
 
 test:
