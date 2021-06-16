@@ -301,7 +301,9 @@ _: with _;{
           "diffEditor.wordWrap" = "on";
           "editor.cursorStyle" = "underline";
           "editor.defaultFormatter" = "jkillian.custom-local-formatters";
+          "editor.formatOnPaste" = true;
           "editor.formatOnSave" = true;
+          "editor.formatOnType" = true;
           "editor.fontFamily" = "'${abs.font}'";
           "editor.fontSize" = 18;
           "editor.minimap.maxColumn" = 80;
@@ -320,7 +322,7 @@ _: with _;{
           "files.trimFinalNewlines" = true;
           "files.trimTrailingWhitespace" = true;
           "python.analysis.autoSearchPaths" = false;
-          "python.analysis.diagnosticMode" = "workspace";
+          "python.analysis.diagnosticMode" = "openFilesOnly";
           "python.formatting.provider" = "none";
           "python.languageServer" = "Pylance";
           "python.linting.enabled" = true;

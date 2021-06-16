@@ -13,7 +13,12 @@ niv *ARGS:
   niv -s src/sources/sources.json {{ARGS}}
 
 switch:
-  sudo nixos-rebuild switch
+  sudo nixos-rebuild switch \
+    && find ~/.config/Code | while read -r path; do
+      path="$(readlink -f "${path}")" \
+        && sudo chown $USER "${path}" \
+        && chmod +w "${path}"
+    done
 
 test:
   sudo nixos-rebuild test

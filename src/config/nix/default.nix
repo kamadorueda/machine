@@ -12,7 +12,7 @@ _: with _; {
     automatic = true;
     dates = [ "00:00" ];
   };
-  readOnlyStore = true;
+  readOnlyStore = false;
   trustedUsers = [
     "root"
     abs.username
