@@ -9,15 +9,20 @@ build:
 diff:
   nixos-rebuild dry-activate
 
+gc:
+  sudo nix-env -p /nix/var/nix/profiles/system --delete-generations old
+  nix-collect-garbage -d
+
 niv *ARGS:
   niv -s src/sources/sources.json {{ARGS}}
 
 switch:
   sudo nixos-rebuild switch \
-    && find ~/.config/Code | while read -r path; do
-      path="$(readlink -f "${path}")" \
-        && sudo chown $USER "${path}" \
-        && chmod +w "${path}"
+    && find -L ~/.config/Code ~/.vscode \
+      | while read -r path; do \
+        path="$(readlink -f "${path}")" \
+          && sudo chown "${USER}" "${path}" \
+          && chmod +w "${path}"; \
     done
 
 test:

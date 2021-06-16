@@ -1,6 +1,6 @@
 _: with _; {
   a = "git add -p";
-  bashrc = "code $MACHINE/src/config/programs/bash/bashrc.sh";
+  bashrc = "code '${abs.machine}/src/config/programs/bash/bashrc.sh'";
   bat = "bat --show-all --theme=ansi";
   c = "git commit --allow-empty";
   csv = "column -s, -t";
@@ -18,5 +18,5 @@ _: with _; {
   ru = "git pull --autostash --progress --rebase --stat upstream master";
   rp = "r && p";
   s = "git status";
-  today = "git log --format=%aI --author ${abs.emailAtWork} | sed -E 's/T.*$//g' | uniq -c | head -n 7 | tac";
+  today = "git log --format=%aI --author '${abs.emailAtWork}' | sed -E 's/T.*$//g' | uniq -c | head -n 7 | tac";
 }

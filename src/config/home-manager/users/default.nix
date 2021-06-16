@@ -92,7 +92,9 @@ _: with _;{
     programs = {
       bash = {
         enable = true;
-        initExtra = builtins.readFile ./bashrc.sh;
+        initExtra = ''
+          test -f /etc/bashrc && source /etc/bashrc
+        '';
       };
       bat = {
         enable = true;
@@ -208,9 +210,9 @@ _: with _;{
         modules = [ "cwd" "exit" "git" "time" ];
         newline = true;
         pathAliases = {
-          "\\~/Documents/github/kamadorueda/machine" = "@machine";
-          "\\~/Documents/github/kamadorueda/secrets" = "@secrets";
-          "\\~/Documents/gitlab/fluidattacks/product" = "@product";
+          "${abs.machine}" = "@machine";
+          "${abs.product}" = "@product";
+          "${abs.secrets}" = "@secrets";
         };
         settings = {
           cwd-max-depth = "3";
@@ -228,7 +230,7 @@ _: with _;{
             extraOptions = {
               PreferredAuthentications = "publickey";
             };
-            identityFile = "~/.ssh/${abs.username}";
+            identityFile = "${abs.home}/.ssh/${abs.username}";
           };
         };
       };
@@ -251,10 +253,10 @@ _: with _;{
           packages.nixpkgs.vscode-extensions.eamodio.gitlens
           packages.nixpkgs.vscode-extensions.jkillian.custom-local-formatters
           packages.nixpkgs.vscode-extensions.haskell.haskell
-          packages.nixpkgs.vscode-extensions.justusadam.language-haskell
+          # packages.nixpkgs.vscode-extensions.justusadam.language-haskell
           packages.nixpkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
-          packages.nixpkgs.vscode-extensions.ms-azuretools.vscode-docker
-          packages.nixpkgs.vscode-extensions.ms-python.python
+          # packages.nixpkgs.vscode-extensions.ms-azuretools.vscode-docker
+          # packages.nixpkgs.vscode-extensions.ms-python.python
           packages.nixpkgs.vscode-extensions.ms-python.vscode-pylance
           packages.nixpkgs.vscode-extensions.shardulm94.trailing-spaces
           packages.nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
@@ -301,9 +303,9 @@ _: with _;{
           "diffEditor.wordWrap" = "on";
           "editor.cursorStyle" = "underline";
           "editor.defaultFormatter" = "jkillian.custom-local-formatters";
-          "editor.formatOnPaste" = true;
+          "editor.formatOnPaste" = false;
           "editor.formatOnSave" = true;
-          "editor.formatOnType" = true;
+          "editor.formatOnType" = false;
           "editor.fontFamily" = "'${abs.font}'";
           "editor.fontSize" = 18;
           "editor.minimap.maxColumn" = 80;

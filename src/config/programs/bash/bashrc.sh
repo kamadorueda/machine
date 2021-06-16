@@ -1,10 +1,5 @@
 # shellcheck shell=bash
 
-export MACHINE=~/Documents/github/kamadorueda/machine
-export NIX_PROFILE=/etc/profiles/per-user/kamadorueda
-export PRODUCT=~/Documents/gitlab/fluidattacks/product
-export SECRETS=~/Documents/github/kamadorueda/secrets
-
 function dev_env {
   local code="${1}"
 

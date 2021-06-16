@@ -1,16 +1,16 @@
 _: with _; {
   gc = {
     automatic = true;
-    dates = "00:00";
+    dates = "12:00";
     persistent = true;
   };
   nixPath = [
-    "nixos-config=${abs.home}/Documents/github/kamadorueda/machine/configuration.nix"
+    "nixos-config=${abs.machine}/configuration.nix"
     "nixpkgs=${sources.nixpkgsNixos}"
   ];
   optimise = {
     automatic = true;
-    dates = [ "00:00" ];
+    dates = [ "12:00" ];
   };
   readOnlyStore = false;
   trustedUsers = [
