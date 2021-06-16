@@ -36,7 +36,7 @@ td_latest := "https://repo2.timedoctor.com/td-desktop-hybrid/prod/latest-linux.y
 
 update:
   @true \
-    && just niv update homeManager --rev a6370ec40c8ed6e963093081c83f9982d532e49b \
+    && just niv update homeManager \
     && just niv update niv \
     && just niv update nixpkgs \
     && just niv update nixpkgsNixos \
