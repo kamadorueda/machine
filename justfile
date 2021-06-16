@@ -12,12 +12,13 @@ diff:
 gc:
   sudo nix-env -p /nix/var/nix/profiles/system --delete-generations old
   nix-collect-garbage -d
+  nix-store --optimise
 
 niv *ARGS:
   niv -s src/sources/sources.json {{ARGS}}
 
 switch:
-  sudo nixos-rebuild switch \
+  sudo env "NIX_PATH=nixos-config=${PWD}/configuration.nix" nixos-rebuild switch \
     && find -L ~/.config/Code ~/.vscode \
       | while read -r path; do \
         path="$(readlink -f "${path}")" \

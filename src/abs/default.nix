@@ -4,10 +4,10 @@ _: with _; {
   font = "ProFont for Powerline";
   home = "/home/kamadorueda";
   locale = "en_US.UTF-8";
-  machine = "${abs.home}/github/kamadorueda/machine";
+  machine = "${abs.home}/Documents/github/kamadorueda/machine";
   name = "Kevin Amado";
-  product = "${abs.home}/gitlab/fluidattacks/product";
-  secrets = "${abs.home}/github/kamadorueda/secrets";
+  product = "${abs.home}/Documents/gitlab/fluidattacks/product";
+  secrets = "${abs.home}/Documents/github/kamadorueda/secrets";
   signingkey = "FFF341057F503148";
   username = "kamadorueda";
 }
