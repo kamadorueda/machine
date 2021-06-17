@@ -305,7 +305,7 @@ _: with _;{
           "editor.formatOnSave" = true;
           "editor.formatOnType" = false;
           "editor.fontFamily" = "'${abs.font}'";
-          "editor.fontSize" = 19;
+          "editor.fontSize" = 18.4;
           "editor.minimap.maxColumn" = 80;
           "editor.minimap.renderCharacters" = false;
           "editor.minimap.showSlider" = "always";
