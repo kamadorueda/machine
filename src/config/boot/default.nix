@@ -11,5 +11,5 @@ _: with _; {
       enable = true;
     };
   };
-  tmpOnTmpfs = true;
+  tmpOnTmpfs = false;
 }
