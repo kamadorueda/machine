@@ -19,9 +19,9 @@ niv *ARGS:
 
 switch:
   sudo env "NIX_PATH=${NIX_PATH}" nixos-rebuild switch \
-    && just switch-writeable
+    && just switch-patch
 
-switch-writeable:
+switch-patch:
   find -L ~/.config/Code ~/.vscode \
     | while read -r path; do \
       path="$(readlink -f "${path}")" \
