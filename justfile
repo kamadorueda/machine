@@ -17,17 +17,16 @@ gc:
 niv *ARGS:
   niv -s src/sources/sources.json {{ARGS}}
 
-switch:
-  sudo env "NIX_PATH=${NIX_PATH}" nixos-rebuild switch \
-    && just switch-patch
-
-switch-patch:
+patch:
   find -L ~/.config/Code ~/.vscode \
     | while read -r path; do \
       path="$(readlink -f "${path}")" \
         && sudo chown "${USER}" "${path}" \
         && chmod +w "${path}"; \
     done
+
+switch:
+  sudo env "NIX_PATH=${NIX_PATH}" nixos-rebuild switch
 
 test:
   sudo nixos-rebuild test

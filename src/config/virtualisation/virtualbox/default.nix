@@ -6,8 +6,8 @@ _: with _; {
   host = {
     enable = true;
     headless = false;
-    enableHardening = true;
+    enableHardening = false;
     addNetworkInterface = true;
-    enableExtensionPack = false;
+    enableExtensionPack = true;
   };
 }
