@@ -294,6 +294,10 @@ _: with _;{
               command = "${packages.nixpkgs.shfmt}/bin/shfmt -bn -ci -i 2 -s -sr -";
               languages = [ "shellscript" ];
             }
+            {
+              command = "${packages.nixpkgs.terraform}/bin/terraform fmt -";
+              languages = [ "tf" ];
+            }
           ];
           "diffEditor.ignoreTrimWhitespace" = false;
           "diffEditor.maxComputationTime" = 0;
