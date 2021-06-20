@@ -75,12 +75,10 @@
 
     ```bash
     cd "$(mktemp -d)"
-    nix-shell -p git
-    git clone https://github.com/kamadorueda/machine
+    nix-shell -p gh just
+    gh repo clone kamadorueda/machine
     cd machine
-    nixos-generate-config --show-hardware-config > src/hardware/local.nix
-    NIX_PATH="nixos-config=${PWD}/configuration.nix:${NIX_PATH}"
-    nixos-rebuild switch
+    just switch
     reboot
     ```
 

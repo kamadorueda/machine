@@ -19,6 +19,7 @@ _: with _; [
   packages.nixpkgs.dmenu
   packages.nixpkgs.evtest
   packages.nixpkgs.gcc
+  packages.nixpkgs.gh
   packages.nixpkgs.ghc
   packages.nixpkgs.gimp
   packages.nixpkgs.git-sizer
@@ -70,6 +71,8 @@ _: with _; [
   packages.nixpkgs.traceroute
   packages.nixpkgs.tree
   packages.nixpkgs.vlc
+  packages.nixpkgs.wirelesstools
+  packages.nixpkgs.wpa_supplicant
   packages.nixpkgs.xclip
   packages.nixpkgs.yq
 ]

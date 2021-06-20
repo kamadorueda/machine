@@ -26,7 +26,8 @@ patch:
     done
 
 switch:
-  sudo env "NIX_PATH=${NIX_PATH}" nixos-rebuild switch
+  nixos-generate-config --show-hardware-config | tee src/hardware/local.nix
+  sudo env "NIX_PATH=nixos-config=${PWD}/configuration.nix:${NIX_PATH}" nixos-rebuild switch
 
 test:
   sudo nixos-rebuild test
