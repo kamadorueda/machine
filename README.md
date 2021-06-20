@@ -59,8 +59,14 @@
     nixos-generate-config --root /mnt
     cat << EOF >> /mnt/etc/nixos/configuration.nix
       // { boot.loader.efi.canTouchEfiVariables = true;
-           boot.loader.systemd-boot.enable = true; }
+           boot.loader.systemd-boot.enable = true;
+           environment.systemPackages = [ pkgs.wpa_supplicant ];
+           services.nscd.enable = true; }
     EOF
+    if not_connected_to_the_internet; then
+      ip a # List interfaces
+      wpa_supplicant -B -i "${interface}" -c <(wpa_supplicant "${ssid}" "{psk}")
+    fi
     nixos-install
     reboot
     ```
