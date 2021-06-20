@@ -11,14 +11,6 @@ gc:
 niv *ARGS:
   niv -s src/sources/sources.json {{ARGS}}
 
-patch:
-  find -L ~/.config/Code ~/.vscode \
-    | while read -r path; do \
-      path="$(readlink -f "${path}")" \
-        && sudo chown "${USER}" "${path}" \
-        && chmod +w "${path}"; \
-    done
-
 rebuild *ARGS:
   nixos-generate-config --show-hardware-config | tee src/hardware/local.nix
   @echo
