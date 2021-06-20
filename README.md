@@ -17,7 +17,7 @@
       (parted) mktable msdos
       (parted) mkpart primary fat32 1MiB 100%
     mkfs.vfat -F 32 "${device}1"
-    dd bs=1MB conv=fdatasync if="${iso}" of="${device}1" status=progress
+    dd bs=1KB conv=fdatasync if="${iso}" of="${device}1" status=progress
     ```
 
 1. Boot from the USB stick, start the installation and then `sudo su`.
