@@ -25,37 +25,42 @@
     replace "${device}" by the address of the main disk:
 
     - List block devices: `lsblk -fr`
-    - Create a partition table: `parted "${device}" -- mktable gpt`
-    - Remove a partition: `parted "${device}" -- rm "${number}"`
+    - Managing partitions: `parted "${device}"`
+      - Create a partition table: `(parted) mktable gpt`
+      - Remove a partition: `(parted) rm "${number}"`
 
 1. Setup the NixOS file system
     in the free space allocated in the previous step.
 
     ```bash
-    # Print the current partitioning state
-    parted "${device}" -- unit MiB print
+    parted "${device}"
 
-    # Prepare boot device
-    if in_dual_boot; then
-      # Remove the Windows-managed boot partition
-      parted "${device}" -- rm "${number}"
-    fi
-    parted "${device}" -- mkpart ESP fat32 "${start:-1MiB}" "${end:-512MiB}"
-    parted "${device}" -- set "${number}" esp on
-    mkfs.fat -F 32 -n boot /dev/disk/by-partlabel/ESP
+    # Generic setup
+    (parted) unit MiB
+    (parted) print
 
-    # Prepare root device
-    parted "${device}" -- mkpart primary "${start}" "${end:-100%}"
-    cryptsetup luksFormat /dev/disk/by-partlabel/primary
-    cryptsetup luksOpen /dev/disk/by-partlabel/primary cryptroot
-    mkfs.ext4 -L nixos /dev/mapper/cryptroot
+    # Setup boot partition
+    (parted) rm "${number}" # Remove existing boot partitions
+    (parted) mkpart ESP fat32 "${start:-1MiB}" "${end:-512MiB}"
+    (parted) set "${number}" esp on
+
+    # Setup root partition
+    (parted) mkpart primary "${start}" "${end}"
+    ```
 
 1. Finish NixOS installation:
 
     ```bash
+    cryptsetup luksFormat /dev/disk/by-partlabel/primary
+    cryptsetup luksOpen /dev/disk/by-partlabel/primary cryptroot
+
+    mkfs.fat -F 32 -n boot /dev/disk/by-partlabel/ESP
+    mkfs.ext4 -L nixos /dev/mapper/cryptroot
+
     mount /dev/disk/by-label/nixos /mnt
     mkdir /mnt/boot
     mount /dev/disk/by-partlabel/ESP /mnt/boot
+
     nixos-generate-config --root /mnt
     cat << EOF >> /mnt/etc/nixos/configuration.nix
       // { boot.loader.efi.canTouchEfiVariables = true;
