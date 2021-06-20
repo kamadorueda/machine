@@ -3,12 +3,6 @@ set shell := ["bash", "-euo", "pipefail", "-c"]
 _:
   @just --list
 
-build:
-  nixos-rebuild build
-
-diff:
-  nixos-rebuild dry-activate
-
 gc:
   sudo nix-env -p /nix/var/nix/profiles/system --delete-generations old
   nix-collect-garbage -d
@@ -25,13 +19,12 @@ patch:
         && chmod +w "${path}"; \
     done
 
-switch:
+rebuild *ARGS:
   nixos-generate-config --show-hardware-config | tee src/hardware/local.nix
-  read -p 'Pess a key to continue...'
-  sudo env "NIX_PATH=nixos-config=${PWD}/configuration.nix:${NIX_PATH}" nixos-rebuild switch
-
-test:
-  sudo nixos-rebuild test
+  @echo
+  @read -p 'Pess a key to continue...'
+  sudo env "NIX_PATH=nixos-config=${PWD}/configuration.nix:${NIX_PATH}" \
+    nixos-rebuild {{ARGS}}
 
 td_latest := "https://repo2.timedoctor.com/td-desktop-hybrid/prod/latest-linux.yml"
 

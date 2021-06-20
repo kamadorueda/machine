@@ -78,7 +78,7 @@
     nix-shell -p gh just
     gh repo clone kamadorueda/machine
     cd machine
-    just switch
+    just rebuild switch
     reboot
     ```
 
