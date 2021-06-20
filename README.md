@@ -1,9 +1,9 @@
 # My development machine, as code
 
-1. (optional) if you want to dual-boot with Windows,
+1. (Optional) if you want to dual-boot with Windows,
     install Windows first and then continue this tutorial
 
-1. Download _NixOS minimal ISO image_ from the
+1. Download `NixOS minimal ISO image` from the
     [NixOS's download page](https://nixos.org/download).
 
 1. Burn NixOS into a USB stick:
@@ -53,34 +53,50 @@
     mount /dev/disk/by-partlabel/ESP /mnt/boot
     ```
 
+1. Generate a basic config with: `nixos-generate-config --root /mnt`
+
+1. Ensure your `/mnt/etc/nixos/configuration.nix` has the following options:
+
+    ```nix
+    {
+      boot.loader = {
+        efi.canTouchEfiVariables = true;
+        systemd-boot.enable=true;
+      };
+    }
+    ```
+
+1. `nixos-install`
+
+1. `reboot`
+
+1. Install git with: `nix-env -i git`.
+
+1. Clone this repository and rebuild:
+
+    ```bash
+          cd "$(mktemp -d)" \
+      &&  git clone https://github.com/kamadorueda/machine \
+      &&  cd machine \
+      &&  NIX_PATH="nixos-config=${PWD}/configuration.nix:${NIX_PATH}" \
+          nixos-rebuild switch \
+      &&  reboot
+    ```
+
 1. Get your GitHub API token from the
     [secrets file](https://github.com/kamadorueda/secrets/blob/master/machine/secrets.sh)
     and export it into the terminal.
 
-1. Install git with `nix-env -i git`.
-
-1. Clone this repository:
-
-    ```bash
-          mkdir -p /home/kamadorueda/Documents/github/kamadorueda \
-      &&  pushd /home/kamadorueda/Documents/github/kamadorueda \
-        &&  git clone "https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/machine" \
-      &&  popd
-    ```
-
-1. Update your hardware configuration at `src/hardware/default.nix`
-    with the results of: `nixos-generate-config --show-hardware-config`.
-
-1. Rebuild with:
-
-    ```bash
-    NIX_PATH="nixos-config=/home/kamadorueda/Documents/github/kamadorueda/machine/configuration.nix:${NIX_PATH}" \
-    nixos-rebuild switch
-    ```
-
-1. Logout and login as the new user.
-
 1. Setup the state:
+
+    - github/kamadorueda/machine:
+
+      ```bash
+            mkdir -p /home/kamadorueda/Documents/github/kamadorueda \
+        &&  pushd /home/kamadorueda/Documents/github/kamadorueda \
+          &&  git clone "https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/machine" \
+        &&  popd
+      ```
 
     - github/kamadorueda/secrets:
 
