@@ -83,8 +83,8 @@
 
     ```bash
     cd "$(mktemp -d)"
-    nix-shell -p gh just
-    gh repo clone kamadorueda/machine
+    nix-shell -p git just
+    git clone https://github.com/kamadorueda/machine
     cd machine
     just rebuild switch
     reboot
