@@ -38,17 +38,17 @@
     ```bash
     parted "${device}"
 
-    # Generic setup
-    (parted) unit MiB
-    (parted) print
+      # Generic setup
+      (parted) unit MiB
+      (parted) print
 
-    # Setup boot partition
-    (parted) rm "${number}" # Remove existing boot partitions
-    (parted) mkpart ESP fat32 "${start:-1MiB}" "${end:-512MiB}"
-    (parted) set "${number}" esp on
+      # Setup boot partition
+      (parted) rm "${number}" # Remove existing boot partitions
+      (parted) mkpart ESP fat32 "${start:-1MiB}" "${end:-512MiB}"
+      (parted) set "${number}" esp on
 
-    # Setup root partition
-    (parted) mkpart primary "${start}" "${end}"
+      # Setup root partition
+      (parted) mkpart primary "${start}" "${end}"
     ```
 
 1. Finish NixOS installation:
