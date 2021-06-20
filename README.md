@@ -8,12 +8,14 @@
 
 1. Burn it into a USB stick:
 
-    1. Locate the USB device with: `lsblk`
-    1. Export the USB device address: `device=/dev/xxx`
-    1. `sudo umount "${device}"`
-    1. `sudo dd conv=fdatasync if=nixos.iso of="${device}" status=progress`
+    ```bash
+    lsblk
+    device='/dev/xxx' # Replace by the correct one
+    sudo umount "${device}"
+    sudo dd conv=fdatasync if=nixos.iso of="${device}" status=progress
+    ```
 
-1. Boot from the USB stick, start the installation and then login as root.
+1. Boot from the USB stick, start the installation and then `sudo su`.
 
 1. Create an empty partition where NixOS will live.
 
@@ -48,31 +50,31 @@
 
 1. Finish NixOS installation:
 
-    1. `mount /dev/disk/by-label/nixos /mnt`
-    1. `mkdir /mnt/boot`
-    1. `mount /dev/disk/by-partlabel/ESP /mnt/boot`
-    1. `nixos-generate-config --root /mnt`
-    1.  ```bash
-        cat << EOF >> /mnt/etc/nixos/configuration.nix
-        // {
-          boot.loader.efi.canTouchEfiVariables = true;
-          boot.loader.systemd-boot.enable=true;
-        }
-        EOF
-        ```
-    1. `nixos-install`
-    1. `reboot`
+    ```bash
+    mount /dev/disk/by-label/nixos /mnt
+    mkdir /mnt/boot
+    mount /dev/disk/by-partlabel/ESP /mnt/boot
+    nixos-generate-config --root /mnt
+    cat << EOF >> /mnt/etc/nixos/configuration.nix
+      // { boot.loader.efi.canTouchEfiVariables = true;
+           boot.loader.systemd-boot.enable=true; }
+    EOF
+    nixos-install
+    reboot
+    ```
 
 1. Clone this repository and rebuild:
 
-    1. `cd "$(mktemp -d)"`
-    1. `nix-shell -p git`
-    1. `git clone https://github.com/kamadorueda/machine`
-    1. `cd machine`
-    1. `nixos-generate-config --show-hardware-config > src/hardware/local.nix`
-    1. `NIX_PATH="nixos-config=${PWD}/configuration.nix:${NIX_PATH}"`
-    1. `nixos-rebuild switch`
-    1. `reboot`
+    ```bash
+    cd "$(mktemp -d)"
+    nix-shell -p git
+    git clone https://github.com/kamadorueda/machine
+    cd machine
+    nixos-generate-config --show-hardware-config > src/hardware/local.nix
+    NIX_PATH="nixos-config=${PWD}/configuration.nix:${NIX_PATH}"
+    nixos-rebuild switch
+    reboot
+    ```
 
 1. Get your GitHub API token from the
     [secrets file](https://github.com/kamadorueda/secrets/blob/master/machine/secrets.sh)
