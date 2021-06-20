@@ -1,5 +1,7 @@
 # My development machine, as code
 
+## Setup
+
 1. (Optional) if you want to dual-boot with Windows,
     install Windows first and then continue this tutorial.
 
@@ -113,7 +115,7 @@
       ```
 1. Enjoy!
 
-# Timedoctor
+## Timedoctor
 
 You may find useful to install [Timedoctor](https://www.timedoctor.com/)
 via [Nix](https://nixos.org).
@@ -124,7 +126,7 @@ via [Nix](https://nixos.org).
 
 Source: [a8547c04](https://github.com/kamadorueda/machine/commit/a8547c048cfe34bc78475a8c8621b226426b81ab)
 
-# Useful links
+## Useful links
 
 - [NixOS options](https://nixos.org/manual/nixos/stable/options.html)
 - [NixOS options search](https://search.nixos.org/options)
