@@ -46,28 +46,22 @@
     cryptsetup luksOpen /dev/disk/by-partlabel/primary cryptroot
     mkfs.ext4 -L nixos /dev/mapper/cryptroot
 
-    # Mount stuff
-    mount /dev/disk/by-label/nixos /mnt
-    mkdir /mnt/boot
-    mount /dev/disk/by-partlabel/ESP /mnt/boot
-    ```
+1. Finish NixOS installation:
 
-1. Generate a basic config with: `nixos-generate-config --root /mnt`
-
-1. Ensure your `/mnt/etc/nixos/configuration.nix` has the following options:
-
-    ```nix
-    {
-      boot.loader = {
-        efi.canTouchEfiVariables = true;
-        systemd-boot.enable=true;
-      };
-    }
-    ```
-
-1. `nixos-install`
-
-1. `reboot`
+    1. `mount /dev/disk/by-label/nixos /mnt`
+    1. `mkdir /mnt/boot`
+    1. `mount /dev/disk/by-partlabel/ESP /mnt/boot`
+    1. `nixos-generate-config --root /mnt`
+    1.  ```bash
+        cat << EOF >> /mnt/etc/nixos/configuration.nix
+        // {
+          boot.loader.efi.canTouchEfiVariables = true;
+          boot.loader.systemd-boot.enable=true;
+        }
+        EOF
+        ```
+    1. `nixos-install`
+    1. `reboot`
 
 1. Clone this repository and rebuild:
 
@@ -79,7 +73,6 @@
     1. `NIX_PATH="nixos-config=${PWD}/configuration.nix:${NIX_PATH}"`
     1. `nixos-rebuild switch`
     1. `reboot`
-    ```
 
 1. Get your GitHub API token from the
     [secrets file](https://github.com/kamadorueda/secrets/blob/master/machine/secrets.sh)
