@@ -1,6 +1,13 @@
 _: with _;
 
-(import ./local.nix) // {
+{ config
+, lib
+, modulesPath
+, pkgs
+, ...
+} @ attrs:
+
+(import ./local.nix attrs) // {
   swapDevices = [
     {
       device = "/swap";
