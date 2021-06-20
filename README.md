@@ -19,7 +19,7 @@
 
 1. Boot from the USB stick, start the installation and then `sudo su`.
 
-1. Create an empty partition where NixOS will live.
+1. Allocate some empty disk space for NixOS to live in.
 
     Use the following commands as/if needed,
     replace "${device}" by the address of the main disk:
@@ -59,7 +59,7 @@
     nixos-generate-config --root /mnt
     cat << EOF >> /mnt/etc/nixos/configuration.nix
       // { boot.loader.efi.canTouchEfiVariables = true;
-           boot.loader.systemd-boot.enable=true; }
+           boot.loader.systemd-boot.enable = true; }
     EOF
     nixos-install
     reboot
