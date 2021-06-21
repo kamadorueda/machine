@@ -362,9 +362,9 @@ _: with _;{
     };
     xdg = {
       desktopEntries = {
-        timedoctor = {
-          name = "timedoctor";
-          exec = "${packages.timedoctor}/bin/timedoctor";
+        timedoctor = with packages.nixpkgsMaster; {
+          name = timedoctor.name;
+          exec = "${timedoctor}/bin/${timedoctor.name}";
           terminal = false;
         };
       };

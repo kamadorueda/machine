@@ -20,11 +20,15 @@ _: with _; {
     };
     source = sources.nixpkgs;
   };
+  nixpkgsMaster = utils.remoteImport {
+    args = {
+      config = {
+        allowUnfree = true;
+      };
+    };
+    source = sources.nixpkgsMaster;
+  };
   product = utils.remoteImport {
     source = sources.product;
-  };
-  timedoctorExtracted = packages.nixpkgs.appimageTools.extract {
-    name = "timedoctor-extracted";
-    src = sources.timedoctor;
   };
 }

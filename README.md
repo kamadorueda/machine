@@ -132,11 +132,11 @@
 You may find useful to install [Timedoctor](https://www.timedoctor.com/)
 via [Nix](https://nixos.org).
 
-1. `$ nix-build -A packages.timedoctor https://github.com/kamadorueda/machine/archive/main.tar.gz`
+1. `$ NIXPKGS_ALLOW_UNFREE=1 nix-build -A timedoctor https://github.com/nixos/nixpkgs/archive/7310407d493ee1c7caf38f8181507d7ac9c90eb8.tar.gz`
 
-2. `$ ./result/bin/timedoctor`
+2. `$ ./result/bin/timedoctor*`
 
-Source: [a8547c04](https://github.com/kamadorueda/machine/commit/a8547c048cfe34bc78475a8c8621b226426b81ab)
+Source: [Pull 127590](https://github.com/NixOS/nixpkgs/pull/127590)
 
 ## Useful links
 
