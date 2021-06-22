@@ -96,9 +96,6 @@ _: with _;{
           test -f /etc/bashrc && source /etc/bashrc
         '';
       };
-      bat = {
-        enable = true;
-      };
       direnv = {
         enable = true;
         enableBashIntegration = true;
@@ -197,13 +194,6 @@ _: with _;{
         };
         showMenubar = false;
         themeVariant = "dark";
-      };
-      gpg = {
-        enable = true;
-        package = packages.nixpkgs.gnupg;
-      };
-      jq = {
-        enable = true;
       };
       powerline-go = {
         enable = true;

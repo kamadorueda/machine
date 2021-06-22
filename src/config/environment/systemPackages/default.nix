@@ -1,8 +1,6 @@
 _: with _; [
-  packages.nixpkgs.acpi
-  packages.nixpkgs.age
   packages.nixpkgs.awscli
-  packages.nixpkgs.beep
+  packages.nixpkgs.bat
   packages.nixpkgs.bind
   packages.nixpkgs.binutils
   packages.nixpkgs.black
@@ -11,33 +9,25 @@ _: with _; [
   packages.nixpkgs.cachix
   packages.nixpkgs.cargo
   packages.nixpkgs.coreutils
-  packages.nixpkgs.cuneiform
   packages.nixpkgs.curl
   packages.nixpkgs.dconf2nix
   packages.nixpkgs.diction
   packages.nixpkgs.diffoscope
   packages.nixpkgs.dmenu
-  packages.nixpkgs.evtest
   packages.nixpkgs.gcc
-  packages.nixpkgs.gh
   packages.nixpkgs.ghc
-  packages.nixpkgs.gimp
-  packages.nixpkgs.git-sizer
   packages.nixpkgs.gnome.dconf-editor
   packages.nixpkgs.gnumake
   packages.nixpkgs.google-chrome
-  packages.nixpkgs.gptfdisk
+  packages.nixpkgs.gnupg
   packages.nixpkgs.hugo
-  packages.nixpkgs.imagemagick7Big
-  packages.nixpkgs.inxi
+  packages.nixpkgs.jq
   packages.nixpkgs.just
   packages.nixpkgs.kubectl
   packages.nixpkgs.libreoffice
-  packages.nixpkgs.lshw
   packages.nixpkgs.lsof
   packages.nixpkgs.maven
   packages.nixpkgs.mypy
-  packages.nixpkgs.networkmanager
   packages.nixpkgs.ngrok
   packages.nixpkgs.niv
   packages.nixpkgs.nix-index
@@ -45,15 +35,11 @@ _: with _; [
   packages.nixpkgs.nixpkgs-fmt
   packages.nixpkgs.nixpkgs-review
   packages.nixpkgs.nodejs
-  packages.nixpkgs.nodePackages.asar
-  packages.nixpkgs.ocrad
-  packages.nixpkgs.ocrfeeder
   packages.nixpkgs.openjdk
   packages.nixpkgs.optipng
   packages.nixpkgs.parallel
   packages.nixpkgs.parted
   packages.nixpkgs.patchelf
-  packages.nixpkgs.pciutils
   packages.nixpkgs.pcre
   packages.nixpkgs.peek
   packages.nixpkgs.python38
@@ -63,9 +49,7 @@ _: with _; [
   packages.nixpkgs.shfmt
   packages.nixpkgs.sops
   packages.nixpkgs.terraform
-  packages.nixpkgs.tesseract4
   packages.nixpkgs.tokei
-  packages.nixpkgs.tor
   packages.nixpkgs.torbrowser
   packages.nixpkgs.traceroute
   packages.nixpkgs.tree
