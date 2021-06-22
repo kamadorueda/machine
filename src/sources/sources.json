@@ -65,10 +65,10 @@
         "homepage": "",
         "owner": "fluidattacks",
         "repo": "product",
-        "rev": "eb1ef4553eed6612a91fb650f0f81e8b8b6dea54",
-        "sha256": "1y64lva0dg4hz3mgyk0sxs2l60xwwi038ch0jkslby1jznfc5qk8",
+        "rev": "fb88d94a85fb4b8a94af788ecf393cca51abeb8c",
+        "sha256": "1qqnmyrd4zz9cqqa82niz8j5xbmk2xh2z8s2zsi8mvazy7ikpfmq",
         "type": "tarball",
-        "url": "https://gitlab.com/fluidattacks/product/-/archive/eb1ef4553eed6612a91fb650f0f81e8b8b6dea54.tar.gz",
+        "url": "https://gitlab.com/fluidattacks/product/-/archive/fb88d94a85fb4b8a94af788ecf393cca51abeb8c.tar.gz",
         "url_template": "https://gitlab.com/<owner>/<repo>/-/archive/<rev>.tar.gz"
     },
     "timedoctor": {
