@@ -1,5 +1,11 @@
 # My development machine, as code
 
+- Powered by [NixOS](https://nixos.org/) and four partitions:
+  - `/`, ephemeral, **deleted** at EVERY boot
+  - `/boot`
+  - `/data`, persistent, where my important data lives in
+  - `/nix`, persistent, but mounted as **read-only**
+
 ## Setup
 
 1. (Optional) if you want to dual-boot with Windows,
@@ -47,22 +53,32 @@
       (parted) mkpart ESP fat32 "${start:-1MiB}" "${end:-512MiB}"
       (parted) set "${number}" esp on
 
-      # Setup root partition
-      (parted) mkpart primary "${start}" "${end}"
+      # Setup other partitions
+      (parted) mkpart data "${start}" "${end}"
+      (parted) mkpart nix "${start}" "${end}"
+      (parted) mkpart root "${start}" "${end}"
     ```
 
 1. Finish NixOS installation:
 
     ```bash
-    cryptsetup luksFormat /dev/disk/by-partlabel/primary
-    cryptsetup luksOpen /dev/disk/by-partlabel/primary cryptroot
+    cryptsetup luksFormat /dev/disk/by-partlabel/data
+    cryptsetup luksFormat /dev/disk/by-partlabel/nix
+    cryptsetup luksFormat /dev/disk/by-partlabel/root
+    cryptsetup luksOpen /dev/disk/by-partlabel/data cryptdata
+    cryptsetup luksOpen /dev/disk/by-partlabel/nix cryptnix
+    cryptsetup luksOpen /dev/disk/by-partlabel/root cryptroot
 
     mkfs.fat -F 32 -n boot /dev/disk/by-partlabel/ESP
-    mkfs.ext4 -L nixos /dev/mapper/cryptroot
+    mkfs.ext4 -L nix /dev/mapper/cryptnix
+    mkfs.ext4 -L data /dev/mapper/cryptdata
+    mkfs.ext4 -L root /dev/mapper/cryptroot
 
-    mount /dev/disk/by-label/nixos /mnt
+    mount /dev/disk/by-label/root /mnt
     mkdir /mnt/boot
     mount /dev/disk/by-partlabel/ESP /mnt/boot
+    mount /dev/disk/by-label/data /mnt/data
+    mount /dev/disk/by-label/nix /mnt/nix
 
     nixos-generate-config --root /mnt
     cat << EOF >> /mnt/etc/nixos/configuration.nix
