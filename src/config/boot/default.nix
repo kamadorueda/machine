@@ -4,6 +4,9 @@ _: with _; {
     luks = {
       reusePassphrases = true;
     };
+    postDeviceCommands = packages.nixpkgs.lib.mkAfter ''
+      ${packages.nixpkgs.e2fsprogs}/bin/mkfs.ext4 -L root /dev/mapper/cryptroot
+    '';
   };
   loader = {
     efi = {
