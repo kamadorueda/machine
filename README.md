@@ -187,3 +187,4 @@ Source: [Pull 127590](https://github.com/NixOS/nixpkgs/pull/127590)
 1. Make VSCode writeable
 1. Replace Gnome (too heavy) with I3
 1. Replace Chrome (non-free) with Chromium
+1. chown -R $USER /data
