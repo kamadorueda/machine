@@ -216,11 +216,17 @@ _: with _;{
       ssh = {
         enable = true;
         matchBlocks = {
+          "github.com" = {
+            extraOptions = {
+              PreferredAuthentications = "publickey";
+            };
+            identityFile = "${abs.secrets}/machine/ssh/kamadorueda";
+          };
           "gitlab.com" = {
             extraOptions = {
               PreferredAuthentications = "publickey";
             };
-            identityFile = "${abs.home}/.ssh/${abs.username}";
+            identityFile = "${abs.secrets}/machine/ssh/kamadorueda";
           };
         };
       };
