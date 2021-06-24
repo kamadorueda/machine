@@ -8,136 +8,160 @@
 
 ## Setup
 
-1. (Optional) if you want to dual-boot with Windows,
+1.  (Optional) if you want to dual-boot with Windows,
     install Windows first and then continue this tutorial.
 
-1. Download `NixOS minimal ISO image` from the
+1.  Download `NixOS minimal ISO image` from the
     [NixOS's download page](https://nixos.org/download).
 
-1. Burn it into a USB stick:
+1.  <details>
+      <summary>Burn it into a USB stick.</summary>
 
-    ```bash
-    lsblk
-    umount "${partition}"
-    parted "${device}" -- mktable msdos
-    dd bs=1MiB if="${iso}" of="${device}" oflag=direct status=progress
-    ```
+      ```bash
+      lsblk
+      umount "${partition}"
+      parted "${device}" -- mktable msdos
+      dd bs=1MiB if="${iso}" of="${device}" oflag=direct status=progress
+      ```
+    </details>
 
-1. Boot from the USB stick, start the installation and then `sudo su`.
+1.  Boot from the USB stick, start the installation and then `sudo su`.
 
-1. Allocate some empty disk space for NixOS to live in.
+1.  <details>
+      <summary>Allocate some empty disk space for NixOS to live in.</summary>
+      Use the following commands as needed,
+      replace "${device}" by the address of the main disk:
 
-    Use the following commands as/if needed,
-    replace "${device}" by the address of the main disk:
+      - List block devices: `lsblk -f`
+      - Managing partitions: `parted "${device}"`
+        - Create a partition table: `(parted) mktable gpt`
+        - Remove a partition: `(parted) rm "${number}"`
+    </details>
 
-    - List block devices: `lsblk -fr`
-    - Managing partitions: `parted "${device}"`
-      - Create a partition table: `(parted) mktable gpt`
-      - Remove a partition: `(parted) rm "${number}"`
+1.  <details>
+      <summary>Setup the NixOS file system
+      in the free space allocated in the previous step.</summary>
 
-1. Setup the NixOS file system
-    in the free space allocated in the previous step.
+      ```bash
+      parted "${device}"
 
-    ```bash
-    parted "${device}"
+        # Generic setup
+        (parted) unit GiB
+        (parted) print
 
-      # Generic setup
-      (parted) unit MiB
-      (parted) print
+        # Setup boot partition
+        (parted) rm "${number}" # Remove existing boot partitions
+        (parted) mkpart ESP fat32 1MiB 0.5
+        (parted) set "${number}" esp on
 
-      # Setup boot partition
-      (parted) rm "${number}" # Remove existing boot partitions
-      (parted) mkpart ESP fat32 "${start:-1MiB}" "${end:-512MiB}"
-      (parted) set "${number}" esp on
+        # Setup other partitions
+        (parted) mkpart data "${start}" "${end}" # 50 GiB
+        (parted) mkpart nix "${start}" "${end}" # 100 GiB
+        (parted) mkpart root "${start}" "${end}" # 50 GiB
+      ```
+    </details>
 
-      # Setup other partitions
-      (parted) mkpart data "${start}" "${end}"
-      (parted) mkpart nix "${start}" "${end}"
-      (parted) mkpart root "${start}" "${end}"
-    ```
+1.  <details>
+      <summary>Finish NixOS installation.</summary>
 
-1. Finish NixOS installation:
+      ```bash
+      cryptsetup luksFormat /dev/disk/by-partlabel/data
+      cryptsetup luksFormat /dev/disk/by-partlabel/nix
+      cryptsetup luksFormat /dev/disk/by-partlabel/root
+      cryptsetup luksOpen /dev/disk/by-partlabel/data cryptdata
+      cryptsetup luksOpen /dev/disk/by-partlabel/nix cryptnix
+      cryptsetup luksOpen /dev/disk/by-partlabel/root cryptroot
 
-    ```bash
-    cryptsetup luksFormat /dev/disk/by-partlabel/data
-    cryptsetup luksFormat /dev/disk/by-partlabel/nix
-    cryptsetup luksFormat /dev/disk/by-partlabel/root
-    cryptsetup luksOpen /dev/disk/by-partlabel/data cryptdata
-    cryptsetup luksOpen /dev/disk/by-partlabel/nix cryptnix
-    cryptsetup luksOpen /dev/disk/by-partlabel/root cryptroot
+      mkfs.fat -F 32 -n boot /dev/disk/by-partlabel/ESP
+      mkfs.ext4 -L data /dev/mapper/cryptdata
+      mkfs.ext4 -L nix /dev/mapper/cryptnix
+      mkfs.ext4 -L root /dev/mapper/cryptroot
 
-    mkfs.fat -F 32 -n boot /dev/disk/by-partlabel/ESP
-    mkfs.ext4 -L nix /dev/mapper/cryptnix
-    mkfs.ext4 -L data /dev/mapper/cryptdata
-    mkfs.ext4 -L root /dev/mapper/cryptroot
+      mount /dev/disk/by-label/root /mnt
+      mkdir /mnt/boot
+      mkdir /mnt/data
+      mkdir /mnt/nix
+      mount /dev/disk/by-partlabel/ESP /mnt/boot
+      mount /dev/disk/by-label/data /mnt/data
+      mount /dev/disk/by-label/nix /mnt/nix
 
-    mount /dev/disk/by-label/root /mnt
-    mkdir /mnt/boot
-    mount /dev/disk/by-partlabel/ESP /mnt/boot
-    mount /dev/disk/by-label/data /mnt/data
-    mount /dev/disk/by-label/nix /mnt/nix
+      nixos-generate-config --root /mnt
+      cat << EOF >> /mnt/etc/nixos/configuration.nix
+        // { boot.loader.efi.canTouchEfiVariables = true;
+            boot.loader.systemd-boot.enable = true;
+            environment.systemPackages = [ pkgs.wpa_supplicant ];
+            services.nscd.enable = true; }
+      EOF
+      if not_connected_to_the_internet; then
+        ip a
+        wpa_supplicant -B -i "${interface}" -c <(wpa_passphrase "${ssid}" "{psk}")
+      fi
+      nixos-install --no-root-passwd
+      reboot
+      ```
+    </details>
 
-    nixos-generate-config --root /mnt
-    cat << EOF >> /mnt/etc/nixos/configuration.nix
-      // { boot.loader.efi.canTouchEfiVariables = true;
-           boot.loader.systemd-boot.enable = true;
-           environment.systemPackages = [ pkgs.wpa_supplicant ];
-           services.nscd.enable = true; }
-    EOF
-    if not_connected_to_the_internet; then
-      ip a # List interfaces
-      wpa_supplicant -B -i "${interface}" -c <(wpa_supplicant "${ssid}" "{psk}")
-    fi
-    nixos-install
-    reboot
-    ```
+1.  <details>
+      <summary>Clone this repository and rebuild.</summary>
 
-1. Clone this repository and rebuild:
-
-    ```bash
-    cd "$(mktemp -d)"
-    nix-shell -p git just
-    git clone https://github.com/kamadorueda/machine
-    cd machine
-    just rebuild switch
-    reboot
-    ```
+      ```bash
+      if not_connected_to_the_internet; then
+        ip a
+        wpa_supplicant -B -i "${interface}" -c <(wpa_passphrase "${ssid}" "{psk}")
+      fi
+      cd "$(mktemp -d)"
+      nix-shell -p git just
+      git clone https://github.com/kamadorueda/machine
+      cd machine
+      just rebuild switch
+      reboot
+      ```
+    </details>
 
 1. Get your GitHub API token from the
     [secrets file](https://github.com/kamadorueda/secrets/blob/master/machine/secrets.sh)
     and export it into the terminal.
 
-1. Setup the state:
+1.  <details>
+      <summary>Setup the state.</summary>
 
-    - github/kamadorueda/machine:
+      - <details>
+          <summary>github/kamadorueda/machine</summary>
 
-      ```bash
-            mkdir -p /home/kamadorueda/Documents/github/kamadorueda \
-        &&  pushd /home/kamadorueda/Documents/github/kamadorueda \
-          &&  git clone "https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/machine" \
-        &&  popd
-      ```
+          ```bash
+                mkdir -p /data/github/kamadorueda \
+            &&  pushd /data/github/kamadorueda \
+              &&  git clone "https://kamadorueda:${GITHUB_API_TOKEN}@github.com/kamadorueda/machine" \
+            &&  popd
+          ```
+        </details>
 
-    - github/kamadorueda/secrets:
+      - <details>
+          <summary>github/kamadorueda/secrets</summary>
 
-      ```bash
-          mkdir -p ~/Documents/github/kamadorueda \
-      &&  pushd ~/Documents/github/kamadorueda \
-        &&  git clone "https://kamadorueda:${GIHUB_API_TOKEN}@github.com/kamadorueda/secrets" \
-        &&  cd secrets/machine \
-          &&  ./install.sh \
-      &&  popd
-      ```
+          ```bash
+              mkdir -p /data/github/kamadorueda \
+          &&  pushd /data/github/kamadorueda \
+            &&  git clone --depth 1 "https://kamadorueda:${GITHUB_API_TOKEN}@github.com/kamadorueda/secrets" \
+            &&  cd secrets/machine \
+              &&  ./install.sh \
+          &&  popd
+          ```
+        </details>
 
-    - gitlab/fluidattacks:
+      - <details>
+          <summary>gitlab/fluidattacks</summary>
 
-      ```bash
-          mkdir -p ~/Documents/gitlab/fluidattacks \
-      &&  pushd ~/Documents/gitlab/fluidattacks \
-        &&  git clone git@gitlab.com:fluidattacks/product \
-        &&  git clone git@gitlab.com:fluidattacks/services \
-      &&  popd
-      ```
+          ```bash
+              mkdir -p /data/gitlab/fluidattacks \
+          &&  pushd /data/gitlab/fluidattacks \
+            &&  git clone git@gitlab.com:fluidattacks/product \
+            &&  git clone git@gitlab.com:fluidattacks/services \
+          &&  popd
+          ```
+        </details>
+    </details>
+
 1. Enjoy!
 
 ## Timedoctor
