@@ -10,20 +10,40 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/ee853b10-1dd5-4cae-899e-f78f9106f2ac";
+    { device = "/dev/disk/by-uuid/9c68541d-ba2d-4475-a867-789580ecc1c4";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/b3587deb-cd81-4142-828d-ab9908820ba7";
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/00ea7072-60ec-45cd-8421-5ebcfc977220";
+
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/c0f41e03-4fc2-439c-8816-52039fc252e0";
+      fsType = "ext4";
+    };
+
+  boot.initrd.luks.devices."cryptnix".device = "/dev/disk/by-uuid/3c60f0a3-4b24-4df5-bd5a-5edf6f136c3e";
+
+  fileSystems."/nix/store" =
+    { device = "/nix/store";
+      fsType = "none";
+      options = [ "bind" ];
+    };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/C424-B3CE";
+    { device = "/dev/disk/by-uuid/F446-8957";
       fsType = "vfat";
     };
+
+  fileSystems."/data" =
+    { device = "/dev/disk/by-uuid/eab6f133-4ac5-4856-870b-f26531a788db";
+      fsType = "ext4";
+    };
+
+  boot.initrd.luks.devices."cryptdata".device = "/dev/disk/by-uuid/6a941b1f-6330-41e4-bf04-17a816aaee48";
 
   swapDevices = [ ];
 
