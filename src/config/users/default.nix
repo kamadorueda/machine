@@ -8,7 +8,11 @@ _: with _; {
       password = "1";
     };
     "${abs.username}" = {
-      extraGroups = [ "docker" "wheel" ];
+      extraGroups = [
+        "docker"
+        "networkmanager"
+        "wheel"
+      ];
       home = abs.home;
       isNormalUser = true;
       password = "1";
