@@ -10,7 +10,7 @@ _: with _;{
         };
         "org/gnome/desktop/a11y/magnifier" = {
           lens-mode = true;
-          mag-factor = 1.5;
+          mag-factor = 2.0;
           mouse-tracking = "proportional";
           screen-position = "full-screen";
           scroll-at-edges = false;
@@ -25,11 +25,12 @@ _: with _;{
           ];
         };
         "org/gnome/desktop/interface" = {
+          cursor-size = 48;
           gtk-im-module = "ibus";
           gtk-theme = "HighContrast";
           icon-theme = "HighContrast";
           show-battery-percentage = true;
-          text-scaling-factor = 1.0;
+          text-scaling-factor = 1.5;
         };
         "org/gnome/desktop/peripherals/mouse" = {
           natural-scroll = false;
