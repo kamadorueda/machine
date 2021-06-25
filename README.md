@@ -150,6 +150,17 @@
         </details>
 
       - <details>
+          <summary>github/nixos</summary>
+
+          ```bash
+              mkdir -p /data/github/nixos \
+          &&  pushd /data/github/nixos \
+            &&  git clone git@github.com:NixOS/nixpkgs \
+          &&  popd
+          ```
+        </details>
+
+      - <details>
           <summary>gitlab/fluidattacks</summary>
 
           ```bash
@@ -187,4 +198,5 @@ Source: [Pull 127590](https://github.com/NixOS/nixpkgs/pull/127590)
 1. Make VSCode writeable
 1. Replace Gnome (too heavy) with I3
 1. Replace Chrome (non-free) with Chromium
+1. Configure user.email and branch in product and services
 1. chown -R $USER /data
