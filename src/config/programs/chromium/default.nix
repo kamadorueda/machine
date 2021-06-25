@@ -23,6 +23,10 @@ _: with _; {
         name = "pipelines";
         url = "https://gitlab.com/fluidattacks/product/-/pipelines?page=1&scope=all&ref=kamadoatfluid";
       }
+      {
+        name = "nixos options";
+        url = "https://search.nixos.org/options";
+      }
     ];
     ShowAppsShortcutInBookmarkBar = false;
   };
