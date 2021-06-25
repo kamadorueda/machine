@@ -4,11 +4,15 @@ _: with _; {
     luks = {
       reusePassphrases = true;
     };
-    postMountCommands = packages.nixpkgs.lib.mkAfter ''
-      ${packages.nixpkgs.coreutils}/bin/mkdir /eph
-      ${packages.nixpkgs.utillinux}/bin/mount /dev/disk/by-partlabel/ext4 /eph
-      ${packages.nixpkgs.coreutils}/bin/rm -rf /eph
-      ${packages.nixpkgs.utillinux}/bin/umount /eph
+    postDeviceCommands = packages.nixpkgs.lib.mkAfter ''
+      ${packages.nixpkgs.utillinux}/bin/lsblk
+      ${packages.nixpkgs.findutils}/bin/find /mnt-root
+
+      # ${packages.nixpkgs.coreutils}/bin/mkdir /eph
+      # ${packages.nixpkgs.utillinux}/bin/mount /dev/disk/by-partlabel/root /eph
+      # ${packages.nixpkgs.coreutils}/bin/rm -f --one-file-system -r /eph
+      # ${packages.nixpkgs.utillinux}/bin/umount /eph
+
       ${packages.nixpkgs.coreutils}/bin/sleep 15
     '';
   };
