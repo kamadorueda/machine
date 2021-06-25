@@ -33,14 +33,14 @@
       options = [ "bind" ];
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/E89E-4224";
-      fsType = "vfat";
-    };
-
   fileSystems."/eph" =
     { device = "/dev/disk/by-uuid/16eeb42e-d4bc-40cb-b2ed-71531985b288";
       fsType = "ext4";
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/E89E-4224";
+      fsType = "vfat";
     };
 
   fileSystems."/data" =

@@ -6,12 +6,13 @@ _: with _; {
     };
     postDeviceCommands = packages.nixpkgs.lib.mkAfter ''
       ${packages.nixpkgs.utillinux}/bin/lsblk
-      ${packages.nixpkgs.findutils}/bin/find /mnt-root
 
-      # ${packages.nixpkgs.coreutils}/bin/mkdir /eph
-      # ${packages.nixpkgs.utillinux}/bin/mount /dev/disk/by-partlabel/root /eph
-      # ${packages.nixpkgs.coreutils}/bin/rm -f --one-file-system -r /eph
-      # ${packages.nixpkgs.utillinux}/bin/umount /eph
+      ${packages.nixpkgs.coreutils}/bin/mkdir /eph
+      ${packages.nixpkgs.utillinux}/bin/mount /dev/disk/by-partlabel/root /eph
+      ${packages.nixpkgs.coreutils}/bin/rm -fr /eph/*
+      ${packages.nixpkgs.findutils}/bin/find /eph
+      ${packages.nixpkgs.utillinux}/bin/umount /eph
+      ${packages.nixpkgs.utillinux}/bin/lsblk
 
       ${packages.nixpkgs.coreutils}/bin/sleep 15
     '';
