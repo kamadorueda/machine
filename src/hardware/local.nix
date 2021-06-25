@@ -8,7 +8,7 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
@@ -44,6 +44,11 @@
     };
 
   boot.initrd.luks.devices."cryptdata".device = "/dev/disk/by-uuid/840336b1-cc61-4e65-a9d2-af80a9335bf8";
+
+  fileSystems."/eph" =
+    { device = "/dev/disk/by-uuid/16eeb42e-d4bc-40cb-b2ed-71531985b288";
+      fsType = "ext4";
+    };
 
   swapDevices = [ ];
 
