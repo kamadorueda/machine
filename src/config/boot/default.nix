@@ -5,9 +5,7 @@ _: with _; {
       reusePassphrases = true;
     };
     postMountCommands = packages.nixpkgs.lib.mkAfter ''
-      set -x || true
-      rm -rf /eph || true
-      set +x || true
+      lsblk
     '';
   };
   loader = {
