@@ -195,6 +195,5 @@ Source: [Pull 127590](https://github.com/NixOS/nixpkgs/pull/127590)
 ## Future work
 
 1. Delete cryptroot on boot
-1. Replace Gnome (too heavy) with I3
 1. Configure user.email and branch in product and services
 1. chown -R $USER /data

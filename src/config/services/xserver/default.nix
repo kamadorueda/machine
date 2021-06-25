@@ -15,14 +15,5 @@ _: with _; {
     enable = true;
   };
   updateDbusEnvironment = true;
-  windowManager = {
-    i3 = {
-      configFile = ./i3.config;
-      enable = true;
-      extraPackages = [
-        packages.nixpkgs.i3status
-      ];
-    };
-  };
   xkbVariant = "altgr-intl";
 }
