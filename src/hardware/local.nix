@@ -38,17 +38,17 @@
       fsType = "vfat";
     };
 
+  fileSystems."/eph" =
+    { device = "/dev/disk/by-uuid/16eeb42e-d4bc-40cb-b2ed-71531985b288";
+      fsType = "ext4";
+    };
+
   fileSystems."/data" =
     { device = "/dev/disk/by-uuid/927ddd70-c78d-4393-8279-483218f7b39c";
       fsType = "ext4";
     };
 
   boot.initrd.luks.devices."cryptdata".device = "/dev/disk/by-uuid/840336b1-cc61-4e65-a9d2-af80a9335bf8";
-
-  fileSystems."/eph" =
-    { device = "/dev/disk/by-uuid/16eeb42e-d4bc-40cb-b2ed-71531985b288";
-      fsType = "ext4";
-    };
 
   swapDevices = [ ];
 

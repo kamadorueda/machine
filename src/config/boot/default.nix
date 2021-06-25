@@ -4,13 +4,10 @@ _: with _; {
     luks = {
       reusePassphrases = true;
     };
-    postDeviceCommands = packages.nixpkgs.lib.mkAfter ''
-      set -x
-      mkdir /post-device || true
-      mount /dev/disk/by-partlabel/ext4 /post-device || true
-      rm -rf /post-device || true
-      umount /post-device || true
-      set +x
+    postMountCommands = packages.nixpkgs.lib.mkAfter ''
+      set -x || true
+      rm -rf /eph || true
+      set +x || true
     '';
   };
   loader = {
