@@ -5,7 +5,11 @@ _: with _; {
       reusePassphrases = true;
     };
     postMountCommands = packages.nixpkgs.lib.mkAfter ''
-      lsblk
+      ${packages.nixpkgs.coreutils}/bin/mkdir /eph
+      ${packages.nixpkgs.utillinux}/bin/mount /dev/disk/by-partlabel/ext4 /eph
+      ${packages.nixpkgs.coreutils}/bin/rm -rf /eph
+      ${packages.nixpkgs.utillinux}/bin/umount /eph
+      ${packages.nixpkgs.coreutils}/bin/sleep 15
     '';
   };
   loader = {
