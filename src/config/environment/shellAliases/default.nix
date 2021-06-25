@@ -3,6 +3,7 @@ _: with _; {
   bashrc = "code '${abs.machine}/src/config/programs/bash/bashrc.sh'";
   bat = "bat --show-all --theme=ansi";
   c = "git commit --allow-empty";
+  code="code --extensions-dir /data/vscode/extensions --user-data-dir /data/vscode/data";
   csv = "column -s, -t";
   cm = "git log -n 1 --format=%s%n%n%b";
   cr = "git commit -m \"$(cm)\"";

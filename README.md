@@ -195,7 +195,6 @@ Source: [Pull 127590](https://github.com/NixOS/nixpkgs/pull/127590)
 ## Future work
 
 1. Delete cryptroot on boot
-1. Make VSCode writeable
 1. Replace Gnome (too heavy) with I3
 1. Replace Chrome (non-free) with Chromium
 1. Configure user.email and branch in product and services

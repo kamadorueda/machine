@@ -54,6 +54,7 @@ _: with _; [
   packages.nixpkgs.traceroute
   packages.nixpkgs.tree
   packages.nixpkgs.vlc
+  packages.nixpkgs.vscode
   packages.nixpkgs.wirelesstools
   packages.nixpkgs.wpa_supplicant
   packages.nixpkgs.xclip

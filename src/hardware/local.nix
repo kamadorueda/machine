@@ -8,24 +8,24 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/9c68541d-ba2d-4475-a867-789580ecc1c4";
+    { device = "/dev/disk/by-uuid/af459c0e-fe31-4c7d-8e69-5ed168848146";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/00ea7072-60ec-45cd-8421-5ebcfc977220";
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/2f7e7640-4b78-4452-88e7-ad5935ac61af";
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/c0f41e03-4fc2-439c-8816-52039fc252e0";
+    { device = "/dev/disk/by-uuid/24196bc6-004e-46dd-ac16-f0c184008d9f";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."cryptnix".device = "/dev/disk/by-uuid/3c60f0a3-4b24-4df5-bd5a-5edf6f136c3e";
+  boot.initrd.luks.devices."cryptnix".device = "/dev/disk/by-uuid/510fea1f-1bfc-4456-a328-06ae7000ebc4";
 
   fileSystems."/nix/store" =
     { device = "/nix/store";
@@ -34,16 +34,16 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/F446-8957";
+    { device = "/dev/disk/by-uuid/E89E-4224";
       fsType = "vfat";
     };
 
   fileSystems."/data" =
-    { device = "/dev/disk/by-uuid/eab6f133-4ac5-4856-870b-f26531a788db";
+    { device = "/dev/disk/by-uuid/927ddd70-c78d-4393-8279-483218f7b39c";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."cryptdata".device = "/dev/disk/by-uuid/6a941b1f-6330-41e4-bf04-17a816aaee48";
+  boot.initrd.luks.devices."cryptdata".device = "/dev/disk/by-uuid/840336b1-cc61-4e65-a9d2-af80a9335bf8";
 
   swapDevices = [ ];
 
