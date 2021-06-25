@@ -18,7 +18,6 @@ _: with _; [
   packages.nixpkgs.ghc
   packages.nixpkgs.gnome.dconf-editor
   packages.nixpkgs.gnumake
-  packages.nixpkgs.google-chrome
   packages.nixpkgs.gnupg
   packages.nixpkgs.hugo
   packages.nixpkgs.jq
