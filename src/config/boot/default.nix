@@ -7,11 +7,11 @@ _: with _; {
     postDeviceCommands = packages.nixpkgs.lib.mkAfter ''
       ${packages.nixpkgs.utillinux}/bin/lsblk
 
-      ${packages.nixpkgs.coreutils}/bin/mkdir /eph
-      ${packages.nixpkgs.utillinux}/bin/mount /dev/disk/by-partlabel/root /eph
-      ${packages.nixpkgs.coreutils}/bin/rm -fr /eph/*
-      ${packages.nixpkgs.findutils}/bin/find /eph
-      ${packages.nixpkgs.utillinux}/bin/umount /eph
+      ${packages.nixpkgs.coreutils}/bin/mkdir /root
+      ${packages.nixpkgs.utillinux}/bin/mount /dev/disk/by-label/root /root
+      ${packages.nixpkgs.coreutils}/bin/rm -fr /root/*
+      ${packages.nixpkgs.findutils}/bin/find /root
+      ${packages.nixpkgs.utillinux}/bin/umount /root
       ${packages.nixpkgs.utillinux}/bin/lsblk
 
       ${packages.nixpkgs.coreutils}/bin/sleep 15
