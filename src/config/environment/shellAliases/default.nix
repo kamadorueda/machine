@@ -1,9 +1,9 @@
 _: with _; {
   a = "git add -p";
-  bashrc = "$EDITOR '${abs.machine}/src/config/programs/bash/bashrc.sh'";
+  bashrc = "${abs.editor} '${abs.machine}/src/config/programs/bash/bashrc.sh'";
   bat = "bat --show-all --theme=ansi";
   c = "git commit --allow-empty";
-  code = "$EDITOR";
+  code = "${abs.editor}";
   csv = "column -s, -t";
   cm = "git log -n 1 --format=%s%n%n%b";
   cr = "git commit -m \"$(cm)\"";
@@ -16,7 +16,7 @@ _: with _; {
   now = "date --iso-8601=seconds --utc";
   p = "git push -f";
   r = "git pull --autostash --progress --rebase --stat origin master";
-  ru = "git pull --autostash --progress --rebase --stat upstream master";
+  ru = "git pull --autostash --progress --rebase --stat upstream";
   rp = "r && p";
   s = "git status";
   today = "git log --format=%aI --author '${abs.emailAtWork}' | sed -E 's/T.*$//g' | uniq -c | head -n 7 | tac";

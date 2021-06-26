@@ -108,7 +108,7 @@ _: with _;{
             gpgsign = true;
           };
           core = {
-            editor = "$EDITOR --wait";
+            editor = "${abs.editor} --wait";
           };
           diff = {
             sopsdiffer = {
@@ -122,7 +122,7 @@ _: with _;{
           };
           difftool = {
             vscode = {
-              cmd = "$EDITOR --diff $LOCAL $REMOTE --wait";
+              cmd = "${abs.editor} --diff $LOCAL $REMOTE --wait";
             };
           };
           init = {
@@ -140,7 +140,7 @@ _: with _;{
           };
           mergetool = {
             vscode = {
-              cmd = "$EDITOR --wait $MERGED";
+              cmd = "${abs.editor} --wait $MERGED";
             };
           };
           user = {
