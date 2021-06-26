@@ -108,7 +108,7 @@ _: with _;{
             gpgsign = true;
           };
           core = {
-            editor = "${packages.nixpkgs.vscode}/bin/code --wait";
+            editor = "$EDITOR --wait";
           };
           diff = {
             sopsdiffer = {
@@ -122,7 +122,7 @@ _: with _;{
           };
           difftool = {
             vscode = {
-              cmd = "${packages.nixpkgs.vscode}/bin/code --diff $LOCAL $REMOTE --wait";
+              cmd = "$EDITOR --diff $LOCAL $REMOTE --wait";
             };
           };
           init = {
@@ -140,7 +140,7 @@ _: with _;{
           };
           mergetool = {
             vscode = {
-              cmd = "${packages.nixpkgs.vscode}/bin/code --wait $MERGED";
+              cmd = "$EDITOR --wait $MERGED";
             };
           };
           user = {

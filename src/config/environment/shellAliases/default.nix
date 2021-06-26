@@ -1,9 +1,9 @@
 _: with _; {
   a = "git add -p";
-  bashrc = "code '${abs.machine}/src/config/programs/bash/bashrc.sh'";
+  bashrc = "$EDITOR '${abs.machine}/src/config/programs/bash/bashrc.sh'";
   bat = "bat --show-all --theme=ansi";
   c = "git commit --allow-empty";
-  code="code --extensions-dir /data/vscode/extensions --user-data-dir /data/vscode/data";
+  code = "$EDITOR";
   csv = "column -s, -t";
   cm = "git log -n 1 --format=%s%n%n%b";
   cr = "git commit -m \"$(cm)\"";

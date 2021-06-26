@@ -150,12 +150,25 @@
         </details>
 
       - <details>
+          <summary>github/fluidattacks</summary>
+
+          ```bash
+              mkdir -p /data/github/kamadorueda \
+          &&  pushd /data/github/kamadorueda \
+            &&  git clone git@github.com:kamadorueda/makes \
+            &&  git -C makes remote add upstream git@github.com:fluidattacks/makes \
+          &&  popd
+          ```
+        </details>
+
+      - <details>
           <summary>github/nixos</summary>
 
           ```bash
               mkdir -p /data/github/nixos \
           &&  pushd /data/github/nixos \
-            &&  git clone git@github.com:NixOS/nixpkgs \
+            &&  git clone git@github.com:kamadorueda/nixpkgs \
+            &&  git -C nixpkgs remote add upstream git@github.com:nixos/nixpkgs \
           &&  popd
           ```
         </details>
@@ -167,7 +180,9 @@
               mkdir -p /data/gitlab/fluidattacks \
           &&  pushd /data/gitlab/fluidattacks \
             &&  git clone git@gitlab.com:fluidattacks/product \
+            &&  git -C product config user.email kamado@fluidattacks.com \
             &&  git clone git@gitlab.com:fluidattacks/services \
+            &&  git -C services config user.email kamado@fluidattacks.com \
           &&  popd
           ```
         </details>
