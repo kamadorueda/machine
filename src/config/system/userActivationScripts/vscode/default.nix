@@ -66,7 +66,7 @@ _: with _; utils.script {
       "editor.formatOnSave" = true;
       "editor.formatOnType" = false;
       "editor.fontFamily" = "'${abs.font}'";
-      "editor.fontSize" = 21.4;
+      "editor.fontSize" = 16.5;
       "editor.minimap.maxColumn" = 80;
       "editor.minimap.renderCharacters" = false;
       "editor.minimap.showSlider" = "always";
