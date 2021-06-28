@@ -201,6 +201,9 @@ via [Nix](https://nixos.org).
 
 Source: [Pull 127590](https://github.com/NixOS/nixpkgs/pull/127590)
 
+Caveats:
+- It does not work with Gnome Display Manager (gdm), use LightDM (lightdm)
+
 ## Useful links
 
 - [NixOS options](https://nixos.org/manual/nixos/stable/options.html)
