@@ -7,6 +7,7 @@ _: with _; {
   # https://chromeenterprise.google/policies/
   extraOpts = {
     BookmarkBarEnabled = true;
+    BrowserSignin = 0;
     ManagedBookmarks = [
       {
         toplevel_name = "Go";
@@ -28,6 +29,7 @@ _: with _; {
         url = "https://search.nixos.org/options";
       }
     ];
+    PasswordManagerEnabled = false;
     ShowAppsShortcutInBookmarkBar = false;
   };
 }
