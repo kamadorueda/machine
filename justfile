@@ -23,7 +23,6 @@ td_latest := "https://repo2.timedoctor.com/td-desktop-hybrid/prod/latest-linux.y
 update:
   @true \
     && just niv update homeManager \
-    && just niv update niv \
     && just niv update nixpkgs \
     && just niv update product \
     && td_version="$(curl -Ls {{td_latest}} | yq -r .version)" \
