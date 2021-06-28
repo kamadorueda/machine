@@ -203,6 +203,7 @@ Source: [Pull 127590](https://github.com/NixOS/nixpkgs/pull/127590)
 
 Caveats:
 - It does not work with Gnome Display Manager (gdm), use LightDM (lightdm)
+- It only works with X.org server, not Wayland, etc.
 
 ## Useful links
 
