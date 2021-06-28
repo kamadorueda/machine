@@ -24,6 +24,7 @@ update:
   @true \
     && just niv update homeManager \
     && just niv update nixpkgs \
+    && just niv update nixpkgsNixos \
     && just niv update product \
     && td_version="$(curl -Ls {{td_latest}} | yq -r .version)" \
     && echo "Time Doctor version: ${td_version}" \

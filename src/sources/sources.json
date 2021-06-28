@@ -23,6 +23,18 @@
         "url": "https://github.com/nixos/nixpkgs/archive/b1da480910cfd8870cdc0896b3a422c513be05c1.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "nixpkgsNixos": {
+        "branch": "nixos-21.05",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "6613a30c5e3ee59753181512b4bedd4121569925",
+        "sha256": "18v74cwjcl7qkdhgc8xic9fvp3330dsc82ah4xs3qzl5ks2h9d5h",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nixpkgs/archive/6613a30c5e3ee59753181512b4bedd4121569925.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "product": {
         "branch": "master",
         "description": "WARNING: This is mirror of https://gitlab.com/fluidattacks/product",

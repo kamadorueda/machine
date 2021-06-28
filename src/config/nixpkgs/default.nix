@@ -3,5 +3,4 @@ _: with _; {
     allowBroken = false;
     allowUnfree = true;
   };
-  pkgs = packages.nixpkgs;
 }
