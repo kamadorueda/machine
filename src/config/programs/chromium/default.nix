@@ -27,6 +27,14 @@ _: with _; {
         url = "https://search.nixos.org/options";
       }
       {
+        name = "home-manager manual";
+        url = "https://nix-community.github.io/home-manager";
+      }
+      {
+        name = "home-manager options";
+        url = "https://nix-community.github.io/home-manager/options.html";
+      }
+      {
         name = "timedoctor";
         url = "https://login.timedoctor.com";
       }
