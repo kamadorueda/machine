@@ -6,7 +6,7 @@ _: with _; {
   };
   nixPath = [
     "nixos-config=${abs.machine}/configuration.nix"
-    "nixpkgs=${sources.nixpkgsNixos}"
+    "nixpkgs=${sources.nixpkgs}"
   ];
   optimise = {
     automatic = true;
