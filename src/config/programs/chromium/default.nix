@@ -9,9 +9,7 @@ _: with _; {
     BookmarkBarEnabled = true;
     BrowserSignin = 0;
     ManagedBookmarks = [
-      {
-        toplevel_name = "Go";
-      }
+      { toplevel_name = "Go"; }
       {
         name = "okta";
         url = "https://fluidattacks.okta.com";
@@ -27,6 +25,10 @@ _: with _; {
       {
         name = "nixos options";
         url = "https://search.nixos.org/options";
+      }
+      {
+        name = "timedoctor";
+        url = "https://login.timedoctor.com";
       }
     ];
     PasswordManagerEnabled = false;
