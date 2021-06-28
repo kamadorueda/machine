@@ -8,6 +8,7 @@ _: with _; {
   extraOpts = {
     BookmarkBarEnabled = true;
     BrowserSignin = 0;
+    DefaultBrowserSettingEnabled = false;
     ManagedBookmarks = [
       { toplevel_name = "Go"; }
       {
