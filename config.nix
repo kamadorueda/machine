@@ -4,7 +4,6 @@ in
 {
   imports = [
     machine.hardware
-    "${machine.sources.homeManager}/nixos"
-    machine.config
+    machine.software
   ];
 }

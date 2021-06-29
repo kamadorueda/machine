@@ -15,7 +15,7 @@ rebuild *ARGS:
   nixos-generate-config --show-hardware-config | tee src/hardware/local.nix
   @echo
   @read -p 'Pess a key to continue...'
-  sudo env "NIX_PATH=nixos-config=${PWD}/configuration.nix:${NIX_PATH}" \
+  sudo env "NIX_PATH=nixos-config=${PWD}/config.nix:${NIX_PATH}" \
     nixos-rebuild {{ARGS}}
 
 td_latest := "https://repo2.timedoctor.com/td-desktop-hybrid/prod/latest-linux.yml"
