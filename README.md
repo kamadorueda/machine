@@ -96,7 +96,7 @@
         ip a
         wpa_supplicant -B -i "${interface}" -c <(wpa_passphrase "${ssid}" "{psk}")
       fi
-      nixos-install --no-root-passwd
+      nixos-install
       reboot
       ```
     </details>
