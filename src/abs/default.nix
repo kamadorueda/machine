@@ -1,5 +1,5 @@
 _: with _; {
-  editor = "code --extensions-dir /data/vscode/extensions --user-data-dir /data/vscode/data";
+  editor = "${packages.nixpkgs.vscode}/bin/code --extensions-dir /data/vscode/extensions --user-data-dir /data/vscode/data";
   email = "kamadorueda@gmail.com";
   emailAtWork = "kamado@fluidattacks.com";
   font = "ProFont for Powerline";
