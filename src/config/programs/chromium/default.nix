@@ -24,15 +24,19 @@ _: with _; {
         url = "https://gitlab.com/fluidattacks/product/-/pipelines?page=1&scope=all&ref=kamadoatfluid";
       }
       {
-        name = "nixos options";
+        name = "makes-pr";
+        url = "https://github.com/fluidattacks/makes/compare/main...kamadorueda:main";
+      }
+      {
+        name = "nixos-options";
         url = "https://search.nixos.org/options";
       }
       {
-        name = "home-manager manual";
+        name = "home-manager-manual";
         url = "https://nix-community.github.io/home-manager";
       }
       {
-        name = "home-manager options";
+        name = "home-manager-options";
         url = "https://nix-community.github.io/home-manager/options.html";
       }
       {
