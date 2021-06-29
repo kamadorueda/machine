@@ -212,7 +212,3 @@ Caveats:
 - [Home Manager options](https://nix-community.github.io/home-manager/options.html)
 
 ## Future work
-
-1. Delete cryptroot on boot
-1. Configure user.email and branch in product and services
-1. chown -R $USER /data
