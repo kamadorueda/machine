@@ -32,6 +32,7 @@ _: with _; [
   packages.nixpkgs.niv
   packages.nixpkgs.nix-index
   packages.nixpkgs.nix-info
+  packages.nixpkgs.nixos-generators
   packages.nixpkgs.nixpkgs-fmt
   packages.nixpkgs.nixpkgs-review
   packages.nixpkgs.nodejs
