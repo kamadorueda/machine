@@ -202,6 +202,7 @@ _: with _;{
         newline = true;
         pathAliases = {
           "${abs.machine}" = "@machine";
+          "${abs.makes}" = "@makes";
           "${abs.product}" = "@product";
           "${abs.secrets}" = "@secrets";
         };

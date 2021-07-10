@@ -9,6 +9,9 @@ _: with _; {
     args = {
       config = {
         allowUnfree = true;
+        android_sdk = {
+          accept_license = true;
+        };
       };
       overlays = [
         (self: super: {

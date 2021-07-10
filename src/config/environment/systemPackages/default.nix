@@ -1,4 +1,6 @@
 _: with _; [
+  packages.nixpkgs.androidsdk_9_0
+  packages.nixpkgs.asciinema
   packages.nixpkgs.awscli
   packages.nixpkgs.bat
   packages.nixpkgs.bind

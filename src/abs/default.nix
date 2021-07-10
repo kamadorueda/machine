@@ -6,6 +6,7 @@ _: with _; {
   home = "/home/kamadorueda";
   locale = "en_US.UTF-8";
   machine = "/data/github/kamadorueda/machine";
+  makes = "/data/github/kamadorueda/makes";
   name = "Kevin Amado";
   product = "/data/gitlab/fluidattacks/product";
   secrets = "/data/github/kamadorueda/secrets";
