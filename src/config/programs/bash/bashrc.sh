@@ -37,7 +37,7 @@ function fetch_fluid_var {
 
 source "${SECRETS}/machine/secrets.sh"
 
-export_fluid_aws_vars makes
+# export_fluid_aws_vars makes
 # export_fluid_aws_vars integrates
 # export_fluid_aws_vars skims
 

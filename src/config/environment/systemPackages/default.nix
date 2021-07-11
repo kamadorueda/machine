@@ -20,6 +20,7 @@ _: with _; [
   packages.nixpkgs.ghc
   packages.nixpkgs.gnome.dconf-editor
   packages.nixpkgs.gnumake
+  packages.nixpkgs.go
   packages.nixpkgs.google-chrome
   packages.nixpkgs.gnupg
   packages.nixpkgs.hugo
