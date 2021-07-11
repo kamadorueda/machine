@@ -212,3 +212,5 @@ Caveats:
 - [Home Manager options](https://nix-community.github.io/home-manager/options.html)
 
 ## Future work
+
+All good for now
