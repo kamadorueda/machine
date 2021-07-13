@@ -55,13 +55,61 @@ _: with _;{
         "org/gnome/settings-daemon/plugins/media-keys" = {
           custom-keybindings = [
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/"
           ];
           help = [ ];
         };
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-          binding = "<Primary><Alt>t";
+          binding = "<Primary><Super>t";
           command = "gnome-terminal";
           name = "gnome-terminal";
+        };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+          binding = "<Primary><Super>w";
+          command = "xdotool mousemove_relative -- 0 -10";
+          name = "mouse-up";
+        };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+          binding = "<Primary><Super>s";
+          command = "xdotool mousemove_relative -- 0 10";
+          name = "mouse-down";
+        };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
+          binding = "<Primary><Super>a";
+          command = "xdotool mousemove_relative -- -10 0";
+          name = "mouse-left";
+        };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
+          binding = "<Primary><Super>d";
+          command = "xdotool mousemove_relative -- 10 0";
+          name = "mouse-right";
+        };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5" = {
+          binding = "<Primary><Super>q";
+          command = "xdotool click --clearmodifiers 1";
+          name = "mouse-click-left";
+        };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6" = {
+          binding = "<Primary><Super>e";
+          command = "xdotool click --clearmodifiers 3";
+          name = "mouse-click-right";
+        };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7" = {
+          binding = "<Primary><Super>r";
+          command = "xdotool click --clearmodifiers 4";
+          name = "mouse-scroll-up";
+        };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8" = {
+          binding = "<Primary><Super>f";
+          command = "xdotool click --clearmodifiers 5";
+          name = "mouse-scroll-down";
         };
         "org/gnome/settings-daemon/plugins/power" = {
           idle-dim = false;
