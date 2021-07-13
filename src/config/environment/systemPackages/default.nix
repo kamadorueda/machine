@@ -62,5 +62,6 @@ _: with _; [
   packages.nixpkgs.wirelesstools
   packages.nixpkgs.wpa_supplicant
   packages.nixpkgs.xclip
+  packages.nixpkgs.xdotool
   packages.nixpkgs.yq
 ]
