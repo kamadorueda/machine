@@ -11,6 +11,18 @@
         "url": "https://github.com/nix-community/home-manager/archive/cd11c02c286a996ff55010146baecae4c413634f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "makes": {
+        "branch": "main",
+        "description": "A DevSecOps framework powered by Nix.",
+        "homepage": "",
+        "owner": "fluidattacks",
+        "repo": "makes",
+        "rev": "0920673273b3e20dd103cac1efafb0f96eb949cc",
+        "sha256": "1cmgd5l4kw5rsn98x3l8v43bdf30c0a2xbqdgp2lgjch3rvjn8zq",
+        "type": "tarball",
+        "url": "https://github.com/fluidattacks/makes/archive/0920673273b3e20dd103cac1efafb0f96eb949cc.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nixpkgs": {
         "branch": "master",
         "description": "Nix Packages collection",
