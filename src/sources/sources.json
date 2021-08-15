@@ -20,7 +20,7 @@
     "nixpkgsNixos": {
         "branch": "nixos-21.05",
         "repo": "https://github.com/nixos/nixpkgs",
-        "rev": "6613a30c5e3ee59753181512b4bedd4121569925",
+        "rev": "a445f5829889959d65ad65e5c961d5c67e1cd677",
         "type": "git"
     },
     "product": {
