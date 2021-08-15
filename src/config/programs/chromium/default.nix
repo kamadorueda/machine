@@ -28,6 +28,14 @@ _: with _; {
         url = "https://github.com/fluidattacks/makes/compare/main...kamadorueda:main";
       }
       {
+        name = "nixos-forum";
+        url = "https://discourse.nixos.org/latest";
+      }
+      {
+        name = "nixos-packages";
+        url = "https://search.nixos.org/packages";
+      }
+      {
         name = "nixos-options";
         url = "https://search.nixos.org/options";
       }
