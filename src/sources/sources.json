@@ -30,10 +30,10 @@
         "type": "git"
     },
     "timedoctor": {
-        "sha256": "01j149c6lacgysll3sajxlb43m1al08kdcwc6zyzw80nrp4iagf6",
+        "sha256": "1d86hibgbr4mhcfvapk6ibzrqpdiwagp6dhq6s2g88829x7skh6a",
         "type": "file",
-        "url": "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v3.12.12/timedoctor-desktop_3.12.12_linux-x86_64.AppImage",
+        "url": "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v3.12.13/timedoctor-desktop_3.12.13_linux-x86_64.AppImage",
         "url_template": "https://repo2.timedoctor.com/td-desktop-hybrid/prod/v<version>/timedoctor-desktop_<version>_linux-x86_64.AppImage",
-        "version": "3.12.12"
+        "version": "3.12.13"
     }
 }
