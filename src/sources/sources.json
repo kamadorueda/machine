@@ -13,15 +13,9 @@
     },
     "makes": {
         "branch": "main",
-        "description": "A DevSecOps framework powered by Nix.",
-        "homepage": "",
-        "owner": "fluidattacks",
-        "repo": "makes",
-        "rev": "0920673273b3e20dd103cac1efafb0f96eb949cc",
-        "sha256": "1cmgd5l4kw5rsn98x3l8v43bdf30c0a2xbqdgp2lgjch3rvjn8zq",
-        "type": "tarball",
-        "url": "https://github.com/fluidattacks/makes/archive/0920673273b3e20dd103cac1efafb0f96eb949cc.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+        "repo": "https://github.com/fluidattacks/makes",
+        "rev": "d7d0deeb96d26c31c2b255f91826ce9f20a83ea5",
+        "type": "git"
     },
     "nixpkgs": {
         "branch": "master",
