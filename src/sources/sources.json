@@ -1,15 +1,9 @@
 {
     "homeManager": {
         "branch": "master",
-        "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
-        "homepage": "https://nix-community.github.io/home-manager/",
-        "owner": "nix-community",
-        "repo": "home-manager",
+        "repo": "https://github.com/nix-community/home-manager",
         "rev": "cd11c02c286a996ff55010146baecae4c413634f",
-        "sha256": "0xkbqsbdmqwvigx63cv436bjm13f5rbka9f5y37nyp4hb69pml06",
-        "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/cd11c02c286a996ff55010146baecae4c413634f.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+        "type": "git"
     },
     "makes": {
         "branch": "main",
@@ -19,27 +13,15 @@
     },
     "nixpkgs": {
         "branch": "master",
-        "description": "Nix Packages collection",
-        "homepage": "",
-        "owner": "nixos",
-        "repo": "nixpkgs",
+        "repo": "https://github.com/nixos/nixpkgs",
         "rev": "b1da480910cfd8870cdc0896b3a422c513be05c1",
-        "sha256": "1g7pfj5fjryx8ksf6ksmmi9bhkfzpc9632s45m9b5p8g8z7qkn41",
-        "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/b1da480910cfd8870cdc0896b3a422c513be05c1.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+        "type": "git"
     },
     "nixpkgsNixos": {
         "branch": "nixos-21.05",
-        "description": "Nix Packages collection",
-        "homepage": "",
-        "owner": "nixos",
-        "repo": "nixpkgs",
+        "repo": "https://github.com/nixos/nixpkgs",
         "rev": "6613a30c5e3ee59753181512b4bedd4121569925",
-        "sha256": "18v74cwjcl7qkdhgc8xic9fvp3330dsc82ah4xs3qzl5ks2h9d5h",
-        "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/6613a30c5e3ee59753181512b4bedd4121569925.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+        "type": "git"
     },
     "product": {
         "branch": "master",
