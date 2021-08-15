@@ -2,7 +2,7 @@
     "homeManager": {
         "branch": "master",
         "repo": "https://github.com/nix-community/home-manager",
-        "rev": "cd11c02c286a996ff55010146baecae4c413634f",
+        "rev": "72f3bc6fa461a2899a06c87c137c7135e410e387",
         "type": "git"
     },
     "makes": {
