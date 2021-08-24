@@ -37,12 +37,12 @@ _: with _; utils.script {
 
               ${packages.nixpkgs.black}/bin/black \
                 --config \
-                ${sources.product}/makes/utils/python-format/settings-black.toml \
+                ${sources.makes}/src/evaluator/modules/format-python/settings-black.toml \
                 - \
                 | \
               ${packages.nixpkgs.python38Packages.isort}/bin/isort \
                 --settings-path \
-                ${sources.product}/makes/utils/python-format/settings-isort.toml \
+                ${sources.makes}/src/evaluator/modules/format-python/settings-isort.toml \
                 -
             '').outPath;
           languages = [ "python" ];

@@ -8,7 +8,7 @@
     "makes": {
         "branch": "main",
         "repo": "https://github.com/fluidattacks/makes",
-        "rev": "d7d0deeb96d26c31c2b255f91826ce9f20a83ea5",
+        "rev": "0fb6a5bd41cd85bdfb3a52019f18015ebf15f813",
         "type": "git"
     },
     "nixpkgs": {
