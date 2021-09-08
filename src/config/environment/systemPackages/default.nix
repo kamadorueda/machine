@@ -54,7 +54,6 @@ _: with _; [
   packages.nixpkgs.sops
   packages.nixpkgs.terraform
   packages.nixpkgs.tokei
-  packages.nixpkgs.torbrowser
   packages.nixpkgs.traceroute
   packages.nixpkgs.tree
   packages.nixpkgs.vlc
