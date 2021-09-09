@@ -150,6 +150,17 @@
         </details>
 
       - <details>
+          <summary>github/kamadorueda/nixpkgs-python</summary>
+
+          ```bash
+                mkdir -p /data/github/kamadorueda \
+          &&  pushd /data/github/kamadorueda \
+            &&  git clone git@github.com:kamadorueda/nixpkgs-python \
+          &&  popd
+          ```
+        </details>
+
+      - <details>
           <summary>github/fluidattacks</summary>
 
           ```bash
