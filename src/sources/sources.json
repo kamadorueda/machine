@@ -23,6 +23,18 @@
         "rev": "a445f5829889959d65ad65e5c961d5c67e1cd677",
         "type": "git"
     },
+    "nixpkgsPython": {
+        "branch": "main",
+        "description": "Extensive collection of Python packages from PyPI, for Nix",
+        "homepage": null,
+        "owner": "kamadorueda",
+        "repo": "nixpkgs-python",
+        "rev": "a5cdf6df7f155f5b96e625061db60fb17dcfa7e9",
+        "sha256": "0sc69iljc9plpdc6kphxgar6xwri4b434y4v00nvfwxj4lq464qb",
+        "type": "tarball",
+        "url": "https://github.com/kamadorueda/nixpkgs-python/archive/a5cdf6df7f155f5b96e625061db60fb17dcfa7e9.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "product": {
         "branch": "master",
         "repo": "https://gitlab.com/fluidattacks/product",
