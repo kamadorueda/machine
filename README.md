@@ -176,8 +176,8 @@
           <summary>github/nixos</summary>
 
           ```bash
-              mkdir -p /data/github/nixos \
-          &&  pushd /data/github/nixos \
+              mkdir -p /data/github/kamadorueda \
+          &&  pushd /data/github/kamadorueda \
             &&  git clone git@github.com:kamadorueda/nixpkgs \
             &&  git -C nixpkgs remote add upstream git@github.com:nixos/nixpkgs \
           &&  popd

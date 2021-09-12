@@ -47,7 +47,6 @@ _: with _; [
   packages.nixpkgs.pcre
   packages.nixpkgs.peek
   packages.nixpkgs.python38
-  packages.nixpkgs.python38Packages.isort
   packages.nixpkgs.qemu
   packages.nixpkgs.shadow
   packages.nixpkgs.shfmt

@@ -23,7 +23,7 @@ _: with _; {
     };
     source = sources.nixpkgs;
   };
-  product = utils.remoteImport {
-    source = sources.product;
+  nixpkgsPython = utils.remoteImport {
+    source = sources.nixpkgsPython;
   };
 }

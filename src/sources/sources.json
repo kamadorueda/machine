@@ -1,27 +1,51 @@
 {
     "homeManager": {
         "branch": "master",
-        "repo": "https://github.com/nix-community/home-manager",
+        "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
+        "homepage": "https://nix-community.github.io/home-manager/",
+        "owner": "nix-community",
+        "repo": "home-manager",
         "rev": "72f3bc6fa461a2899a06c87c137c7135e410e387",
-        "type": "git"
+        "sha256": "19346841har81bgj4vfb2ks222846ng185fcdhrwygxj6m3kbw5v",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/home-manager/archive/72f3bc6fa461a2899a06c87c137c7135e410e387.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "makes": {
         "branch": "main",
-        "repo": "https://github.com/fluidattacks/makes",
+        "description": "A DevSecOps framework powered by Nix.",
+        "homepage": "",
+        "owner": "fluidattacks",
+        "repo": "makes",
         "rev": "0fb6a5bd41cd85bdfb3a52019f18015ebf15f813",
-        "type": "git"
+        "sha256": "1w9hiwhbnrp43k2n6x5c431j3l7mym3zn39mhnv7qwxqvi9a6wzy",
+        "type": "tarball",
+        "url": "https://github.com/fluidattacks/makes/archive/0fb6a5bd41cd85bdfb3a52019f18015ebf15f813.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
         "branch": "master",
-        "repo": "https://github.com/nixos/nixpkgs",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "nixos",
+        "repo": "nixpkgs",
         "rev": "b1da480910cfd8870cdc0896b3a422c513be05c1",
-        "type": "git"
+        "sha256": "1g7pfj5fjryx8ksf6ksmmi9bhkfzpc9632s45m9b5p8g8z7qkn41",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nixpkgs/archive/b1da480910cfd8870cdc0896b3a422c513be05c1.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgsNixos": {
         "branch": "nixos-21.05",
-        "repo": "https://github.com/nixos/nixpkgs",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "nixos",
+        "repo": "nixpkgs",
         "rev": "a445f5829889959d65ad65e5c961d5c67e1cd677",
-        "type": "git"
+        "sha256": "0zl930jjacdphplw1wv5nlhjk15zvflzzwp53zbh0l8qq01wh7bl",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nixpkgs/archive/a445f5829889959d65ad65e5c961d5c67e1cd677.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgsPython": {
         "branch": "main",
@@ -29,10 +53,10 @@
         "homepage": null,
         "owner": "kamadorueda",
         "repo": "nixpkgs-python",
-        "rev": "a5cdf6df7f155f5b96e625061db60fb17dcfa7e9",
-        "sha256": "0sc69iljc9plpdc6kphxgar6xwri4b434y4v00nvfwxj4lq464qb",
+        "rev": "f3d3366c7c845164ebfe3b1b4ecb49e3adedfc79",
+        "sha256": "0l4gy2iwa10hj6wz9paz1h84gpsrnrm3c78mbsf8cd48sy9sdnmq",
         "type": "tarball",
-        "url": "https://github.com/kamadorueda/nixpkgs-python/archive/a5cdf6df7f155f5b96e625061db60fb17dcfa7e9.tar.gz",
+        "url": "https://github.com/kamadorueda/nixpkgs-python/archive/f3d3366c7c845164ebfe3b1b4ecb49e3adedfc79.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "product": {

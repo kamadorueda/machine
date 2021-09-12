@@ -42,6 +42,9 @@ _: with _;{
         "org/gnome/desktop/session" = {
           idle-delay = mkUint32 0;
         };
+        "org/gnome/desktop/sound" = {
+          allow-volume-above-100-percent = true;
+        };
         "org/gnome/desktop/wm/preferences" = {
           theme = "HighContrast";
         };

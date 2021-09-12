@@ -33,14 +33,12 @@ _: with _; utils.script {
             (packages.nixpkgs.writeScript "python-fmt" ''
               #! ${packages.nixpkgs.bash}/bin/bash
 
-              PYTHONPATH=/pythonpath/not/set
-
-              ${packages.nixpkgs.black}/bin/black \
+              ${packages.nixpkgsPython.projects.black.latest.latest.bin}/bin/black \
                 --config \
                 ${sources.makes}/src/evaluator/modules/format-python/settings-black.toml \
                 - \
                 | \
-              ${packages.nixpkgs.python38Packages.isort}/bin/isort \
+              ${packages.nixpkgsPython.projects.isort.latest.latest.bin}/bin/isort \
                 --settings-path \
                 ${sources.makes}/src/evaluator/modules/format-python/settings-isort.toml \
                 -
@@ -90,17 +88,19 @@ _: with _; utils.script {
       "python.linting.lintOnSave" = true;
       "python.linting.mypyArgs" = [
         "--config-file"
-        "${sources.product}/makes/utils/lint-python/settings-mypy.cfg"
+        "${sources.makes}/src/evaluator/modules/lint-python/settings-mypy.cfg"
       ];
       "python.linting.mypyEnabled" = true;
-      "python.linting.mypyPath" = "${packages.nixpkgs.mypy}/bin/mypy";
+      "python.linting.mypyPath" =
+        "${packages.nixpkgsPython.projects.mypy.latest.latest.bin}/bin/mypy";
       "python.linting.prospectorArgs" = [
         "--profile"
-        "${sources.product}/makes/utils/lint-python/settings-prospector.yaml"
+        "${sources.makes}/src/evaluator/modules/lint-python/settings-prospector.yaml"
       ];
       "python.defaultInterpreterPath" = "/run/current-system/sw/bin/python3.8";
       "python.linting.prospectorEnabled" = true;
-      "python.linting.prospectorPath" = "prospector";
+      "python.linting.prospectorPath" =
+        "${packages.nixpkgsPython.projects.prospector.latest.latest.bin}/bin/prospector";
       "python.linting.pylintEnabled" = false;
       "python.pythonPath" = "${packages.nixpkgs.python38}/bin/python";
       "security.workspace.trust.enabled" = false;
