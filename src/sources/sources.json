@@ -47,23 +47,23 @@
         "url": "https://github.com/nixos/nixpkgs/archive/a445f5829889959d65ad65e5c961d5c67e1cd677.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "nixpkgsPython": {
-        "branch": "main",
-        "description": "Extensive collection of Python packages from PyPI, for Nix",
-        "homepage": null,
-        "owner": "kamadorueda",
-        "repo": "nixpkgs-python",
-        "rev": "f3d3366c7c845164ebfe3b1b4ecb49e3adedfc79",
-        "sha256": "0l4gy2iwa10hj6wz9paz1h84gpsrnrm3c78mbsf8cd48sy9sdnmq",
-        "type": "tarball",
-        "url": "https://github.com/kamadorueda/nixpkgs-python/archive/f3d3366c7c845164ebfe3b1b4ecb49e3adedfc79.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "product": {
         "branch": "master",
         "repo": "https://gitlab.com/fluidattacks/product",
         "rev": "d8f5516c1b2f5b2d897dc78ce66c0ea31afd414b",
         "type": "git"
+    },
+    "pythonOnNix": {
+        "branch": "main",
+        "description": "Extensive collection of Python packages from PyPI, for Nix",
+        "homepage": null,
+        "owner": "kamadorueda",
+        "repo": "python-on-nix",
+        "rev": "910d3f6554acd4a4ef0425ebccd31104dccb283c",
+        "sha256": "191l3ncl4mwl5w5rby59k2gnjz0qrllxay6cm3vdfszlhk6p03r7",
+        "type": "tarball",
+        "url": "https://github.com/kamadorueda/python-on-nix/archive/910d3f6554acd4a4ef0425ebccd31104dccb283c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "timedoctor": {
         "sha256": "1d86hibgbr4mhcfvapk6ibzrqpdiwagp6dhq6s2g88829x7skh6a",

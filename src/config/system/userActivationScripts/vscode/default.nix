@@ -33,12 +33,12 @@ _: with _; utils.script {
             (packages.nixpkgs.writeScript "python-fmt" ''
               #! ${packages.nixpkgs.bash}/bin/bash
 
-              ${packages.nixpkgsPython.projects.black.latest.latest.bin}/bin/black \
+              ${packages.pythonOnNix.projects.black.latest.pythonLatest.bin}/bin/black \
                 --config \
                 ${sources.makes}/src/evaluator/modules/format-python/settings-black.toml \
                 - \
                 | \
-              ${packages.nixpkgsPython.projects.isort.latest.latest.bin}/bin/isort \
+              ${packages.pythonOnNix.projects.isort.latest.pythonLatest.bin}/bin/isort \
                 --settings-path \
                 ${sources.makes}/src/evaluator/modules/format-python/settings-isort.toml \
                 -
@@ -92,7 +92,7 @@ _: with _; utils.script {
       ];
       "python.linting.mypyEnabled" = true;
       "python.linting.mypyPath" =
-        "${packages.nixpkgsPython.projects.mypy.latest.latest.bin}/bin/mypy";
+        "${packages.pythonOnNix.projects.mypy.latest.pythonLatest.bin}/bin/mypy";
       "python.linting.prospectorArgs" = [
         "--profile"
         "${sources.makes}/src/evaluator/modules/lint-python/settings-prospector.yaml"
@@ -100,7 +100,7 @@ _: with _; utils.script {
       "python.defaultInterpreterPath" = "/run/current-system/sw/bin/python3.8";
       "python.linting.prospectorEnabled" = true;
       "python.linting.prospectorPath" =
-        "${packages.nixpkgsPython.projects.prospector.latest.latest.bin}/bin/prospector";
+        "${packages.pythonOnNix.projects.prospector.latest.pythonLatest.bin}/bin/prospector";
       "python.linting.pylintEnabled" = false;
       "python.pythonPath" = "${packages.nixpkgs.python38}/bin/python";
       "security.workspace.trust.enabled" = false;

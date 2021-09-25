@@ -23,7 +23,7 @@ _: with _; {
     };
     source = sources.nixpkgs;
   };
-  nixpkgsPython = utils.remoteImport {
-    source = sources.nixpkgsPython;
+  pythonOnNix = utils.remoteImport {
+    source = sources.pythonOnNix;
   };
 }
