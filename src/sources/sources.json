@@ -17,10 +17,10 @@
         "homepage": "",
         "owner": "fluidattacks",
         "repo": "makes",
-        "rev": "0fb6a5bd41cd85bdfb3a52019f18015ebf15f813",
-        "sha256": "1w9hiwhbnrp43k2n6x5c431j3l7mym3zn39mhnv7qwxqvi9a6wzy",
+        "rev": "4a6ed2304fb8ea457340c874899f2aa060a88b8e",
+        "sha256": "06j1m3fdj3l6wizs0w192k74il3zr7syc5h61fglr3gnqmf95wkq",
         "type": "tarball",
-        "url": "https://github.com/fluidattacks/makes/archive/0fb6a5bd41cd85bdfb3a52019f18015ebf15f813.tar.gz",
+        "url": "https://github.com/fluidattacks/makes/archive/4a6ed2304fb8ea457340c874899f2aa060a88b8e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
@@ -50,7 +50,7 @@
     "product": {
         "branch": "master",
         "repo": "https://gitlab.com/fluidattacks/product",
-        "rev": "d8f5516c1b2f5b2d897dc78ce66c0ea31afd414b",
+        "rev": "b05568b99c4dec0cbfd0bb876694642e8a57d57d",
         "type": "git"
     },
     "pythonOnNix": {
