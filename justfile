@@ -24,6 +24,9 @@ update:
   @echo Updating homeManager
   just niv update homeManager
 
+  @echo Updating makes
+  just niv update makes
+
   @echo Updating nixpkgs
   just niv update nixpkgs
 
