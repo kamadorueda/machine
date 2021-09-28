@@ -4,6 +4,7 @@ _: with _; {
   bat = "bat --show-all --theme=ansi";
   c = "git commit --allow-empty";
   ca = "git commit --amend --no-edit --allow-empty";
+  clip = "xclip -sel clip";
   code = "${abs.editor}";
   csv = "column -s, -t";
   cm = "git log -n 1 --format=%s%n%n%b";

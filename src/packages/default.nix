@@ -6,19 +6,21 @@ _: with _; {
     source = sources.homeManager;
   };
   makes = utils.remoteImport {
-    args = {
-      __globalStateDir__ = "$HOME_IMPURE/.makes/state";
-      __projectStateDir__ = "$HOME_IMPURE/.makes/state/machine";
-    };
+    args = { };
     source = "${sources.makes}/src/args/agnostic.nix";
   };
   nixpkgs = utils.remoteImport {
     args = {
       config = {
         allowUnfree = true;
-        android_sdk = {
-          accept_license = true;
-        };
+      };
+    };
+    source = sources.nixpkgs;
+  };
+  nixpkgsTimedoctor = utils.remoteImport {
+    args = {
+      config = {
+        allowUnfree = true;
       };
       overlays = [
         (self: super: {
@@ -28,7 +30,7 @@ _: with _; {
         })
       ];
     };
-    source = sources.nixpkgs;
+    source = sources.nixpkgsTimedoctor;
   };
   pythonOnNix = utils.remoteImport {
     source = sources.pythonOnNix;

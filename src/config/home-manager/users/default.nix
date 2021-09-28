@@ -295,15 +295,10 @@ _: with _;{
     };
     xdg = {
       desktopEntries = {
-        timedoctorNix1 = with packages.nixpkgs; {
+        timedoctorNix = with packages.nixpkgsTimedoctor; {
           name = "timedoctor-nix";
           exec = "${timedoctor}/bin/${timedoctor.name}";
           terminal = false;
-        };
-        timedoctorNix2 = with packages.nixpkgs; {
-          name = "timedoctor-nix2";
-          exec = "ELECTRON_ENABLE_LOGGING=true ${timedoctor}/bin/${timedoctor.name}";
-          terminal = true;
         };
       };
       enable = true;
