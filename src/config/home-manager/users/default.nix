@@ -162,6 +162,7 @@ _: with _;{
             editor = "${abs.editor} --wait";
           };
           diff = {
+            renamelimit = 16384;
             sopsdiffer = {
               textconv =
                 (packages.nixpkgs.writeScript "sopsdiffer.sh" ''
