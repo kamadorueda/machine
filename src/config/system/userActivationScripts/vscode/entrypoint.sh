@@ -1,3 +1,4 @@
+set -x
 info settings vscode...
 
 # Create --user-data-dir

@@ -103,7 +103,7 @@ let
           "--profile"
           "${sources.makes}/src/evaluator/modules/lint-python/settings-prospector.yaml"
         ];
-        "python.defaultInterpreterPath" = "/run/current-system/sw/bin/python3.8";
+        "python.defaultInterpreterPath" = "/run/current-system/sw/bin/python";
         "python.linting.prospectorEnabled" = true;
         "python.linting.prospectorPath" =
           "${packages.pythonOnNix.projects.prospector.latest.pythonLatest.bin}/bin/prospector";
@@ -125,4 +125,5 @@ let
     };
   };
 in
-builtins.readFile "${script}/bin/${name}"
+let x = builtins.readFile "${script}/bin/${name}";
+in builtins.trace x x
