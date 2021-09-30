@@ -10,7 +10,6 @@ _: with _; {
       ${utillinux}/bin/mount /dev/disk/by-label/root /mnt-root
       ${coreutils}/bin/rm -fr /mnt-root/*
       ${utillinux}/bin/umount /mnt-root
-      ${coreutils}/bin/sleep 5
     '';
   };
   loader = {
