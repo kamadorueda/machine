@@ -17,10 +17,10 @@
         "homepage": "",
         "owner": "fluidattacks",
         "repo": "makes",
-        "rev": "c09d7491cbc1fb52793e20f7c73e0def5f0b62aa",
-        "sha256": "1zl8r713dpbcwj46dz40y0gbdsvvwzms0hxd5600685v79dzkxyi",
+        "rev": "874fb8ca2eb28e60f5b51b8526d9616cfa624fb2",
+        "sha256": "116gzhd61x51ha3w3gc89qc61n6ps3lfxjyfsikzfjri6l2dffhk",
         "type": "tarball",
-        "url": "https://github.com/fluidattacks/makes/archive/c09d7491cbc1fb52793e20f7c73e0def5f0b62aa.tar.gz",
+        "url": "https://github.com/fluidattacks/makes/archive/874fb8ca2eb28e60f5b51b8526d9616cfa624fb2.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
@@ -29,10 +29,10 @@
         "homepage": "",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "f68d7408c6f41ca5493eb0cf6608d75a89f6b358",
-        "sha256": "0c7vrg5ygsd1gb5zclbnd84s9vp8bfjn21l5yb9jn07qm9br0bw6",
+        "rev": "a4d96cd808f13d924988938ecf9a46b2a2787fa3",
+        "sha256": "171i7xx3l13kyj662w7nc3007lf8wlxh7y127hf9bgybv5z828rk",
         "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/f68d7408c6f41ca5493eb0cf6608d75a89f6b358.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs/archive/a4d96cd808f13d924988938ecf9a46b2a2787fa3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgsNixos": {
@@ -41,10 +41,10 @@
         "homepage": "",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "fd8a7fd07da0f3fc0e27575891f45c2f88e5dd44",
-        "sha256": "076d2r9bm8jkbjs3viaw9mcq177jparxfqsmihj14gx0xynz24kx",
+        "rev": "ee90403e147b181300dffca5b0afa405e14f1945",
+        "sha256": "1mk3s4ncfa8z8mr6vrgjh74s8dci12yam7plpc1bqgz12wld73ax",
         "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/fd8a7fd07da0f3fc0e27575891f45c2f88e5dd44.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs/archive/ee90403e147b181300dffca5b0afa405e14f1945.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgsTimedoctor": {
@@ -62,7 +62,7 @@
     "product": {
         "branch": "master",
         "repo": "https://gitlab.com/fluidattacks/product",
-        "rev": "ce6cfbbd276b7feb2d42a819d47d46835d020b0c",
+        "rev": "a4f40246d0cb2b93503879272e0878378ada47e3",
         "type": "git"
     },
     "pythonOnNix": {
