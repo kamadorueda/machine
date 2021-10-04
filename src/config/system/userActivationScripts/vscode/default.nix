@@ -6,24 +6,6 @@ let
     inherit name;
     entrypoint = ./entrypoint.sh;
     replace = {
-      __argExtensions__ = packages.nixpkgs.symlinkJoin {
-        name = "extensions";
-        paths = [
-          packages.nixpkgs.vscode-extensions._4ops.terraform
-          # packages.nixpkgs.vscode-extensions.bbenoist.nix
-          packages.nixpkgs.vscode-extensions.coenraads.bracket-pair-colorizer-2
-          packages.nixpkgs.vscode-extensions.coolbear.systemd-unit-file
-          packages.nixpkgs.vscode-extensions.eamodio.gitlens
-          packages.nixpkgs.vscode-extensions.jkillian.custom-local-formatters
-          packages.nixpkgs.vscode-extensions.haskell.haskell
-          packages.nixpkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
-          # packages.nixpkgs.vscode-extensions.ms-python.python
-          packages.nixpkgs.vscode-extensions.ms-python.vscode-pylance
-          packages.nixpkgs.vscode-extensions.shardulm94.trailing-spaces
-          packages.nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
-          packages.nixpkgs.vscode-extensions.tamasfe.even-better-toml
-        ];
-      };
       __argSettings__ = packages.makes.toFileJson "settings.json" {
         "[html]" = {
           "editor.formatOnSave" = false;
@@ -125,5 +107,4 @@ let
     };
   };
 in
-let x = builtins.readFile "${script}/bin/${name}";
-in builtins.trace x x
+builtins.readFile "${script}/bin/${name}"
