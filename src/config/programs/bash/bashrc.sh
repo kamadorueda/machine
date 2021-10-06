@@ -1,14 +1,5 @@
 # shellcheck shell=bash
 
-function dev_env {
-  local code="${1}"
-
-  cd "${PRODUCT}" \
-    && source .envrc* \
-    && CACHIX_FLUIDATTACKS_TOKEN= ./m "makes.dev.${code}" \
-    && source "out/makes-dev-${code//./-}"
-}
-
 function export_fluid_var {
   export "${1}"="$(fetch_fluid_var ${1})"
 }
@@ -35,13 +26,6 @@ function fetch_fluid_var {
     && curl -s -H "private-token: ${GITLAB_API_TOKEN}" "${url}" | jq -r '.value'
 }
 
+export DIRENV_WARN_TIMEOUT=1h
 source "${SECRETS}/machine/secrets.sh"
 source <(m-comp-bash 2> /dev/null)
-
-# export_fluid_aws_vars makes
-# export_fluid_aws_vars integrates
-# export_fluid_aws_vars skims
-
-# dev_env integrates.back
-# dev_env skims
-# dev_env melts
