@@ -1,11 +1,10 @@
 _: with _; {
   a = "git add -p";
-  bashrc = "${abs.editor} '${abs.machine}/src/config/programs/bash/bashrc.sh'";
   bat = "bat --show-all --theme=ansi";
   c = "git commit --allow-empty";
   ca = "git commit --amend --no-edit --allow-empty";
   clip = "xclip -sel clip";
-  code = "${abs.editor}";
+  code = "${abs.editor.bin}";
   csv = "column -s, -t";
   cm = "git log -n 1 --format=%s%n%n%b";
   cr = "git commit -m \"$(cm)\"";

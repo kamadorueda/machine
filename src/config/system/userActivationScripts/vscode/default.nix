@@ -6,6 +6,7 @@ let
     inherit name;
     entrypoint = ./entrypoint.sh;
     replace = {
+      __argEditor__ = abs.editor.bin;
       __argSettings__ = packages.makes.toFileJson "settings.json" {
         "[html]" = {
           "editor.formatOnSave" = false;

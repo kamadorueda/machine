@@ -159,7 +159,7 @@ _: with _;{
             gpgsign = true;
           };
           core = {
-            editor = "${abs.editor} --wait";
+            editor = "${abs.editor.bin} --wait";
           };
           diff = {
             renamelimit = 16384;
@@ -174,7 +174,7 @@ _: with _;{
           };
           difftool = {
             vscode = {
-              cmd = "${abs.editor} --diff $LOCAL $REMOTE --wait";
+              cmd = "${abs.editor.bin} --diff $LOCAL $REMOTE --wait";
             };
           };
           init = {
@@ -192,7 +192,7 @@ _: with _;{
           };
           mergetool = {
             vscode = {
-              cmd = "${abs.editor} --wait $MERGED";
+              cmd = "${abs.editor.bin} --wait $MERGED";
             };
           };
           user = {

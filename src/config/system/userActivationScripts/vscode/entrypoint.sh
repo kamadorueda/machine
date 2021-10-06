@@ -9,9 +9,8 @@ mkdir -p "${user_data_dir}/User"
 copy __argSettings__ "${user_data_dir}/User/settings.json"
 
 # Create --extensions-dir
-extensions_dir=/data/vscode/extensions
 extensions=(
-  bbenoist.Nix
+  bbenoist.nix
   CoenraadS.bracket-pair-colorizer
   coolbear.systemd-unit-file
   eamodio.gitlens
@@ -29,8 +28,5 @@ extensions=(
   tamasfe.even-better-toml
 )
 for extension in "${extensions[@]}"; do
-  code \
-    --extensions-dir "${extensions_dir}" \
-    --force \
-    --install-extension "${extension}"
+  __argEditor__ --force --install-extension "${extension}"
 done

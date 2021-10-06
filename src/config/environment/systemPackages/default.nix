@@ -1,4 +1,5 @@
 _: with _; [
+  abs.editor.package
   packages.nixpkgs.awscli
   packages.nixpkgs.bat
   packages.nixpkgs.coreutils
@@ -32,7 +33,6 @@ _: with _; [
   packages.nixpkgs.tokei
   packages.nixpkgs.tree
   packages.nixpkgs.vlc
-  packages.nixpkgs.vscode
   packages.nixpkgs.xclip
   packages.nixpkgs.xdotool
   packages.nixpkgs.yq
