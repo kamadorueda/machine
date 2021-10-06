@@ -10,9 +10,8 @@ copy __argSettings__ "${user_data_dir}/User/settings.json"
 
 # Create --extensions-dir
 extensions_dir=/data/vscode/extensions
-rm -rf "${extensions_dir}"
 extensions=(
-  benoist.Nix
+  bbenoist.Nix
   CoenraadS.bracket-pair-colorizer
   coolbear.systemd-unit-file
   eamodio.gitlens
