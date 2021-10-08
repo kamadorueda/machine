@@ -5,15 +5,12 @@ _: with _; {
       reusePassphrases = true;
     };
     postDeviceCommands = ''
-      set -x
-      sleep 5
       echo wiping root device...
       mkdir /tmp/root
-      mount /dev/disk/by-label/root /tmp/root
+      ${packages.nixpkgsNixos.utillinux}/bin/mount \
+        /dev/disk/by-label/root /tmp/root
       rm -fr /tmp/root/*
-      umount /tmp/root
-      set +x
-      sleep 60
+      ${packages.nixpkgsNixos.utillinux}/bin/umount /tmp/root
     '';
   };
   loader = {
