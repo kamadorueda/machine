@@ -4,12 +4,16 @@ _: with _; {
     luks = {
       reusePassphrases = true;
     };
-    postDeviceCommands = with packages.nixpkgs; lib.mkAfter ''
-      ${coreutils}/bin/echo wiping root device...
-      ${coreutils}/bin/mkdir /mnt-root
-      ${utillinux}/bin/mount /dev/disk/by-label/root /mnt-root
-      ${coreutils}/bin/rm -fr /mnt-root/*
-      ${utillinux}/bin/umount /mnt-root
+    postDeviceCommands = ''
+      set -x
+      sleep 5
+      echo wiping root device...
+      mkdir /tmp/root
+      mount /dev/disk/by-label/root /tmp/root
+      rm -fr /tmp/root/*
+      umount /tmp/root
+      set +x
+      sleep 60
     '';
   };
   loader = {
