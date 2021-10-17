@@ -5,10 +5,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "592da767bd46a206a1a8200a48b829a59a06b969",
-        "sha256": "0sanqcr0vpr7cr0pxm4xgih4l7bb8zw2mwxj8b2qgkqh3w742laf",
+        "rev": "309808afbc2a07e340067f66029a4202b4c4b959",
+        "sha256": "0gwk6xgfajw31v3q2hzzr34yizssc75r87jg4vyvx0amdk4isbdm",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/592da767bd46a206a1a8200a48b829a59a06b969.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/309808afbc2a07e340067f66029a4202b4c4b959.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "makes": {
@@ -17,10 +17,10 @@
         "homepage": "",
         "owner": "fluidattacks",
         "repo": "makes",
-        "rev": "2f18403a393cdebefe0a7bffb6dcb3047583ffc7",
-        "sha256": "04kdhvijqrdxs278yaklhh5np1ykx6b1yvd722a0qvn91jflr0qb",
+        "rev": "d4a5025ab4ae17a498f118bf26dece6b77867e35",
+        "sha256": "1grn8zxs8wz4ya9qq67fsm7qlbw6jivr9g7p7v7wny5cxmx00cfd",
         "type": "tarball",
-        "url": "https://github.com/fluidattacks/makes/archive/2f18403a393cdebefe0a7bffb6dcb3047583ffc7.tar.gz",
+        "url": "https://github.com/fluidattacks/makes/archive/d4a5025ab4ae17a498f118bf26dece6b77867e35.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
@@ -29,10 +29,10 @@
         "homepage": "",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "56278b034dd59b4bed9a602e606f76a33216425d",
-        "sha256": "1qyadk09wws4fww5wp95j36cr6z2hgx9rnwym7w9wcincm51gd2c",
+        "rev": "f0869742a4c475442b9bfaf29e4e01845c00e19d",
+        "sha256": "05zpkbr7nb9l05scbs6hx0z8p3n3zvq3wc2djlimdyyh1kww379q",
         "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/56278b034dd59b4bed9a602e606f76a33216425d.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs/archive/f0869742a4c475442b9bfaf29e4e01845c00e19d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgsNixos": {
@@ -41,10 +41,10 @@
         "homepage": "",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "aff647e2704fa1223994604887bb78276dc57083",
-        "sha256": "18zi4dq9d4c4v5rr5chkpb6mj27xrdybsp1qy17d9038clzgd315",
+        "rev": "83667ff60a88e22b76ef4b0bdf5334670b39c2b6",
+        "sha256": "0i3cl781909mshwh9f5k94z81ixmfk0k4427afajwm6lr2hgp4kp",
         "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/aff647e2704fa1223994604887bb78276dc57083.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs/archive/83667ff60a88e22b76ef4b0bdf5334670b39c2b6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgsTimedoctor": {
@@ -62,7 +62,7 @@
     "product": {
         "branch": "master",
         "repo": "https://gitlab.com/fluidattacks/product",
-        "rev": "744fc724fe1cfc0babd79f1fc754c03053c5926d",
+        "rev": "ebff7b6ccfb25a191ce8c526ff82431d6317891e",
         "type": "git"
     },
     "pythonOnNix": {
