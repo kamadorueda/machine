@@ -40,7 +40,7 @@ let
           }
           {
             command = "${packages.nixpkgs.terraform}/bin/terraform fmt -";
-            languages = [ "tf" ];
+            languages = [ "terraform" ];
           }
         ];
         "diffEditor.ignoreTrimWhitespace" = false;
