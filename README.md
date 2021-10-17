@@ -17,12 +17,16 @@
 1.  <details>
       <summary>Burn it into a USB stick.</summary>
 
-      ```bash
-      lsblk
-      umount "${partition}"
-      parted "${device}" -- mktable msdos
-      dd bs=1MiB if="${iso}" of="${device}" oflag=direct status=progress
-      ```
+      - If you are currently on Windows use [Rufus](https://rufus.ie)
+
+      - If you are on an unix-like operative system:
+
+        ```bash
+        lsblk
+        umount "${partition}"
+        parted "${device}" -- mktable msdos
+        dd bs=1MiB if="${iso}" of="${device}" oflag=direct status=progress
+        ```
     </details>
 
 1.  Boot from the USB stick, start the installation and then `sudo su`.
