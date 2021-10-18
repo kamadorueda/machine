@@ -14,6 +14,14 @@ let
         "[python]" = { "editor.tabSize" = 4; };
         "customLocalFormatters.formatters" = [
           {
+            command = "clang-format --sort-includes --style=microsoft";
+            languages = [ "cpp" ];
+          }
+          {
+            command = "jq";
+            languages = [ "json" "jsonc" ];
+          }
+          {
             command = "${packages.nixpkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
             languages = [ "nix" ];
           }
