@@ -5,6 +5,9 @@ _: with _; {
     };
   };
   displayManager = {
+    gdm = {
+      enable = true;
+    };
     lightdm = {
       background = packages.nixpkgs.nixos-artwork.wallpapers.dracula.gnomeFilePath;
     };
