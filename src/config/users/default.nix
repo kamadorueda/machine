@@ -1,11 +1,16 @@
-_: with _; {
+_: with _;
+let
+  # mkpasswd -m sha-512
+  hashedPassword = "$6$lN51G8gh$ETrEWKgyhHPtt3PiMMkB1brrUwORe70KYONhxMhXcXSY7.zswV/FvrMuKV.uTIRvPbm4mvMp0EeP7Fv15mUh2.";
+in
+{
   groups = {
     docker = { };
   };
   mutableUsers = false;
   users = {
     root = {
-      password = "1";
+      inherit hashedPassword;
     };
     "${abs.username}" = {
       extraGroups = [
@@ -15,7 +20,7 @@ _: with _; {
       ];
       home = abs.home;
       isNormalUser = true;
-      password = "1";
+      inherit hashedPassword;
     };
   };
 }
