@@ -24,16 +24,8 @@ _: with _; {
         url = "https://gitlab.com/fluidattacks/product/-/pipelines?page=1&scope=all&ref=kamadoatfluid";
       }
       {
-        name = "makes";
-        url = "https://github.com/fluidattacks/makes";
-      }
-      {
-        name = "makes-pr";
-        url = "https://github.com/fluidattacks/makes/compare/main...kamadorueda:main";
-      }
-      {
-        name = "python-on-nix";
-        url = "https://github.com/kamadorueda/python-on-nix";
+        name = "on-nix";
+        url = "https://github.com/on-nix";
       }
       {
         name = "nixos-forum";
