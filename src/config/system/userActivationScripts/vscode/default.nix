@@ -18,7 +18,7 @@ let
             languages = [ "cpp" ];
           }
           {
-            command = "jq";
+            command = "jq -S";
             languages = [ "json" "jsonc" ];
           }
           {
