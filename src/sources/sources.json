@@ -53,10 +53,10 @@
     "homepage": null,
     "owner": "on-nix",
     "repo": "python",
-    "rev": "c6e270da122661b673d810f8baf9107d029d0865",
-    "sha256": "0mgyd3b2dx5y018gkxx1jiqv1gq5am0qzrc17bmczhj5pdw500rn",
+    "rev": "7ba5e876bd86df430df55754673ad0624f09e151",
+    "sha256": "1c8d9gw1726yvp2zm1a766940f7x154gf2jd1kxb78j5mqq4wzm5",
     "type": "tarball",
-    "url": "https://github.com/on-nix/python/archive/c6e270da122661b673d810f8baf9107d029d0865.tar.gz",
+    "url": "https://github.com/on-nix/python/archive/7ba5e876bd86df430df55754673ad0624f09e151.tar.gz",
     "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
   }
 }
