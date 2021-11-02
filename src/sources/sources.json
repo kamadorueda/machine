@@ -1,80 +1,80 @@
 {
-  "homeManager": {
-    "branch": "master",
-    "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
-    "homepage": "https://nix-community.github.io/home-manager/",
-    "owner": "nix-community",
-    "repo": "home-manager",
-    "rev": "288faaa5a65e72e37e6027024829b15c8bb69286",
-    "sha256": "1y9n1v91hqhyv9l92gqkhdajwif4h27hnqrrv5q8xhg2yjlq67nq",
-    "type": "tarball",
-    "url": "https://github.com/nix-community/home-manager/archive/288faaa5a65e72e37e6027024829b15c8bb69286.tar.gz",
-    "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-  },
-  "makes": {
-    "branch": "main",
-    "description": "A DevSecOps framework powered by Nix.",
-    "homepage": "",
-    "owner": "fluidattacks",
-    "repo": "makes",
-    "rev": "c3451d0c14f5f1728eb8358fe021535021d209b2",
-    "sha256": "037kabrvfzrs8874dcqw43wyba14i08xj355q2x6rdr982401cqw",
-    "type": "tarball",
-    "url": "https://github.com/fluidattacks/makes/archive/c3451d0c14f5f1728eb8358fe021535021d209b2.tar.gz",
-    "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-  },
-  "nixpkgs": {
-    "branch": "nixpkgs-unstable",
-    "description": "Nix Packages collection",
-    "homepage": "",
-    "owner": "nixos",
-    "repo": "nixpkgs",
-    "rev": "7053541084bf5ce2921ef307e5585d39d7ba8b3f",
-    "sha256": "1flhh5d4zy43x6060hvzjb5hi5cmc51ivc0nwmija9n8d35kcc4x",
-    "type": "tarball",
-    "url": "https://github.com/nixos/nixpkgs/archive/7053541084bf5ce2921ef307e5585d39d7ba8b3f.tar.gz",
-    "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-  },
-  "nixpkgsNixos": {
-    "branch": "nixos-21.05",
-    "description": "Nix Packages collection",
-    "homepage": "",
-    "owner": "nixos",
-    "repo": "nixpkgs",
-    "rev": "f0869b1a2c0b150aac26e10bb5c2364ffb2e804f",
-    "sha256": "150rrksrjf6w9m3c1ll04xilpglysklfpi636rxwyy318g5xss55",
-    "type": "tarball",
-    "url": "https://github.com/nixos/nixpkgs/archive/f0869b1a2c0b150aac26e10bb5c2364ffb2e804f.tar.gz",
-    "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-  },
-  "nixpkgsTimedoctor": {
-    "branch": "7310407d493ee1c7caf38f8181507d7ac9c90eb8",
-    "description": "Nix Packages collection",
-    "homepage": "",
-    "owner": "nixos",
-    "repo": "nixpkgs",
-    "rev": "7310407d493ee1c7caf38f8181507d7ac9c90eb8",
-    "sha256": "1fwqfl3l5pip9ngyln7kanka5m0xlx8v5n4jbk88mn5zrn8psdyz",
-    "type": "tarball",
-    "url": "https://github.com/nixos/nixpkgs/archive/7310407d493ee1c7caf38f8181507d7ac9c90eb8.tar.gz",
-    "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-  },
-  "product": {
-    "branch": "master",
-    "repo": "https://gitlab.com/fluidattacks/product",
-    "rev": "0a6d207a4576e7b475e35319ce80f4010dcf6151",
-    "type": "git"
-  },
-  "pythonOnNix": {
-    "branch": "main",
-    "description": "Extensive collection of Python packages from PyPI, for Nix",
-    "homepage": null,
-    "owner": "kamadorueda",
-    "repo": "python-on-nix",
-    "rev": "910d3f6554acd4a4ef0425ebccd31104dccb283c",
-    "sha256": "191l3ncl4mwl5w5rby59k2gnjz0qrllxay6cm3vdfszlhk6p03r7",
-    "type": "tarball",
-    "url": "https://github.com/kamadorueda/python-on-nix/archive/910d3f6554acd4a4ef0425ebccd31104dccb283c.tar.gz",
-    "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-  }
+    "homeManager": {
+        "branch": "master",
+        "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
+        "homepage": "https://nix-community.github.io/home-manager/",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "288faaa5a65e72e37e6027024829b15c8bb69286",
+        "sha256": "1y9n1v91hqhyv9l92gqkhdajwif4h27hnqrrv5q8xhg2yjlq67nq",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/home-manager/archive/288faaa5a65e72e37e6027024829b15c8bb69286.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "makes": {
+        "branch": "main",
+        "description": "A DevSecOps framework powered by Nix.",
+        "homepage": "",
+        "owner": "fluidattacks",
+        "repo": "makes",
+        "rev": "158dd48af51bed34df84de5ef6ced031bc97524b",
+        "sha256": "08qf615q6yivpdhk98z3zin09pg2i8015j2h0gfsglxh8icdqhqh",
+        "type": "tarball",
+        "url": "https://github.com/fluidattacks/makes/archive/158dd48af51bed34df84de5ef6ced031bc97524b.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs": {
+        "branch": "nixpkgs-unstable",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "7053541084bf5ce2921ef307e5585d39d7ba8b3f",
+        "sha256": "1flhh5d4zy43x6060hvzjb5hi5cmc51ivc0nwmija9n8d35kcc4x",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nixpkgs/archive/7053541084bf5ce2921ef307e5585d39d7ba8b3f.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgsNixos": {
+        "branch": "nixos-21.05",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "f0869b1a2c0b150aac26e10bb5c2364ffb2e804f",
+        "sha256": "150rrksrjf6w9m3c1ll04xilpglysklfpi636rxwyy318g5xss55",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nixpkgs/archive/f0869b1a2c0b150aac26e10bb5c2364ffb2e804f.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgsTimedoctor": {
+        "branch": "7310407d493ee1c7caf38f8181507d7ac9c90eb8",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "7310407d493ee1c7caf38f8181507d7ac9c90eb8",
+        "sha256": "1fwqfl3l5pip9ngyln7kanka5m0xlx8v5n4jbk88mn5zrn8psdyz",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nixpkgs/archive/7310407d493ee1c7caf38f8181507d7ac9c90eb8.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "product": {
+        "branch": "master",
+        "repo": "https://gitlab.com/fluidattacks/product",
+        "rev": "11e869e14103848b16dfe5a4058f5eb3f4281d9e",
+        "type": "git"
+    },
+    "pythonOnNix": {
+        "branch": "main",
+        "description": "Extensive collection of Python packages from PyPI, for Nix",
+        "homepage": null,
+        "owner": "kamadorueda",
+        "repo": "python-on-nix",
+        "rev": "dc82df64fd117a8ba923a6d77f870a9f1e10aec7",
+        "sha256": "0p49q8lqnspbig9g8inw75p666y704wkpxp1sznaajsyql6lawr1",
+        "type": "tarball",
+        "url": "https://github.com/kamadorueda/python-on-nix/archive/dc82df64fd117a8ba923a6d77f870a9f1e10aec7.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
 }
