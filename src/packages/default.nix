@@ -17,10 +17,6 @@ _: with _; {
     };
     source = sources.nixpkgs;
   };
-  nixpkgsNixos = utils.remoteImport {
-    args = { };
-    source = sources.nixpkgsNixos;
-  };
   nixpkgsTimedoctor = utils.remoteImport {
     args = {
       config = {

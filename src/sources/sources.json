@@ -35,18 +35,6 @@
     "url": "https://github.com/nixos/nixpkgs/archive/7053541084bf5ce2921ef307e5585d39d7ba8b3f.tar.gz",
     "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
   },
-  "nixpkgsNixos": {
-    "branch": "nixos-21.05",
-    "description": "Nix Packages collection",
-    "homepage": "",
-    "owner": "nixos",
-    "repo": "nixpkgs",
-    "rev": "f0869b1a2c0b150aac26e10bb5c2364ffb2e804f",
-    "sha256": "150rrksrjf6w9m3c1ll04xilpglysklfpi636rxwyy318g5xss55",
-    "type": "tarball",
-    "url": "https://github.com/nixos/nixpkgs/archive/f0869b1a2c0b150aac26e10bb5c2364ffb2e804f.tar.gz",
-    "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-  },
   "nixpkgsTimedoctor": {
     "branch": "7310407d493ee1c7caf38f8181507d7ac9c90eb8",
     "description": "Nix Packages collection",

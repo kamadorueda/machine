@@ -7,10 +7,10 @@ _: with _; {
     postDeviceCommands = ''
       echo wiping root device...
       mkdir /tmp/root
-      ${packages.nixpkgsNixos.utillinux}/bin/mount \
+      ${packages.nixpkgs.utillinux}/bin/mount \
         /dev/disk/by-label/root /tmp/root
       rm -fr /tmp/root/*
-      ${packages.nixpkgsNixos.utillinux}/bin/umount /tmp/root
+      ${packages.nixpkgs.utillinux}/bin/umount /tmp/root
     '';
   };
   loader = {

@@ -3,7 +3,7 @@ _: with _; {
   maxJobs = 1;
   nixPath = [
     "nixos-config=${abs.machine}/configuration.nix"
-    "nixpkgs=${sources.nixpkgsNixos}"
+    "nixpkgs=${sources.nixpkgs}"
   ];
   optimise = {
     automatic = true;
