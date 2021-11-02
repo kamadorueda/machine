@@ -38,5 +38,9 @@ _: with _; {
   };
   pythonOnNix = utils.remoteImport {
     source = sources.pythonOnNix;
+    # args = {
+    #   nixpkgs = packages.nixpkgs;
+    #   system = builtins.currentSystem;
+    # };
   };
 }
