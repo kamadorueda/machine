@@ -5,10 +5,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "288faaa5a65e72e37e6027024829b15c8bb69286",
-        "sha256": "1y9n1v91hqhyv9l92gqkhdajwif4h27hnqrrv5q8xhg2yjlq67nq",
+        "rev": "70c5b268e10025c70823767f4fb49e240b40151d",
+        "sha256": "09si7wq89qpyzfxgs1862s7lv8sl0ikwx7cy9vavf1hd5y6m13s4",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/288faaa5a65e72e37e6027024829b15c8bb69286.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/70c5b268e10025c70823767f4fb49e240b40151d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "makes": {
@@ -17,10 +17,10 @@
         "homepage": "",
         "owner": "fluidattacks",
         "repo": "makes",
-        "rev": "158dd48af51bed34df84de5ef6ced031bc97524b",
-        "sha256": "08qf615q6yivpdhk98z3zin09pg2i8015j2h0gfsglxh8icdqhqh",
+        "rev": "4524dd65d1455fef0686d280c45587e0f3229876",
+        "sha256": "0j6br6bf9jvfl3zp64bhrg9b13ikjjn5z3vjqs7x8s38k97w4518",
         "type": "tarball",
-        "url": "https://github.com/fluidattacks/makes/archive/158dd48af51bed34df84de5ef6ced031bc97524b.tar.gz",
+        "url": "https://github.com/fluidattacks/makes/archive/4524dd65d1455fef0686d280c45587e0f3229876.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
@@ -29,10 +29,10 @@
         "homepage": "",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "550dab224a26ec25e20e82c0c8bfc764e01b772e",
-        "sha256": "1dh518kmvjvlm8r04pvf6xvi1kr7c79d20q810jl9yg36cpkn24i",
+        "rev": "4789953e5c1ef6d10e3ff437e5b7ab8eed526942",
+        "sha256": "15nksgi9pncz59l8vrfg05g9dqw835wwdi9bmghffyg0k1yh2j8d",
         "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/550dab224a26ec25e20e82c0c8bfc764e01b772e.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs/archive/4789953e5c1ef6d10e3ff437e5b7ab8eed526942.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgsTimedoctor": {
@@ -53,10 +53,10 @@
         "homepage": null,
         "owner": "on-nix",
         "repo": "python",
-        "rev": "7ba5e876bd86df430df55754673ad0624f09e151",
-        "sha256": "1c8d9gw1726yvp2zm1a766940f7x154gf2jd1kxb78j5mqq4wzm5",
+        "rev": "a58286c90d9bb13d86677a3f6af6916b571693b8",
+        "sha256": "16ggcxyv8qriycxkmidw1sqaa2n1fr9y5c7wi24az2ahfdbzqzin",
         "type": "tarball",
-        "url": "https://github.com/on-nix/python/archive/7ba5e876bd86df430df55754673ad0624f09e151.tar.gz",
+        "url": "https://github.com/on-nix/python/archive/a58286c90d9bb13d86677a3f6af6916b571693b8.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
