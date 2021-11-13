@@ -5,10 +5,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "2917ef23b398a22ee33fb34b5766b28728228ab1",
-        "sha256": "09whf7ai8ppcj931r82wyahgfhrk32r54arbi3lpwz4w38d2x5mm",
+        "rev": "520adafcb993bf382e9c3e20742c9b4f998330bf",
+        "sha256": "1r2s2f01dx95qs48nx5337c6k3dp5d3hzb705jjpclczyf174wxp",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/2917ef23b398a22ee33fb34b5766b28728228ab1.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/520adafcb993bf382e9c3e20742c9b4f998330bf.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "makes": {
@@ -17,10 +17,10 @@
         "homepage": "",
         "owner": "fluidattacks",
         "repo": "makes",
-        "rev": "29c058c8df8ea16f7b6898842c8a773c287b4ccd",
-        "sha256": "1h8axdaz1xfy4zk12qbzyn4zgwqa5b5xnnnmmzjpws46k23gyi2j",
+        "rev": "dcf78966401927d952d0d5e804887703ed104b20",
+        "sha256": "1zhnr1gl60gb46yx36p7nxhkys9a6al0jsn7crcizh266khy3ijk",
         "type": "tarball",
-        "url": "https://github.com/fluidattacks/makes/archive/29c058c8df8ea16f7b6898842c8a773c287b4ccd.tar.gz",
+        "url": "https://github.com/fluidattacks/makes/archive/dcf78966401927d952d0d5e804887703ed104b20.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
@@ -29,10 +29,10 @@
         "homepage": "",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "d14ae62671fd4eaec57427da1e50f91d6a5f9605",
-        "sha256": "1d5r94b693pri0prwbv3009fnanjmpd4jyldfrhmhjdwiknbqzlr",
+        "rev": "92204897f3d80e7034168d883741dffae99ede5c",
+        "sha256": "0vnrn5504436k9f3337j4drng14crr53qc86wsh2a19jlmn5fp9m",
         "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/d14ae62671fd4eaec57427da1e50f91d6a5f9605.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs/archive/92204897f3d80e7034168d883741dffae99ede5c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgsTimedoctor": {
