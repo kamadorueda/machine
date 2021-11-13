@@ -2,7 +2,7 @@ _: with _; {
   editor = {
     bin = "${abs.editor.package}/bin/code --extensions-dir ${abs.editor.extensionsDir} --user-data-dir ${abs.editor.userDataDir}";
     extensionsDir = "/data/vscode/extensions";
-    package = packages.nixpkgs.vscode;
+    package = inputs.nixpkgs.vscode;
     userDataDir = "/data/vscode/data";
   };
   email = "kamadorueda@gmail.com";

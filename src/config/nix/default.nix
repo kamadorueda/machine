@@ -6,13 +6,13 @@ _: with _; {
   maxJobs = 1;
   nixPath = [
     "nixos-config=${abs.machine}/configuration.nix"
-    "nixpkgs=${sources.nixpkgs}"
+    "nixpkgs=${inputs.nixpkgsSrc}"
   ];
   optimise = {
     automatic = true;
     dates = [ "12:00" ];
   };
-  package = packages.nixpkgs.nixUnstable;
+  package = inputs.nixpkgs.nixUnstable;
   readOnlyStore = true;
   trustedUsers = [
     "root"

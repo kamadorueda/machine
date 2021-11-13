@@ -17,10 +17,16 @@
 
   outputs = inputs: {
 
-    nixosConfigurations.machine = inputs.nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [ ./default.nix ];
-    };
+    nixosConfigurations.machine =
+      let
+        system = "x86_64-linux";
+      in
+      inputs.nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules =
+          let machine = import ./default.nix inputs;
+          in [ inputs.homeManager.nixosModule machine.hardware machine.config ];
+      };
 
   };
 }

@@ -15,5 +15,4 @@ rebuild *ARGS:
   nixos-generate-config --show-hardware-config | tee src/hardware/local.nix
   @echo
   @read -N 1 -p 'Pess a key to continue...' -r
-  sudo env "NIX_PATH=nixos-config=${PWD}/config.nix:${NIX_PATH}" \
-    nixos-rebuild --flake .#machine {{ARGS}}
+  sudo nixos-rebuild --flake .#machine --show-trace {{ARGS}}

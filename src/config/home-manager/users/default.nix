@@ -165,8 +165,8 @@ _: with _;{
             renamelimit = 16384;
             sopsdiffer = {
               textconv =
-                (packages.nixpkgs.writeScript "sopsdiffer.sh" ''
-                  #! ${packages.nixpkgs.bash}/bin/bash
+                (inputs.nixpkgs.writeScript "sopsdiffer.sh" ''
+                  #! ${inputs.nixpkgs.bash}/bin/bash
                   sops -d "$1" || cat "$1"
                 '').outPath;
             };
@@ -181,7 +181,7 @@ _: with _;{
             defaultbranch = "main";
           };
           gpg = {
-            progam = "${packages.nixpkgs.gnupg}/bin/gpg2";
+            progam = "${inputs.nixpkgs.gnupg}/bin/gpg2";
             sign = true;
           };
           init = {
@@ -201,7 +201,7 @@ _: with _;{
             signingkey = abs.signingkey;
           };
         };
-        package = packages.nixpkgs.git;
+        package = inputs.nixpkgs.git;
       };
       gnome-terminal = {
         enable = true;
@@ -296,7 +296,7 @@ _: with _;{
     };
     xdg = {
       desktopEntries = {
-        timedoctorNix = with packages.nixpkgsTimedoctor; {
+        timedoctorNix = with inputs.nixpkgsTimedoctor; {
           name = "timedoctor-nix";
           exec = "${timedoctor}/bin/${timedoctor.name}";
           terminal = false;

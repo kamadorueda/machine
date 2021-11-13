@@ -2,12 +2,12 @@ _: with _;
 let
   name = "config-system-user-activation-scripts-vscode";
 
-  script = packages.makes.makeScript {
+  script = inputs.makes.makeScript {
     inherit name;
     entrypoint = ./entrypoint.sh;
     replace = {
       __argEditor__ = abs.editor.bin;
-      __argSettings__ = packages.makes.toFileJson "settings.json" {
+      __argSettings__ = inputs.makes.toFileJson "settings.json" {
         "[html]" = {
           "editor.formatOnSave" = false;
         };
@@ -22,32 +22,32 @@ let
             languages = [ "json" "jsonc" ];
           }
           {
-            command = "${packages.nixpkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
+            command = "${inputs.nixpkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
             languages = [ "nix" ];
           }
           {
             command =
-              (packages.nixpkgs.writeScript "python-fmt" ''
-                #! ${packages.nixpkgs.bash}/bin/bash
+              (inputs.nixpkgs.writeScript "python-fmt" ''
+                #! ${inputs.nixpkgs.bash}/bin/bash
 
-                ${packages.pythonOnNix.projects.black.latest.pythonLatest.bin}/bin/black \
+                ${inputs.pythonOnNix.black-latest-python39-bin}/bin/black \
                   --config \
-                  ${sources.makes}/src/evaluator/modules/format-python/settings-black.toml \
+                  ${inputs.makesSrc}/src/evaluator/modules/format-python/settings-black.toml \
                   - \
                   | \
-                ${packages.pythonOnNix.projects.isort.latest.pythonLatest.bin}/bin/isort \
+                ${inputs.pythonOnNix.isort-latest-python39-bin}/bin/isort \
                   --settings-path \
-                  ${sources.makes}/src/evaluator/modules/format-python/settings-isort.toml \
+                  ${inputs.makesSrc}/src/evaluator/modules/format-python/settings-isort.toml \
                   -
               '').outPath;
             languages = [ "python" ];
           }
           {
-            command = "${packages.nixpkgs.shfmt}/bin/shfmt -bn -ci -i 2 -s -sr -";
+            command = "${inputs.nixpkgs.shfmt}/bin/shfmt -bn -ci -i 2 -s -sr -";
             languages = [ "shellscript" ];
           }
           {
-            command = "${packages.nixpkgs.terraform}/bin/terraform fmt -";
+            command = "${inputs.nixpkgs.terraform}/bin/terraform fmt -";
             languages = [ "terraform" ];
           }
         ];
@@ -85,21 +85,21 @@ let
         "python.linting.lintOnSave" = true;
         "python.linting.mypyArgs" = [
           "--config-file"
-          "${sources.makes}/src/evaluator/modules/lint-python/settings-mypy.cfg"
+          "${inputs.makesSrc}/src/evaluator/modules/lint-python/settings-mypy.cfg"
         ];
         "python.linting.mypyEnabled" = true;
         "python.linting.mypyPath" =
-          "${packages.pythonOnNix.projects.mypy.latest.pythonLatest.bin}/bin/mypy";
+          "${inputs.pythonOnNix.mypy-latest-python39-bin}/bin/mypy";
         "python.linting.prospectorArgs" = [
           "--profile"
-          "${sources.makes}/src/evaluator/modules/lint-python/settings-prospector.yaml"
+          "${inputs.makesSrc}/src/evaluator/modules/lint-python/settings-prospector.yaml"
         ];
         "python.defaultInterpreterPath" = "/run/current-system/sw/bin/python";
         "python.linting.prospectorEnabled" = true;
         "python.linting.prospectorPath" =
-          "${packages.pythonOnNix.projects.prospector.latest.pythonLatest.bin}/bin/prospector";
+          "${inputs.pythonOnNix.prospector-latest-python39-bin}/bin/prospector";
         "python.linting.pylintEnabled" = false;
-        "python.pythonPath" = "${packages.nixpkgs.python38}/bin/python";
+        "python.pythonPath" = "${inputs.nixpkgs.python38}/bin/python";
         "security.workspace.trust.enabled" = false;
         "telemetry.enableCrashReporter" = false;
         "telemetry.enableTelemetry" = false;
