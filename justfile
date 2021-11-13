@@ -16,4 +16,4 @@ rebuild *ARGS:
   @echo
   @read -N 1 -p 'Pess a key to continue...' -r
   sudo env "NIX_PATH=nixos-config=${PWD}/config.nix:${NIX_PATH}" \
-    nixos-rebuild {{ARGS}}
+    nixos-rebuild --flake .#machine {{ARGS}}

@@ -33,17 +33,17 @@
       options = [ "bind" ];
     };
 
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/3130-1867";
+      fsType = "vfat";
+    };
+
   fileSystems."/data" =
     { device = "/dev/disk/by-uuid/a02122c0-0003-4dc8-bc5f-9d062ebf61b4";
       fsType = "ext4";
     };
 
   boot.initrd.luks.devices."cryptdata".device = "/dev/disk/by-uuid/fb963d9f-23c9-4a65-9fa3-d47d7691c390";
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/3130-1867";
-      fsType = "vfat";
-    };
 
   swapDevices = [ ];
 
