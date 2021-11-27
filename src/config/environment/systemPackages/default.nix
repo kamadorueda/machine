@@ -1,40 +1,20 @@
 _: with _; [
   abs.editor.package
-  inputs.nixpkgs.awscli
-  inputs.nixpkgs.bat
   inputs.nixpkgs.coreutils
   inputs.nixpkgs.curl
-  inputs.nixpkgs.dconf2nix
-  inputs.nixpkgs.gcc
-  inputs.nixpkgs.ghc
-  inputs.nixpkgs.gnome.dconf-editor
   inputs.nixpkgs.gnumake
-  inputs.nixpkgs.go
   inputs.nixpkgs.google-chrome
   inputs.nixpkgs.gnupg
-  inputs.nixpkgs.hugo
-  inputs.nixpkgs.jq
   inputs.nixpkgs.just
-  inputs.nixpkgs.kubectl
   inputs.nixpkgs.libreoffice
-  inputs.nixpkgs.niv
-  inputs.nixpkgs.nix-index
-  inputs.nixpkgs.nix-info
   inputs.nixpkgs.nixpkgs-fmt
-  inputs.nixpkgs.nodejs
   inputs.nixpkgs.parted
   inputs.nixpkgs.patchelf
   inputs.nixpkgs.peek
-  inputs.nixpkgs.python39
   inputs.nixpkgs.shadow
   inputs.nixpkgs.shfmt
-  inputs.nixpkgs.sops
-  inputs.nixpkgs.terraform
-  inputs.nixpkgs.tokei
   inputs.nixpkgs.tree
   inputs.nixpkgs.vlc
   inputs.nixpkgs.xclip
   inputs.nixpkgs.xdotool
-  inputs.nixpkgs.yq
-  inputs.nixpkgs.yj
 ]
