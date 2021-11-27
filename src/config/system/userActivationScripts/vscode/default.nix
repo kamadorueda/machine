@@ -43,6 +43,10 @@ let
             languages = [ "python" ];
           }
           {
+            command = "${inputs.nixpkgs.rustfmt}/bin/rustfmt";
+            languages = [ "rust" ];
+          }
+          {
             command = "${inputs.nixpkgs.shfmt}/bin/shfmt -bn -ci -i 2 -s -sr -";
             languages = [ "shellscript" ];
           }
