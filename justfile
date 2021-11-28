@@ -16,4 +16,4 @@ rebuild *ARGS:
   git diff -- components/hardware/auto.nix
   @echo
   @read -N 1 -p 'Pess a key to continue...' -r
-  sudo nixos-rebuild --flake .#machine --show-trace {{ARGS}}
+  sudo nixos-rebuild --flake .#machine --show-trace -L -v {{ARGS}}

@@ -11,7 +11,12 @@ let
         "[html]" = {
           "editor.formatOnSave" = false;
         };
-        "[python]" = { "editor.tabSize" = 4; };
+        "[python]" = {
+          "editor.tabSize" = 4;
+        };
+        "[rust]" = {
+          "editor.tabSize" = 4;
+        };
         "customLocalFormatters.formatters" = [
           {
             command = "clang-format --sort-includes --style=microsoft";
