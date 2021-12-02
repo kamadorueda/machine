@@ -23,7 +23,7 @@ let
             languages = [ "cpp" ];
           }
           {
-            command = "jq -S";
+            command = "${inputs.nixpkgs.jq}/bin/jq -S";
             languages = [ "json" "jsonc" ];
           }
           {
@@ -58,6 +58,21 @@ let
           {
             command = "${inputs.nixpkgs.terraform}/bin/terraform fmt -";
             languages = [ "terraform" ];
+          }
+          {
+            command =
+              (inputs.nixpkgs.writeScript "python-fmt" ''
+                #! ${inputs.nixpkgs.bash}/bin/bash
+
+                ${inputs.nixpkgs.yj}/bin/yj -tj \
+                  | ${inputs.nixpkgs.jq}/bin/jq -S \
+                  | ${inputs.nixpkgs.yj}/bin/yj -jti
+              '').outPath;
+            languages = [ "toml" ];
+          }
+          {
+            command = "${inputs.nixpkgs.html-tidy}/bin/tidy -xml -i -wrap 80";
+            languages = [ "xml" ];
           }
         ];
         "diffEditor.ignoreTrimWhitespace" = false;
