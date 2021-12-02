@@ -48,7 +48,7 @@ let
             languages = [ "python" ];
           }
           {
-            command = "${inputs.nixpkgs.rustfmt}/bin/rustfmt";
+            command = "${inputs.nixpkgs.rustfmt}/bin/rustfmt --config-path ${./rustfmt.toml}";
             languages = [ "rust" ];
           }
           {
