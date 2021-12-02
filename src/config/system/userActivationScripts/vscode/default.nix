@@ -61,7 +61,7 @@ let
           }
           {
             command =
-              (inputs.nixpkgs.writeScript "python-fmt" ''
+              (inputs.nixpkgs.writeScript "toml-fmt" ''
                 #! ${inputs.nixpkgs.bash}/bin/bash
 
                 ${inputs.nixpkgs.yj}/bin/yj -tj \
@@ -69,10 +69,6 @@ let
                   | ${inputs.nixpkgs.yj}/bin/yj -jti
               '').outPath;
             languages = [ "toml" ];
-          }
-          {
-            command = "${inputs.nixpkgs.html-tidy}/bin/tidy -xml -i -wrap 80";
-            languages = [ "xml" ];
           }
         ];
         "diffEditor.ignoreTrimWhitespace" = false;
