@@ -1,7 +1,5 @@
 edition = "2021"
 enum_discrim_align_threshold = 999
-error_on_line_overflow = true
-error_on_unformatted = true
 format_code_in_doc_comments = true
 format_generated_files = true
 format_macro_bodies = true
