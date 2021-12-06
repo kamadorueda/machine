@@ -237,7 +237,7 @@ _: with _;{
             cursorShape = "underline";
             default = true;
             deleteBinding = "delete-sequence";
-            font = "${abs.font} 23";
+            font = "${abs.font} 28";
             scrollbackLines = 1000000;
             scrollOnOutput = false;
             showScrollbar = false;
