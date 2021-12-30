@@ -34,6 +34,7 @@
 
       nixosModules = {
         boot = import ./nixos-modules/boot;
+        browser = import ./nixos-modules/browser;
         editor = import ./nixos-modules/editor;
         hardware = import ./nixos-modules/hardware;
         nix = import ./nixos-modules/nix;
@@ -52,6 +53,7 @@
           modules = [
             inputs.homeManager.nixosModule
             inputs.self.nixosModules.boot
+            inputs.self.nixosModules.browser
             inputs.self.nixosModules.editor
             inputs.self.nixosModules.hardware
             inputs.self.nixosModules.nix

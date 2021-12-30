@@ -1,11 +1,16 @@
-_: with _; {
-  enable = true;
-  extensions = [
+{ nixpkgs
+, ...
+}:
+
+{
+  environment.systemPackages = [ nixpkgs.google-chrome-dev ];
+  programs.chromium.enable = true;
+  programs.chromium.extensions = [
     "glnpjglilkicbckjpbgcfkogebgllemb" # okta
     "hdokiejnpimakedhajhdlcegeplioahd" # lastpass
   ];
   # https://chromeenterprise.google/policies/
-  extraOpts = {
+  programs.chromium.extraOpts = {
     BookmarkBarEnabled = true;
     BrowserSignin = 0;
     DefaultBrowserSettingEnabled = false;
