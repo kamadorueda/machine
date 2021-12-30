@@ -8,9 +8,6 @@ gc:
   nix-collect-garbage -d
   nix-store --optimise
 
-niv *ARGS:
-  niv -s src/sources/sources.json {{ARGS}}
-
 rebuild *ARGS:
   nixos-generate-config --show-hardware-config \
     > nixos-modules/hardware/auto-detected.nix
