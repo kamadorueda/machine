@@ -1,4 +1,4 @@
-_: with _; {
+{
   virtualisation.docker.autoPrune.enable = true;
   virtualisation.docker.autoPrune.dates = "12:00";
   virtualisation.docker.autoPrune.flags = [ "-a" "-f" "--volumes" ];

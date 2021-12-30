@@ -33,6 +33,7 @@
         boot = import ./nixos-modules/boot;
         hardware = import ./nixos-modules/hardware;
         nix = import ./nixos-modules/nix;
+        ui = import ./nixos-modules/ui;
         virtualisation = import ./nixos-modules/virtualisation;
         wellKnown = import ./nixos-modules/well-known;
       };
@@ -47,6 +48,8 @@
             inputs.self.nixosModules.boot
             inputs.self.nixosModules.hardware
             inputs.self.nixosModules.nix
+            inputs.self.nixosModules.ui
+            inputs.self.nixosModules.virtualisation
             inputs.self.nixosModules.wellKnown
 
             { inherit wellKnown; }
