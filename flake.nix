@@ -22,9 +22,12 @@
         inherit system;
       };
       system = "x86_64-linux";
-      wellKnown = {
+      wellKnown = rec {
         email = "kamadorueda@gmail.com";
         username = "kamadorueda";
+
+        # mkpasswd -m sha-512
+        hashedPassword = "$6$lN51G8gh$ETrEWKgyhHPtt3PiMMkB1brrUwORe70KYONhxMhXcXSY7.zswV/FvrMuKV.uTIRvPbm4mvMp0EeP7Fv15mUh2.";
       };
     in
     {
@@ -34,6 +37,7 @@
         hardware = import ./nixos-modules/hardware;
         nix = import ./nixos-modules/nix;
         ui = import ./nixos-modules/ui;
+        users = import ./nixos-modules/users;
         virtualisation = import ./nixos-modules/virtualisation;
         wellKnown = import ./nixos-modules/well-known;
       };
@@ -49,6 +53,7 @@
             inputs.self.nixosModules.hardware
             inputs.self.nixosModules.nix
             inputs.self.nixosModules.ui
+            inputs.self.nixosModules.users
             inputs.self.nixosModules.virtualisation
             inputs.self.nixosModules.wellKnown
 
