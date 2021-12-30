@@ -1,7 +1,7 @@
 { config, lib, pkgs, modulesPath, ... } @ attrs:
 
 let
-  autoDetected = import ./auto.nix attrs;
+  autoDetected = import ./auto-detected.nix attrs;
 in
 autoDetected // {
   swapDevices = [{

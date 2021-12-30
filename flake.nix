@@ -18,27 +18,30 @@
   outputs = inputs: {
 
     nixosModules = {
-      hardware = import ./components/hardware;
+      hardware = import ./nixos-modules/hardware;
+      wellKnown = import ./nixos-modules/well-known;
     };
 
     nixosConfigurations.machine =
       let
-        machine = import ./default.nix inputs;
         system = "x86_64-linux";
+        nixpkgs = import inputs.nixpkgs {
+          config.allowUnfree = true;
+          inherit system;
+        };
       in
       inputs.nixpkgs.lib.nixosSystem {
-        specialArgs = rec {
-          nixpkgs = import inputs.nixpkgs {
-            config.allowUnfree = true;
-            inherit system;
-          };
-          pkgs = nixpkgs;
-        };
         modules = [
           inputs.homeManager.nixosModule
           inputs.self.nixosModules.hardware
-          machine.config
+
+          # Deprecate this
+          (import ./default.nix inputs).config
         ];
+        specialArgs = rec {
+          inherit nixpkgs;
+          pkgs = nixpkgs;
+        };
         inherit system;
       };
 

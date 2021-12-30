@@ -12,8 +12,9 @@ niv *ARGS:
   niv -s src/sources/sources.json {{ARGS}}
 
 rebuild *ARGS:
-  nixos-generate-config --show-hardware-config > components/hardware/auto.nix
-  git diff -- components/hardware/auto.nix
+  nixos-generate-config --show-hardware-config \
+    > nixos-modules/hardware/auto-detected.nix
+  git diff -- nixos-modules/hardware/auto.nix
   @echo
   @read -N 1 -p 'Pess a key to continue...' -r
   sudo nixos-rebuild --flake .#machine --show-trace -L -v {{ARGS}}
