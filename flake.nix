@@ -33,6 +33,7 @@
         boot = import ./nixos-modules/boot;
         hardware = import ./nixos-modules/hardware;
         nix = import ./nixos-modules/nix;
+        virtualisation = import ./nixos-modules/virtualisation;
         wellKnown = import ./nixos-modules/well-known;
       };
 
