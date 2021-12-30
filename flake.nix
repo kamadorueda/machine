@@ -21,14 +21,10 @@
         config.allowUnfree = true;
         inherit system;
       };
-      system = "x86_64-linux";
-      wellKnown = rec {
-        email = "kamadorueda@gmail.com";
-        username = "kamadorueda";
-
-        # mkpasswd -m sha-512
-        hashedPassword = "$6$lN51G8gh$ETrEWKgyhHPtt3PiMMkB1brrUwORe70KYONhxMhXcXSY7.zswV/FvrMuKV.uTIRvPbm4mvMp0EeP7Fv15mUh2.";
+      makes = import "${inputs.makes}/src/args/agnostic.nix" {
+        inherit system;
       };
+      system = "x86_64-linux";
     in
     {
 
@@ -45,33 +41,40 @@
         wellKnown = import ./nixos-modules/well-known;
       };
 
-      nixosConfigurations.machine =
-        let
-          system = "x86_64-linux";
-        in
-        inputs.nixpkgs.lib.nixosSystem {
-          modules = [
-            inputs.homeManager.nixosModule
-            inputs.self.nixosModules.boot
-            inputs.self.nixosModules.browser
-            inputs.self.nixosModules.editor
-            inputs.self.nixosModules.hardware
-            inputs.self.nixosModules.nix
-            inputs.self.nixosModules.ui
-            inputs.self.nixosModules.terminal
-            inputs.self.nixosModules.users
-            inputs.self.nixosModules.virtualisation
-            inputs.self.nixosModules.wellKnown
-
-            { inherit wellKnown; }
-          ];
-          specialArgs = rec {
-            inherit nixpkgs;
-            nixpkgsSrc = inputs.nixpkgs.outPath;
-            pkgs = nixpkgs;
-          };
-          inherit system;
+      nixosConfigurations.machine = inputs.nixpkgs.lib.nixosSystem {
+        modules = [
+          inputs.homeManager.nixosModule
+          inputs.self.nixosModules.boot
+          inputs.self.nixosModules.browser
+          inputs.self.nixosModules.editor
+          inputs.self.nixosModules.hardware
+          inputs.self.nixosModules.nix
+          inputs.self.nixosModules.ui
+          {
+            ui.locale = "en_US.UTF-8";
+            ui.timezone = "America/Bogota";
+          }
+          inputs.self.nixosModules.terminal
+          inputs.self.nixosModules.users
+          inputs.self.nixosModules.virtualisation
+          inputs.self.nixosModules.wellKnown
+          {
+            wellKnown.email = "kamadorueda@gmail.com";
+            # mkpasswd -m sha-512
+            wellKnown.hashedPassword = "$6$lN51G8gh$ETrEWKgyhHPtt3PiMMkB1brrUwORe70KYONhxMhXcXSY7.zswV/FvrMuKV.uTIRvPbm4mvMp0EeP7Fv15mUh2.";
+            wellKnown.username = "kamadorueda";
+          }
+        ];
+        specialArgs = rec {
+          inherit nixpkgs;
+          nixpkgsSrc = inputs.nixpkgs.outPath;
+          inherit makes;
+          makesSrc = inputs.makes.outPath;
+          pkgs = nixpkgs;
+          pythonOnNix = inputs.pythonOnNix.packages.${system};
         };
+        inherit system;
+      };
 
     };
 }

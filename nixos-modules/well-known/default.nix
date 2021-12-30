@@ -20,12 +20,8 @@
     };
   };
 
-  config =
-    let
-      inherit (config.wellKnown) username;
-    in
-    {
-      wellKnown.paths.home = "/home/${username}";
-    };
+  config = {
+    wellKnown.paths.home = "/home/${config.wellKnown.username}";
+  };
 
 }

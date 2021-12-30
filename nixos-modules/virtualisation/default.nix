@@ -2,12 +2,9 @@
 , ...
 }:
 
-let
-  inherit (config.wellKnown) username;
-in
 {
   users.groups.docker = { };
-  users.users.${username}.extraGroups = [ "docker" ];
+  users.users.${config.wellKnown.username}.extraGroups = [ "docker" ];
   virtualisation.docker.autoPrune.enable = true;
   virtualisation.docker.autoPrune.dates = "12:00";
   virtualisation.docker.autoPrune.flags = [ "-a" "-f" "--volumes" ];

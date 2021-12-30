@@ -1,5 +1,9 @@
-{ lib
+{ config
+, lib
+, makes
+, makesSrc
 , nixpkgs
+, pythonOnNix
 , ...
 }:
 
@@ -8,6 +12,9 @@
   options = {
     editor.bin = lib.mkOption {
       type = lib.types.str;
+    };
+    editor.extensions = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
     };
   };
 
@@ -23,29 +30,7 @@
         "--user-data-dir"
         userDataDir
       ];
-      extensions = [
-        "bbenoist.Nix"
-        "CoenraadS.bracket-pair-colorizer"
-        "coolbear.systemd-unit-file"
-        "eamodio.gitlens"
-        "Gimly81.matlab"
-        "hashicorp.terraform"
-        "haskell.haskell"
-        "jinliming2.vscode-go-template"
-        "jkillian.custom-local-formatters"
-        "justusadam.language-haskell"
-        "mads-hartmann.bash-ide-vscode"
-        "ms-python.python"
-        "ms-python.vscode-pylance"
-        "ms-toolsai.jupyter"
-        "ms-toolsai.jupyter-keymap"
-        "ms-toolsai.jupyter-renderers"
-        "rust-lang.rust"
-        "shardulm94.trailing-spaces"
-        "streetsidesoftware.code-spell-checker"
-        "tamasfe.even-better-toml"
-      ];
-      config = {
+      settings = {
         "[html]"."editor.formatOnSave" = false;
         "[python]"."editor.tabSize" = 4;
         "[rust]"."editor.tabSize" = 4;
@@ -55,50 +40,50 @@
             languages = [ "cpp" ];
           }
           {
-            command = "${inputs.nixpkgs.jq}/bin/jq -S";
+            command = "${nixpkgs.jq}/bin/jq -S";
             languages = [ "json" "jsonc" ];
           }
           {
-            command = "${inputs.nixpkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
+            command = "${nixpkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
             languages = [ "nix" ];
           }
           {
             command =
-              (inputs.nixpkgs.writeScript "python-fmt" ''
-                #! ${inputs.nixpkgs.bash}/bin/bash
+              (nixpkgs.writeScript "python-fmt" ''
+                #! ${nixpkgs.bash}/bin/bash
 
-                ${inputs.pythonOnNix.black-latest-python39-bin}/bin/black \
+                ${pythonOnNix.black-latest-python39-bin}/bin/black \
                   --config \
-                  ${inputs.makesSrc}/src/evaluator/modules/format-python/settings-black.toml \
+                  ${makesSrc}/src/evaluator/modules/format-python/settings-black.toml \
                   - \
                   | \
-                ${inputs.pythonOnNix.isort-latest-python39-bin}/bin/isort \
+                ${pythonOnNix.isort-latest-python39-bin}/bin/isort \
                   --settings-path \
-                  ${inputs.makesSrc}/src/evaluator/modules/format-python/settings-isort.toml \
+                  ${makesSrc}/src/evaluator/modules/format-python/settings-isort.toml \
                   -
               '').outPath;
             languages = [ "python" ];
           }
           {
-            command = "${inputs.nixpkgs.rustfmt}/bin/rustfmt --config-path ${./rustfmt.toml}";
+            command = "${nixpkgs.rustfmt}/bin/rustfmt --config-path ${./rustfmt.toml}";
             languages = [ "rust" ];
           }
           {
-            command = "${inputs.nixpkgs.shfmt}/bin/shfmt -bn -ci -i 2 -s -sr -";
+            command = "${nixpkgs.shfmt}/bin/shfmt -bn -ci -i 2 -s -sr -";
             languages = [ "shellscript" ];
           }
           {
-            command = "${inputs.nixpkgs.terraform}/bin/terraform fmt -";
+            command = "${nixpkgs.terraform}/bin/terraform fmt -";
             languages = [ "terraform" ];
           }
           {
             command =
-              (inputs.nixpkgs.writeScript "toml-fmt" ''
-                #! ${inputs.nixpkgs.bash}/bin/bash
+              (nixpkgs.writeScript "toml-fmt" ''
+                #! ${nixpkgs.bash}/bin/bash
 
-                ${inputs.nixpkgs.yj}/bin/yj -tj \
-                  | ${inputs.nixpkgs.jq}/bin/jq -S \
-                  | ${inputs.nixpkgs.yj}/bin/yj -jti
+                ${nixpkgs.yj}/bin/yj -tj \
+                  | ${nixpkgs.jq}/bin/jq -S \
+                  | ${nixpkgs.yj}/bin/yj -jti
               '').outPath;
             languages = [ "toml" ];
           }
@@ -112,7 +97,7 @@
         "editor.formatOnPaste" = false;
         "editor.formatOnSave" = true;
         "editor.formatOnType" = false;
-        "editor.fontFamily" = "'${abs.font}'";
+        "editor.fontFamily" = "'${config.ui.font}'";
         "editor.fontSize" = 16.5;
         "editor.minimap.maxColumn" = 80;
         "editor.minimap.renderCharacters" = false;
@@ -137,21 +122,21 @@
         "python.linting.lintOnSave" = true;
         "python.linting.mypyArgs" = [
           "--config-file"
-          "${inputs.makesSrc}/src/evaluator/modules/lint-python/settings-mypy.cfg"
+          "${makesSrc}/src/evaluator/modules/lint-python/settings-mypy.cfg"
         ];
         "python.linting.mypyEnabled" = true;
         "python.linting.mypyPath" =
-          "${inputs.pythonOnNix.mypy-latest-python39-bin}/bin/mypy";
+          "${pythonOnNix.mypy-latest-python39-bin}/bin/mypy";
         "python.linting.prospectorArgs" = [
           "--profile"
-          "${inputs.makesSrc}/src/evaluator/modules/lint-python/settings-prospector.yaml"
+          "${makesSrc}/src/evaluator/modules/lint-python/settings-prospector.yaml"
         ];
         "python.defaultInterpreterPath" = "/run/current-system/sw/bin/python";
         "python.linting.prospectorEnabled" = true;
         "python.linting.prospectorPath" =
-          "${inputs.pythonOnNix.prospector-latest-python39-bin}/bin/prospector";
+          "${pythonOnNix.prospector-latest-python39-bin}/bin/prospector";
         "python.linting.pylintEnabled" = false;
-        "python.pythonPath" = "${inputs.nixpkgs.python38}/bin/python";
+        "python.pythonPath" = "${nixpkgs.python38}/bin/python";
         "security.workspace.trust.enabled" = false;
         "telemetry.enableCrashReporter" = false;
         "telemetry.enableTelemetry" = false;
@@ -168,17 +153,40 @@
     in
     {
       editor.bin = bin;
+      editor.extensions = [
+        "bbenoist.Nix"
+        "CoenraadS.bracket-pair-colorizer"
+        "coolbear.systemd-unit-file"
+        "eamodio.gitlens"
+        "Gimly81.matlab"
+        "hashicorp.terraform"
+        "haskell.haskell"
+        "jinliming2.vscode-go-template"
+        "jkillian.custom-local-formatters"
+        "justusadam.language-haskell"
+        "mads-hartmann.bash-ide-vscode"
+        "ms-python.python"
+        "ms-python.vscode-pylance"
+        "ms-toolsai.jupyter"
+        "ms-toolsai.jupyter-keymap"
+        "ms-toolsai.jupyter-renderers"
+        "rust-lang.rust"
+        "shardulm94.trailing-spaces"
+        "streetsidesoftware.code-spell-checker"
+        "tamasfe.even-better-toml"
+      ];
       environment.variables.EDITOR = bin;
       environment.systemPackages = [ nixpkgs.vscode ];
       system.userActivationScripts.vscode =
         let
+          name = "editor-setup";
           script = makes.makeScript {
             inherit name;
             entrypoint = ./entrypoint.sh;
             replace = {
               __argBin__ = bin;
-              __argExtensions__ = makes.toBashArray extensions;
-              __argSettings__ = makes.toFileJson "settings.json" config;
+              __argExtensions__ = makes.toBashArray config.editor.extensions;
+              __argSettings__ = makes.toFileJson "settings.json" settings;
               __argUserDataDir__ = userDataDir;
             };
           };
