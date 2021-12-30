@@ -45,6 +45,11 @@
       nixosConfigurations.machine = inputs.nixpkgs.lib.nixosSystem {
         modules = [
           inputs.homeManager.nixosModule
+          {
+            home-manager.useUserPackages = true;
+            home-manager.useGlobalPkgs = true;
+            home-manager.verbose = true;
+          }
           inputs.self.nixosModules.boot
           inputs.self.nixosModules.browser
           inputs.self.nixosModules.editor
@@ -64,6 +69,8 @@
             wellKnown.email = "kamadorueda@gmail.com";
             # mkpasswd -m sha-512
             wellKnown.hashedPassword = "$6$lN51G8gh$ETrEWKgyhHPtt3PiMMkB1brrUwORe70KYONhxMhXcXSY7.zswV/FvrMuKV.uTIRvPbm4mvMp0EeP7Fv15mUh2.";
+            wellKnown.name = "Kevin Amado";
+            wellKnown.signingKey = "FFF341057F503148";
             wellKnown.username = "kamadorueda";
           }
         ];
