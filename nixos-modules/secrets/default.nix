@@ -3,9 +3,11 @@
 , ...
 }:
 
-
 {
   options = {
+    secrets.hashedPassword = lib.mkOption {
+      type = lib.types.str;
+    };
     secrets.path = lib.mkOption {
       type = lib.types.str;
     };

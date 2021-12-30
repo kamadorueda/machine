@@ -56,6 +56,11 @@
           inputs.self.nixosModules.hardware
           inputs.self.nixosModules.nix
           inputs.self.nixosModules.secrets
+          {
+            secrets.hashedPassword =
+              # mkpasswd -m sha-512
+              "$6$lN51G8gh$ETrEWKgyhHPtt3PiMMkB1brrUwORe70KYONhxMhXcXSY7.zswV/FvrMuKV.uTIRvPbm4mvMp0EeP7Fv15mUh2.";
+          }
           inputs.self.nixosModules.ui
           {
             ui.locale = "en_US.UTF-8";
@@ -67,8 +72,6 @@
           inputs.self.nixosModules.wellKnown
           {
             wellKnown.email = "kamadorueda@gmail.com";
-            # mkpasswd -m sha-512
-            wellKnown.hashedPassword = "$6$lN51G8gh$ETrEWKgyhHPtt3PiMMkB1brrUwORe70KYONhxMhXcXSY7.zswV/FvrMuKV.uTIRvPbm4mvMp0EeP7Fv15mUh2.";
             wellKnown.name = "Kevin Amado";
             wellKnown.signingKey = "FFF341057F503148";
             wellKnown.username = "kamadorueda";
