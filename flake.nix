@@ -34,8 +34,10 @@
 
       nixosModules = {
         boot = import ./nixos-modules/boot;
+        editor = import ./nixos-modules/editor;
         hardware = import ./nixos-modules/hardware;
         nix = import ./nixos-modules/nix;
+        terminal = import ./nixos-modules/terminal;
         ui = import ./nixos-modules/ui;
         users = import ./nixos-modules/users;
         virtualisation = import ./nixos-modules/virtualisation;
@@ -50,9 +52,11 @@
           modules = [
             inputs.homeManager.nixosModule
             inputs.self.nixosModules.boot
+            inputs.self.nixosModules.editor
             inputs.self.nixosModules.hardware
             inputs.self.nixosModules.nix
             inputs.self.nixosModules.ui
+            inputs.self.nixosModules.terminal
             inputs.self.nixosModules.users
             inputs.self.nixosModules.virtualisation
             inputs.self.nixosModules.wellKnown

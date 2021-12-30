@@ -6,6 +6,7 @@
   fonts.enableDefaultFonts = true;
   fonts.fonts = [ nixpkgs.powerline-fonts ];
   i18n.defaultLocale = "en_US.UTF-8";
+  programs.dconf.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.displayManager.lightdm.background =
     nixpkgs.nixos-artwork.wallpapers.dracula.gnomeFilePath;
