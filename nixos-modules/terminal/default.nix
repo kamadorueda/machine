@@ -31,4 +31,5 @@
     nixpkgs.tree
     nixpkgs.vlc
   ];
+  programs.bash.interactiveShellInit = builtins.readFile ./bashrc.sh;
 }
