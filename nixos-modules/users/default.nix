@@ -3,17 +3,19 @@
 }:
 
 let
+  inherit (config.wellKnown) hashedPassword;
   inherit (config.wellKnown) username;
+  inherit (config.wellKnown.paths) home;
 in
 {
   users.mutableUsers = false;
   users.users.root = {
-    hashedPassword = config.wellKnown.hashedPassword;
+    inherit hashedPassword;
   };
   users.users.${username} = {
     extraGroups = [ "networkmanager" "wheel" ];
-    hashedPassword = config.wellKnown.hashedPassword;
-    home = config.wellKnown.paths.home;
+    inherit hashedPassword;
+    inherit home;
     isNormalUser = true;
   };
 }
