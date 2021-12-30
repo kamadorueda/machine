@@ -1,3 +1,7 @@
+{ lib, ... }:
+
 {
-  email = "kamadorueda@gmail.com";
+  options.wellKnown.email = lib.mkOption {
+    type = lib.types.string;
+  };
 }

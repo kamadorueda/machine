@@ -15,35 +15,43 @@
     pythonOnNix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs: {
-
-    nixosModules = {
-      hardware = import ./nixos-modules/hardware;
-      wellKnown = import ./nixos-modules/well-known;
-    };
-
-    nixosConfigurations.machine =
-      let
-        system = "x86_64-linux";
-        nixpkgs = import inputs.nixpkgs {
-          config.allowUnfree = true;
-          inherit system;
-        };
-      in
-      inputs.nixpkgs.lib.nixosSystem {
-        modules = [
-          inputs.homeManager.nixosModule
-          inputs.self.nixosModules.hardware
-
-          # Deprecate this
-          (import ./default.nix inputs).config
-        ];
-        specialArgs = rec {
-          inherit nixpkgs;
-          pkgs = nixpkgs;
-        };
+  outputs = inputs:
+    let
+      nixpkgs = import inputs.nixpkgs {
+        config.allowUnfree = true;
         inherit system;
       };
+      system = "x86_64-linux";
+    in
+    {
 
-  };
+      nixosModules = {
+        boot = import ./nixos-modules/boot;
+        hardware = import ./nixos-modules/hardware;
+        wellKnown = import ./nixos-modules/well-known;
+      };
+
+      nixosConfigurations.machine =
+        let
+          system = "x86_64-linux";
+        in
+        inputs.nixpkgs.lib.nixosSystem {
+          modules = [
+            inputs.homeManager.nixosModule
+            inputs.self.nixosModules.boot
+            inputs.self.nixosModules.hardware
+            inputs.self.nixosModules.wellKnown
+
+            {
+              options.wellKnown.email = "kamadorueda@gmail.com";
+            }
+          ];
+          specialArgs = rec {
+            inherit nixpkgs;
+            pkgs = nixpkgs;
+          };
+          inherit system;
+        };
+
+    };
 }
