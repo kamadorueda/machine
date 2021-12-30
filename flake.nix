@@ -22,12 +22,17 @@
         inherit system;
       };
       system = "x86_64-linux";
+      wellKnown = {
+        email = "kamadorueda@gmail.com";
+        username = "kamadorueda";
+      };
     in
     {
 
       nixosModules = {
         boot = import ./nixos-modules/boot;
         hardware = import ./nixos-modules/hardware;
+        nix = import ./nixos-modules/nix;
         wellKnown = import ./nixos-modules/well-known;
       };
 
@@ -40,14 +45,14 @@
             inputs.homeManager.nixosModule
             inputs.self.nixosModules.boot
             inputs.self.nixosModules.hardware
+            inputs.self.nixosModules.nix
             inputs.self.nixosModules.wellKnown
 
-            {
-              options.wellKnown.email = "kamadorueda@gmail.com";
-            }
+            { inherit wellKnown; }
           ];
           specialArgs = rec {
             inherit nixpkgs;
+            nixpkgsSrc = inputs.nixpkgs.outPath;
             pkgs = nixpkgs;
           };
           inherit system;
