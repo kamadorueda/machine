@@ -17,4 +17,5 @@
   nixpkgs.config.allowBroken = false;
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.android_sdk.accept_license = true;
+  system.stateVersion = "21.05";
 }
