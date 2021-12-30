@@ -10,7 +10,7 @@
   users.users.${config.wellKnown.username} = {
     extraGroups = [ "networkmanager" "wheel" ];
     inherit (config.wellKnown) hashedPassword;
-    inherit (config.wellKnown.paths) home;
+    inherit (config.wellKnown) home;
     isNormalUser = true;
   };
 }

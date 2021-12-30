@@ -12,8 +12,8 @@
     wellKnown.hashedPassword = lib.mkOption {
       type = lib.types.str;
     };
-    wellKnown.paths = lib.mkOption {
-      type = lib.types.attrsOf lib.types.str;
+    wellKnown.home = lib.mkOption {
+      type = lib.types.str;
     };
     wellKnown.username = lib.mkOption {
       type = lib.types.str;
@@ -21,7 +21,7 @@
   };
 
   config = {
-    wellKnown.paths.home = "/home/${config.wellKnown.username}";
+    wellKnown.home = "/home/${config.wellKnown.username}";
   };
 
 }

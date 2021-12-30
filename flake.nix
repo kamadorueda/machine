@@ -34,6 +34,7 @@
         editor = import ./nixos-modules/editor;
         hardware = import ./nixos-modules/hardware;
         nix = import ./nixos-modules/nix;
+        secrets = import ./nixos-modules/secrets;
         terminal = import ./nixos-modules/terminal;
         ui = import ./nixos-modules/ui;
         users = import ./nixos-modules/users;
@@ -49,6 +50,7 @@
           inputs.self.nixosModules.editor
           inputs.self.nixosModules.hardware
           inputs.self.nixosModules.nix
+          inputs.self.nixosModules.secrets
           inputs.self.nixosModules.ui
           {
             ui.locale = "en_US.UTF-8";
