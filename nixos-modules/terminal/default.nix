@@ -23,6 +23,7 @@
   environment.systemPackages = [
     nixpkgs.coreutils
     nixpkgs.curl
+    nixpkgs.gnugrep
     nixpkgs.just
     nixpkgs.libreoffice
     nixpkgs.parted

@@ -1,7 +1,6 @@
 { nixpkgs, ... }:
 
 {
-  boot.cleanTmpDir = true;
   boot.initrd.postDeviceCommands = ''
     echo wiping root device...
     mkdir /tmp/root
