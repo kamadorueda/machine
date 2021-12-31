@@ -4,6 +4,8 @@
 }:
 
 {
+  console.font = "ter-powerline-v28";
+  console.packages = [ nixpkgs.powerline-fonts ];
   environment.shellAliases = {
     a = "git add -p";
     c = "git commit --allow-empty";
