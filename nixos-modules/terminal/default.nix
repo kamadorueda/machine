@@ -30,9 +30,7 @@
     nixpkgs.patchelf
     nixpkgs.peek
     nixpkgs.shadow
-    nixpkgs.shfmt
     nixpkgs.tree
-    nixpkgs.vlc
   ];
   home-manager.users.${config.wellKnown.username} = {
     programs.bash.enable = true;
