@@ -8,6 +8,10 @@
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
+  nix.registry.nixpkgs = {
+    exact = false;
+    flake = nixpkgsSrc;
+  };
   nix.maxJobs = 1;
   nix.nixPath = [ "nixpkgs=${nixpkgsSrc}" ];
   nix.optimise.automatic = true;

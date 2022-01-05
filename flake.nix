@@ -77,9 +77,9 @@
         ];
         specialArgs = rec {
           inherit nixpkgs;
-          nixpkgsSrc = inputs.nixpkgs.outPath;
+          nixpkgsSrc = inputs.nixpkgs.sourceInfo;
           inherit makes;
-          makesSrc = inputs.makes.outPath;
+          makesSrc = inputs.makes.sourceInfo;
           pkgs = nixpkgs;
           pythonOnNix = inputs.pythonOnNix.packages.${system};
         };
