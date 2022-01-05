@@ -16,9 +16,8 @@
 
   config = {
     environment.variables.GNUPGHOME = "${config.secrets.path}/machine/gpg/home";
-    environment.systemPackages = [
-      nixpkgs.gnupg
-    ];
+    environment.variables.SECRETS = config.secrets.path;
+    environment.systemPackages = [ nixpkgs.gnupg ];
     home-manager.users.${config.wellKnown.username} = {
       programs.ssh.enable = true;
       programs.ssh.matchBlocks = {
@@ -32,6 +31,5 @@
         };
       };
     };
-    secrets.path = "/data/github/kamadorueda/secrets";
   };
 }

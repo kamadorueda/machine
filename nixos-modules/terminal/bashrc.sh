@@ -5,13 +5,18 @@ function export_fluid_var {
 }
 
 function export_fluid_aws_vars {
-  for var in "${1^^}_DEV_AWS_ACCESS_KEY_ID" "${1^^}_PROD_AWS_ACCESS_KEY_ID"; do
-    export_fluid_var "${var}"
-  done \
+  : \
+    && for var in \
+      "DEV_${1^^}_AWS_ACCESS_KEY_ID" \
+      "PROD_${1^^}_AWS_ACCESS_KEY_ID"; do
+      export_fluid_var "${var}"
+    done \
     && export AWS_ACCESS_KEY_ID="${!var}" \
     && export DEV_AWS_ACCESS_KEY_ID="${!var}" \
     && export PROD_AWS_ACCESS_KEY_ID="${!var}" \
-    && for var in "${1^^}_DEV_AWS_SECRET_ACCESS_KEY" "${1^^}_PROD_AWS_SECRET_ACCESS_KEY"; do
+    && for var in \
+      "DEV_${1^^}_AWS_SECRET_ACCESS_KEY" \
+      "PROD_${1^^}_AWS_SECRET_ACCESS_KEY"; do
       export_fluid_var "${var}"
     done \
     && export AWS_SECRET_ACCESS_KEY="${!var}" \
