@@ -165,18 +165,6 @@
         </details>
 
       - <details>
-          <summary>github/fluidattacks</summary>
-
-          ```bash
-              mkdir -p /data/github/kamadorueda \
-          &&  pushd /data/github/kamadorueda \
-            &&  git clone git@github.com:kamadorueda/makes \
-            &&  git -C makes remote add upstream git@github.com:fluidattacks/makes \
-          &&  popd
-          ```
-        </details>
-
-      - <details>
           <summary>github/nixos</summary>
 
           ```bash
@@ -188,37 +176,7 @@
           ```
         </details>
 
-      - <details>
-          <summary>gitlab/fluidattacks</summary>
-
-          ```bash
-              mkdir -p /data/gitlab/fluidattacks \
-          &&  pushd /data/gitlab/fluidattacks \
-            &&  git clone git@gitlab.com:fluidattacks/product \
-            &&  git -C product config user.email kamado@fluidattacks.com \
-            &&  git clone git@gitlab.com:fluidattacks/services \
-            &&  git -C services config user.email kamado@fluidattacks.com \
-          &&  popd
-          ```
-        </details>
-    </details>
-
 1. Enjoy!
-
-## Timedoctor
-
-You may find useful to install [Timedoctor](https://www.timedoctor.com/)
-via [Nix](https://nixos.org).
-
-1. `$ NIXPKGS_ALLOW_UNFREE=1 nix-build -A timedoctor https://github.com/nixos/nixpkgs/archive/7310407d493ee1c7caf38f8181507d7ac9c90eb8.tar.gz`
-
-2. `$ ./result/bin/timedoctor*`
-
-Source: [Pull 127590](https://github.com/NixOS/nixpkgs/pull/127590)
-
-Caveats:
-- It does not work with Gnome Display Manager (gdm), use LightDM (lightdm)
-- It only works with X.org server, not Wayland, etc.
 
 ## Useful links
 

@@ -25,10 +25,6 @@
           extraOptions.PreferredAuthentications = "publickey";
           identityFile = "${config.secrets.path}/machine/ssh/kamadorueda";
         };
-        "gitlab.com" = {
-          extraOptions.PreferredAuthentications = "publickey";
-          identityFile = "${config.secrets.path}/machine/ssh/kamadorueda";
-        };
       };
     };
   };
