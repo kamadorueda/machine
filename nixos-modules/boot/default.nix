@@ -9,6 +9,7 @@
     ${nixpkgs.utillinux}/bin/umount /tmp/root
   '';
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.efiSupport = true;
   boot.loader.grub.gfxmodeBios = "auto";
   boot.loader.grub.gfxmodeEfi = "auto";
   boot.loader.grub.gfxpayloadBios = "text";
