@@ -20,6 +20,7 @@
   boot.loader.grub.gfxpayloadBios = "text";
   boot.loader.grub.gfxpayloadEfi = "text";
   boot.loader.grub.useOSProber = true;
+  boot.loader.systemd-boot.consoleMode = "auto";
   boot.loader.systemd-boot.enable = true;
-  boot.loader.timeout = null;
+  boot.loader.timeout = 60;
 }
