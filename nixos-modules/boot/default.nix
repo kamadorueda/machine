@@ -10,6 +10,11 @@
   '';
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.efiSupport = true;
+  boot.loader.grub.extraEntries = ''
+    menuentry "Windows" {
+      chainloader (hd0,1)+1
+    }
+  '';
   boot.loader.grub.gfxmodeBios = "auto";
   boot.loader.grub.gfxmodeEfi = "auto";
   boot.loader.grub.gfxpayloadBios = "text";
