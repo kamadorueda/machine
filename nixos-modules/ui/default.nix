@@ -21,12 +21,6 @@
   config = {
     fonts.enableDefaultFonts = true;
     fonts.fonts = [ nixpkgs.powerline-fonts ];
-    i18n.defaultLocale = config.ui.locale;
-    programs.dconf.enable = true;
-    services.xserver.desktopManager.gnome.enable = true;
-    services.xserver.displayManager.gdm.enable = true;
-    services.xserver.displayManager.lightdm.background =
-      nixpkgs.nixos-artwork.wallpapers.dracula.gnomeFilePath;
     home-manager.users.${config.wellKnown.username} = { lib, ... }: {
       dconf.settings = with lib.hm.gvariant; {
         "org/gnome/desktop/a11y" = {
@@ -86,6 +80,10 @@
         };
       };
     };
+    i18n.defaultLocale = config.ui.locale;
+    programs.dconf.enable = true;
+    services.xserver.desktopManager.gnome.enable = true;
+    services.xserver.displayManager.gdm.enable = true;
     services.xserver.enable = true;
     services.xserver.layout = "us";
     services.xserver.libinput.enable = true;
