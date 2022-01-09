@@ -9,6 +9,11 @@
     ${nixpkgs.utillinux}/bin/umount /tmp/root
   '';
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.gfxmodeBios = "auto";
+  boot.loader.grub.gfxmodeEfi = "auto";
+  boot.loader.grub.gfxpayloadBios = "text";
+  boot.loader.grub.gfxpayloadEfi = "text";
   boot.loader.grub.useOSProber = true;
   boot.loader.systemd-boot.enable = true;
+  boot.loader.timeout = null;
 }
