@@ -94,11 +94,13 @@
         "diffEditor.wordWrap" = "on";
         "editor.cursorStyle" = "underline";
         "editor.defaultFormatter" = "jkillian.custom-local-formatters";
+        "editor.bracketPairColorization.enabled" = true;
         "editor.formatOnPaste" = false;
         "editor.formatOnSave" = true;
         "editor.formatOnType" = false;
         "editor.fontFamily" = "'${config.ui.font}'";
         "editor.fontSize" = 16.5;
+        "editor.guides.bracketPairs" = "active";
         "editor.minimap.maxColumn" = 80;
         "editor.minimap.renderCharacters" = false;
         "editor.minimap.showSlider" = "always";
@@ -155,7 +157,6 @@
       editor.bin = bin;
       editor.extensions = [
         "bbenoist.Nix"
-        "CoenraadS.bracket-pair-colorizer"
         "coolbear.systemd-unit-file"
         "eamodio.gitlens"
         "Gimly81.matlab"
