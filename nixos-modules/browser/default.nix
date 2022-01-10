@@ -36,6 +36,15 @@
         name = "home-manager-options";
         url = "https://nix-community.github.io/home-manager/options.html";
       }
+      { toplevel_name = "Nix"; }
+      {
+        name = "workpace";
+        url = "https://wwgmkedxfx.workplace.com";
+      }
+      {
+        name = "core";
+        url = "https://core.floxdev.com";
+      }
     ];
     PasswordManagerEnabled = false;
     ShowAppsShortcutInBookmarkBar = false;
