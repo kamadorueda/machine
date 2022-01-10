@@ -6,16 +6,13 @@
 
 {
   nix.buildCores = 4;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
   nix.registry.nixpkgs = {
     exact = false;
     flake = nixpkgsSrc;
   };
   nix.maxJobs = 4;
   nix.nixPath = [ "nixpkgs=${nixpkgsSrc}" ];
-  nix.package = nixpkgs.nixUnstable;
+  nix.package = nixpkgs.nix;
   nix.trustedUsers = [ "root" config.wellKnown.username ];
   nixpkgs.config.allowBroken = false;
   nixpkgs.config.allowUnfree = true;

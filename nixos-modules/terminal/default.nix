@@ -14,6 +14,7 @@
     code = config.editor.bin;
     f = "git fetch --all";
     l = "git log";
+    nix3 = "nix --option experimental-features 'nix-command flakes' -L -v";
     now = "date --iso-8601=seconds --utc";
     p = "git push -f";
     ro = "git pull --autostash --progress --rebase --stat origin";
