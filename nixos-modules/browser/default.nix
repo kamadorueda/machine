@@ -3,7 +3,7 @@
 }:
 
 {
-  environment.systemPackages = [ nixpkgs.google-chrome-dev ];
+  environment.systemPackages = [ nixpkgs.google-chrome ];
   programs.chromium.enable = true;
   programs.chromium.extensions = [
     "glnpjglilkicbckjpbgcfkogebgllemb" # okta
