@@ -15,35 +15,44 @@
     BrowserSignin = 0;
     DefaultBrowserSettingEnabled = false;
     ManagedBookmarks = [
-      { toplevel_name = "Nix"; }
+      { toplevel_name = "Links"; }
       {
-        name = "nixos-forum";
-        url = "https://discourse.nixos.org/latest";
+        name = "Nix";
+        children = [
+          {
+            name = "nixos-forum";
+            url = "https://discourse.nixos.org/latest";
+          }
+          {
+            name = "nixos-packages";
+            url = "https://search.nixos.org/packages";
+          }
+          {
+            name = "nixos-options";
+            url = "https://search.nixos.org/options";
+          }
+          {
+            name = "home-manager-manual";
+            url = "https://nix-community.github.io/home-manager";
+          }
+          {
+            name = "home-manager-options";
+            url = "https://nix-community.github.io/home-manager/options.html";
+          }
+        ];
       }
       {
-        name = "nixos-packages";
-        url = "https://search.nixos.org/packages";
-      }
-      {
-        name = "nixos-options";
-        url = "https://search.nixos.org/options";
-      }
-      {
-        name = "home-manager-manual";
-        url = "https://nix-community.github.io/home-manager";
-      }
-      {
-        name = "home-manager-options";
-        url = "https://nix-community.github.io/home-manager/options.html";
-      }
-      { toplevel_name = "Flox"; }
-      {
-        name = "workpace";
-        url = "https://wwgmkedxfx.workplace.com";
-      }
-      {
-        name = "core";
-        url = "https://core.floxdev.com";
+        name = "Flox";
+        children = [
+          {
+            name = "workpace";
+            url = "https://wwgmkedxfx.workplace.com";
+          }
+          {
+            name = "core";
+            url = "https://core.floxdev.com";
+          }
+        ];
       }
     ];
     PasswordManagerEnabled = false;
