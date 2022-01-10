@@ -47,7 +47,8 @@
         modules = [
           inputs.flox.outPath
           {
-            services.flox.substituterAdded = true;
+            services.flox.server = "core.floxdev.com";
+            services.flox.substituterAdded = false;
           }
           inputs.homeManager.nixosModule
           {
