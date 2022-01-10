@@ -18,4 +18,4 @@ rebuild *ARGS:
   nixos-generate-config --show-hardware-config \
     > nixos-modules/hardware/auto-detected.nix
   git diff -- nixos-modules/hardware/auto-detected.nix
-  sudo nixos-rebuild --flake .#machine --show-trace -L -v {{ARGS}}
+  sudo nixos-rebuild --flake .#machine --show-trace -L -v --impure {{ARGS}}
