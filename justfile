@@ -4,9 +4,15 @@ _:
   @just --list
 
 gc:
-  sudo nix-env -p /nix/var/nix/profiles/system --delete-generations old
+  just gc-nixos
+  just gc-nix
+
+gc-nix:
   nix-collect-garbage -d
   nix-store --optimise
+
+gc-nixos:
+  sudo nix-env -p /nix/var/nix/profiles/system --delete-generations old
 
 rebuild *ARGS:
   nixos-generate-config --show-hardware-config \
