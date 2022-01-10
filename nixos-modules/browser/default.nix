@@ -36,7 +36,7 @@
         name = "home-manager-options";
         url = "https://nix-community.github.io/home-manager/options.html";
       }
-      { toplevel_name = "Nix"; }
+      { toplevel_name = "Flox"; }
       {
         name = "workpace";
         url = "https://wwgmkedxfx.workplace.com";
