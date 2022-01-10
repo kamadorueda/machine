@@ -2,6 +2,9 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
+    flox.url = "github:flox/nixos-module/master";
+    flox.flake = false;
+
     homeManager.url = "github:nix-community/home-manager/master";
     homeManager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -42,6 +45,10 @@
 
       nixosConfigurations.machine = inputs.nixpkgs.lib.nixosSystem {
         modules = [
+          inputs.flox.outPath
+          {
+            services.flox.substituterAdded = false;
+          }
           inputs.homeManager.nixosModule
           {
             home-manager.useUserPackages = true;
