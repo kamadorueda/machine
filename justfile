@@ -14,8 +14,10 @@ gc-nix:
 gc-nixos:
   sudo nix-env -p /nix/var/nix/profiles/system --delete-generations old
 
-rebuild *ARGS:
+update-hardware:
   nixos-generate-config --show-hardware-config \
     > nixos-modules/hardware/auto-detected.nix
   git diff -- nixos-modules/hardware/auto-detected.nix
+
+rebuild *ARGS:
   sudo nixos-rebuild --flake .#machine --show-trace -L -v --impure {{ARGS}}
