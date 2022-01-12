@@ -15,23 +15,6 @@
         "type": "github"
       }
     },
-    "flox": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1632889218,
-        "narHash": "sha256-rRtzz0mnjkNSheDrzFg0R5tnPo3Wc8dWC++rASgwfjo=",
-        "owner": "flox",
-        "repo": "nixos-module",
-        "rev": "8a02d7a488dbc1f2d3d7d591145bea0d88d4dcba",
-        "type": "github"
-      },
-      "original": {
-        "owner": "flox",
-        "ref": "master",
-        "repo": "nixos-module",
-        "type": "github"
-      }
-    },
     "homeManager": {
       "inputs": {
         "nixpkgs": [
@@ -117,7 +100,6 @@
     },
     "root": {
       "inputs": {
-        "flox": "flox",
         "homeManager": "homeManager",
         "makes": "makes",
         "nixpkgs": "nixpkgs",
