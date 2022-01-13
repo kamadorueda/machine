@@ -171,6 +171,7 @@
         "ms-toolsai.jupyter"
         "ms-toolsai.jupyter-keymap"
         "ms-toolsai.jupyter-renderers"
+        "ms-vscode-remote.remote-ssh"
         "rust-lang.rust"
         "shardulm94.trailing-spaces"
         "streetsidesoftware.code-spell-checker"
