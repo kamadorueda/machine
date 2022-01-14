@@ -24,24 +24,28 @@
         name = "Nix";
         children = [
           {
-            name = "nixos-forum";
-            url = "https://discourse.nixos.org/latest";
-          }
-          {
-            name = "nixos-packages";
-            url = "https://search.nixos.org/packages";
-          }
-          {
-            name = "nixos-options";
-            url = "https://search.nixos.org/options";
-          }
-          {
             name = "home-manager-manual";
             url = "https://nix-community.github.io/home-manager";
           }
           {
             name = "home-manager-options";
             url = "https://nix-community.github.io/home-manager/options.html";
+          }
+          {
+            name = "nix-ux-roadmap";
+            url = "https://github.com/orgs/NixOS/projects/10/views/1";
+          }
+          {
+            name = "nixos-forum";
+            url = "https://discourse.nixos.org/latest";
+          }
+          {
+            name = "nixos-options";
+            url = "https://search.nixos.org/options";
+          }
+          {
+            name = "nixos-packages";
+            url = "https://search.nixos.org/packages";
           }
         ];
       }
