@@ -8,8 +8,28 @@
 
 ## Setup
 
-1.  (Optional) if you want to dual-boot with Windows,
-    install Windows first and then continue this tutorial.
+1.  (Optional)
+    If you want to dual-boot with Windows,
+    install Windows first
+    on your whole disk.
+
+    You'll get a partition scheme like this:
+
+    ```
+    Number  Start   End     Size    File system  Name                          Flags
+    1      1049kB  274MB   273MB   fat32        EFI system partition          boot, hidden, esp
+    2      274MB   290MB   16.8MB               Microsoft reserved partition  msftres
+    3      290MB   291GB   291GB   ntfs         Basic data partition          msftdata
+    4      1023GB  1024GB  1049MB  ntfs         Basic data partition          hidden, diag
+    ```
+
+    All you need to do is (On Windows)
+    resizing the partition #3,
+    to make some free space for NixOS.
+    Windows natively include a tool for this.
+
+    After installing NixOS
+    and then continue this tutorial.
 
 1.  Download `NixOS minimal ISO image` from the
     [NixOS's download page](https://nixos.org/download).
