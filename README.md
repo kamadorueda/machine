@@ -1,12 +1,29 @@
 # My development machine, as code
 
 - Powered by [NixOS](https://nixos.org/) and four partitions:
-  - `/`, ephemeral, **deleted** at EVERY boot
-  - `/boot`
-  - `/data`, persistent, where my important data lives in
-  - `/nix`, persistent, but mounted as **read-only**
+  - `/`, ephemeral, **erased** at every boot.
+  - `/nix`, persistent, mounted as **read-only** for maximum immutability.
+  - `/data`, persistent, and backed up regularly.
+  - `/boot`, config files that start the system.
 
 ## Setup
+
+1.  Download `NixOS minimal ISO image` from the
+    [NixOS's download page](https://nixos.org/download).
+
+1.  Burn it into a USB stick.
+
+    - If you are currently on Windows use [Rufus](https://rufus.ie).
+
+    - If you are on an unix-like operative system,
+      you can do so from the command line:
+
+      ```bash
+      lsblk
+      umount "${partition}"
+      parted "${device}" -- mktable msdos
+      dd bs=1MiB if="${iso}" of="${device}" oflag=direct status=progress
+      ```
 
 1.  (Optional)
     If you want to dual-boot with Windows,
@@ -16,187 +33,152 @@
     You'll get a partition scheme like this:
 
     ```
-    Number  Start   End     Size    File system  Name                          Flags
-    1      1049kB  274MB   273MB   fat32        EFI system partition          boot, hidden, esp
-    2      274MB   290MB   16.8MB               Microsoft reserved partition  msftres
-    3      290MB   291GB   291GB   ntfs         Basic data partition          msftdata
-    4      1023GB  1024GB  1049MB  ntfs         Basic data partition          hidden, diag
+    Number Start    End      Size     File system  Name                          Flags
+    1      0.00GiB  0.25GiB  0.25GiB  fat32        EFI system partition          boot, hidden, esp
+    2      0.25GiB  0.27GiB  0.02GiB               Microsoft reserved partition  msftres
+    3      0.27GiB  953GiB   953GiB   ntfs         Basic data partition          msftdata
+    4      953GiB   954GiB   0.98GiB  ntfs         Basic data partition          hidden, diag
     ```
 
-    All you need to do is (On Windows)
-    resizing the partition #3,
-    to make some free space for NixOS.
-    Windows natively include a tool for this.
+    All you need to do
+    is to open `Disk Manager`
+    on Windows,
+    and resize the `msftdata` partition
+    to make some free space for NixOS:
 
-    After installing NixOS
-    and then continue this tutorial.
+    ```
+    Number Start    End      Size     File system  Name                          Flags
+     1     0.00GiB  0.25GiB  0.25GiB  fat32        EFI system partition          boot, hidden, esp
+     2     0.25GiB  0.27GiB  0.02GiB               Microsoft reserved partition  msftres
+     3     0.27GiB  271GiB   271GiB   ntfs         Basic data partition          msftdata
+     5     271GiB   953GiB   682GiB   -            -
+     4     953GiB   954GiB   0.98GiB  ntfs         Basic data partition          hidden, diag
+    ```
 
-1.  Download `NixOS minimal ISO image` from the
-    [NixOS's download page](https://nixos.org/download).
+    After this tutorial,
+    NixOS will boot by default,
+    but you can also select the Windows Boot Partition
+    to boot into Windows.
+    This is achieved
+    by selecting a different startup device in your BIOS,
+    which is normally as simple as pressing F12
+    once the computer starts.
 
-1.  <details>
-      <summary>Burn it into a USB stick.</summary>
+1.  Boot from the USB stick,
+    start the installation
+    and then `sudo su`.
 
-      - If you are currently on Windows use [Rufus](https://rufus.ie)
+    If for some reason
+    your system refuses to boot into the USB,
+    enter the BIOS and disable `Secure Boot`
+    or try enabling `Legacy Boot` support.
 
-      - If you are on an unix-like operative system:
+1.  Make sure that we have
+    some empty disk space for NixOS to live in.
 
-        ```bash
-        lsblk
-        umount "${partition}"
-        parted "${device}" -- mktable msdos
-        dd bs=1MiB if="${iso}" of="${device}" oflag=direct status=progress
-        ```
-    </details>
+    Use the following commands as needed,
+    replace "${device}" by the address of the main disk:
 
-1.  Boot from the USB stick, start the installation and then `sudo su`.
+    - List block devices: `lsblk -f`.
+    - Managing partitions: `parted "${device}"`.
+      - Create a partition table: `(parted) mktable gpt`.
+      - Remove a partition: `(parted) rm "${number}"`.
 
-1.  <details>
-      <summary>Allocate some empty disk space for NixOS to live in.</summary>
-      Use the following commands as needed,
-      replace "${device}" by the address of the main disk:
+1.  Setup the NixOS partition scheme
+    in the free space allocated in the previous step.
 
-      - List block devices: `lsblk -f`
-      - Managing partitions: `parted "${device}"`
-        - Create a partition table: `(parted) mktable gpt`
-        - Remove a partition: `(parted) rm "${number}"`
-    </details>
+    ```bash
+    parted "${device}"
 
-1.  <details>
-      <summary>Setup the NixOS file system
-      in the free space allocated in the previous step.</summary>
+      # Generic setup
+      (parted) unit GiB
+      (parted) print
 
-      ```bash
-      parted "${device}"
+      # Setup boot partition
+      (parted) mkpart ESP fat32 "${start}" "${end}" # 1GiB
+      (parted) set "${number}" esp on
 
-        # Generic setup
-        (parted) unit GiB
-        (parted) print
+      # Setup other partitions
+      (parted) mkpart data "${start}" "${end}" # 50 GiB
+      (parted) mkpart root "${start}" "${end}" # 50 GiB
+      (parted) mkpart nix "${start}" "${end}" # As much as possible
+    ```
 
-        # Setup boot partition
-        (parted) rm "${number}" # Remove existing boot partitions
-        (parted) mkpart ESP fat32 1MiB 0.5
-        (parted) set "${number}" esp on
+    It should look like this:
 
-        # Setup other partitions
-        (parted) mkpart data "${start}" "${end}" # 50 GiB
-        (parted) mkpart nix "${start}" "${end}" # 100 GiB
-        (parted) mkpart root "${start}" "${end}" # 50 GiB
-      ```
-    </details>
+    ```
+    Number  Start    End      Size     File system  Name                          Flags
+     1      0.00GiB  0.25GiB  0.25GiB  fat32        EFI system partition          boot, hidden, esp
+     2      0.25GiB  0.27GiB  0.02GiB               Microsoft reserved partition  msftres
+     3      0.27GiB  271GiB   271GiB   ntfs         Basic data partition          msftdata
+     5      271GiB   272GiB   0.68GiB  fat32        ESP                           boot, esp
+     6      272GiB   322GiB   50.0GiB               data
+     7      322GiB   372GiB   50.0GiB               root
+     8      372GiB   953GiB   581GiB                nix
+     4      953GiB   954GiB   0.98GiB  ntfs         Basic data partition          hidden, diag
+    ```
 
-1.  <details>
-      <summary>Finish NixOS installation.</summary>
+    The Windows partitions (1, 2, 3 and 4) are optional
+    if you do not want to dual boot with Windows.
 
-      ```bash
-      cryptsetup luksFormat /dev/disk/by-partlabel/data
-      cryptsetup luksFormat /dev/disk/by-partlabel/nix
-      cryptsetup luksFormat /dev/disk/by-partlabel/root
-      cryptsetup luksOpen /dev/disk/by-partlabel/data cryptdata
-      cryptsetup luksOpen /dev/disk/by-partlabel/nix cryptnix
-      cryptsetup luksOpen /dev/disk/by-partlabel/root cryptroot
+1.  Encrypt disks with LUKS:
 
-      mkfs.fat -F 32 -n boot /dev/disk/by-partlabel/ESP
-      mkfs.ext4 -L data /dev/mapper/cryptdata
-      mkfs.ext4 -L nix /dev/mapper/cryptnix
-      mkfs.ext4 -L root /dev/mapper/cryptroot
+    ```bash
+    cryptsetup luksFormat /dev/disk/by-partlabel/data
+    cryptsetup luksFormat /dev/disk/by-partlabel/nix
+    cryptsetup luksFormat /dev/disk/by-partlabel/root
+    cryptsetup luksOpen /dev/disk/by-partlabel/data cryptdata
+    cryptsetup luksOpen /dev/disk/by-partlabel/nix cryptnix
+    cryptsetup luksOpen /dev/disk/by-partlabel/root cryptroot
 
-      mount /dev/disk/by-label/root /mnt
-      mkdir /mnt/boot
-      mkdir /mnt/data
-      mkdir /mnt/nix
-      mount /dev/disk/by-partlabel/ESP /mnt/boot
-      mount /dev/disk/by-label/data /mnt/data
-      mount /dev/disk/by-label/nix /mnt/nix
+    mkfs.fat -F 32 -n boot /dev/disk/by-partlabel/ESP
+    mkfs.ext4 -L data /dev/mapper/cryptdata
+    mkfs.ext4 -L nix /dev/mapper/cryptnix
+    mkfs.ext4 -L root /dev/mapper/cryptroot
+    ```
 
-      nixos-generate-config --root /mnt
-      cat << EOF >> /mnt/etc/nixos/configuration.nix
-        // { boot.loader.efi.canTouchEfiVariables = true;
-            boot.loader.systemd-boot.enable = true;
-            environment.systemPackages = [ pkgs.wpa_supplicant ];
-            services.nscd.enable = true; }
-      EOF
-      if not_connected_to_the_internet; then
-        ip a
-        wpa_supplicant -B -i "${interface}" -c <(wpa_passphrase "${ssid}" "{psk}")
-      fi
-      nixos-install
-      reboot
-      ```
-    </details>
+1.  Install NixOS, step one:
 
-1.  <details>
-      <summary>Clone this repository and rebuild.</summary>
+    ```bash
+    mount /dev/disk/by-label/root /mnt
+    mkdir /mnt/boot
+    mkdir /mnt/data
+    mkdir /mnt/nix
+    mount /dev/disk/by-partlabel/ESP /mnt/boot
+    mount /dev/disk/by-label/data /mnt/data
+    mount /dev/disk/by-label/nix /mnt/nix
 
-      ```bash
-      sudo chown -R $USER /data
+    nixos-generate-config --root /mnt
+    cat << EOF >> /mnt/etc/nixos/configuration.nix
+      // { boot.loader.efi.canTouchEfiVariables = true;
+          boot.loader.systemd-boot.enable = true;
+          environment.systemPackages = [ pkgs.wpa_supplicant ];
+          services.nscd.enable = true; }
+    EOF
+    if not_connected_to_the_internet; then
+      ip a
+      wpa_supplicant -B -i "${interface}" -c <(wpa_passphrase "${ssid}" "{psk}")
+    fi
+    nixos-install
+    reboot
+    ```
 
-      if not_connected_to_the_internet; then
-        ip a
-        wpa_supplicant -B -i "${interface}" -c <(wpa_passphrase "${ssid}" "{psk}")
-      fi
-      cd "$(mktemp -d)"
-      nix-shell -p git just
-      git clone https://github.com/kamadorueda/machine
-      cd machine
-      just rebuild switch
-      reboot
-      ```
-    </details>
+1.  Install NixOS, step two:
 
-1. Get your GitHub API token from the
-    [secrets file](https://github.com/kamadorueda/secrets/blob/master/machine/secrets.sh)
-    and export it into the terminal.
+    ```bash
+    sudo chown -R $USER /data
 
-1.  <details>
-      <summary>Setup the state.</summary>
-
-      - <details>
-          <summary>github/kamadorueda/machine</summary>
-
-          ```bash
-                mkdir -p /data/github/kamadorueda \
-            &&  pushd /data/github/kamadorueda \
-              &&  git clone "https://kamadorueda:${GITHUB_API_TOKEN}@github.com/kamadorueda/machine" \
-            &&  popd
-          ```
-        </details>
-
-      - <details>
-          <summary>github/kamadorueda/secrets</summary>
-
-          ```bash
-              mkdir -p /data/github/kamadorueda \
-          &&  pushd /data/github/kamadorueda \
-            &&  git clone --depth 1 "https://kamadorueda:${GITHUB_API_TOKEN}@github.com/kamadorueda/secrets" \
-            &&  cd secrets/machine \
-              &&  ./install.sh \
-          &&  popd
-          ```
-        </details>
-
-      - <details>
-          <summary>github/kamadorueda/nixpkgs-python</summary>
-
-          ```bash
-                mkdir -p /data/github/kamadorueda \
-          &&  pushd /data/github/kamadorueda \
-            &&  git clone git@github.com:kamadorueda/nixpkgs-python \
-          &&  popd
-          ```
-        </details>
-
-      - <details>
-          <summary>github/nixos</summary>
-
-          ```bash
-              mkdir -p /data/github/kamadorueda \
-          &&  pushd /data/github/kamadorueda \
-            &&  git clone git@github.com:kamadorueda/nixpkgs \
-            &&  git -C nixpkgs remote add upstream git@github.com:nixos/nixpkgs \
-          &&  popd
-          ```
-        </details>
+    if not_connected_to_the_internet; then
+      ip a
+      wpa_supplicant -B -i "${interface}" -c <(wpa_passphrase "${ssid}" "{psk}")
+    fi
+    cd "$(mktemp -d)"
+    nix-shell -p git just
+    git clone https://github.com/kamadorueda/machine
+    cd machine
+    just rebuild switch
+    reboot
+    ```
 
 1. Enjoy!
 
@@ -208,4 +190,4 @@
 
 ## Future work
 
-All good for now
+All good for now.
