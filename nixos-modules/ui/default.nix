@@ -32,7 +32,6 @@
     services.xserver.windowManager.i3.extraPackages = [
       nixpkgs.dmenu
       nixpkgs.i3status
-      nixpkgs.i3lock
     ];
     services.xserver.xkbVariant = "altgr-intl";
     time.timeZone = config.ui.timezone;
