@@ -23,6 +23,9 @@
     fonts.fonts = [ nixpkgs.powerline-fonts ];
     i18n.defaultLocale = config.ui.locale;
     programs.dconf.enable = true;
+    services.xserver.displayManager.autoLogin.enable = true;
+    services.xserver.displayManager.autoLogin.user = config.wellKnown.username;
+    services.xserver.displayManager.defaultSession = "none+i3";
     services.xserver.enable = true;
     services.xserver.layout = "us";
     services.xserver.windowManager.i3.enable = true;
