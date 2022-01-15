@@ -55,7 +55,7 @@
       mouse = "a";
     };
     xresources.extraConfig = ''
-      XTerm.vt100.faceName: ProFont for Powerline:size=28
+      XTerm.vt100.faceName: ${ui.font}:size=28
       XTerm.vt100.background: rgb:00/00/00
       XTerm.vt100.color0: rgb:00/00/00
       XTerm.vt100.color1: rgb:CD/00/00
