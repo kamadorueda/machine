@@ -55,7 +55,7 @@
       mouse = "a";
     };
     xresources.extraConfig = ''
-      XTerm.vt100.faceName: ${ui.font}:size=28
+      XTerm.vt100.faceName: ${config.ui.font}:size=28
       XTerm.vt100.background: rgb:00/00/00
       XTerm.vt100.color0: rgb:00/00/00
       XTerm.vt100.color1: rgb:CD/00/00
@@ -75,6 +75,17 @@
       XTerm.vt100.color15: rgb:FF/FF/FF
       XTerm.vt100.foreground: rgb:FF/FF/FF
       XTerm.vt100.selectToClipboard: true
+      XTerm.vt100.translations: #override \n\
+        Ctrl <Key> +: larger-vt-font() \n\
+        Ctrl <Key> -: smaller-vt-font() \n\
+        Ctrl Shift <Key> C: select-end(CLIPBOARD) \n\
+        Ctrl Shift <Key> V: insert-selection(CLIPBOARD) \n\
+        Shift <Key> Up: scroll-back(1, line) \n\
+        Shift <Key> Down: scroll-forw(1, line) \n\
+        Shift <Key> Next: scroll-back(1, halfpage) \n\
+        Shift <Key> Prior: scroll-forw(1, halfpage) \n\
+        Shift <Key> Home: scroll-back(9999, page) \n\
+        Shift <Key> End: scroll-forw(9999, page)
     '';
   };
   programs.bash.interactiveShellInit = builtins.readFile ./bashrc.sh;

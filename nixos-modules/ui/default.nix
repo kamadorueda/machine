@@ -35,7 +35,7 @@
 
       set $mod Mod4
 
-      font pango:${ui.font} 16
+      font pango:${config.ui.font} 16
 
       # Use pactl to adjust volume in PulseAudio.
       set $refresh_i3status killall -SIGUSR1 i3status
