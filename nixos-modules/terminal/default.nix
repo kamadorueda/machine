@@ -4,8 +4,6 @@
 }:
 
 {
-  console.font = "ter-powerline-v28";
-  console.packages = [ nixpkgs.powerline-fonts ];
   environment.shellAliases = {
     a = "git add -p";
     c = "git commit --allow-empty";
@@ -22,13 +20,9 @@
   };
   environment.systemPackages = [
     nixpkgs.coreutils
-    nixpkgs.curl
     nixpkgs.gnugrep
     nixpkgs.just
-    nixpkgs.libreoffice
     nixpkgs.parted
-    nixpkgs.patchelf
-    nixpkgs.peek
     nixpkgs.shadow
     nixpkgs.tree
   ];
@@ -53,60 +47,6 @@
       user.name = config.wellKnown.name;
       user.signingkey = config.wellKnown.signingKey;
     };
-    programs.gnome-terminal.enable = true;
-    programs.gnome-terminal.profile = {
-      "e0b782ed-6aca-44eb-8c75-62b3706b6220" = {
-        allowBold = true;
-        audibleBell = true;
-        backspaceBinding = "ascii-delete";
-        boldIsBright = true;
-        colors = {
-          backgroundColor = "#000000";
-          foregroundColor = "#FFFFFF";
-          palette = [
-            "#000000"
-            "#CD0000"
-            "#00CD00"
-            "#CDCD00"
-            "#0000EE"
-            "#CD00CD"
-            "#00CDCD"
-            "#E5E5E5"
-            "#7F7F7F"
-            "#FF0000"
-            "#00FF00"
-            "#FFFF00"
-            "#5C5CFF"
-            "#FF00FF"
-            "#00FFFF"
-            "#FFFFFF"
-          ];
-        };
-        cursorBlinkMode = "off";
-        cursorShape = "underline";
-        default = true;
-        deleteBinding = "delete-sequence";
-        font = "${config.ui.font} 28";
-        scrollbackLines = 1000000;
-        scrollOnOutput = false;
-        showScrollbar = false;
-        transparencyPercent = 4;
-        visibleName = config.wellKnown.username;
-      };
-    };
-    programs.gnome-terminal.showMenubar = false;
-    programs.gnome-terminal.themeVariant = "dark";
-    programs.powerline-go.enable = true;
-    programs.powerline-go.modules = [ "cwd" "exit" "git" "time" ];
-    programs.powerline-go.newline = true;
-    programs.powerline-go.settings = {
-      cwd-max-depth = "3";
-      cwd-max-dir-size = "16";
-      git-mode = "fancy";
-      numeric-exit-codes = true;
-      shell = "bash";
-      theme = "default";
-    };
     programs.vim.enable = true;
     programs.vim.extraConfig = "";
     programs.vim.plugins = [ ];
@@ -114,6 +54,28 @@
       background = "dark";
       mouse = "a";
     };
+    xresources.extraConfig = ''
+      XTerm.vt100.faceName: ProFont for Powerline:size=28
+      XTerm.vt100.background: rgb:00/00/00
+      XTerm.vt100.color0: rgb:00/00/00
+      XTerm.vt100.color1: rgb:CD/00/00
+      XTerm.vt100.color2: rgb:00/CD/00
+      XTerm.vt100.color3: rgb:CD/CD/00
+      XTerm.vt100.color4: rgb:00/00/EE
+      XTerm.vt100.color5: rgb:CD/00/CD
+      XTerm.vt100.color6: rgb:00/CD/CD
+      XTerm.vt100.color7: rgb:E5/E5/E5
+      XTerm.vt100.color8: rgb:7F/7F/7F
+      XTerm.vt100.color9: rgb:FF/00/00
+      XTerm.vt100.color10: rgb:00/FF/00
+      XTerm.vt100.color11: rgb:FF/FF/00
+      XTerm.vt100.color12: rgb:5C/5C/FF
+      XTerm.vt100.color13: rgb:FF/00/FF
+      XTerm.vt100.color14: rgb:00/FF/FF
+      XTerm.vt100.color15: rgb:FF/FF/FF
+      XTerm.vt100.foreground: rgb:FF/FF/FF
+      XTerm.vt100.selectToClipboard: true
+    '';
   };
   programs.bash.interactiveShellInit = builtins.readFile ./bashrc.sh;
 }
