@@ -26,52 +26,26 @@
     in
     {
 
-      nixosModules = {
-        boot = import ./nixos-modules/boot;
-        browser = import ./nixos-modules/browser;
-        editor = import ./nixos-modules/editor;
-        hardware = import ./nixos-modules/hardware;
-        networking = import ./nixos-modules/networking;
-        nix = import ./nixos-modules/nix;
-        secrets = import ./nixos-modules/secrets;
-        terminal = import ./nixos-modules/terminal;
-        ui = import ./nixos-modules/ui;
-        users = import ./nixos-modules/users;
-        virtualisation = import ./nixos-modules/virtualisation;
-        wellKnown = import ./nixos-modules/well-known;
-      };
+      nixosModules =
+        let nixosModulesSrc = ./nixos-modules;
+        in
+        builtins.mapAttrs
+          (module: type: import "${nixosModulesSrc}/${module}")
+          (builtins.readDir nixosModulesSrc);
 
       nixosConfigurations.machine = inputs.nixpkgs.lib.nixosSystem {
-        modules = [
+        modules = (builtins.attrValues inputs.self.nixosModules) ++ [
           inputs.homeManager.nixosModule
           {
             home-manager.useUserPackages = true;
             home-manager.useGlobalPkgs = true;
             home-manager.verbose = true;
-          }
-          inputs.self.nixosModules.boot
-          inputs.self.nixosModules.browser
-          inputs.self.nixosModules.editor
-          inputs.self.nixosModules.hardware
-          inputs.self.nixosModules.networking
-          inputs.self.nixosModules.nix
-          inputs.self.nixosModules.secrets
-          {
             secrets.hashedPassword =
               # mkpasswd -m sha-512
               "$6$qQYhouD2P24RYK1H$Oc9BI/2wC7uydLXP5taS7LQgpTUbORwty/0sAGtwial7k9ZYQOmeyjZ5DxvmObdccPJHem2N/.afn/JtCJ2af.";
             secrets.path = "/data/github/kamadorueda/secrets";
-          }
-          inputs.self.nixosModules.ui
-          {
             ui.locale = "en_US.UTF-8";
             ui.timezone = "America/Bogota";
-          }
-          inputs.self.nixosModules.terminal
-          inputs.self.nixosModules.users
-          inputs.self.nixosModules.virtualisation
-          inputs.self.nixosModules.wellKnown
-          {
             wellKnown.email = "kamadorueda@gmail.com";
             wellKnown.name = "Kevin Amado";
             wellKnown.signingKey = "FFF341057F503148";
