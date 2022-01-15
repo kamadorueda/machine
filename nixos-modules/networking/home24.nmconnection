@@ -2,7 +2,7 @@
 id=24f42fdc30
 uuid=39041dee-4b7f-46cb-9a62-a793390f69e2
 type=wifi
-autoconnect=true
+autoconnect=false
 permissions=
 
 [wifi]
