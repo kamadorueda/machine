@@ -6,7 +6,6 @@
   environment.systemPackages = [ nixpkgs.google-chrome ];
   programs.chromium.enable = true;
   programs.chromium.extensions = [
-    "glnpjglilkicbckjpbgcfkogebgllemb" # okta
     "hdokiejnpimakedhajhdlcegeplioahd" # lastpass
   ];
   # https://chromeenterprise.google/policies/
