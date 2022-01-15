@@ -50,10 +50,8 @@
     programs.vim.enable = true;
     programs.vim.extraConfig = "";
     programs.vim.plugins = [ ];
-    programs.vim.settings = {
-      background = "dark";
-      mouse = "a";
-    };
+    programs.vim.settings.background = "dark";
+    programs.vim.settings.mouse = "a";
     xresources.extraConfig = ''
       XTerm.vt100.faceName: ${config.ui.font}:size=28
       XTerm.vt100.background: rgb:00/00/00
