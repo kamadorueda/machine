@@ -109,6 +109,8 @@
       <summary>Clone this repository and rebuild.</summary>
 
       ```bash
+      sudo chown -R $USER /data
+
       if not_connected_to_the_internet; then
         ip a
         wpa_supplicant -B -i "${interface}" -c <(wpa_passphrase "${ssid}" "{psk}")
