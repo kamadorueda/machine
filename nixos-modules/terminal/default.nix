@@ -11,7 +11,6 @@
     c = "git commit --allow-empty";
     ca = "git commit --amend --no-edit --allow-empty";
     clip = "${nixpkgs.xclip}/bin/xclip -sel clip";
-    code = config.editor.bin;
     f = "git fetch --all";
     l = "git log";
     nix3 = "nix --option experimental-features 'nix-command flakes' -L -v";
@@ -41,20 +40,15 @@
     programs.git.enable = true;
     programs.git.extraConfig = {
       commit.gpgsign = true;
-      core.editor = "${config.editor.bin} --wait";
       diff.renamelimit = 16384;
       diff.sopsdiffer.textconv =
         (nixpkgs.writeScript "sopsdiffer.sh" ''
           #! ${nixpkgs.bash}/bin/bash
           sops -d "$1" || cat "$1"
         '').outPath;
-      diff.tool = "vscode";
-      difftool.vscode.cmd = "${config.editor.bin} --diff $LOCAL $REMOTE --wait";
       gpg.progam = "${nixpkgs.gnupg}/bin/gpg2";
       gpg.sign = true;
       init.defaultbranch = "main";
-      merge.tool = "vscode";
-      mergetool.vscode.cmd = "${config.editor.bin} --wait $MERGED";
       user.email = config.wellKnown.email;
       user.name = config.wellKnown.name;
       user.signingkey = config.wellKnown.signingKey;
