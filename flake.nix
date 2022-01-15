@@ -31,6 +31,7 @@
         browser = import ./nixos-modules/browser;
         editor = import ./nixos-modules/editor;
         hardware = import ./nixos-modules/hardware;
+        networking = import ./nixos-modules/networking;
         nix = import ./nixos-modules/nix;
         secrets = import ./nixos-modules/secrets;
         terminal = import ./nixos-modules/terminal;
@@ -52,6 +53,7 @@
           inputs.self.nixosModules.browser
           inputs.self.nixosModules.editor
           inputs.self.nixosModules.hardware
+          inputs.self.nixosModules.networking
           inputs.self.nixosModules.nix
           inputs.self.nixosModules.secrets
           {
