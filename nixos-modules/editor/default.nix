@@ -7,7 +7,6 @@
 , ...
 }:
 
-
 let
   userDataDir = "/data/vscode/data";
 
