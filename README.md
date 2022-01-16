@@ -5,6 +5,8 @@
   - `/nix`, persistent, mounted as **read-only** for maximum immutability.
   - `/data`, persistent, and backed up regularly.
   - `/boot`, config files that start the system.
+- With [Nvidia](https://www.nvidia.com/) support.
+- With [Multi-booting](https://en.wikipedia.org/wiki/Multi-booting) support.
 
 ## Setup
 
