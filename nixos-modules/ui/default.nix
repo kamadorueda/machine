@@ -50,6 +50,6 @@
     services.xserver.xkbVariant = "altgr-intl";
     time.timeZone = config.ui.timezone;
     ui.font = "ProFont for Powerline";
-    ui.fontSize = 22;
+    ui.fontSize = 14;
   };
 }
