@@ -1,4 +1,6 @@
-args:
+{ config
+, ...
+} @ args:
 
 let
   autoDetected = import ./auto-detected.nix args;
