@@ -20,4 +20,11 @@ update-hardware:
   git diff -- nixos-modules/hardware/auto-detected.nix
 
 rebuild *ARGS:
-  sudo nixos-rebuild --flake .#machine --show-trace -L -v --impure {{ARGS}}
+  sudo nixos-rebuild \
+    --flake .#machine \
+    --show-trace \
+    -L \
+    -v \
+    --option substituters '' \
+    --impure \
+    {{ARGS}}

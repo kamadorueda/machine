@@ -43,6 +43,8 @@
       nixpkgs.i3status
     ];
     services.xserver.xkbVariant = "altgr-intl";
+    hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackage.legacy_470;
+    services.xserver.videoDrivers = [ "nvidia" ];
     time.timeZone = config.ui.timezone;
     ui.font = "ProFont for Powerline";
   };
