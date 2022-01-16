@@ -4,17 +4,19 @@
 , ...
 }:
 
-let
-  strOption = lib.mkOption {
-    type = lib.types.str;
-  };
-in
 {
 
   options = {
-    ui.font = strOption;
-    ui.fontSize = strOption;
-    ui.timezone = strOption;
+    ui.font = lib.mkOption {
+      type = lib.types.str;
+    };
+    ui.fontSize = lib.mkOption {
+      apply = builtins.toString;
+      type = lib.types.ints.positive;
+    };
+    ui.timezone = lib.mkOption {
+      type = lib.types.str;
+    };
   };
 
   config = {
@@ -44,6 +46,6 @@ in
     services.xserver.xkbVariant = "altgr-intl";
     time.timeZone = config.ui.timezone;
     ui.font = "ProFont for Powerline";
-    ui.fontSize = "22";
+    ui.fontSize = 22;
   };
 }

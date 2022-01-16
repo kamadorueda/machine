@@ -109,7 +109,7 @@ let
     "editor.formatOnSave" = true;
     "editor.formatOnType" = false;
     "editor.fontFamily" = "'${config.ui.font}'";
-    "editor.fontSize" = 16.5;
+    "editor.fontSize" = config.ui.fontSize;
     "editor.guides.bracketPairs" = "active";
     "editor.minimap.maxColumn" = 80;
     "editor.minimap.renderCharacters" = false;

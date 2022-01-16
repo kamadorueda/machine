@@ -16,6 +16,7 @@ XTerm.vt100.color13: rgb:FF/00/FF
 XTerm.vt100.color14: rgb:00/FF/FF
 XTerm.vt100.color15: rgb:FF/FF/FF
 XTerm.vt100.foreground: rgb:FF/FF/FF
+XTerm.vt100.saveLines: 1000000
 XTerm.vt100.selectToClipboard: true
 XTerm.vt100.translations: #override \n\
   Ctrl <Key> +: larger-vt-font() \n\
