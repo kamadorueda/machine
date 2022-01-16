@@ -25,6 +25,5 @@ rebuild *ARGS:
     --show-trace \
     -L \
     -v \
-    --option substituters '' \
     --impure \
     {{ARGS}}

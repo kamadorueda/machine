@@ -55,14 +55,10 @@
      4     953GiB   954GiB   0.98GiB  ntfs         Basic data partition          hidden, diag
     ```
 
-    After this tutorial,
-    NixOS will boot by default,
-    but you can also select the Windows Boot Partition
-    to boot into Windows.
-    This is achieved
-    by selecting a different startup device in your BIOS,
-    which is normally as simple as pressing F12
-    once the computer starts.
+    After this tutorial
+    you'll be able to pick
+    which Operative System you want to use
+    when the computer starts.
 
 1.  Boot from the USB stick,
     start the installation
