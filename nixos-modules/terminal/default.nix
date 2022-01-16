@@ -80,8 +80,8 @@
         Ctrl Shift <Key> V: insert-selection(CLIPBOARD) \n\
         Shift <Key> Up: scroll-back(1, line) \n\
         Shift <Key> Down: scroll-forw(1, line) \n\
-        Shift <Key> Next: scroll-back(1, halfpage) \n\
-        Shift <Key> Prior: scroll-forw(1, halfpage) \n\
+        Shift <Key> Prior: scroll-back(1, halfpage) \n\
+        Shift <Key> Next: scroll-forw(1, halfpage) \n\
         Shift <Key> Home: scroll-back(9999, page) \n\
         Shift <Key> End: scroll-forw(9999, page)
     '';
