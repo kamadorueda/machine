@@ -154,7 +154,7 @@ let
     "telemetry.enableTelemetry" = false;
     "update.mode" = "none";
     "update.showReleaseNotes" = false;
-    "window.zoomLevel" = 2;
+    "window.zoomLevel" = 4;
     "workbench.colorTheme" = "Default High Contrast";
     "workbench.editor.enablePreview" = false;
     "workbench.editor.focusRecentEditorAfterClose" = false;

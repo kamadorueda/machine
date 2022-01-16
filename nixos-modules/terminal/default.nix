@@ -52,7 +52,7 @@
     programs.vim.settings.background = "dark";
     programs.vim.settings.mouse = "a";
     xresources.extraConfig = ''
-      XTerm.vt100.faceName: ${config.ui.font}:size=${config.ui.fontSize}
+      XTerm.vt100.faceName: ${config.ui.font}:size=${builtins.toString config.ui.fontSize}
       ${builtins.readFile ./Xresources}
     '';
   };

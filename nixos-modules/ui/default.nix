@@ -11,7 +11,6 @@
       type = lib.types.str;
     };
     ui.fontSize = lib.mkOption {
-      apply = builtins.toString;
       type = lib.types.ints.positive;
     };
     ui.timezone = lib.mkOption {
@@ -22,6 +21,11 @@
   config = {
     fonts.enableDefaultFonts = true;
     fonts.fonts = [ nixpkgs.powerline-fonts ];
+    home-manager.users.${config.wellKnown.username} = {
+      gtk.enable = true;
+      gtk.font.name = config.ui.font;
+      gtk.font.size = config.ui.fontSize;
+    };
     i18n.defaultLocale = "en_US.UTF-8";
     programs.dconf.enable = true;
     services.xserver.displayManager.autoLogin.enable = true;
@@ -30,7 +34,7 @@
     services.xserver.enable = true;
     services.xserver.layout = "us";
     services.xserver.windowManager.i3.configFile = builtins.toFile "i3.conf" ''
-      font pango:${config.ui.font} ${config.ui.fontSize}
+      font pango:${config.ui.font} ${builtins.toString config.ui.fontSize}
 
       bar {
         status_command i3status -c ${./i3status.conf}
