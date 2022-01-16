@@ -3,24 +3,19 @@
 , ...
 }:
 
+let
+  strOption = lib.mkOption {
+    type = lib.types.str;
+  };
+in
 {
 
   options = {
-    wellKnown.email = lib.mkOption {
-      type = lib.types.str;
-    };
-    wellKnown.home = lib.mkOption {
-      type = lib.types.str;
-    };
-    wellKnown.name = lib.mkOption {
-      type = lib.types.str;
-    };
-    wellKnown.signingKey = lib.mkOption {
-      type = lib.types.str;
-    };
-    wellKnown.username = lib.mkOption {
-      type = lib.types.str;
-    };
+    wellKnown.email = strOption;
+    wellKnown.home = strOption;
+    wellKnown.name = strOption;
+    wellKnown.signingKey = strOption;
+    wellKnown.username = strOption;
   };
 
   config = {
