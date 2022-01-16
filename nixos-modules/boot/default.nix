@@ -1,14 +1,16 @@
-{ nixpkgs, ... }:
+{ config
+, nixpkgs
+, ...
+}:
 
 {
-  # I have to manage some state now
-  # boot.initrd.postDeviceCommands = ''
-  #   echo wiping root device...
-  #   mkdir /tmp/root
-  #   ${nixpkgs.utillinux}/bin/mount /dev/disk/by-label/root /tmp/root
-  #   rm -fr /tmp/root/*
-  #   ${nixpkgs.utillinux}/bin/umount /tmp/root
-  # '';
+  boot.initrd.postDeviceCommands = ''
+    echo erasing: ${config.fileSystems."/".device}
+    mkdir /tmp/mnt
+    ${nixpkgs.utillinux}/bin/mount ${config.fileSystems."/".device} /tmp/mnt
+    rm -fr /tmp/mnt/*
+    ${nixpkgs.utillinux}/bin/umount /tmp/mnt
+  '';
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.extraEntries = ''
