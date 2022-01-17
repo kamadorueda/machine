@@ -150,8 +150,7 @@ let
     "python.linting.pylintEnabled" = false;
     "python.pythonPath" = "${nixpkgs.python38}/bin/python";
     "security.workspace.trust.enabled" = false;
-    "telemetry.enableCrashReporter" = false;
-    "telemetry.enableTelemetry" = false;
+    "telemetry.telemetryLevel" = "off";
     "update.mode" = "none";
     "update.showReleaseNotes" = false;
     "window.zoomLevel" = 2;
