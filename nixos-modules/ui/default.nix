@@ -19,20 +19,17 @@
   };
 
   config = {
-    fonts.enableDefaultFonts = true;
-    fonts.fonts = [ nixpkgs.powerline-fonts ];
+    fonts.fonts = [ nixpkgs.jetbrains-mono ];
     home-manager.users.${config.wellKnown.username} = {
       gtk.enable = true;
       gtk.font.name = config.ui.font;
       gtk.font.size = config.ui.fontSize;
     };
-    i18n.defaultLocale = "en_US.UTF-8";
     programs.dconf.enable = true;
     services.xserver.displayManager.autoLogin.enable = true;
     services.xserver.displayManager.autoLogin.user = config.wellKnown.username;
     services.xserver.displayManager.defaultSession = "none+i3";
     services.xserver.enable = true;
-    services.xserver.layout = "us";
     services.xserver.windowManager.i3.configFile = builtins.toFile "i3.conf" ''
       font pango:${config.ui.font} ${builtins.toString config.ui.fontSize}
 
@@ -49,7 +46,7 @@
     ];
     services.xserver.xkbVariant = "altgr-intl";
     time.timeZone = config.ui.timezone;
-    ui.font = "ProFont for Powerline";
+    ui.font = "JetBrains Mono";
     ui.fontSize = 14;
   };
 }
