@@ -32,8 +32,8 @@
       colors.normal.black = "#000000";
       colors.normal.red = "#CD0000";
       colors.normal.green = "#00CD00";
-      colors.normal.yellow = "#0000EE";
-      colors.normal.blue = "#0000ee";
+      colors.normal.yellow = "#CDCD00";
+      colors.normal.blue = "#0000EE";
       colors.normal.magenta = "#CD00CD";
       colors.normal.cyan = "#00CDCD";
       colors.normal.white = "#E5E5E5";
