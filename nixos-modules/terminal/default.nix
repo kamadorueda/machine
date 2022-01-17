@@ -26,6 +26,12 @@
     nixpkgs.tree
   ];
   home-manager.users.${config.wellKnown.username} = {
+    programs.alacritty.enable = true;
+    programs.alacritty.settings = {
+      font.normal.family = config.ui.font;
+      font.size = config.ui.fontSize;
+      scrolling.history = 1000000;
+    };
     programs.bash.enable = true;
     programs.bash.initExtra = "test -f /etc/bashrc && source /etc/bashrc";
     programs.direnv.enable = true;
@@ -51,10 +57,6 @@
     programs.vim.plugins = [ ];
     programs.vim.settings.background = "dark";
     programs.vim.settings.mouse = "a";
-    xresources.extraConfig = ''
-      XTerm.vt100.faceName: ${config.ui.font}:size=${builtins.toString config.ui.fontSize}
-      ${builtins.readFile ./Xresources}
-    '';
   };
   programs.bash.interactiveShellInit = builtins.readFile ./bashrc.sh;
 }
