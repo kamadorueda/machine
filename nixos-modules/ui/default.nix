@@ -20,6 +20,9 @@
 
   config = {
     environment.systemPackages = [
+      (nixpkgs.writeShellScriptBin "bluetooth" ''
+        exec ${nixpkgs.bluez}/bin/bluetoothctl "$@"
+      '')
       (nixpkgs.writeShellScriptBin "files" ''
         exec ${nixpkgs.gnome.nautilus}/bin/nautilus "$@"
       '')
@@ -27,7 +30,7 @@
         exec ${nixpkgs.gnome.eog}/bin/eog "$@"
       '')
       (nixpkgs.writeShellScriptBin "screenshot" ''
-        exec ${nixpkgs.gnome.eog}/bin/gnome-screenshot "$@"
+        exec ${nixpkgs.gnome.gnome-screenshot}/bin/gnome-screenshot "$@"
       '')
       (nixpkgs.writeShellScriptBin "sound" ''
         exec ${nixpkgs.pavucontrol}/bin/pavucontrol "$@"
