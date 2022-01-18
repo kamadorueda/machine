@@ -3,6 +3,9 @@
 }:
 
 {
+  home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
+  home-manager.verbose = true;
   users.mutableUsers = false;
   users.users.root = {
     inherit (config.secrets) hashedPassword;

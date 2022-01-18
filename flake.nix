@@ -27,30 +27,28 @@
     {
 
       nixosModules =
-        let nixosModulesSrc = ./nixos-modules;
+        let
+          nixosModulesSrc = ./nixos-modules;
+          nixosModules = builtins.mapAttrs
+            (module: type: import "${nixosModulesSrc}/${module}")
+            (builtins.readDir nixosModulesSrc);
         in
-        builtins.mapAttrs
-          (module: type: import "${nixosModulesSrc}/${module}")
-          (builtins.readDir nixosModulesSrc);
+        nixosModules // {
+          homeManager = inputs.homeManager.nixosModule;
+        };
 
       nixosConfigurations.machine = inputs.nixpkgs.lib.nixosSystem {
-        modules = (builtins.attrValues inputs.self.nixosModules) ++ [
-          inputs.homeManager.nixosModule
-          {
-            home-manager.useUserPackages = true;
-            home-manager.useGlobalPkgs = true;
-            home-manager.verbose = true;
-            secrets.hashedPassword =
-              # mkpasswd -m sha-512
-              "$6$qQYhouD2P24RYK1H$Oc9BI/2wC7uydLXP5taS7LQgpTUbORwty/0sAGtwial7k9ZYQOmeyjZ5DxvmObdccPJHem2N/.afn/JtCJ2af.";
-            secrets.path = "/data/github/kamadorueda/secrets";
-            ui.timezone = "America/Bogota";
-            wellKnown.email = "kamadorueda@gmail.com";
-            wellKnown.name = "Kevin Amado";
-            wellKnown.signingKey = "FFF341057F503148";
-            wellKnown.username = "kamadorueda";
-          }
-        ];
+        modules = (builtins.attrValues inputs.self.nixosModules) ++ [{
+          secrets.hashedPassword =
+            # mkpasswd -m sha-512
+            "$6$qQYhouD2P24RYK1H$Oc9BI/2wC7uydLXP5taS7LQgpTUbORwty/0sAGtwial7k9ZYQOmeyjZ5DxvmObdccPJHem2N/.afn/JtCJ2af.";
+          secrets.path = "/data/github/kamadorueda/secrets";
+          ui.timezone = "America/Bogota";
+          wellKnown.email = "kamadorueda@gmail.com";
+          wellKnown.name = "Kevin Amado";
+          wellKnown.signingKey = "FFF341057F503148";
+          wellKnown.username = "kamadorueda";
+        }];
         specialArgs = rec {
           inherit nixpkgs;
           nixpkgsSrc = inputs.nixpkgs.sourceInfo;
