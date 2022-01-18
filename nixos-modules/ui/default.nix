@@ -41,6 +41,16 @@
       gtk.enable = true;
       gtk.font.name = config.ui.font;
       gtk.font.size = config.ui.fontSize;
+      xdg.enable = true;
+      xdg.userDirs.enable = true;
+      xdg.userDirs.desktop = "/data/xdg/desktop";
+      xdg.userDirs.documents = "/data/xdg/documents";
+      xdg.userDirs.download = "/data/xdg/download";
+      xdg.userDirs.music = "/data/xdg/music";
+      xdg.userDirs.pictures = "/data/xdg/pictures";
+      xdg.userDirs.publicShare = "/data/xdg/public-share";
+      xdg.userDirs.templates = "/data/xdg/templates";
+      xdg.userDirs.videos = "/data/xdg/videos";
     };
     programs.dconf.enable = true;
     services.xserver.displayManager.autoLogin.enable = true;
