@@ -6,8 +6,8 @@
 
 {
   environment.systemPackages = [
-    (pkgs.writeShellScriptBin "nix3" ''
-      exec ${pkgs.nixUnstable}/bin/nix \
+    (nixpkgs.writeShellScriptBin "nix3" ''
+      exec ${nixpkgs.nixUnstable}/bin/nix \
         --experimental-features "nix-command flakes" \
         --print-build-logs \
         --verbose "$@"
