@@ -23,5 +23,6 @@
         source = "${config.secrets.path}/machine/ssh/config";
       };
     };
+    programs.ssh.startAgent = true;
   };
 }
