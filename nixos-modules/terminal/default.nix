@@ -11,7 +11,6 @@
     clip = "${nixpkgs.xclip}/bin/xclip -sel clip";
     f = "git fetch --all";
     l = "git log";
-    nix3 = "nix --option experimental-features 'nix-command flakes' -L -v";
     p = "git push -f";
     ro = "git pull --autostash --progress --rebase --stat origin";
     ru = "git pull --autostash --progress --rebase --stat upstream";

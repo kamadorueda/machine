@@ -5,6 +5,14 @@
 }:
 
 {
+  environment.systemPackages = [
+    (pkgs.writeShellScriptBin "nix3" ''
+      exec ${pkgs.nixUnstable}/bin/nix \
+        --experimental-features "nix-command flakes" \
+        --print-build-logs \
+        --verbose "$@"
+    '')
+  ];
   nix.buildCores = 0;
   nix.registry.nixpkgs = {
     exact = false;
