@@ -48,7 +48,9 @@
       colors.primary.foreground = "#FFFFFF";
       font.normal.family = config.ui.font;
       font.size = config.ui.fontSize;
+      live_config_reload = true;
       scrolling.history = 100000;
+      working_directory = "/data";
     };
     programs.bash.enable = true;
     programs.bash.initExtra = "test -f /etc/bashrc && source /etc/bashrc";

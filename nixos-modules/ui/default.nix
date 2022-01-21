@@ -45,7 +45,7 @@
       xdg.userDirs.enable = true;
       xdg.userDirs.desktop = "/data/xdg/desktop";
       xdg.userDirs.documents = "/data/xdg/documents";
-      xdg.userDirs.download = "/data/xdg/download";
+      xdg.userDirs.download = "/data/xdg/downloads";
       xdg.userDirs.music = "/data/xdg/music";
       xdg.userDirs.pictures = "/data/xdg/pictures";
       xdg.userDirs.publicShare = "/data/xdg/public-share";
