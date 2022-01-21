@@ -58,11 +58,9 @@
     services.xserver.displayManager.defaultSession = "none+i3";
     services.xserver.enable = true;
     services.xserver.windowManager.i3.configFile = builtins.toFile "i3.conf" ''
-      font pango:${config.ui.font} ${builtins.toString config.ui.fontSize}
-
-      bar {
-        status_command i3status -c ${./i3status.conf}
-      }
+      set $font ${config.ui.font}
+      set $fontSize ${builtins.toString config.ui.fontSize}
+      set $i3status_conf ${./i3status.conf}
 
       include ${./i3.conf}
     '';
