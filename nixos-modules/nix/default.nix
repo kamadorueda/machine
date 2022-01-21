@@ -13,12 +13,12 @@
         --verbose "$@"
     '')
   ];
-  nix.buildCores = 0;
+  nix.buildCores = 1;
   nix.registry.nixpkgs = {
     exact = false;
     flake = nixpkgsSrc;
   };
-  nix.maxJobs = 1;
+  nix.maxJobs = "auto";
   nix.nixPath = [ "nixpkgs=${nixpkgsSrc}" ];
   nix.package = nixpkgs.nix;
   nix.trustedUsers = [ "root" config.wellKnown.username ];
