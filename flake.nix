@@ -58,14 +58,27 @@
       };
 
       nixosConfigurations = {
+        isoInstaller = mkNixosSystem {
+          modules =
+            [ inputs.nixosGenerators.nixosModules.install-iso ]
+            ++
+            (builtins.attrValues (builtins.removeAttrs inputs.self.nixosModules [
+              "boot"
+              "hardware"
+              "networking"
+              "virtualisation"
+            ]));
+          system = "x86_64-linux";
+        };
+
         machine = mkNixosSystem {
           modules = builtins.attrValues inputs.self.nixosModules;
           system = "x86_64-linux";
         };
 
-        isoInstaller = mkNixosSystem {
+        virtualbox = mkNixosSystem {
           modules =
-            [ inputs.nixosGenerators.nixosModules.install-iso ]
+            [ inputs.nixosGenerators.nixosModules.virtualbox ]
             ++
             (builtins.attrValues (builtins.removeAttrs inputs.self.nixosModules [
               "boot"
@@ -80,6 +93,9 @@
       packages."x86_64-linux" = {
         isoInstaller =
           let nixosSystem = inputs.self.nixosConfigurations.isoInstaller;
+          in nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
+        virtualbox =
+          let nixosSystem = inputs.self.nixosConfigurations.virtualbox;
           in nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
       };
 
