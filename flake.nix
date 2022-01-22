@@ -70,6 +70,7 @@
                 "boot"
                 "hardware"
                 "networking"
+                "virtualisation"
               ];
             in
             [
