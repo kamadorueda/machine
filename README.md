@@ -5,6 +5,7 @@
   - `/nix`, persistent, mounted as **read-only** for maximum immutability.
   - `/data`, persistent, and backed up regularly.
   - `/boot`, config files that start the system.
+- With the [Latest stable Linux Kernel](https://www.kernel.org/).
 - With [Nvidia](https://www.nvidia.com/) support.
 - With [Multi-booting](https://en.wikipedia.org/wiki/Multi-booting) support.
 
@@ -179,6 +180,50 @@
     ```
 
 1. Enjoy!
+
+## Nvidia
+
+1.  Look up your graphics card product:
+
+    ```bash
+    $ nix shell nixpkgs#pciutils
+
+    [nix-shell] $ lspci
+
+    # ...
+    01:00.0 VGA compatible controller: NVIDIA Corporation TU116 [GeForce GTX 1660] (rev a1)
+    # ...
+    ```
+
+1.  See which is the highest driver version
+    that supports your product:
+    https://www.nvidia.com/en-us/drivers/unix/
+
+1.  Map it to a package in
+    [nixpkgs](https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/os-specific/linux/nvidia-x11/default.nix):
+
+    You can also explore:
+    `nixpkgs.linuxPackages_latest.nvidiaPackages.*.version`
+    on a `$ nix repl`.
+
+1.  Add it to your configuration.
+
+    You can see the `hardware` NixOS module in this repository for an example.
+
+1.  Switch and reboot.
+
+1.  Should be in use now:
+
+    ```bash
+    $ nix3 run nixpkgs#glxinfo -- -B
+
+    # ...
+    OpenGL vendor string: nvidia
+    # ...
+    ```
+
+    It should not mention [nouveau](https://nouveau.freedesktop.org/)
+    but [Nvidia](https://www.nvidia.com/).
 
 ## Useful links
 
