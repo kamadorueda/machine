@@ -8,36 +8,42 @@
 }:
 
 let
+  extensionsDir = "/data/vscode/extensions";
   userDataDir = "/data/vscode/data";
 
   bin = builtins.concatStringsSep " " [
     "${nixpkgs.vscode}/bin/code"
     "--extensions-dir"
-    "/data/vscode/extensions"
+    extensionsDir
     "--user-data-dir"
     userDataDir
   ];
   extensions = [
-    "bbenoist.Nix"
-    "coolbear.systemd-unit-file"
-    "eamodio.gitlens"
-    "Gimly81.matlab"
-    "hashicorp.terraform"
-    "haskell.haskell"
-    "jinliming2.vscode-go-template"
-    "jkillian.custom-local-formatters"
-    "justusadam.language-haskell"
-    "mads-hartmann.bash-ide-vscode"
-    "ms-python.python"
-    "ms-python.vscode-pylance"
-    "ms-toolsai.jupyter"
-    "ms-toolsai.jupyter-keymap"
-    "ms-toolsai.jupyter-renderers"
-    "ms-vscode-remote.remote-ssh"
-    "rust-lang.rust"
-    "shardulm94.trailing-spaces"
-    "streetsidesoftware.code-spell-checker"
-    "tamasfe.even-better-toml"
+    nixpkgs.vscode-extensions._4ops.terraform
+    nixpkgs.vscode-extensions.bbenoist.nix
+    nixpkgs.vscode-extensions.coolbear.systemd-unit-file
+    nixpkgs.vscode-extensions.eamodio.gitlens
+    # "Gimly81.matlab"
+    nixpkgs.vscode-extensions.hashicorp.terraform
+    nixpkgs.vscode-extensions.haskell.haskell
+    # "jinliming2.vscode-go-template"
+    nixpkgs.vscode-extensions.jkillian.custom-local-formatters
+    nixpkgs.vscode-extensions.justusadam.language-haskell
+    nixpkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
+
+    nixpkgs.vscode-extensions.ms-python.python
+    nixpkgs.vscode-extensions.ms-python.vscode-pylance
+    nixpkgs.vscode-extensions.ms-toolsai.jupyter
+    # "ms-toolsai.jupyter-keymap"
+    nixpkgs.vscode-extensions.ms-toolsai.jupyter-renderers
+
+    nixpkgs.vscode-extensions.ms-vscode-remote.remote-ssh
+    # ms-vscode-remote.remote-ssh-edit
+    # "rust-lang.rust"
+    nixpkgs.vscode-extensions.matklad.rust-analyzer
+    nixpkgs.vscode-extensions.shardulm94.trailing-spaces
+    nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
+    nixpkgs.vscode-extensions.tamasfe.even-better-toml
   ];
   settings = {
     "[html]"."editor.formatOnSave" = false;
@@ -169,7 +175,24 @@ in
       exec ${bin} "$@"
     '')
   ];
-  home-manager.users.${config.wellKnown.username} = {
+  home-manager.users.${config.wellKnown.username} = { lib, ... }: {
+    home.activation.editorSetup =
+      let
+        name = "editor-setup";
+        script = makes.makeScript {
+          inherit name;
+          entrypoint = ./entrypoint.sh;
+          replace = {
+            __argExtensions__ = makes.toBashArray extensions;
+            __argExtensionsDir__ = extensionsDir;
+            __argSettings__ = makes.toFileJson "settings.json" settings;
+            __argUserDataDir__ = userDataDir;
+          };
+        };
+      in
+      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        ${script}/bin/${name}
+      '';
     programs.git.extraConfig = {
       core.editor = "${bin} --wait";
       diff.tool = "editor";
@@ -178,19 +201,4 @@ in
       mergetool.editor.cmd = "${bin} --wait $MERGED";
     };
   };
-  system.userActivationScripts.vscode =
-    let
-      name = "editor-setup";
-      script = makes.makeScript {
-        inherit name;
-        entrypoint = ./entrypoint.sh;
-        replace = {
-          __argBin__ = bin;
-          __argExtensions__ = makes.toBashArray extensions;
-          __argSettings__ = makes.toFileJson "settings.json" settings;
-          __argUserDataDir__ = userDataDir;
-        };
-      };
-    in
-    builtins.readFile "${script}/bin/${name}";
 }
