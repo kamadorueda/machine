@@ -8,6 +8,9 @@
     makes.url = "github:fluidattacks/makes/main";
     makes.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixosGenerators.url = "github:nix-community/nixos-generators";
+    nixosGenerators.inputs.nixpkgs.follows = "nixpkgs";
+
     pythonOnNix.url = "github:on-nix/python/main";
     pythonOnNix.inputs.makes.follows = "makes";
     pythonOnNix.inputs.nixpkgs.follows = "nixpkgs";
@@ -15,50 +18,71 @@
 
   outputs = inputs:
     let
-      nixpkgs = import inputs.nixpkgs {
-        config.allowUnfree = true;
-        inherit system;
-      };
-      makes = import "${inputs.makes}/src/args/agnostic.nix" {
-        inherit system;
-      };
-      system = "x86_64-linux";
+      mkNixosSystem = { modules, system }:
+        inputs.nixpkgs.lib.nixosSystem {
+          inherit modules;
+          specialArgs = rec {
+            nixpkgs = import inputs.nixpkgs {
+              config.allowUnfree = true;
+              inherit system;
+            };
+            nixpkgsSrc = inputs.nixpkgs.sourceInfo;
+            makes = import "${inputs.makes}/src/args/agnostic.nix" {
+              inherit system;
+            };
+            makesSrc = inputs.makes.sourceInfo;
+            pkgs = nixpkgs;
+            pythonOnNix = inputs.pythonOnNix.packages.${system};
+          };
+          inherit system;
+        };
     in
     {
 
-      nixosModules =
-        let
-          nixosModulesSrc = ./nixos-modules;
-          nixosModules = builtins.mapAttrs
-            (module: type: import "${nixosModulesSrc}/${module}")
-            (builtins.readDir nixosModulesSrc);
-        in
-        nixosModules // {
-          homeManager = inputs.homeManager.nixosModule;
+      nixosModules = {
+        audio = ./nixos-modules/audio;
+        boot = ./nixos-modules/boot;
+        browser = ./nixos-modules/browser;
+        config = ./nixos-modules/config;
+        editor = ./nixos-modules/editor;
+        hardware = ./nixos-modules/hardware;
+        homeManager = inputs.homeManager.nixosModule;
+        networking = ./nixos-modules/networking;
+        nix = ./nixos-modules/nix;
+        secrets = ./nixos-modules/secrets;
+        terminal = ./nixos-modules/terminal;
+        ui = ./nixos-modules/ui;
+        users = ./nixos-modules/users;
+        virtualisation = ./nixos-modules/virtualisation;
+        wellKnown = ./nixos-modules/well-known;
+      };
+
+      nixosConfigurations = {
+        machine = mkNixosSystem {
+          modules = builtins.attrValues inputs.self.nixosModules;
+          system = "x86_64-linux";
         };
 
-      nixosConfigurations.machine = inputs.nixpkgs.lib.nixosSystem {
-        modules = (builtins.attrValues inputs.self.nixosModules) ++ [{
-          secrets.hashedPassword =
-            # mkpasswd -m sha-512
-            "$6$qQYhouD2P24RYK1H$Oc9BI/2wC7uydLXP5taS7LQgpTUbORwty/0sAGtwial7k9ZYQOmeyjZ5DxvmObdccPJHem2N/.afn/JtCJ2af.";
-          secrets.path = "/data/secrets";
-          ui.timezone = "America/Bogota";
-          wellKnown.email = "kamadorueda@gmail.com";
-          wellKnown.name = "Kevin Amado";
-          wellKnown.signingKey = "FFF341057F503148";
-          wellKnown.username = "kamadorueda";
-        }];
-        specialArgs = rec {
-          inherit nixpkgs;
-          nixpkgsSrc = inputs.nixpkgs.sourceInfo;
-          inherit makes;
-          makesSrc = inputs.makes.sourceInfo;
-          pkgs = nixpkgs;
-          pythonOnNix = inputs.pythonOnNix.packages.${system};
+        machineIsoInstaller = mkNixosSystem {
+          modules =
+            let
+              nixosModules = builtins.removeAttrs inputs.self.nixosModules [
+                "boot"
+                "hardware"
+                "networking"
+              ];
+            in
+            [
+              inputs.nixosGenerators.nixosModules.install-iso
+              { imports = builtins.attrValues nixosModules; }
+            ];
+          system = "x86_64-linux";
         };
-        inherit system;
       };
+
+      packages."x86_64-linux".installer =
+        let nixosSystem = inputs.self.nixosConfigurations.machineIsoInstaller;
+        in nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
 
     };
 }

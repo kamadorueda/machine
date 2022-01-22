@@ -11,7 +11,7 @@
     inherit (config.secrets) hashedPassword;
   };
   users.users.${config.wellKnown.username} = {
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "wheel" ];
     inherit (config.secrets) hashedPassword;
     inherit (config.wellKnown) home;
     isNormalUser = true;

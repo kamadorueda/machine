@@ -27,3 +27,10 @@ rebuild *ARGS:
     --show-trace \
     --verbose \
     {{ARGS}}
+
+installer:
+  nix3 build \
+    --impure \
+    --print-build-logs \
+    --show-trace \
+    .#installer

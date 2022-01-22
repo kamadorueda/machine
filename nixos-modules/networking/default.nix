@@ -10,4 +10,5 @@
     source = ./home50.nmconnection;
   };
   networking.networkmanager.enable = true;
+  users.users.${config.wellKnown.username}.extraGroups = [ "networkmanager" ];
 }
