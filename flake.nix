@@ -63,27 +63,25 @@
           system = "x86_64-linux";
         };
 
-        machineIsoInstaller = mkNixosSystem {
+        isoInstaller = mkNixosSystem {
           modules =
-            let
-              nixosModules = builtins.removeAttrs inputs.self.nixosModules [
-                "boot"
-                "hardware"
-                "networking"
-                "virtualisation"
-              ];
-            in
-            [
-              inputs.nixosGenerators.nixosModules.install-iso
-              { imports = builtins.attrValues nixosModules; }
-            ];
+            [ inputs.nixosGenerators.nixosModules.install-iso ]
+            ++
+            (builtins.attrValues (builtins.removeAttrs inputs.self.nixosModules [
+              "boot"
+              "hardware"
+              "networking"
+              "virtualisation"
+            ]));
           system = "x86_64-linux";
         };
       };
 
-      packages."x86_64-linux".installer =
-        let nixosSystem = inputs.self.nixosConfigurations.machineIsoInstaller;
-        in nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
+      packages."x86_64-linux" = {
+        isoInstaller =
+          let nixosSystem = inputs.self.nixosConfigurations.isoInstaller;
+          in nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
+      };
 
     };
 }

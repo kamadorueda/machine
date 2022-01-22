@@ -28,9 +28,9 @@ rebuild *ARGS:
     --verbose \
     {{ARGS}}
 
-installer:
+build *ARGS:
   nix3 build \
     --impure \
     --print-build-logs \
     --show-trace \
-    .#installer
+    {{ARGS}}
