@@ -22,8 +22,8 @@ update-hardware:
 rebuild *ARGS:
   sudo nixos-rebuild \
     --flake .#machine \
-    --show-trace \
-    -L \
-    -v \
     --impure \
+    -L \
+    --show-trace \
+    --verbose \
     {{ARGS}}
