@@ -218,7 +218,7 @@
     $ nix3 run nixpkgs#glxinfo -- -B
 
     # ...
-    OpenGL vendor string: nvidia
+    OpenGL vendor string: NVIDIA Corporation
     # ...
     ```
 
