@@ -57,6 +57,7 @@
     services.xserver.displayManager.autoLogin.user = config.wellKnown.username;
     services.xserver.displayManager.defaultSession = "none+i3";
     services.xserver.enable = true;
+    services.xserver.exportConfiguration = true;
     services.xserver.windowManager.i3.configFile = builtins.toFile "i3.conf" ''
       set $font ${config.ui.font}
       set $fontSize ${builtins.toString config.ui.fontSize}

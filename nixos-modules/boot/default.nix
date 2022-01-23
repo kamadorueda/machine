@@ -3,6 +3,11 @@
 , ...
 }:
 
+let
+  kernelPackages =
+    let packages = nixpkgs.linuxPackages_latest;
+    in builtins.trace "Linux kernel version: ${packages.kernel.version}" packages;
+in
 {
   boot.initrd.postDeviceCommands = ''
     echo erasing: ${config.fileSystems."/".device}
@@ -11,9 +16,7 @@
     rm -fr /tmp/mnt/*
     ${nixpkgs.utillinux}/bin/umount /tmp/mnt
   '';
-  boot.kernelPackages =
-    let packages = nixpkgs.linuxPackages_latest;
-    in builtins.trace "Linux kernel version: ${packages.kernel.version}" packages;
+  boot.kernelPackages = kernelPackages;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "nodev";
