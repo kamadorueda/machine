@@ -18,7 +18,13 @@
 
   outputs = inputs:
     let
-      mkNixosSystem = { modules, system }:
+      system = "x86_64-linux";
+
+      makes = import "${inputs.makes}/src/args/agnostic.nix" {
+        inherit system;
+      };
+
+      mkNixosSystem = modules:
         inputs.nixpkgs.lib.nixosSystem {
           inherit modules;
           specialArgs = rec {
@@ -27,9 +33,7 @@
               inherit system;
             };
             nixpkgsSrc = inputs.nixpkgs.sourceInfo;
-            makes = import "${inputs.makes}/src/args/agnostic.nix" {
-              inherit system;
-            };
+            inherit makes;
             makesSrc = inputs.makes.sourceInfo;
             pkgs = nixpkgs;
             pythonOnNix = inputs.pythonOnNix.packages.${system};
@@ -58,42 +62,37 @@
       };
 
       nixosConfigurations = {
-        isoInstaller = mkNixosSystem {
-          modules =
-            [ inputs.nixosGenerators.nixosModules.install-iso ]
+        isoInstaller = mkNixosSystem
+          ([ inputs.nixosGenerators.nixosModules.install-iso ]
             ++
             (builtins.attrValues (builtins.removeAttrs inputs.self.nixosModules [
               "boot"
               "hardware"
               "networking"
               "virtualisation"
-            ]));
-          system = "x86_64-linux";
-        };
+            ])));
 
-        machine = mkNixosSystem {
-          modules = builtins.attrValues inputs.self.nixosModules;
-          system = "x86_64-linux";
-        };
+        machine = mkNixosSystem
+          (builtins.attrValues inputs.self.nixosModules);
 
-        virtualbox = mkNixosSystem {
-          modules =
-            [ inputs.nixosGenerators.nixosModules.virtualbox ]
+        virtualbox = mkNixosSystem
+          ([ inputs.nixosGenerators.nixosModules.virtualbox ]
             ++
             (builtins.attrValues (builtins.removeAttrs inputs.self.nixosModules [
               "boot"
               "hardware"
               "networking"
               "virtualisation"
-            ]));
-          system = "x86_64-linux";
-        };
+            ])));
       };
 
       packages."x86_64-linux" = {
         isoInstaller =
           let nixosSystem = inputs.self.nixosConfigurations.isoInstaller;
           in nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
+        machineJson = makes.toFileJson
+          "machine.json"
+          inputs.self.nixosConfigurations.machine.config.system.build;
         virtualbox =
           let nixosSystem = inputs.self.nixosConfigurations.virtualbox;
           in nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
