@@ -19,8 +19,16 @@
     environment.variables.SECRETS = config.secrets.path;
     environment.systemPackages = [ nixpkgs.gnupg ];
     home-manager.users.${config.wellKnown.username} = {
-      home.file.".ssh/config" = {
-        source = "${config.secrets.path}/machine/ssh/config";
+      programs.ssh.enable = true;
+      programs.ssh.matchBlocks = {
+        "core" = {
+          forwardAgent = true;
+          host = "core.floxdev.com";
+          identityFile = "${config.secrets.path}/machine/ssh/kamadorueda";
+        };
+        "github.com" = {
+          identityFile = "${config.secrets.path}/machine/ssh/kamadorueda";
+        };
       };
     };
     programs.ssh.startAgent = true;
