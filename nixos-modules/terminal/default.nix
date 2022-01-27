@@ -2,13 +2,12 @@
 , nixpkgs
 , ...
 }:
-
 {
   environment.shellAliases = {
     a = "git add -p";
     c = "git commit --allow-empty";
     ca = "git commit --amend --no-edit --allow-empty";
-    clip = "${nixpkgs.xclip}/bin/xclip -sel clip";
+    clip = "${ nixpkgs.xclip }/bin/xclip -sel clip";
     f = "git fetch --all";
     l = "git log";
     p = "git push -f";
@@ -16,15 +15,8 @@
     ru = "git pull --autostash --progress --rebase --stat upstream";
     s = "git status";
   };
-  environment.systemPackages = [
-    nixpkgs.coreutils
-    nixpkgs.gnugrep
-    nixpkgs.just
-    nixpkgs.parted
-    nixpkgs.shadow
-    nixpkgs.tree
-  ];
-  home-manager.users.${config.wellKnown.username} = {
+  environment.systemPackages = [ nixpkgs.coreutils nixpkgs.gnugrep nixpkgs.just nixpkgs.parted nixpkgs.shadow nixpkgs.tree ];
+  home-manager.users.${ config.wellKnown.username } = {
     programs.alacritty.enable = true;
     programs.alacritty.package = nixpkgs.alacritty;
     programs.alacritty.settings = {
@@ -60,11 +52,17 @@
     programs.git.extraConfig = {
       commit.gpgsign = true;
       diff.renamelimit = 16384;
-      diff.sopsdiffer.textconv = (nixpkgs.writeScript "sopsdiffer.sh" ''
-        #! ${nixpkgs.bash}/bin/bash
+      diff.sopsdiffer.textconv =
+        (
+            nixpkgs.writeScript
+              "sopsdiffer.sh"
+              ''
+        #! ${ nixpkgs.bash }/bin/bash
         sops -d "$1" || cat "$1"
-      '').outPath;
-      gpg.progam = "${nixpkgs.gnupg}/bin/gpg2";
+      ''
+          )
+          .outPath;
+      gpg.progam = "${ nixpkgs.gnupg }/bin/gpg2";
       gpg.sign = true;
       init.defaultbranch = "main";
       user.email = config.wellKnown.email;

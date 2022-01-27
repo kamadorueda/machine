@@ -1,12 +1,52 @@
 {
   "nodes": {
+    "alejandra": {
+      "inputs": {
+        "flakeCompat": "flakeCompat",
+        "flakeUtils": [
+          "flakeUtils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1643327039,
+        "narHash": "sha256-g9aMgaTf2uuh+iXvF6wg+2260efACbNlB8INVL3w2Fg=",
+        "owner": "kamadorueda",
+        "repo": "alejandra",
+        "rev": "e081ba1b4ef6e7129664f8e03166e61a247d6ecd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kamadorueda",
+        "repo": "alejandra",
+        "type": "github"
+      }
+    },
+    "flakeCompat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1641205782,
+        "narHash": "sha256-4jY7RCWUoZ9cKD8co0/4tFARpWB+57+r1bLLvXNJliY=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "b7547d3eed6f32d06102ead8991ec52ab0a4f1a7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "flakeUtils": {
       "locked": {
-        "lastModified": 1634851050,
-        "narHash": "sha256-N83GlSGPJJdcqhUxSCS/WwW5pksYf3VP1M13cDRTSVA=",
+        "lastModified": 1642700792,
+        "narHash": "sha256-XqHrk7hFb+zBvRg6Ghl+AZDq03ov6OshJLiSWOoX5es=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "c91f3de5adaf1de973b797ef7485e441a65b8935",
+        "rev": "846b2ae0fc4cc943637d3d1def4454213e203cba",
         "type": "github"
       },
       "original": {
@@ -22,11 +62,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1642871355,
-        "narHash": "sha256-zljBYdayGvXvpr0sXLLjNV7+pCa408CZYXJKOJJDdgg=",
+        "lastModified": 1643307345,
+        "narHash": "sha256-xiu7i6Q3Dqu4lLfDNaAL/f2DVewBxL+ysMuAyJiGv+4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "e622c5d83633c16d29c50f8d777dddf2290c0b8c",
+        "rev": "4e92ec84f93a293042a64c3ed56ac8aee62fb6e1",
         "type": "github"
       },
       "original": {
@@ -95,11 +135,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1642762012,
-        "narHash": "sha256-hJqPNDyooFxhGOd4mRleWl9kj1EACziLctrjneW0pbU=",
+        "lastModified": 1643119265,
+        "narHash": "sha256-mmDEctIkHSWcC/HRpeaw6QOe+DbNOSzc0wsXAHOZWwo=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "787ced6423cbfd130471aaf0a5e66ca3fd3e6af0",
+        "rev": "b05d2077ebe219f6a47825767f8bab5c6211d200",
         "type": "github"
       },
       "original": {
@@ -111,7 +151,9 @@
     },
     "pythonOnNix": {
       "inputs": {
-        "flakeUtils": "flakeUtils",
+        "flakeUtils": [
+          "flakeUtils"
+        ],
         "makes": [
           "makes"
         ],
@@ -136,6 +178,8 @@
     },
     "root": {
       "inputs": {
+        "alejandra": "alejandra",
+        "flakeUtils": "flakeUtils",
         "homeManager": "homeManager",
         "makes": "makes",
         "nixosGenerators": "nixosGenerators",

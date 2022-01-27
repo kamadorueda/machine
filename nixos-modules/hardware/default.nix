@@ -2,13 +2,14 @@
 , lib
 , nixpkgs
 , ...
-} @ args:
-
-
+}
+@ args:
 let
   nvidiaPackage =
-    let package = config.boot.kernelPackages.nvidiaPackages.stable;
-    in builtins.trace "Nvidia driver version: ${package.version}" package;
+    let
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    in
+    builtins.trace "Nvidia driver version: ${ package.version }" package;
 in
 {
   hardware.bluetooth.enable = true;
