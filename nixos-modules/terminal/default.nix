@@ -56,10 +56,10 @@
         (
             nixpkgs.writeScript
               "sopsdiffer.sh"
+              ''              
+              #! ${ nixpkgs.bash }/bin/bash
+              sops -d "$1" || cat "$1"
               ''
-        #! ${ nixpkgs.bash }/bin/bash
-        sops -d "$1" || cat "$1"
-      ''
           )
           .outPath;
       gpg.progam = "${ nixpkgs.gnupg }/bin/gpg2";

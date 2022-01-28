@@ -52,19 +52,19 @@ let
           (
               nixpkgs.writeScript
                 "python-fmt"
+                ''                
+                #! ${ nixpkgs.bash }/bin/bash
+                
+                ${ pythonOnNix.black-latest-python39-bin }/bin/black \
+                  --config \
+                  ${ makesSrc }/src/evaluator/modules/format-python/settings-black.toml \
+                  - \
+                  | \
+                ${ pythonOnNix.isort-latest-python39-bin }/bin/isort \
+                  --settings-path \
+                  ${ makesSrc }/src/evaluator/modules/format-python/settings-isort.toml \
+                  -
                 ''
-            #! ${ nixpkgs.bash }/bin/bash
-
-            ${ pythonOnNix.black-latest-python39-bin }/bin/black \
-              --config \
-              ${ makesSrc }/src/evaluator/modules/format-python/settings-black.toml \
-              - \
-              | \
-            ${ pythonOnNix.isort-latest-python39-bin }/bin/isort \
-              --settings-path \
-              ${ makesSrc }/src/evaluator/modules/format-python/settings-isort.toml \
-              -
-          ''
             )
             .outPath;
         languages = [ "python" ];
@@ -77,13 +77,13 @@ let
           (
               nixpkgs.writeScript
                 "toml-fmt"
+                ''                
+                #! ${ nixpkgs.bash }/bin/bash
+                
+                ${ nixpkgs.yj }/bin/yj -tj \
+                  | ${ nixpkgs.jq }/bin/jq -S \
+                  | ${ nixpkgs.yj }/bin/yj -jti
                 ''
-            #! ${ nixpkgs.bash }/bin/bash
-
-            ${ nixpkgs.yj }/bin/yj -tj \
-              | ${ nixpkgs.jq }/bin/jq -S \
-              | ${ nixpkgs.yj }/bin/yj -jti
-          ''
             )
             .outPath;
         languages = [ "toml" ];
@@ -152,9 +152,9 @@ in
     (
       nixpkgs.writeShellScriptBin
         "code"
+        ''        
+        exec ${ bin } "$@"
         ''
-      exec ${ bin } "$@"
-    ''
     )
   ];
   home-manager.users.${ config.wellKnown.username } =
@@ -180,9 +180,9 @@ in
         in
         lib.hm.dag.entryAfter
           [ "writeBoundary" ]
-          ''
-        ${ script }/bin/${ name }
-      '';
+          ''          
+          ${ script }/bin/${ name }
+          '';
       programs.git.extraConfig = {
         core.editor = "${ bin } --wait";
         diff.tool = "editor";
