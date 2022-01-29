@@ -18,7 +18,10 @@
   ];
   nix.nixPath = [ "nixpkgs=${ nixpkgsSrc }" ];
   nix.package = nixpkgs.nix;
-  nix.registry.nixpkgs = { exact = false; flake = nixpkgsSrc; };
+  nix.registry.nixpkgs = {
+    exact = false;
+    flake = nixpkgsSrc;
+  };
   nix.settings.cores = 1;
   nix.settings.max-jobs = "auto";
   nix.settings.trusted-users = [ "root" config.wellKnown.username ];

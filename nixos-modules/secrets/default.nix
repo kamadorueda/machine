@@ -15,7 +15,11 @@
     home-manager.users.${ config.wellKnown.username } = {
       programs.ssh.enable = true;
       programs.ssh.matchBlocks = {
-        "core.floxdev.com" = { forwardAgent = true; port = 4444; identityFile = "${ config.secrets.path }/machine/ssh/kamadorueda2"; };
+        "core.floxdev.com" = {
+          forwardAgent = true;
+          port = 4444;
+          identityFile = "${ config.secrets.path }/machine/ssh/kamadorueda2";
+        };
         "github.com" = { identityFile = "${ config.secrets.path }/machine/ssh/kamadorueda"; };
       };
     };

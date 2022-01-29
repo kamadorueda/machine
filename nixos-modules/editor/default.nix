@@ -44,9 +44,18 @@ let
     "[python]"."editor.tabSize" = 4;
     "[rust]"."editor.tabSize" = 4;
     "customLocalFormatters.formatters" = [
-      { command = "clang-format --sort-includes --style=microsoft"; languages = [ "cpp" ]; }
-      { command = "${ nixpkgs.jq }/bin/jq -S"; languages = [ "json" "jsonc" ]; }
-      { command = alejandra.outputs.defaultApp.${ nixpkgs.system }.program; languages = [ "nix" ]; }
+      {
+        command = "clang-format --sort-includes --style=microsoft";
+        languages = [ "cpp" ];
+      }
+      {
+        command = "${ nixpkgs.jq }/bin/jq -S";
+        languages = [ "json" "jsonc" ];
+      }
+      {
+        command = alejandra.outputs.defaultApp.${ nixpkgs.system }.program;
+        languages = [ "nix" ];
+      }
       {
         command =
           (
@@ -69,9 +78,18 @@ let
             .outPath;
         languages = [ "python" ];
       }
-      { command = "${ nixpkgs.rustfmt }/bin/rustfmt --config-path ${ ./rustfmt.toml }"; languages = [ "rust" ]; }
-      { command = "${ nixpkgs.shfmt }/bin/shfmt -bn -ci -i 2 -s -sr -"; languages = [ "shellscript" ]; }
-      { command = "${ nixpkgs.terraform }/bin/terraform fmt -"; languages = [ "terraform" ]; }
+      {
+        command = "${ nixpkgs.rustfmt }/bin/rustfmt --config-path ${ ./rustfmt.toml }";
+        languages = [ "rust" ];
+      }
+      {
+        command = "${ nixpkgs.shfmt }/bin/shfmt -bn -ci -i 2 -s -sr -";
+        languages = [ "shellscript" ];
+      }
+      {
+        command = "${ nixpkgs.terraform }/bin/terraform fmt -";
+        languages = [ "terraform" ];
+      }
       {
         command =
           (
