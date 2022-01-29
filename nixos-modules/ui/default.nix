@@ -26,35 +26,35 @@
       (
         nixpkgs.writeShellScriptBin
           "bluetooth"
-          ''          
+          ''
           exec ${ nixpkgs.bluez }/bin/bluetoothctl "$@"
           ''
       )
       (
         nixpkgs.writeShellScriptBin
           "files"
-          ''          
+          ''
           exec ${ nixpkgs.gnome.nautilus }/bin/nautilus "$@"
           ''
       )
       (
         nixpkgs.writeShellScriptBin
           "images"
-          ''          
+          ''
           exec ${ nixpkgs.gnome.eog }/bin/eog "$@"
           ''
       )
       (
         nixpkgs.writeShellScriptBin
           "screenshot"
-          ''          
+          ''
           exec ${ nixpkgs.gnome.gnome-screenshot }/bin/gnome-screenshot "$@"
           ''
       )
       (
         nixpkgs.writeShellScriptBin
           "sound"
-          ''          
+          ''
           exec ${ nixpkgs.pavucontrol }/bin/pavucontrol "$@"
           ''
       )
@@ -84,11 +84,11 @@
     services.xserver.windowManager.i3.configFile =
       builtins.toFile
         "i3.conf"
-        ''        
+        ''
         set $font ${ config.ui.font }
         set $fontSize ${ builtins.toString config.ui.fontSize }
         set $i3status_conf ${ ./i3status.conf }
-        
+
         include ${ ./i3.conf }
         '';
     services.xserver.windowManager.i3.enable = true;

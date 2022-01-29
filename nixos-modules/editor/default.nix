@@ -52,9 +52,9 @@ let
           (
               nixpkgs.writeScript
                 "python-fmt"
-                ''                
+                ''
                 #! ${ nixpkgs.bash }/bin/bash
-                
+
                 ${ pythonOnNix.black-latest-python39-bin }/bin/black \
                   --config \
                   ${ makesSrc }/src/evaluator/modules/format-python/settings-black.toml \
@@ -77,9 +77,9 @@ let
           (
               nixpkgs.writeScript
                 "toml-fmt"
-                ''                
+                ''
                 #! ${ nixpkgs.bash }/bin/bash
-                
+
                 ${ nixpkgs.yj }/bin/yj -tj \
                   | ${ nixpkgs.jq }/bin/jq -S \
                   | ${ nixpkgs.yj }/bin/yj -jti
@@ -152,7 +152,7 @@ in
     (
       nixpkgs.writeShellScriptBin
         "code"
-        ''        
+        ''
         exec ${ bin } "$@"
         ''
     )
@@ -180,7 +180,7 @@ in
         in
         lib.hm.dag.entryAfter
           [ "writeBoundary" ]
-          ''          
+          ''
           ${ script }/bin/${ name }
           '';
       programs.git.extraConfig = {

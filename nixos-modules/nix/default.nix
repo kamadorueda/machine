@@ -8,7 +8,7 @@
     (
       nixpkgs.writeShellScriptBin
         "nix3"
-        ''        
+        ''
         exec ${ nixpkgs.nixUnstable }/bin/nix \
           --experimental-features "nix-command flakes" \
           --print-build-logs \
