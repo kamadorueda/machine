@@ -16,12 +16,12 @@
         ''
     )
   ];
-  nix.buildCores = 1;
-  nix.registry.nixpkgs = { exact = false; flake = nixpkgsSrc; };
-  nix.maxJobs = "auto";
   nix.nixPath = [ "nixpkgs=${ nixpkgsSrc }" ];
   nix.package = nixpkgs.nix;
-  nix.trustedUsers = [ "root" config.wellKnown.username ];
+  nix.registry.nixpkgs = { exact = false; flake = nixpkgsSrc; };
+  nix.settings.cores = 1;
+  nix.settings.max-jobs = "auto";
+  nix.settings.trusted-users = [ "root" config.wellKnown.username ];
   nixpkgs.config.allowBroken = false;
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.android_sdk.accept_license = true;
