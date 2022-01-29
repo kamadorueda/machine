@@ -16,6 +16,7 @@
     ManagedBookmarks = [
       { toplevel_name = "Links"; }
       { name = "discord"; url = "https://discord.com"; }
+      { name = "matrix"; url = "https://app.element.io"; }
       {
         name = "Nix";
         children = [
