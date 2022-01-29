@@ -26,8 +26,7 @@
         inputs.nixpkgs.lib.nixosSystem
           {
             inherit modules;
-            specialArgs = rec
-              {
+            specialArgs = rec {
               alejandra = inputs.alejandra;
               nixpkgs = import inputs.nixpkgs { config.allowUnfree = true; inherit system; };
               nixpkgsSrc = inputs.nixpkgs.sourceInfo;

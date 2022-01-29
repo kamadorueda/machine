@@ -12,8 +12,7 @@
   config = {
     assertions = [
       (
-        rec
-          {
+        rec {
           assertion =
             builtins.trace
               "X Video Drivers: ${ message }"
