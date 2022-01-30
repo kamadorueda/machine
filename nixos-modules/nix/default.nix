@@ -22,8 +22,8 @@
     exact = false;
     flake = nixpkgsSrc;
   };
-  nix.settings.cores = 1;
-  nix.settings.max-jobs = "auto";
+  nix.settings.cores = 0;
+  nix.settings.max-jobs = 1;
   nix.settings.trusted-users = [ "root" config.wellKnown.username ];
   nixpkgs.config.allowBroken = false;
   nixpkgs.config.allowUnfree = true;

@@ -28,7 +28,13 @@
             inherit modules;
             specialArgs = rec {
               alejandra = inputs.alejandra;
-              nixpkgs = import inputs.nixpkgs { config.allowUnfree = true; inherit system; };
+              nixpkgs =
+                import
+                  inputs.nixpkgs
+                  {
+                    config.allowUnfree = true;
+                    inherit system;
+                  };
               nixpkgsSrc = inputs.nixpkgs.sourceInfo;
               inherit makes;
               makesSrc = inputs.makes.sourceInfo;
