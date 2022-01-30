@@ -2,8 +2,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     alejandra.url = "github:kamadorueda/alejandra";
+    alejandra.inputs.alejandra.follows = "alejandra";
+    alejandra.inputs.fenix.follows = "fenix";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
     alejandra.inputs.flakeUtils.follows = "flakeUtils";
+    alejandra.inputs.rustAnalyzer.follows = "rustAnalyzer";
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
     fenix.inputs.rust-analyzer-src.follows = "rustAnalyzer";
