@@ -45,8 +45,20 @@ let
         languages = [ "cpp" ];
       }
       {
+        command = "${ nixpkgs.nodePackages.prettier }/bin/prettier --parser css";
+        languages = [ "css" ];
+      }
+      {
+        command = "${ nixpkgs.nodePackages.prettier }/bin/prettier --parser html";
+        languages = [ "html" ];
+      }
+      {
         command = "${ nixpkgs.jq }/bin/jq -S";
         languages = [ "json" "jsonc" ];
+      }
+      {
+        command = "${ nixpkgs.nodePackages.prettier }/bin/prettier --parser markdown";
+        languages = [ "markdown" ];
       }
       {
         command = alejandra.outputs.defaultApp.${ nixpkgs.system }.program;
@@ -79,6 +91,10 @@ let
         languages = [ "rust" ];
       }
       {
+        command = "${ nixpkgs.nodePackages.prettier }/bin/prettier --parser scss";
+        languages = [ "scss" ];
+      }
+      {
         command = "${ nixpkgs.shfmt }/bin/shfmt -bn -ci -i 2 -s -sr -";
         languages = [ "shellscript" ];
       }
@@ -94,9 +110,10 @@ let
                 ''
                 #! ${ nixpkgs.bash }/bin/bash
 
-                ${ nixpkgs.yj }/bin/yj -tj \
-                  | ${ nixpkgs.jq }/bin/jq -S \
-                  | ${ nixpkgs.yj }/bin/yj -jti
+                NODE_PATH=${ nixpkgs.nodePackages.prettier-plugin-toml }/lib/node_modules:$NODE_PATH \
+                ${ nixpkgs.nodePackages.prettier }/bin/prettier \
+                  --parser toml \
+                  --plugin prettier-plugin-toml
                 ''
             )
             .outPath;
