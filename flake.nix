@@ -1,10 +1,13 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    flakeUtils.url = "github:numtide/flake-utils";
     alejandra.url = "github:kamadorueda/alejandra";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
     alejandra.inputs.flakeUtils.follows = "flakeUtils";
+    fenix.url = "github:nix-community/fenix";
+    fenix.inputs.nixpkgs.follows = "nixpkgs";
+    fenix.inputs.rust-analyzer-src.follows = "rustAnalyzer";
+    flakeUtils.url = "github:numtide/flake-utils";
     homeManager.url = "github:nix-community/home-manager/master";
     homeManager.inputs.nixpkgs.follows = "nixpkgs";
     makes.url = "github:fluidattacks/makes/main";
@@ -15,6 +18,8 @@
     pythonOnNix.inputs.flakeUtils.follows = "flakeUtils";
     pythonOnNix.inputs.makes.follows = "makes";
     pythonOnNix.inputs.nixpkgs.follows = "nixpkgs";
+    rustAnalyzer.flake = false;
+    rustAnalyzer.url = "github:rust-analyzer/rust-analyzer";
   };
   outputs =
     inputs:
@@ -28,6 +33,7 @@
             inherit modules;
             specialArgs = rec {
               alejandra = inputs.alejandra;
+              fenix = inputs.fenix.packages.${ system };
               nixpkgs =
                 import
                   inputs.nixpkgs

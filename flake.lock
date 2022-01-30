@@ -44,6 +44,29 @@
         "type": "github"
       }
     },
+    "fenix_2": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-analyzer-src": [
+          "rustAnalyzer"
+        ]
+      },
+      "locked": {
+        "lastModified": 1643437378,
+        "narHash": "sha256-nciShE41PZ5wU54Sm7xSLsZxzgcSlab2UNrf5GGjndc=",
+        "owner": "nix-community",
+        "repo": "fenix",
+        "rev": "af56bbdd36b7644ea466cef5a4b1163d923296a7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "fenix",
+        "type": "github"
+      }
+    },
     "flakeCompat": {
       "flake": false,
       "locked": {
@@ -215,12 +238,14 @@
     "root": {
       "inputs": {
         "alejandra": "alejandra",
+        "fenix": "fenix_2",
         "flakeUtils": "flakeUtils",
         "homeManager": "homeManager",
         "makes": "makes",
         "nixosGenerators": "nixosGenerators",
         "nixpkgs": "nixpkgs_2",
-        "pythonOnNix": "pythonOnNix"
+        "pythonOnNix": "pythonOnNix",
+        "rustAnalyzer": "rustAnalyzer"
       }
     },
     "rust-analyzer-src": {
@@ -236,6 +261,22 @@
       "original": {
         "owner": "rust-analyzer",
         "ref": "nightly",
+        "repo": "rust-analyzer",
+        "type": "github"
+      }
+    },
+    "rustAnalyzer": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1643383912,
+        "narHash": "sha256-QtpTMM54jozLsjpOt3tMvnAoL+nc5bezbwxilHooOzM=",
+        "owner": "rust-analyzer",
+        "repo": "rust-analyzer",
+        "rev": "6634eaf13a7e3a2b30f98f6e69af952f2d760df4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rust-analyzer",
         "repo": "rust-analyzer",
         "type": "github"
       }

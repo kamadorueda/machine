@@ -1,5 +1,6 @@
 { alejandra
 , config
+, fenix
 , lib
 , makes
 , makesSrc
@@ -15,26 +16,21 @@ let
       " "
       [ "${ nixpkgs.vscode }/bin/code" "--extensions-dir" extensionsDir "--user-data-dir" userDataDir ];
   extensions = [
+    fenix.rust-analyzer-vscode-extension
     nixpkgs.vscode-extensions._4ops.terraform
     nixpkgs.vscode-extensions.bbenoist.nix
     nixpkgs.vscode-extensions.coolbear.systemd-unit-file
     nixpkgs.vscode-extensions.eamodio.gitlens
-    # "Gimly81.matlab"
     nixpkgs.vscode-extensions.hashicorp.terraform
     nixpkgs.vscode-extensions.haskell.haskell
-    # "jinliming2.vscode-go-template"
     nixpkgs.vscode-extensions.jkillian.custom-local-formatters
     nixpkgs.vscode-extensions.justusadam.language-haskell
     nixpkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
     nixpkgs.vscode-extensions.ms-python.python
     nixpkgs.vscode-extensions.ms-python.vscode-pylance
     nixpkgs.vscode-extensions.ms-toolsai.jupyter
-    # "ms-toolsai.jupyter-keymap"
     nixpkgs.vscode-extensions.ms-toolsai.jupyter-renderers
     nixpkgs.vscode-extensions.ms-vscode-remote.remote-ssh
-    # ms-vscode-remote.remote-ssh-edit
-    # "rust-lang.rust"
-    nixpkgs.vscode-extensions.matklad.rust-analyzer
     nixpkgs.vscode-extensions.shardulm94.trailing-spaces
     nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
     nixpkgs.vscode-extensions.tamasfe.even-better-toml
@@ -79,7 +75,7 @@ let
         languages = [ "python" ];
       }
       {
-        command = "${ nixpkgs.rustfmt }/bin/rustfmt --config-path ${ ./rustfmt.toml }";
+        command = "${ fenix.latest.rustfmt }/bin/rustfmt --config-path ${ ./rustfmt.toml }";
         languages = [ "rust" ];
       }
       {
@@ -167,6 +163,9 @@ in
 {
   environment.variables.EDITOR = bin;
   environment.systemPackages = [
+    fenix.stable.cargo
+    fenix.stable.rustc
+    fenix.stable.rust-src
     (
       nixpkgs.writeShellScriptBin
         "code"
