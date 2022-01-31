@@ -53,61 +53,65 @@
             inherit system;
           };
     in
-    {
-      nixosModules = {
-        audio = ./nixos-modules/audio;
-        boot = ./nixos-modules/boot;
-        browser = ./nixos-modules/browser;
-        config = ./nixos-modules/config;
-        editor = ./nixos-modules/editor;
-        hardware = ./nixos-modules/hardware;
-        homeManager = inputs.homeManager.nixosModule;
-        networking = ./nixos-modules/networking;
-        nix = ./nixos-modules/nix;
-        secrets = ./nixos-modules/secrets;
-        terminal = ./nixos-modules/terminal;
-        ui = ./nixos-modules/ui;
-        users = ./nixos-modules/users;
-        virtualisation = ./nixos-modules/virtualisation;
-        wellKnown = ./nixos-modules/well-known;
+      {
+        nixosModules = {
+          audio = ./nixos-modules/audio;
+          boot = ./nixos-modules/boot;
+          browser = ./nixos-modules/browser;
+          config = ./nixos-modules/config;
+          editor = ./nixos-modules/editor;
+          hardware = ./nixos-modules/hardware;
+          homeManager = inputs.homeManager.nixosModule;
+          networking = ./nixos-modules/networking;
+          nix = ./nixos-modules/nix;
+          secrets = ./nixos-modules/secrets;
+          terminal = ./nixos-modules/terminal;
+          ui = ./nixos-modules/ui;
+          users = ./nixos-modules/users;
+          virtualisation = ./nixos-modules/virtualisation;
+          wellKnown = ./nixos-modules/well-known;
+        };
+        nixosConfigurations = {
+          isoInstaller =
+            mkNixosSystem
+              (
+                [ inputs.nixosGenerators.nixosModules.install-iso ]
+                  ++ (
+                    builtins.attrValues
+                      (
+                        builtins.removeAttrs
+                          inputs.self.nixosModules
+                          [ "boot" "hardware" "networking" "virtualisation" ]
+                      )
+                  )
+              );
+          machine = mkNixosSystem (builtins.attrValues inputs.self.nixosModules);
+          virtualbox =
+            mkNixosSystem
+              (
+                [ inputs.nixosGenerators.nixosModules.virtualbox ]
+                  ++ (
+                    builtins.attrValues
+                      (
+                        builtins.removeAttrs
+                          inputs.self.nixosModules
+                          [ "boot" "hardware" "networking" "virtualisation" ]
+                      )
+                  )
+              );
+        };
+        packages."x86_64-linux" = {
+          isoInstaller =
+            let
+              nixosSystem = inputs.self.nixosConfigurations.isoInstaller;
+            in
+              nixosSystem.config.system.build.${ nixosSystem.config.formatAttr };
+          machineJson = makes.toFileJson "machine.json" inputs.self.nixosConfigurations.machine.config.system.build;
+          virtualbox =
+            let
+              nixosSystem = inputs.self.nixosConfigurations.virtualbox;
+            in
+              nixosSystem.config.system.build.${ nixosSystem.config.formatAttr };
+        };
       };
-      nixosConfigurations = {
-        isoInstaller =
-          mkNixosSystem
-            (
-              [ inputs.nixosGenerators.nixosModules.install-iso ]
-                ++ (
-                  builtins.attrValues
-                    (
-                      builtins.removeAttrs inputs.self.nixosModules [ "boot" "hardware" "networking" "virtualisation" ]
-                    )
-                )
-            );
-        machine = mkNixosSystem ( builtins.attrValues inputs.self.nixosModules );
-        virtualbox =
-          mkNixosSystem
-            (
-              [ inputs.nixosGenerators.nixosModules.virtualbox ]
-                ++ (
-                  builtins.attrValues
-                    (
-                      builtins.removeAttrs inputs.self.nixosModules [ "boot" "hardware" "networking" "virtualisation" ]
-                    )
-                )
-            );
-      };
-      packages."x86_64-linux" = {
-        isoInstaller =
-          let
-            nixosSystem = inputs.self.nixosConfigurations.isoInstaller;
-          in
-          nixosSystem.config.system.build.${ nixosSystem.config.formatAttr };
-        machineJson = makes.toFileJson "machine.json" inputs.self.nixosConfigurations.machine.config.system.build;
-        virtualbox =
-          let
-            nixosSystem = inputs.self.nixosConfigurations.virtualbox;
-          in
-          nixosSystem.config.system.build.${ nixosSystem.config.formatAttr };
-      };
-    };
 }
