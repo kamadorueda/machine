@@ -67,23 +67,23 @@ let
       {
         command =
           (
-              nixpkgs.writeScript
-                "python-fmt"
-                ''
-                  #! ${ nixpkgs.bash }/bin/bash
+            nixpkgs.writeScript
+              "python-fmt"
+              ''
+                #! ${ nixpkgs.bash }/bin/bash
 
-                  ${ pythonOnNix.black-latest-python39-bin }/bin/black \
-                    --config \
-                    ${ makesSrc }/src/evaluator/modules/format-python/settings-black.toml \
-                    - \
-                    | \
-                  ${ pythonOnNix.isort-latest-python39-bin }/bin/isort \
-                    --settings-path \
-                    ${ makesSrc }/src/evaluator/modules/format-python/settings-isort.toml \
-                    -
-                ''
-            )
-            .outPath;
+                ${ pythonOnNix.black-latest-python39-bin }/bin/black \
+                  --config \
+                  ${ makesSrc }/src/evaluator/modules/format-python/settings-black.toml \
+                  - \
+                  | \
+                ${ pythonOnNix.isort-latest-python39-bin }/bin/isort \
+                  --settings-path \
+                  ${ makesSrc }/src/evaluator/modules/format-python/settings-isort.toml \
+                  -
+              ''
+          )
+          .outPath;
         languages = [ "python" ];
       }
       {
@@ -105,18 +105,18 @@ let
       {
         command =
           (
-              nixpkgs.writeScript
-                "toml-fmt"
-                ''
-                  #! ${ nixpkgs.bash }/bin/bash
+            nixpkgs.writeScript
+              "toml-fmt"
+              ''
+                #! ${ nixpkgs.bash }/bin/bash
 
-                  NODE_PATH=${ nixpkgs.nodePackages.prettier-plugin-toml }/lib/node_modules:$NODE_PATH \
-                  ${ nixpkgs.nodePackages.prettier }/bin/prettier \
-                    --parser toml \
-                    --plugin prettier-plugin-toml
-                ''
-            )
-            .outPath;
+                NODE_PATH=${ nixpkgs.nodePackages.prettier-plugin-toml }/lib/node_modules:$NODE_PATH \
+                ${ nixpkgs.nodePackages.prettier }/bin/prettier \
+                  --parser toml \
+                  --plugin prettier-plugin-toml
+              ''
+          )
+          .outPath;
         languages = [ "toml" ];
       }
     ];
@@ -177,52 +177,52 @@ let
     "workbench.startupEditor" = "none";
   };
 in
-  {
-    environment.variables.EDITOR = bin;
-    environment.systemPackages = [
-      fenix.stable.cargo
-      fenix.stable.rustc
-      fenix.stable.rust-src
-      (
-        nixpkgs.writeShellScriptBin
-          "code"
-          ''
-            exec ${ bin } "$@"
-          ''
-      )
-    ];
-    home-manager.users.${ config.wellKnown.username } =
-      { lib
-      , ...
-      }:
-      {
-        home.activation.editorSetup =
-          let
-            name = "editor-setup";
-            script =
-              makes.makeScript
-                {
-                  inherit name;
-                  entrypoint = ./entrypoint.sh;
-                  replace = {
-                    __argExtensions__ = makes.toBashArray extensions;
-                    __argExtensionsDir__ = extensionsDir;
-                    __argSettings__ = makes.toFileJson "settings.json" settings;
-                    __argUserDataDir__ = userDataDir;
-                  };
+{
+  environment.variables.EDITOR = bin;
+  environment.systemPackages = [
+    fenix.stable.cargo
+    fenix.stable.rustc
+    fenix.stable.rust-src
+    (
+      nixpkgs.writeShellScriptBin
+        "code"
+        ''
+          exec ${ bin } "$@"
+        ''
+    )
+  ];
+  home-manager.users.${ config.wellKnown.username } =
+    { lib
+    , ...
+    }:
+    {
+      home.activation.editorSetup =
+        let
+          name = "editor-setup";
+          script =
+            makes.makeScript
+              {
+                inherit name;
+                entrypoint = ./entrypoint.sh;
+                replace = {
+                  __argExtensions__ = makes.toBashArray extensions;
+                  __argExtensionsDir__ = extensionsDir;
+                  __argSettings__ = makes.toFileJson "settings.json" settings;
+                  __argUserDataDir__ = userDataDir;
                 };
-          in
-            lib.hm.dag.entryAfter
-              [ "writeBoundary" ]
-              ''
-                ${ script }/bin/${ name }
-              '';
-        programs.git.extraConfig = {
-          core.editor = "${ bin } --wait";
-          diff.tool = "editor";
-          difftool.editor.cmd = "${ bin } --diff $LOCAL $REMOTE --wait";
-          merge.tool = "editor";
-          mergetool.editor.cmd = "${ bin } --wait $MERGED";
-        };
+              };
+        in
+          lib.hm.dag.entryAfter
+            [ "writeBoundary" ]
+            ''
+              ${ script }/bin/${ name }
+            '';
+      programs.git.extraConfig = {
+        core.editor = "${ bin } --wait";
+        diff.tool = "editor";
+        difftool.editor.cmd = "${ bin } --diff $LOCAL $REMOTE --wait";
+        merge.tool = "editor";
+        mergetool.editor.cmd = "${ bin } --wait $MERGED";
       };
-  }
+    };
+}

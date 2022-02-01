@@ -2,9 +2,6 @@
   "nodes": {
     "alejandra": {
       "inputs": {
-        "alejandra": [
-          "alejandra"
-        ],
         "fenix": [
           "fenix"
         ],
@@ -21,11 +18,11 @@
         "treefmt": "treefmt"
       },
       "locked": {
-        "lastModified": 1643597785,
-        "narHash": "sha256-AKARtpwj+gFXvg8mO2Ihx791kAKEvW0ujQvxnMVNTmM=",
+        "lastModified": 1643681595,
+        "narHash": "sha256-vqb1RU1KlLl3/wYwNVwQIZDgr2Ogz/ZrIzqtsdRBbRc=",
         "owner": "kamadorueda",
         "repo": "alejandra",
-        "rev": "4a45bf1de46f827ebd60a4ad237a47344c1ed62d",
+        "rev": "2b04b9b11791b9000a3b920e7e0f64d1196a2a2d",
         "type": "github"
       },
       "original": {
@@ -44,11 +41,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1643523738,
-        "narHash": "sha256-6XmIEKOtv26tO/wCPg/TQUKXFPfDKPS8pXOBEicSMsw=",
+        "lastModified": 1643610217,
+        "narHash": "sha256-3cFZt9Eyz70s1CNYO3wJeUDgLUC9tC4s5hNpLtX3FQY=",
         "owner": "nix-community",
         "repo": "fenix",
-        "rev": "08742f341a9bcf35b9ee0092c4e9ab309c860558",
+        "rev": "bd91b6fddf7fdf90ad9924339fcb40f008f57447",
         "type": "github"
       },
       "original": {
@@ -256,11 +253,11 @@
     "rustAnalyzer": {
       "flake": false,
       "locked": {
-        "lastModified": 1643580505,
-        "narHash": "sha256-6+d/x7ZIyvkPLdn7ziXuPyKfxt/7z5PCWs7B960DFqk=",
+        "lastModified": 1643645003,
+        "narHash": "sha256-uz+MXBcGoIqzc6acGB7GjJQsTWKr341+fjjv+pQR8N8=",
         "owner": "rust-analyzer",
         "repo": "rust-analyzer",
-        "rev": "fd3942eb620e37a4e4bfdd587d8a2893ccf6fea0",
+        "rev": "4800c05a206eb156617b76fdb30af0b6c2c0fb26",
         "type": "github"
       },
       "original": {

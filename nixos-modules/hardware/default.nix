@@ -11,10 +11,10 @@ let
     in
       builtins.trace "Nvidia driver version: ${ package.version }" package;
 in
-  {
-    hardware.bluetooth.enable = true;
-    hardware.bluetooth.package = nixpkgs.bluez;
-    hardware.nvidia.package = nvidiaPackage;
-    imports = [ ./auto-detected.nix ];
-    services.xserver.videoDrivers = lib.mkOverride 50 [ "nvidia" ];
-  }
+{
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.package = nixpkgs.bluez;
+  hardware.nvidia.package = nvidiaPackage;
+  imports = [ ./auto-detected.nix ];
+  services.xserver.videoDrivers = lib.mkOverride 50 [ "nvidia" ];
+}

@@ -76,28 +76,20 @@
             mkNixosSystem
               (
                 [ inputs.nixosGenerators.nixosModules.install-iso ]
-                  ++ (
-                    builtins.attrValues
-                      (
-                        builtins.removeAttrs
-                          inputs.self.nixosModules
-                          [ "boot" "hardware" "networking" "virtualisation" ]
-                      )
-                  )
+                ++ (
+                  builtins.attrValues
+                    (builtins.removeAttrs inputs.self.nixosModules [ "boot" "hardware" "networking" "virtualisation" ])
+                )
               );
           machine = mkNixosSystem (builtins.attrValues inputs.self.nixosModules);
           virtualbox =
             mkNixosSystem
               (
                 [ inputs.nixosGenerators.nixosModules.virtualbox ]
-                  ++ (
-                    builtins.attrValues
-                      (
-                        builtins.removeAttrs
-                          inputs.self.nixosModules
-                          [ "boot" "hardware" "networking" "virtualisation" ]
-                      )
-                  )
+                ++ (
+                  builtins.attrValues
+                    (builtins.removeAttrs inputs.self.nixosModules [ "boot" "hardware" "networking" "virtualisation" ])
+                )
               );
         };
         packages."x86_64-linux" = {
