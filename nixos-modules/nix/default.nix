@@ -6,17 +6,15 @@
 {
   environment.systemPackages = [
     (
-      nixpkgs.writeShellScriptBin
-        "nix3"
-        ''
-          exec ${ nixpkgs.nixUnstable }/bin/nix \
-            --experimental-features "nix-command flakes" \
-            --print-build-logs \
-            --verbose "$@"
-        ''
+      nixpkgs.writeShellScriptBin "nix3" ''
+        exec ${nixpkgs.nixUnstable}/bin/nix \
+          --experimental-features "nix-command flakes" \
+          --print-build-logs \
+          --verbose "$@"
+      ''
     )
   ];
-  nix.nixPath = [ "nixpkgs=${ nixpkgsSrc }" ];
+  nix.nixPath = [ "nixpkgs=${nixpkgsSrc}" ];
   nix.package = nixpkgs.nix;
   nix.registry.nixpkgs = {
     exact = false;

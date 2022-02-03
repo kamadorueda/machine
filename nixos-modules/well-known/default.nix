@@ -13,5 +13,5 @@ in
     wellKnown.signingKey = strOption;
     wellKnown.username = strOption;
   };
-  config = { wellKnown.home = "/home/${ config.wellKnown.username }"; };
+  config = { wellKnown.home = "/home/${config.wellKnown.username}"; };
 }

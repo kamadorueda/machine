@@ -28,30 +28,26 @@
     inputs:
     let
       system = "x86_64-linux";
-      makes = import "${ inputs.makes }/src/args/agnostic.nix" { inherit system; };
+      makes = import "${inputs.makes}/src/args/agnostic.nix" { inherit system; };
       mkNixosSystem =
         modules:
-        inputs.nixpkgs.lib.nixosSystem
-          {
-            inherit modules;
-            specialArgs = rec {
-              alejandra = inputs.alejandra;
-              fenix = inputs.fenix.packages.${ system };
-              nixpkgs =
-                import
-                  inputs.nixpkgs
-                  {
-                    config.allowUnfree = true;
-                    inherit system;
-                  };
-              nixpkgsSrc = inputs.nixpkgs.sourceInfo;
-              inherit makes;
-              makesSrc = inputs.makes.sourceInfo;
-              pkgs = nixpkgs;
-              pythonOnNix = inputs.pythonOnNix.packages.${ system };
+        inputs.nixpkgs.lib.nixosSystem {
+          inherit modules;
+          specialArgs = rec {
+            alejandra = inputs.alejandra;
+            fenix = inputs.fenix.packages.${system};
+            nixpkgs = import inputs.nixpkgs {
+              config.allowUnfree = true;
+              inherit system;
             };
-            inherit system;
+            nixpkgsSrc = inputs.nixpkgs.sourceInfo;
+            inherit makes;
+            makesSrc = inputs.makes.sourceInfo;
+            pkgs = nixpkgs;
+            pythonOnNix = inputs.pythonOnNix.packages.${system};
           };
+          inherit system;
+        };
     in
       {
         nixosModules = {
@@ -72,38 +68,37 @@
           wellKnown = ./nixos-modules/well-known;
         };
         nixosConfigurations = {
-          isoInstaller =
-            mkNixosSystem
-              (
-                [ inputs.nixosGenerators.nixosModules.install-iso ]
-                ++ (
-                  builtins.attrValues
-                    (builtins.removeAttrs inputs.self.nixosModules [ "boot" "hardware" "networking" "virtualisation" ])
-                )
-              );
+          isoInstaller = mkNixosSystem (
+            [ inputs.nixosGenerators.nixosModules.install-iso ]
+            ++ (
+              builtins.attrValues (
+                builtins.removeAttrs inputs.self.nixosModules [ "boot" "hardware" "networking" "virtualisation" ]
+              )
+            )
+          );
           machine = mkNixosSystem (builtins.attrValues inputs.self.nixosModules);
-          virtualbox =
-            mkNixosSystem
-              (
-                [ inputs.nixosGenerators.nixosModules.virtualbox ]
-                ++ (
-                  builtins.attrValues
-                    (builtins.removeAttrs inputs.self.nixosModules [ "boot" "hardware" "networking" "virtualisation" ])
-                )
-              );
+          virtualbox = mkNixosSystem (
+            [ inputs.nixosGenerators.nixosModules.virtualbox ]
+            ++ (
+              builtins.attrValues (
+                builtins.removeAttrs inputs.self.nixosModules [ "boot" "hardware" "networking" "virtualisation" ]
+              )
+            )
+          );
         };
         packages."x86_64-linux" = {
           isoInstaller =
             let
               nixosSystem = inputs.self.nixosConfigurations.isoInstaller;
             in
-              nixosSystem.config.system.build.${ nixosSystem.config.formatAttr };
-          machineJson = makes.toFileJson "machine.json" inputs.self.nixosConfigurations.machine.config.system.build;
+              nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
+          machineJson = makes.toFileJson "machine.json"
+          inputs.self.nixosConfigurations.machine.config.system.build;
           virtualbox =
             let
               nixosSystem = inputs.self.nixosConfigurations.virtualbox;
             in
-              nixosSystem.config.system.build.${ nixosSystem.config.formatAttr };
+              nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
         };
       };
 }

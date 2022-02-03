@@ -7,7 +7,8 @@ let
     let
       packages = nixpkgs.linuxPackages_latest;
     in
-      builtins.trace "Linux kernel version: ${ packages.kernel.version }" packages;
+      builtins.trace "Linux kernel version: ${packages.kernel.version}"
+      packages;
 in
 {
   boot.initrd.postDeviceCommands = ''

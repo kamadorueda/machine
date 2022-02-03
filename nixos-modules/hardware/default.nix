@@ -9,7 +9,7 @@ let
     let
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     in
-      builtins.trace "Nvidia driver version: ${ package.version }" package;
+      builtins.trace "Nvidia driver version: ${package.version}" package;
 in
 {
   hardware.bluetooth.enable = true;
