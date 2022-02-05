@@ -16,5 +16,5 @@ in
   hardware.bluetooth.package = nixpkgs.bluez;
   hardware.nvidia.package = nvidiaPackage;
   imports = [ ./auto-detected.nix ];
-  services.xserver.videoDrivers = lib.mkOverride 50 [ "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
 }

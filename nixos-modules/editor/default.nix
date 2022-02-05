@@ -148,6 +148,8 @@ let
     "files.insertFinalNewline" = true;
     "files.trimFinalNewlines" = true;
     "files.trimTrailingWhitespace" = true;
+    "gitlens.showWelcomeOnInstall" = false;
+    "gitlens.showWhatsNewAfterUpgrades" = false;
     "python.analysis.autoSearchPaths" = false;
     "python.analysis.diagnosticMode" = "openFilesOnly";
     "python.formatting.provider" = "none";
@@ -194,34 +196,33 @@ in
       ''
     )
   ];
-  home-manager.users.${config.wellKnown.username} =
-    { lib
-    , ...
-    }:
-    {
-      home.activation.editorSetup =
-        let
-          name = "editor-setup";
-          script = makes.makeScript {
-            inherit name;
-            entrypoint = ./entrypoint.sh;
-            replace = {
-              __argExtensions__ = makes.toBashArray extensions;
-              __argExtensionsDir__ = extensionsDir;
-              __argSettings__ = makes.toFileJson "settings.json" settings;
-              __argUserDataDir__ = userDataDir;
-            };
+  home-manager.users.${config.wellKnown.username} = { lib
+  , ...
+  }:
+  {
+    home.activation.editorSetup =
+      let
+        name = "editor-setup";
+        script = makes.makeScript {
+          inherit name;
+          entrypoint = ./entrypoint.sh;
+          replace = {
+            __argExtensions__ = makes.toBashArray extensions;
+            __argExtensionsDir__ = extensionsDir;
+            __argSettings__ = makes.toFileJson "settings.json" settings;
+            __argUserDataDir__ = userDataDir;
           };
-        in
-          lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-            ${script}/bin/${name}
-          '';
-      programs.git.extraConfig = {
-        core.editor = "${bin} --wait";
-        diff.tool = "editor";
-        difftool.editor.cmd = "${bin} --diff $LOCAL $REMOTE --wait";
-        merge.tool = "editor";
-        mergetool.editor.cmd = "${bin} --wait $MERGED";
-      };
+        };
+      in
+        lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          ${script}/bin/${name}
+        '';
+    programs.git.extraConfig = {
+      core.editor = "${bin} --wait";
+      diff.tool = "editor";
+      difftool.editor.cmd = "${bin} --diff $LOCAL $REMOTE --wait";
+      merge.tool = "editor";
+      mergetool.editor.cmd = "${bin} --wait $MERGED";
     };
+  };
 }
