@@ -18,11 +18,11 @@
         "treefmt": "treefmt"
       },
       "locked": {
-        "lastModified": 1644082010,
-        "narHash": "sha256-6Wur/PyCDnn0Hsy1sDyo0fnRHB3ih3ofKhC3EgzpF+0=",
+        "lastModified": 1644185150,
+        "narHash": "sha256-efBRMOsZzZVAlqqWrQJQapzIQGdYaqT7RI/swntChIo=",
         "owner": "kamadorueda",
         "repo": "alejandra",
-        "rev": "5a9660e7079912cfdeaf9d41d78f1634c5adf1ff",
+        "rev": "030f965a55e9a536e5aa39c3a90cb57ec2b6e51f",
         "type": "github"
       },
       "original": {
@@ -165,11 +165,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1644178453,
-        "narHash": "sha256-fEdxAC2g1wIRE9yw+r5AWw6+zYd/317Og5Ndnr88iC8=",
+        "lastModified": 1644185026,
+        "narHash": "sha256-poA5vJUikA9sDbxiTrckEzj9OD0L/4lesUjgc1tppJ8=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "a5921bc959b2990192c1e27e22f421dc2b58c0dd",
+        "rev": "5162bd5769b60b8431fe2c50ab0dcc6fcde48a8a",
         "type": "github"
       },
       "original": {
