@@ -88,8 +88,9 @@
             nixosSystem = inputs.self.nixosConfigurations.isoInstaller;
           in
             nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
-        machineJson = makes.toFileJson "machine.json"
-        inputs.self.nixosConfigurations.machine.config.system.build;
+        machineJson =
+          makes.toFileJson "machine.json"
+          inputs.self.nixosConfigurations.machine.config.system.build;
         virtualbox =
           let
             nixosSystem = inputs.self.nixosConfigurations.virtualbox;

@@ -39,5 +39,6 @@
   boot.initrd.luks.devices."cryptdata".device = "/dev/disk/by-uuid/94b078ab-0407-4549-8a2d-aefd4ad5bc9d";
   swapDevices = [ ];
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
