@@ -10,7 +10,6 @@
   };
   config = {
     environment.variables.GNUPGHOME = "${config.secrets.path}/machine/gpg/home";
-    environment.variables.SECRETS = config.secrets.path;
     environment.systemPackages = [ nixpkgs.gnupg ];
     home-manager.users.${config.wellKnown.username} = {
       programs.ssh.enable = true;

@@ -80,5 +80,8 @@
     programs.vim.settings.background = "dark";
     programs.vim.settings.mouse = "a";
   };
-  programs.bash.interactiveShellInit = builtins.readFile ./bashrc.sh;
+  programs.bash.interactiveShellInit = ''
+    export DIRENV_WARN_TIMEOUT=1h
+    ssh-add ${config.secrets.path}/machine/ssh/kamadorueda
+  '';
 }
