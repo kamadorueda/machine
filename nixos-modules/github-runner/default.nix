@@ -3,6 +3,22 @@
 , ...
 }:
 {
+  services.buildkite-agents.machine = {
+    enable = true;
+    hooks = {
+      environment = "source ${config.secrets.path}/machine/secrets.sh";
+    };
+    runtimePackages = [
+      nixpkgs.bash
+      nixpkgs.cachix
+      nixpkgs.git
+      nixpkgs.gnutar
+      nixpkgs.gzip
+      nixpkgs.nix
+    ];
+    shell = "${nixpkgs.bash}/bin/bash -euo pipefail -c";
+    tokenPath = "${config.secrets.path}/machine/buildkite-token";
+  };
   virtualisation.oci-containers.containers = builtins.foldl' (
     result: repo: result
     // (
