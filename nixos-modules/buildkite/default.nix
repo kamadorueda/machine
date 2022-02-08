@@ -15,8 +15,8 @@
       (
         nixpkgs.writeShellScriptBin "nix3" ''
           exec ${nixpkgs.nixUnstable}/bin/nix \
-            --experimental-features nix-command \
-            --experimental-features flakes \
+            --extra-experimental-features nix-command \
+            --extra-experimental-features flakes \
             --print-build-logs \
             "$@"
         ''
