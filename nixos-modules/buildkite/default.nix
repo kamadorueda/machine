@@ -4,9 +4,11 @@
 }:
 {
   services.buildkite-agents.default = {
-    hooks = {
-      environment = "source ${config.secrets.path}/machine/secrets.sh";
-    };
+    hooks.environment = "source ${config.secrets.path}/machine/secrets.sh";
+    hooks.pre-command = ''
+      nix --version
+      nix3 --version
+    '';
     runtimePackages = [
       nixpkgs.bash
       nixpkgs.cachix
@@ -14,7 +16,7 @@
       nixpkgs.gnutar
       nixpkgs.gzip
       (
-        nixpkgs.writeShellScriptBin "nix" ''
+        nixpkgs.writeShellScriptBin "nix3" ''
           exec ${nixpkgs.nixUnstable}/bin/nix \
             --experimental-features nix-command \
             --experimental-features flakes \
