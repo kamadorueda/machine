@@ -55,22 +55,22 @@
   in
     {
       nixosModules = {
-        audio = ./nixos-modules/audio;
-        boot = ./nixos-modules/boot;
-        browser = ./nixos-modules/browser;
-        config = ./nixos-modules/config;
-        editor = ./nixos-modules/editor;
-        githubRunner = ./nixos-modules/github-runner;
-        hardware = ./nixos-modules/hardware;
+        audio = import ./nixos-modules/audio;
+        boot = import ./nixos-modules/boot;
+        browser = import ./nixos-modules/browser;
+        config = import ./nixos-modules/config;
+        editor = import ./nixos-modules/editor;
+        githubRunner = import ./nixos-modules/github-runner;
+        hardware = import ./nixos-modules/hardware;
         homeManager = inputs.homeManager.nixosModule;
-        networking = ./nixos-modules/networking;
-        nix = ./nixos-modules/nix;
-        secrets = ./nixos-modules/secrets;
-        terminal = ./nixos-modules/terminal;
-        ui = ./nixos-modules/ui;
-        users = ./nixos-modules/users;
-        virtualisation = ./nixos-modules/virtualisation;
-        wellKnown = ./nixos-modules/well-known;
+        networking = import ./nixos-modules/networking;
+        nix = import ./nixos-modules/nix;
+        secrets = import ./nixos-modules/secrets;
+        terminal = import ./nixos-modules/terminal;
+        ui = import ./nixos-modules/ui;
+        users = import ./nixos-modules/users;
+        virtualisation = import ./nixos-modules/virtualisation;
+        wellKnown = import ./nixos-modules/well-known;
       };
       nixosConfigurations = {
         isoInstaller = mkNixosSystem (

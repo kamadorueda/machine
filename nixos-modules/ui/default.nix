@@ -10,14 +10,6 @@
     ui.timezone = lib.mkOption { type = lib.types.str; };
   };
   config = {
-    assertions = [
-      (
-        rec {
-          assertion = builtins.trace "X Video Drivers: ${message}" (builtins.elem "nvidia" config.services.xserver.videoDrivers);
-          message = builtins.toString config.services.xserver.videoDrivers;
-        }
-      )
-    ];
     environment.systemPackages = [
       (
         nixpkgs.writeShellScriptBin "bluetooth" ''
