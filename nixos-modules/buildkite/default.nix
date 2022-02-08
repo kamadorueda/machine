@@ -8,6 +8,7 @@
     runtimePackages = [
       nixpkgs.bash
       nixpkgs.cachix
+      nixpkgs.direnv
       nixpkgs.git
       nixpkgs.gnutar
       nixpkgs.gzip
