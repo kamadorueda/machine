@@ -6,7 +6,7 @@
 {
   environment.systemPackages = [
     (
-      nixpkgs.writeShellScriptBin "nix3" ''
+      nixpkgs.writeShellScriptBin "nix" ''
         exec ${nixpkgs.nixUnstable}/bin/nix \
           --experimental-features nix-command \
           --experimental-features flakes \

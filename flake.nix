@@ -58,9 +58,9 @@
         audio = import ./nixos-modules/audio;
         boot = import ./nixos-modules/boot;
         browser = import ./nixos-modules/browser;
+        buildkite = import ./nixos-modules/buildkite;
         config = import ./nixos-modules/config;
         editor = import ./nixos-modules/editor;
-        githubRunner = import ./nixos-modules/github-runner;
         hardware = import ./nixos-modules/hardware;
         homeManager = inputs.homeManager.nixosModule;
         networking = import ./nixos-modules/networking;
