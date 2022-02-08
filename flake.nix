@@ -1,26 +1,34 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs";
+
     alejandra.url = "github:kamadorueda/alejandra";
     alejandra.inputs.alejandra.follows = "alejandra";
     alejandra.inputs.fenix.follows = "fenix";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
     alejandra.inputs.flakeUtils.follows = "flakeUtils";
     alejandra.inputs.rustAnalyzer.follows = "rustAnalyzer";
+
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
     fenix.inputs.rust-analyzer-src.follows = "rustAnalyzer";
+
     flakeUtils.url = "github:numtide/flake-utils";
+
     homeManager.url = "github:nix-community/home-manager/master";
     homeManager.inputs.nixpkgs.follows = "nixpkgs";
+
     makes.url = "github:fluidattacks/makes/main";
     makes.inputs.nixpkgs.follows = "nixpkgs";
+
     nixosGenerators.url = "github:nix-community/nixos-generators";
     nixosGenerators.inputs.nixpkgs.follows = "nixpkgs";
+
     pythonOnNix.url = "github:on-nix/python/main";
     pythonOnNix.inputs.flakeUtils.follows = "flakeUtils";
     pythonOnNix.inputs.makes.follows = "makes";
     pythonOnNix.inputs.nixpkgs.follows = "nixpkgs";
+
     rustAnalyzer.flake = false;
     rustAnalyzer.url = "github:rust-analyzer/rust-analyzer";
   };
@@ -52,6 +60,7 @@
         browser = ./nixos-modules/browser;
         config = ./nixos-modules/config;
         editor = ./nixos-modules/editor;
+        githubRunner = ./nixos-modules/github-runner;
         hardware = ./nixos-modules/hardware;
         homeManager = inputs.homeManager.nixosModule;
         networking = ./nixos-modules/networking;
