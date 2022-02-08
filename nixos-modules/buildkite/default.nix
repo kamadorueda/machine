@@ -4,7 +4,18 @@
 }:
 {
   services.buildkite-agents.default = {
-    hooks.environment = "source ${config.secrets.path}/machine/secrets.sh";
+    hooks.environment = ''
+      case "$BUILDKITE_PIPELINE_NAME" in
+        alejandra)
+          case "$BUILDKITE_BRANCH" in
+            main)
+              export CACHIX_AUTH_TOKEN="$( \
+                cat ${config.secrets.path}/machine/cachix-auth-token-alejandra)"
+              ;;
+          esac
+          ;;
+      esac
+    '';
     runtimePackages = [
       nixpkgs.bash
       nixpkgs.cachix
