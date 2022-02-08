@@ -3,8 +3,7 @@
 , ...
 }:
 {
-  services.buildkite-agent = {
-    enable = true;
+  services.buildkite-agents.default = {
     hooks = {
       environment = "source ${config.secrets.path}/machine/secrets.sh";
     };
