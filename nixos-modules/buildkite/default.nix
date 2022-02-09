@@ -34,6 +34,7 @@
         nixpkgs.cachix
         nixpkgs.direnv
         nixpkgs.git
+        nixpkgs.gnugrep
         nixpkgs.gnutar
         nixpkgs.gzip
         nixpkgs.nix
