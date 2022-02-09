@@ -13,6 +13,8 @@
     };
     config.services.buildkite-agents.default = {
       hooks.environment = ''
+        export PAGER=
+
         case "$BUILDKITE_PIPELINE_NAME" in
           alejandra)
             case "$BUILDKITE_BRANCH" in
