@@ -52,9 +52,5 @@
       tokenPath = "/secrets/buildkite-token";
     };
     ephemeral = true;
-    extraFlags = [
-      "--private-users=pick"
-      "--private-users-ownership=auto"
-    ];
   };
 }
