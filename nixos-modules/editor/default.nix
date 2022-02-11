@@ -44,7 +44,7 @@ let
     "[rust]"."editor.tabSize" = 4;
     "customLocalFormatters.formatters" = [
       {
-        command = "clang-format --sort-includes --style=microsoft";
+        command = "${nixpkgs.clang-tools}/bin/clang-format --sort-includes";
         languages = [ "cpp" ];
       }
       {

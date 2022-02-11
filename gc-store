@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+
+nix profile wipe-history
+nix store gc
+nix store optimise

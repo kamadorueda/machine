@@ -18,7 +18,6 @@
   environment.systemPackages = [
     nixpkgs.coreutils
     nixpkgs.gnugrep
-    nixpkgs.just
     nixpkgs.parted
     nixpkgs.shadow
     nixpkgs.tree
