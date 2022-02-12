@@ -31,10 +31,18 @@ let
           nixpkgs.gnutar
           nixpkgs.gzip
           (
+            nixpkgs.writeShellScriptBin "nix-env" ''
+              exec ${nixpkgs.nixUnstable}/bin/nix-env "$@"
+            ''
+          )
+          (
+            nixpkgs.writeShellScriptBin "nix-store" ''
+              exec ${nixpkgs.nixUnstable}/bin/nix-store "$@"
+            ''
+          )
+          (
             nixpkgs.writeShellScriptBin "nix" ''
-              exec ${nixpkgs.nixUnstable}/bin/nix \
-                --print-build-logs \
-                "$@"
+              exec ${nixpkgs.nixUnstable}/bin/nix --print-build-logs "$@"
             ''
           )
         ];
