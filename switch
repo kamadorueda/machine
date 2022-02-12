@@ -1,4 +1,5 @@
 #! /usr/bin/env bash
 
 nix build .#nixosConfigurations.machine.config.system.build.toplevel
-nix-env -p /nix/var/nix/profiles/system --set result
+sudo nix-env -p /nix/var/nix/profiles/system --set ./result
+sudo /nix/var/nix/profiles/system/activate

@@ -1,0 +1,3 @@
+#! /usr/bin/env bash
+
+nix build .#nixosConfigurations.machine.config.system.build.toplevel
