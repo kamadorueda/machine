@@ -2,4 +2,4 @@
 
 nix build .#nixosConfigurations.machine.config.system.build.toplevel
 sudo nix-env -p /nix/var/nix/profiles/system --set ./result
-sudo /nix/var/nix/profiles/system/activate
+sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch

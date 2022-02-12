@@ -4,31 +4,47 @@
 }:
 let
   baseConfig = {
+    autoStart = true;
     bindMounts."/secrets/buildkite-token" = {
       hostPath = "${config.secrets.path}/machine/buildkite-token";
     };
-    config.services.buildkite-agents.default = {
-      runtimePackages = [
-        nixpkgs.bash
-        nixpkgs.cachix
-        nixpkgs.direnv
-        nixpkgs.git
-        nixpkgs.gnugrep
-        nixpkgs.gnutar
-        nixpkgs.gzip
-        nixpkgs.nix
-        (
-          nixpkgs.writeShellScriptBin "nix3" ''
-            exec ${nixpkgs.nixUnstable}/bin/nix \
-              --extra-experimental-features nix-command \
-              --extra-experimental-features flakes \
-              --print-build-logs \
-              "$@"
-          ''
-        )
-      ];
-      shell = "${nixpkgs.bash}/bin/bash -euo pipefail -c";
-      tokenPath = "/secrets/buildkite-token";
+    config = {
+      nix.extraOptions = ''
+        extra-experimental-features = nix-command flakes
+      '';
+      nix.settings.cores = 1;
+      nix.settings.max-jobs = 1;
+      nix.package = nixpkgs.nixUnstable;
+      services.buildkite-agents.default = {
+        hooks.environment = ''
+          export PAGER=
+        '';
+        runtimePackages = [
+          nixpkgs.bash
+          nixpkgs.cachix
+          nixpkgs.direnv
+          nixpkgs.git
+          nixpkgs.gnugrep
+          nixpkgs.gnutar
+          nixpkgs.gzip
+          (
+            nixpkgs.writeShellScriptBin "nix" ''
+              exec ${nixpkgs.nixUnstable}/bin/nix \
+                --print-build-logs \
+                "$@"
+            ''
+          )
+          (
+            nixpkgs.writeShellScriptBin "nix3" ''
+              exec ${nixpkgs.nixUnstable}/bin/nix \
+                --print-build-logs \
+                "$@"
+            ''
+          )
+        ];
+        shell = "${nixpkgs.bash}/bin/bash -euo pipefail -c";
+        tokenPath = "/secrets/buildkite-token";
+      };
     };
     ephemeral = true;
   };
