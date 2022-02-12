@@ -8,6 +8,9 @@ let
     bindMounts."/secrets/buildkite-token" = {
       hostPath = "${config.secrets.path}/machine/buildkite-token";
     };
+    bindMounts."/data/nixpkgs" = {
+      hostPath = "/data/nixpkgs";
+    };
     config = {
       nix.extraOptions = ''
         extra-experimental-features = nix-command flakes
@@ -45,10 +48,11 @@ in
 {
   containers.buildkite-public =
     nixpkgs.lib.attrsets.recursiveUpdate
-    { }
-    baseConfig;
+    baseConfig
+    { };
   containers.buildkite-private =
     nixpkgs.lib.attrsets.recursiveUpdate
+    baseConfig
     {
       bindMounts."/secrets/cachix-auth-token-alejandra" = {
         hostPath = "${config.secrets.path}/machine/cachix-auth-token-alejandra";
@@ -73,6 +77,5 @@ in
         '';
         tags.queue = "private";
       };
-    }
-    baseConfig;
+    };
 }
