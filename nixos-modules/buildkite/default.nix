@@ -34,13 +34,6 @@ let
                 "$@"
             ''
           )
-          (
-            nixpkgs.writeShellScriptBin "nix3" ''
-              exec ${nixpkgs.nixUnstable}/bin/nix \
-                --print-build-logs \
-                "$@"
-            ''
-          )
         ];
         shell = "${nixpkgs.bash}/bin/bash -euo pipefail -c";
         tokenPath = "/secrets/buildkite-token";
