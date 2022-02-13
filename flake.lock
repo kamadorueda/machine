@@ -6,23 +6,16 @@
           "fenix"
         ],
         "flakeCompat": "flakeCompat",
-        "flakeUtils": [
-          "flakeUtils"
-        ],
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "rustAnalyzer": [
-          "rustAnalyzer"
-        ],
-        "treefmt": "treefmt"
+        ]
       },
       "locked": {
-        "lastModified": 1644548994,
-        "narHash": "sha256-frZurieD5cHBJYfJqC42FR8IMDgK/D34n5OlZ8z+soQ=",
+        "lastModified": 1644703710,
+        "narHash": "sha256-8S4uG/xKVvlJXXVkvK0mkJCJW0EqFaYItvT5BvK1Heg=",
         "owner": "kamadorueda",
         "repo": "alejandra",
-        "rev": "4ff1547d0883f0885b7ea75b1ba3b1f5f0f24e1c",
+        "rev": "63b45b881ec3ecf9976fb825a1a080c6d8abee68",
         "type": "github"
       },
       "original": {
@@ -231,31 +224,6 @@
       "original": {
         "owner": "rust-analyzer",
         "repo": "rust-analyzer",
-        "type": "github"
-      }
-    },
-    "treefmt": {
-      "inputs": {
-        "flake-utils": [
-          "alejandra",
-          "flakeUtils"
-        ],
-        "nixpkgs": [
-          "alejandra",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1640364438,
-        "narHash": "sha256-sV1Oa9JVNmpAwZ4cnVs7ovHrKL8EPg3J08jPX/a48LI=",
-        "owner": "numtide",
-        "repo": "treefmt",
-        "rev": "26d7f5f15e5d22d4413ba7c5ae0447fdc0b5cc76",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "treefmt",
         "type": "github"
       }
     }

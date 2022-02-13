@@ -56,16 +56,16 @@ let
         languages = [ "html" ];
       }
       {
+        command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser babel";
+        languages = [ "javascript" ];
+      }
+      {
         command = "${nixpkgs.jq}/bin/jq -S";
         languages = [ "json" "jsonc" ];
       }
       {
         command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser markdown";
         languages = [ "markdown" ];
-      }
-      {
-        command = alejandra.outputs.defaultApp.${nixpkgs.system}.program;
-        languages = [ "nix" ];
       }
       {
         command =
@@ -117,6 +117,10 @@ let
           )
           .outPath;
         languages = [ "toml" ];
+      }
+      {
+        command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser yaml";
+        languages = [ "yaml" ];
       }
     ];
     "diffEditor.ignoreTrimWhitespace" = false;
@@ -187,6 +191,7 @@ in
 {
   environment.variables.EDITOR = bin;
   environment.systemPackages = [
+    alejandra.outputs.defaultPackage.${nixpkgs.system}
     fenix.latest.toolchain
     (
       nixpkgs.writeShellScriptBin "code" ''
