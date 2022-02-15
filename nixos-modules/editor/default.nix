@@ -1,12 +1,13 @@
-{ alejandra
-, config
-, fenix
-, lib
-, makes
-, makesSrc
-, nixpkgs
-, pythonOnNix
-, ...
+{
+  alejandra,
+  config,
+  fenix,
+  lib,
+  makes,
+  makesSrc,
+  nixpkgs,
+  pythonOnNix,
+  ...
 }:
 let
   extensionsDir = "/data/vscode/extensions";
@@ -200,8 +201,9 @@ in
     )
   ];
   home-manager.users.${config.wellKnown.username} =
-    { lib
-    , ...
+    {
+      lib,
+      ...
     }:
     {
       home.activation.editorSetup =

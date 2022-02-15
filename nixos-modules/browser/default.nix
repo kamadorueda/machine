@@ -1,5 +1,6 @@
-{ nixpkgs
-, ...
+{
+  nixpkgs,
+  ...
 }:
 {
   environment.systemPackages = [ nixpkgs.google-chrome ];

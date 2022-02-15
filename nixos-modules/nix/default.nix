@@ -1,7 +1,8 @@
-{ config
-, nixpkgs
-, nixpkgsSrc
-, ...
+{
+  config,
+  nixpkgs,
+  nixpkgsSrc,
+  ...
 }:
 {
   environment.systemPackages = [

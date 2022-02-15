@@ -1,7 +1,8 @@
-{ config
-, lib
-, nixpkgs
-, ...
+{
+  config,
+  lib,
+  nixpkgs,
+  ...
 }
 @ args:
 let

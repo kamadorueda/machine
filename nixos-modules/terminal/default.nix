@@ -1,6 +1,7 @@
-{ config
-, nixpkgs
-, ...
+{
+  config,
+  nixpkgs,
+  ...
 }:
 {
   environment.shellAliases = {
