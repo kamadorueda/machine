@@ -28,6 +28,7 @@ let
     nixpkgs.vscode-extensions.haskell.haskell
     nixpkgs.vscode-extensions.jkillian.custom-local-formatters
     nixpkgs.vscode-extensions.justusadam.language-haskell
+    nixpkgs.vscode-extensions.kamadorueda.alejandra
     nixpkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
     nixpkgs.vscode-extensions.ms-python.python
     nixpkgs.vscode-extensions.ms-python.vscode-pylance
@@ -39,7 +40,6 @@ let
     nixpkgs.vscode-extensions.tamasfe.even-better-toml
   ];
   settings = {
-    "[html]"."editor.formatOnSave" = false;
     "[python]"."editor.tabSize" = 4;
     "[rust]"."editor.tabSize" = 4;
     "customLocalFormatters.formatters" = [
