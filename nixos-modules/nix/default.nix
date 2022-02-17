@@ -16,7 +16,7 @@
       ''
     )
   ];
-  nix.nixPath = [ "nixpkgs=${nixpkgsSrc}" ];
+  nix.nixPath = ["nixpkgs=${nixpkgsSrc}"];
   nix.package = nixpkgs.nix;
   nix.registry.nixpkgs = {
     exact = false;
@@ -24,7 +24,7 @@
   };
   nix.settings.cores = 1;
   nix.settings.max-jobs = "auto";
-  nix.settings.trusted-users = [ "root" config.wellKnown.username ];
+  nix.settings.trusted-users = ["root" config.wellKnown.username];
   nixpkgs.config.allowBroken = false;
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.android_sdk.accept_license = true;

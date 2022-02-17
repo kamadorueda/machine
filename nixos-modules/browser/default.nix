@@ -3,7 +3,7 @@
   ...
 }:
 {
-  environment.systemPackages = [ nixpkgs.google-chrome ];
+  environment.systemPackages = [nixpkgs.google-chrome];
   programs.chromium.enable = true;
   programs.chromium.extensions = [
     "hdokiejnpimakedhajhdlcegeplioahd"

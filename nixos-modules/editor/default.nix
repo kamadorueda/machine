@@ -46,27 +46,27 @@ let
     "customLocalFormatters.formatters" = [
       {
         command = "${nixpkgs.clang-tools}/bin/clang-format --sort-includes";
-        languages = [ "cpp" ];
+        languages = ["cpp"];
       }
       {
         command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser css";
-        languages = [ "css" ];
+        languages = ["css"];
       }
       {
         command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser html";
-        languages = [ "html" ];
+        languages = ["html"];
       }
       {
         command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser babel";
-        languages = [ "javascript" ];
+        languages = ["javascript"];
       }
       {
         command = "${nixpkgs.jq}/bin/jq -S";
-        languages = [ "json" "jsonc" ];
+        languages = ["json" "jsonc"];
       }
       {
         command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser markdown";
-        languages = [ "markdown" ];
+        languages = ["markdown"];
       }
       {
         command =
@@ -86,23 +86,23 @@ let
             ''
           )
           .outPath;
-        languages = [ "python" ];
+        languages = ["python"];
       }
       {
         command = "${fenix.latest.rustfmt}/bin/rustfmt --config-path ${./rustfmt.toml}";
-        languages = [ "rust" ];
+        languages = ["rust"];
       }
       {
         command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser scss";
-        languages = [ "scss" ];
+        languages = ["scss"];
       }
       {
         command = "${nixpkgs.shfmt}/bin/shfmt -bn -ci -i 2 -s -sr -";
-        languages = [ "shellscript" ];
+        languages = ["shellscript"];
       }
       {
         command = "${nixpkgs.terraform}/bin/terraform fmt -";
-        languages = [ "terraform" ];
+        languages = ["terraform"];
       }
       {
         command =
@@ -117,11 +117,11 @@ let
             ''
           )
           .outPath;
-        languages = [ "toml" ];
+        languages = ["toml"];
       }
       {
         command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser yaml";
-        languages = [ "yaml" ];
+        languages = ["yaml"];
       }
     ];
     "diffEditor.ignoreTrimWhitespace" = false;
@@ -143,7 +143,7 @@ let
     "editor.minimap.showSlider" = "always";
     "editor.minimap.side" = "left";
     "editor.minimap.size" = "fill";
-    "editor.rulers" = [ 80 ];
+    "editor.rulers" = [80];
     "editor.tabSize" = 2;
     "editor.wordWrap" = "on";
     "explorer.confirmDelete" = false;
@@ -188,8 +188,7 @@ let
     "workbench.settings.editor" = "json";
     "workbench.startupEditor" = "none";
   };
-in
-{
+in {
   environment.variables.EDITOR = bin;
   environment.systemPackages = [
     alejandra.outputs.defaultPackage.${nixpkgs.system}
@@ -220,7 +219,7 @@ in
             };
           };
         in
-          lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          lib.hm.dag.entryAfter ["writeBoundary"] ''
             ${script}/bin/${name}
           '';
       programs.git.extraConfig = {

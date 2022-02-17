@@ -53,12 +53,11 @@ let
     };
     ephemeral = true;
   };
-in
-{
+in {
   containers.buildkite-public =
     nixpkgs.lib.attrsets.recursiveUpdate
     baseConfig
-    { };
+    {};
   containers.buildkite-private =
     nixpkgs.lib.attrsets.recursiveUpdate
     baseConfig

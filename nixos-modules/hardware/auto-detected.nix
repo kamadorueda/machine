@@ -9,11 +9,11 @@
   ...
 }:
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid"];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-intel"];
+  boot.extraModulePackages = [];
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/9f54d61e-e074-410f-bd7c-dde6ffb716ce";
     fsType = "ext4";
@@ -27,7 +27,7 @@
   fileSystems."/nix/store" = {
     device = "/nix/store";
     fsType = "none";
-    options = [ "bind" ];
+    options = ["bind"];
   };
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/E749-6614";
@@ -38,7 +38,7 @@
     fsType = "ext4";
   };
   boot.initrd.luks.devices."cryptdata".device = "/dev/disk/by-uuid/94b078ab-0407-4549-8a2d-aefd4ad5bc9d";
-  swapDevices = [ ];
+  swapDevices = [];
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;

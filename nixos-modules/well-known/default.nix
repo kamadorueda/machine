@@ -5,8 +5,7 @@
 }:
 let
   strOption = lib.mkOption { type = lib.types.str; };
-in
-{
+in {
   options = {
     wellKnown.email = strOption;
     wellKnown.home = strOption;

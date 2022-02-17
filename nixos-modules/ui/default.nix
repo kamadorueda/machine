@@ -38,7 +38,7 @@
         ''
       )
     ];
-    fonts.fonts = [ nixpkgs.jetbrains-mono ];
+    fonts.fonts = [nixpkgs.jetbrains-mono];
     home-manager.users.${config.wellKnown.username} = {
       gtk.enable = true;
       gtk.font.name = config.ui.font;
@@ -68,7 +68,7 @@
       include ${./i3.conf}
     '';
     services.xserver.windowManager.i3.enable = true;
-    services.xserver.windowManager.i3.extraPackages = [ nixpkgs.dmenu nixpkgs.i3status ];
+    services.xserver.windowManager.i3.extraPackages = [nixpkgs.dmenu nixpkgs.i3status];
     services.xserver.xkbVariant = "altgr-intl";
     time.timeZone = config.ui.timezone;
     ui.font = "JetBrains Mono";

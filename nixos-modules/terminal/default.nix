@@ -76,7 +76,7 @@
     };
     programs.vim.enable = true;
     programs.vim.extraConfig = "";
-    programs.vim.plugins = [ ];
+    programs.vim.plugins = [];
     programs.vim.settings.background = "dark";
     programs.vim.settings.mouse = "a";
   };
