@@ -179,7 +179,7 @@
     reboot
     ```
 
-1. Enjoy!
+1.  Enjoy!
 
 ## Nvidia
 
@@ -215,7 +215,7 @@
 1.  Should be in use now:
 
     ```bash
-    $ nix3 run nixpkgs#glxinfo -- -B
+    $ nix run nixpkgs#glxinfo -- -B
 
     # ...
     OpenGL vendor string: NVIDIA Corporation
