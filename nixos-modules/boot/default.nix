@@ -10,15 +10,7 @@ let
     in
       builtins.trace "Linux kernel version: ${packages.kernel.version}"
       packages;
-in
-{
-  boot.initrd.postDeviceCommands = ''
-    echo erasing: ${config.fileSystems."/".device}
-    mkdir /tmp/mnt
-    ${nixpkgs.utillinux}/bin/mount ${config.fileSystems."/".device} /tmp/mnt
-    rm -fr /tmp/mnt/*
-    ${nixpkgs.utillinux}/bin/umount /tmp/mnt
-  '';
+in {
   boot.kernelPackages = kernelPackages;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = true;

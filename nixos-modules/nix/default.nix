@@ -23,8 +23,8 @@
     exact = false;
     flake = nixpkgsSrc;
   };
-  nix.settings.cores = 1;
-  nix.settings.max-jobs = "auto";
+  nix.settings.cores = 8;
+  nix.settings.max-jobs = 2;
   nix.settings.substituters = [ "https://nix-community.cachix.org" ];
   nix.settings.trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
   nix.settings.trusted-users = [ "root" config.wellKnown.username ];
