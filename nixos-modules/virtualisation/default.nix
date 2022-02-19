@@ -4,4 +4,13 @@
   virtualisation.docker.enable = true;
   virtualisation.virtualbox.guest.enable = true;
   virtualisation.virtualbox.host.enable = true;
+  boot.binfmt.emulatedSystems = [
+    "aarch64-linux"
+    "armv6l-linux"
+    "armv7l-linux"
+    "i686-linux"
+    "i686-windows"
+    "mipsel-linux"
+    "x86_64-windows"
+  ];
 }
