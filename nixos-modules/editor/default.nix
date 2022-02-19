@@ -1,5 +1,4 @@
 {
-  alejandra,
   config,
   fenix,
   lib,
@@ -192,7 +191,6 @@ in
 {
   environment.variables.EDITOR = bin;
   environment.systemPackages = [
-    alejandra.outputs.defaultPackage.${nixpkgs.system}
     fenix.latest.toolchain
     (
       nixpkgs.writeShellScriptBin "code" ''
