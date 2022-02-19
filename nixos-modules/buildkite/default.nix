@@ -2,8 +2,7 @@
   config,
   nixpkgs,
   ...
-}:
-let
+}: let
   baseConfig = {
     autoStart = true;
     bindMounts."/secrets/buildkite-token" = {

@@ -1,8 +1,4 @@
-{
-  config,
-  ...
-}:
-{
+{config, ...}: {
   environment.etc."NetworkManager/system-connections/home24.nmconnection" = {
     enable = true;
     mode = "0400";

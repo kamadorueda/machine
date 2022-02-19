@@ -2,8 +2,7 @@
   config,
   nixpkgs,
   ...
-}:
-{
+}: {
   environment.shellAliases = {
     a = "git add -p";
     c = "git commit --allow-empty";

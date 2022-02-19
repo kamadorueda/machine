@@ -3,12 +3,11 @@
   lib,
   nixpkgs,
   ...
-}:
-{
+}: {
   options = {
-    ui.font = lib.mkOption { type = lib.types.str; };
-    ui.fontSize = lib.mkOption { type = lib.types.ints.positive; };
-    ui.timezone = lib.mkOption { type = lib.types.str; };
+    ui.font = lib.mkOption {type = lib.types.str;};
+    ui.fontSize = lib.mkOption {type = lib.types.ints.positive;};
+    ui.timezone = lib.mkOption {type = lib.types.str;};
   };
   config = {
     environment.systemPackages = [

@@ -1,8 +1,4 @@
-{
-  nixpkgs,
-  ...
-}:
-{
+{nixpkgs, ...}: {
   environment.systemPackages = [nixpkgs.google-chrome];
   programs.chromium.enable = true;
   programs.chromium.extensions = [
@@ -15,7 +11,7 @@
     BrowserSignin = 0;
     DefaultBrowserSettingEnabled = false;
     ManagedBookmarks = [
-      { toplevel_name = "Links"; }
+      {toplevel_name = "Links";}
       {
         name = "discord";
         url = "https://discord.com";

@@ -2,9 +2,8 @@
   config,
   lib,
   ...
-}:
-let
-  strOption = lib.mkOption { type = lib.types.str; };
+}: let
+  strOption = lib.mkOption {type = lib.types.str;};
 in {
   options = {
     wellKnown.email = strOption;
@@ -13,5 +12,5 @@ in {
     wellKnown.signingKey = strOption;
     wellKnown.username = strOption;
   };
-  config = { wellKnown.home = "/home/${config.wellKnown.username}"; };
+  config = {wellKnown.home = "/home/${config.wellKnown.username}";};
 }
