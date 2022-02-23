@@ -5,8 +5,6 @@
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
 
-    flakeUtils.url = "github:numtide/flake-utils";
-
     homeManager.url = "github:nix-community/home-manager/master";
     homeManager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -17,7 +15,6 @@
     nixosGenerators.inputs.nixpkgs.follows = "nixpkgs";
 
     pythonOnNix.url = "github:on-nix/python/main";
-    pythonOnNix.inputs.flakeUtils.follows = "flakeUtils";
     pythonOnNix.inputs.makes.follows = "makes";
     pythonOnNix.inputs.nixpkgs.follows = "nixpkgs";
   };
