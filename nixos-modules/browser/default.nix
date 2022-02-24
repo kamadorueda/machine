@@ -49,23 +49,6 @@
           }
         ];
       }
-      {
-        name = "Flox";
-        children = [
-          {
-            name = "core";
-            url = "https://core.floxdev.com";
-          }
-          {
-            name = "slack";
-            url = "https://floxdev.slack.com";
-          }
-          {
-            name = "workpace";
-            url = "https://wwgmkedxfx.workplace.com";
-          }
-        ];
-      }
     ];
     PasswordManagerEnabled = false;
     ShowAppsShortcutInBookmarkBar = false;

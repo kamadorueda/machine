@@ -12,7 +12,7 @@
     l = "git log";
     p = "git push -f";
     ro = "git pull --autostash --progress --rebase --stat origin";
-    ru = "git pull --autostash --progress --rebase --stat upstream";
+    rf = "git pull --autostash --progress --rebase --stat fork";
     s = "git status";
   };
   environment.systemPackages = [
