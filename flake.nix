@@ -23,7 +23,7 @@
   };
   outputs = inputs: let
     system = "x86_64-linux";
-    makes = import "${inputs.makes}/src/args/agnostic.nix" {inherit system;};
+
     mkNixosSystem = modules:
       inputs.nixpkgs.lib.nixosSystem {
         inherit modules;
@@ -35,7 +35,7 @@
             inherit system;
           };
           nixpkgsSrc = inputs.nixpkgs.sourceInfo;
-          inherit makes;
+          makes = import "${inputs.makes}/src/args/agnostic.nix" {inherit system;};
           makesSrc = inputs.makes.sourceInfo;
           pkgs = nixpkgs;
           pythonOnNix = inputs.pythonOnNix.packages.${system};
@@ -61,35 +61,44 @@
       virtualisation = import ./nixos-modules/virtualisation;
       wellKnown = import ./nixos-modules/well-known;
     };
+
     nixosConfigurations = {
-      isoInstaller = mkNixosSystem (
-        [inputs.nixosGenerators.nixosModules.install-iso]
-        ++ (
-          builtins.attrValues (
-            builtins.removeAttrs inputs.self.nixosModules ["boot" "hardware" "networking" "virtualisation"]
-          )
-        )
-      );
       machine = mkNixosSystem (builtins.attrValues inputs.self.nixosModules);
-      virtualbox = mkNixosSystem (
-        [inputs.nixosGenerators.nixosModules.virtualbox]
-        ++ (
-          builtins.attrValues (
-            builtins.removeAttrs inputs.self.nixosModules ["boot" "hardware" "networking" "virtualisation"]
-          )
-        )
-      );
     };
+
     packages."x86_64-linux" = {
       isoInstaller = let
-        nixosSystem = inputs.self.nixosConfigurations.isoInstaller;
+        nixosSystem = mkNixosSystem (
+          [inputs.nixosGenerators.nixosModules.install-iso]
+          ++ (builtins.attrValues (
+            builtins.removeAttrs inputs.self.nixosModules [
+              "boot"
+              "hardware"
+              "virtualisation"
+            ]
+          ))
+        );
       in
         nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
-      machineJson =
-        makes.toFileJson "machine.json"
-        inputs.self.nixosConfigurations.machine.config.system.build;
-      virtualbox = let
-        nixosSystem = inputs.self.nixosConfigurations.virtualbox;
+
+      # machineJson = let
+      #   recurse = depth: value: 3;
+
+      #   generate = config: recurse 0 config.options;
+      # in
+      #   makes.toFileJson "machine.json"
+      #   (generate inputs.self.nixosConfigurations.machine);
+
+      qemuKvm = let
+        nixosSystem = mkNixosSystem (
+          [inputs.nixosGenerators.nixosModules.vm-bootloader]
+          ++ (builtins.attrValues
+          (builtins.removeAttrs inputs.self.nixosModules [
+            "boot"
+            "hardware"
+            "virtualisation"
+          ]))
+        );
       in
         nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
     };

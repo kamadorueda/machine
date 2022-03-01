@@ -2,8 +2,7 @@
   environment.systemPackages = [nixpkgs.google-chrome];
   programs.chromium.enable = true;
   programs.chromium.extensions = [
-    "hdokiejnpimakedhajhdlcegeplioahd"
-    # lastpass
+    "hdokiejnpimakedhajhdlcegeplioahd" # lastpass
   ];
   # https://chromeenterprise.google/policies/
   programs.chromium.extraOpts = {
@@ -46,6 +45,10 @@
           {
             name = "nixos-packages";
             url = "https://search.nixos.org/packages";
+          }
+          {
+            name = "nixpkgs-prs";
+            url = "https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+is%3Apr+kamadorueda";
           }
         ];
       }
