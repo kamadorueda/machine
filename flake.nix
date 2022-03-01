@@ -1,5 +1,8 @@
 {
   inputs = {
+    alejandra.url = "github:kamadorueda/alejandra";
+    alejandra.inputs.nixpkgs.follows = "nixpkgs";
+
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     fenix.url = "github:nix-community/fenix";
@@ -25,6 +28,7 @@
       inputs.nixpkgs.lib.nixosSystem {
         inherit modules;
         specialArgs = rec {
+          alejandra = inputs.alejandra.defaultPackage.${system};
           fenix = inputs.fenix.packages.${system};
           nixpkgs = import inputs.nixpkgs {
             config.allowUnfree = true;

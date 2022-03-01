@@ -1,4 +1,5 @@
 {
+  alejandra,
   config,
   fenix,
   lib,
@@ -41,6 +42,7 @@
   settings = {
     "[python]"."editor.tabSize" = 4;
     "[rust]"."editor.tabSize" = 4;
+    "alejandra.program" = "${alejandra}/bin/alejandra";
     "customLocalFormatters.formatters" = [
       {
         command = "${nixpkgs.clang-tools}/bin/clang-format --sort-includes";
@@ -189,6 +191,7 @@
 in {
   environment.variables.EDITOR = bin;
   environment.systemPackages = [
+    alejandra
     fenix.latest.toolchain
     (
       nixpkgs.writeShellScriptBin "code" ''
