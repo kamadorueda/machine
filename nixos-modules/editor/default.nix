@@ -70,21 +70,19 @@
       }
       {
         command =
-          (
-            nixpkgs.writeScript "python-fmt" ''
-              #! ${nixpkgs.bash}/bin/bash
+          (nixpkgs.writeScript "python-fmt" ''
+            #! ${nixpkgs.bash}/bin/bash
 
-              ${pythonOnNix.black-latest-python39-bin}/bin/black \
-                --config \
-                ${makesSrc}/src/evaluator/modules/format-python/settings-black.toml \
-                - \
-                | \
-              ${pythonOnNix.isort-latest-python39-bin}/bin/isort \
-                --settings-path \
-                ${makesSrc}/src/evaluator/modules/format-python/settings-isort.toml \
-                -
-            ''
-          )
+            ${pythonOnNix.black-latest-python39-bin}/bin/black \
+              --config \
+              ${makesSrc}/src/evaluator/modules/format-python/settings-black.toml \
+              - \
+              | \
+            ${pythonOnNix.isort-latest-python39-bin}/bin/isort \
+              --settings-path \
+              ${makesSrc}/src/evaluator/modules/format-python/settings-isort.toml \
+              -
+          '')
           .outPath;
         languages = ["python"];
       }
@@ -106,16 +104,14 @@
       }
       {
         command =
-          (
-            nixpkgs.writeScript "toml-fmt" ''
-              #! ${nixpkgs.bash}/bin/bash
+          (nixpkgs.writeScript "toml-fmt" ''
+            #! ${nixpkgs.bash}/bin/bash
 
-              NODE_PATH=${nixpkgs.nodePackages.prettier-plugin-toml}/lib/node_modules:$NODE_PATH \
-              ${nixpkgs.nodePackages.prettier}/bin/prettier \
-                --parser toml \
-                --plugin prettier-plugin-toml
-            ''
-          )
+            NODE_PATH=${nixpkgs.nodePackages.prettier-plugin-toml}/lib/node_modules:$NODE_PATH \
+            ${nixpkgs.nodePackages.prettier}/bin/prettier \
+              --parser toml \
+              --plugin prettier-plugin-toml
+          '')
           .outPath;
         languages = ["toml"];
       }
@@ -193,11 +189,9 @@ in {
   environment.systemPackages = [
     alejandra
     fenix.latest.toolchain
-    (
-      nixpkgs.writeShellScriptBin "code" ''
-        exec ${bin} "$@"
-      ''
-    )
+    (nixpkgs.writeShellScriptBin "code" ''
+      exec ${bin} "$@"
+    '')
   ];
   home-manager.users.${config.wellKnown.username} = {lib, ...}: {
     home.activation.editorSetup = let

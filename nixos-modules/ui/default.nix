@@ -11,31 +11,21 @@
   };
   config = {
     environment.systemPackages = [
-      (
-        nixpkgs.writeShellScriptBin "bluetooth" ''
-          exec ${nixpkgs.bluez}/bin/bluetoothctl "$@"
-        ''
-      )
-      (
-        nixpkgs.writeShellScriptBin "files" ''
-          exec ${nixpkgs.gnome.nautilus}/bin/nautilus "$@"
-        ''
-      )
-      (
-        nixpkgs.writeShellScriptBin "images" ''
-          exec ${nixpkgs.gnome.eog}/bin/eog "$@"
-        ''
-      )
-      (
-        nixpkgs.writeShellScriptBin "screenshot" ''
-          exec ${nixpkgs.gnome.gnome-screenshot}/bin/gnome-screenshot "$@"
-        ''
-      )
-      (
-        nixpkgs.writeShellScriptBin "sound" ''
-          exec ${nixpkgs.pavucontrol}/bin/pavucontrol "$@"
-        ''
-      )
+      (nixpkgs.writeShellScriptBin "bluetooth" ''
+        exec ${nixpkgs.bluez}/bin/bluetoothctl "$@"
+      '')
+      (nixpkgs.writeShellScriptBin "files" ''
+        exec ${nixpkgs.gnome.nautilus}/bin/nautilus "$@"
+      '')
+      (nixpkgs.writeShellScriptBin "images" ''
+        exec ${nixpkgs.gnome.eog}/bin/eog "$@"
+      '')
+      (nixpkgs.writeShellScriptBin "screenshot" ''
+        exec ${nixpkgs.gnome.gnome-screenshot}/bin/gnome-screenshot "$@"
+      '')
+      (nixpkgs.writeShellScriptBin "sound" ''
+        exec ${nixpkgs.pavucontrol}/bin/pavucontrol "$@"
+      '')
     ];
     fonts.fonts = [nixpkgs.jetbrains-mono];
     home-manager.users.${config.wellKnown.username} = {

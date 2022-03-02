@@ -59,12 +59,10 @@
       commit.gpgsign = true;
       diff.renamelimit = 16384;
       diff.sopsdiffer.textconv =
-        (
-          nixpkgs.writeScript "sopsdiffer.sh" ''
-            #! ${nixpkgs.bash}/bin/bash
-            sops -d "$1" || cat "$1"
-          ''
-        )
+        (nixpkgs.writeScript "sopsdiffer.sh" ''
+          #! ${nixpkgs.bash}/bin/bash
+          sops -d "$1" || cat "$1"
+        '')
         .outPath;
       gpg.progam = "${nixpkgs.gnupg}/bin/gpg2";
       gpg.sign = true;

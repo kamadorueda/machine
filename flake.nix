@@ -70,13 +70,11 @@
       isoInstaller = let
         nixosSystem = mkNixosSystem (
           [inputs.nixosGenerators.nixosModules.install-iso]
-          ++ (builtins.attrValues (
-            builtins.removeAttrs inputs.self.nixosModules [
-              "boot"
-              "hardware"
-              "virtualisation"
-            ]
-          ))
+          ++ (builtins.attrValues (builtins.removeAttrs inputs.self.nixosModules [
+            "boot"
+            "hardware"
+            "virtualisation"
+          ]))
         );
       in
         nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
@@ -92,12 +90,14 @@
       qemuKvm = let
         nixosSystem = mkNixosSystem (
           [inputs.nixosGenerators.nixosModules.vm-bootloader]
-          ++ (builtins.attrValues
-          (builtins.removeAttrs inputs.self.nixosModules [
-            "boot"
-            "hardware"
-            "virtualisation"
-          ]))
+          ++ (
+            builtins.attrValues
+            (builtins.removeAttrs inputs.self.nixosModules [
+              "boot"
+              "hardware"
+              "virtualisation"
+            ])
+          )
         );
       in
         nixosSystem.config.system.build.${nixosSystem.config.formatAttr};

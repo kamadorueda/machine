@@ -5,15 +5,13 @@
   ...
 }: {
   environment.systemPackages = [
-    (
-      nixpkgs.writeShellScriptBin "nix" ''
-        exec ${nixpkgs.nixUnstable}/bin/nix \
-          --extra-experimental-features nix-command \
-          --extra-experimental-features flakes \
-          --print-build-logs \
-          "$@"
-      ''
-    )
+    (nixpkgs.writeShellScriptBin "nix" ''
+      exec ${nixpkgs.nixUnstable}/bin/nix \
+        --extra-experimental-features nix-command \
+        --extra-experimental-features flakes \
+        --print-build-logs \
+        "$@"
+    '')
   ];
   nix.nixPath = ["nixpkgs=${nixpkgsSrc}"];
   nix.package = nixpkgs.nix;
