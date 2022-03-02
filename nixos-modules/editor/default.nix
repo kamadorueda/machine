@@ -187,9 +187,8 @@
 in {
   environment.variables.EDITOR = bin;
   environment.systemPackages = [
-    alejandra
-    fenix.latest.toolchain
     (nixpkgs.writeShellScriptBin "code" ''
+      export PATH="${fenix.latest.toolchain}/bin:$PATH"
       exec ${bin} "$@"
     '')
   ];
