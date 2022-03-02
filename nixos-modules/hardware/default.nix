@@ -9,6 +9,12 @@
   in
     builtins.trace "Nvidia driver version: ${package.version}" package;
 in {
+  swapDevices = [
+    {
+      device = "/swap";
+      size = 16384;
+    }
+  ];
   hardware.bluetooth.enable = true;
   hardware.bluetooth.package = nixpkgs.bluez;
   hardware.nvidia.package = nvidiaPackage;
