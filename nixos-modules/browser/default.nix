@@ -50,6 +50,10 @@
             name = "nixpkgs-prs";
             url = "https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+is%3Apr+kamadorueda";
           }
+          {
+            name = "nixpkgs-prs-bot";
+            url = "https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+is%3Apr+author%3Ar-ryantm";
+          }
         ];
       }
     ];

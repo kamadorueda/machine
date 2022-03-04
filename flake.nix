@@ -73,6 +73,7 @@
           ++ (builtins.attrValues (builtins.removeAttrs inputs.self.nixosModules [
             "boot"
             "hardware"
+            "networking"
             "virtualisation"
           ]))
         );
@@ -90,14 +91,12 @@
       qemuKvm = let
         nixosSystem = mkNixosSystem (
           [inputs.nixosGenerators.nixosModules.vm-bootloader]
-          ++ (
-            builtins.attrValues
-            (builtins.removeAttrs inputs.self.nixosModules [
-              "boot"
-              "hardware"
-              "virtualisation"
-            ])
-          )
+          ++ (builtins.attrValues (builtins.removeAttrs inputs.self.nixosModules [
+            "boot"
+            "hardware"
+            "networking"
+            "virtualisation"
+          ]))
         );
       in
         nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
