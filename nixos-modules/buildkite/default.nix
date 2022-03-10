@@ -4,7 +4,7 @@
   ...
 }: let
   baseConfig = {
-    autoStart = true;
+    autoStart = false;
     bindMounts."/secrets/buildkite-token" = {
       hostPath = "${config.secrets.path}/machine/buildkite-token";
     };

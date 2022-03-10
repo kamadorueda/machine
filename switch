@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#! /bin/sh -eu
 
 nix build .#nixosConfigurations.machine.config.system.build.toplevel
 sudo nix-env -p /nix/var/nix/profiles/system --set ./result

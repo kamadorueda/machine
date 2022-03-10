@@ -23,6 +23,7 @@
     nixpkgs.vscode-extensions._4ops.terraform
     nixpkgs.vscode-extensions.bbenoist.nix
     nixpkgs.vscode-extensions.coolbear.systemd-unit-file
+    # nixpkgs.vscode-extensions.daohong-emilio.yash
     nixpkgs.vscode-extensions.eamodio.gitlens
     nixpkgs.vscode-extensions.hashicorp.terraform
     nixpkgs.vscode-extensions.haskell.haskell
