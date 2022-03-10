@@ -26,6 +26,14 @@
     nixpkgs.vscode-extensions.eamodio.gitlens
     nixpkgs.vscode-extensions.hashicorp.terraform
     nixpkgs.vscode-extensions.haskell.haskell
+    (nixpkgs.vscode-utils.buildVscodeMarketplaceExtension {
+      mktplcRef = {
+        publisher = "daohong-emilio";
+        name = "yash";
+        version = "0.2.8";
+        sha256 = "ummOEBSXUI78hBb1AUh+x339T7ocB/evOVaz79geHRM=";
+      };
+    })
     nixpkgs.vscode-extensions.jkillian.custom-local-formatters
     nixpkgs.vscode-extensions.justusadam.language-haskell
     nixpkgs.vscode-extensions.kamadorueda.alejandra
