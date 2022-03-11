@@ -44,6 +44,7 @@
       xdg.userDirs.videos = "/data/xdg/videos";
     };
     programs.dconf.enable = true;
+    services.keybase.enable = true;
     services.xserver.displayManager.autoLogin.enable = true;
     services.xserver.displayManager.autoLogin.user = config.wellKnown.username;
     services.xserver.displayManager.defaultSession = "none+i3";
