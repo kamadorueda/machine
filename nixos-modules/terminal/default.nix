@@ -69,7 +69,6 @@
       init.defaultbranch = "main";
       user.email = config.wellKnown.email;
       user.name = config.wellKnown.name;
-      user.signingkey = config.wellKnown.signingKey;
     };
     programs.vim.enable = true;
     programs.vim.extraConfig = "";

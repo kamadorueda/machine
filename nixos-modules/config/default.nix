@@ -6,6 +6,5 @@
   ui.timezone = "America/Bogota";
   wellKnown.email = "kamadorueda@gmail.com";
   wellKnown.name = "Kevin Amado";
-  wellKnown.signingKey = "FFF341057F503148";
   wellKnown.username = "kamadorueda";
 }

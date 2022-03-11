@@ -9,7 +9,6 @@ in {
     wellKnown.email = strOption;
     wellKnown.home = strOption;
     wellKnown.name = strOption;
-    wellKnown.signingKey = strOption;
     wellKnown.username = strOption;
   };
   config = {wellKnown.home = "/home/${config.wellKnown.username}";};
