@@ -3,10 +3,20 @@
   nixpkgs,
   nixpkgsSrc,
   ...
-}: {
+}: let
+  nixSystem = let
+    package = nixpkgs.nix;
+  in
+    builtins.trace "Nix System: ${package.version}" package;
+
+  nix = let
+    package = nixpkgs.nixUnstable;
+  in
+    builtins.trace "Nix CLI: ${package.version}" package;
+in {
   environment.systemPackages = [
     (nixpkgs.writeShellScriptBin "nix" ''
-      exec ${nixpkgs.nixUnstable}/bin/nix \
+      exec ${nix}/bin/nix \
         --extra-experimental-features nix-command \
         --extra-experimental-features flakes \
         --print-build-logs \
@@ -14,7 +24,7 @@
     '')
   ];
   nix.nixPath = ["nixpkgs=${nixpkgsSrc}"];
-  nix.package = nixpkgs.nix;
+  nix.package = nixSystem;
   nix.readOnlyStore = false;
   nix.registry.nixpkgs = {
     exact = false;
