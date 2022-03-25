@@ -58,6 +58,15 @@
           }
         ];
       }
+      {
+        name = "Rust";
+        children = [
+          {
+            name = "forum";
+            url = "https://users.rust-lang.org";
+          }
+        ];
+      }
     ];
     PasswordManagerEnabled = false;
     ShowAppsShortcutInBookmarkBar = false;

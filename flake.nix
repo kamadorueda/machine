@@ -80,47 +80,47 @@
       in
         nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
 
-      machineJson = let
-        isOption = value:
-          builtins.typeOf value
-          == "set"
-          && builtins.hasAttr "name" value
-          && builtins.hasAttr "description" value
-          && builtins.hasAttr "type" value
-          && builtins.hasAttr "_type" value.type
-          && value.type == "option-type";
+      # machineJson = let
+      #   isOption = value:
+      #     builtins.typeOf value
+      #     == "set"
+      #     && builtins.hasAttr "name" value
+      #     && builtins.hasAttr "description" value
+      #     && builtins.hasAttr "type" value
+      #     && builtins.hasAttr "_type" value.type
+      #     && value.type == "option-type";
 
-        maxDepth = 3;
+      #   maxDepth = 3;
 
-        recurse = path: value:
-          if builtins.typeOf value == "set"
-          then
-            builtins.foldl'
-            (result: name:
-              result
-              // (
-                if isOption value.${name}
-                then {
-                  "${builtins.concatStringsSep "." path}" = value.${name}.value;
-                }
-                else if
-                  builtins.length path
-                  <= maxDepth
-                  && (!isOption value.${name}
-                    || (value.${name}.isDefined
-                      && value.${name}.visible))
-                  && !builtins.elem name ["pkgs"]
-                then builtins.trace "${name}" (recurse (path ++ [name]) value.${name})
-                else {}
-              ))
-            {}
-            (builtins.attrNames value)
-          else {};
+      #   recurse = path: value:
+      #     if builtins.typeOf value == "set"
+      #     then
+      #       builtins.foldl'
+      #       (result: name:
+      #         result
+      #         // (
+      #           if isOption value.${name}
+      #           then {
+      #             "${builtins.concatStringsSep "." path}" = value.${name}.value;
+      #           }
+      #           else if
+      #             builtins.length path
+      #             <= maxDepth
+      #             && (!isOption value.${name}
+      #               || (value.${name}.isDefined
+      #                 && value.${name}.visible))
+      #             && !builtins.elem name ["pkgs"]
+      #           then builtins.trace "${name}" (recurse (path ++ [name]) value.${name})
+      #           else {}
+      #         ))
+      #       {}
+      #       (builtins.attrNames value)
+      #     else {};
 
-        generate = config: recurse [] config.options;
-      in
-        # makes.toFileJson "machine.json"
-        (generate inputs.self.nixosConfigurations.machine);
+      #   generate = config: recurse [] config.options;
+      # in
+      #   # makes.toFileJson "machine.json"
+      #   (generate inputs.self.nixosConfigurations.machine);
 
       qemuKvm = let
         nixosSystem = mkNixosSystem (
