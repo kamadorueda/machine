@@ -61,6 +61,9 @@ in {
       bindMounts."/secrets/coveralls-kamadorueda-alejandra" = {
         hostPath = "${config.secrets.path}/machine/coveralls-kamadorueda-alejandra";
       };
+      bindMounts."/secrets/coveralls-kamadorueda-santiago" = {
+        hostPath = "${config.secrets.path}/machine/coveralls-kamadorueda-santiago";
+      };
       config.services.buildkite-agents.default = {
         hooks.environment = ''
           export PAGER=
@@ -71,6 +74,13 @@ in {
                 main)
                   export CACHIX_AUTH_TOKEN="$(cat /secrets/cachix-auth-token-alejandra)"
                   export COVERALLS_REPO_TOKEN="$(cat /secrets/coveralls-kamadorueda-alejandra)"
+                  ;;
+              esac
+              ;;
+            santiago)
+              case "$BUILDKITE_BRANCH" in
+                main)
+                  export COVERALLS_REPO_TOKEN="$(cat /secrets/coveralls-kamadorueda-santiago)"
                   ;;
               esac
               ;;
