@@ -61,6 +61,9 @@ in {
       bindMounts."/secrets/coveralls-kamadorueda-alejandra" = {
         hostPath = "${config.secrets.path}/machine/coveralls-kamadorueda-alejandra";
       };
+      bindMounts."/secrets/coveralls-kamadorueda-nixel" = {
+        hostPath = "${config.secrets.path}/machine/coveralls-kamadorueda-nixel";
+      };
       bindMounts."/secrets/coveralls-kamadorueda-santiago" = {
         hostPath = "${config.secrets.path}/machine/coveralls-kamadorueda-santiago";
       };
@@ -74,6 +77,13 @@ in {
                 main)
                   export CACHIX_AUTH_TOKEN="$(cat /secrets/cachix-auth-token-alejandra)"
                   export COVERALLS_REPO_TOKEN="$(cat /secrets/coveralls-kamadorueda-alejandra)"
+                  ;;
+              esac
+              ;;
+            nixel)
+              case "$BUILDKITE_BRANCH" in
+                main)
+                  export COVERALLS_REPO_TOKEN="$(cat /secrets/coveralls-kamadorueda-nixel)"
                   ;;
               esac
               ;;
