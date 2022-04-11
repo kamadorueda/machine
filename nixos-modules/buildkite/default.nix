@@ -19,6 +19,9 @@
       nix.settings.max-jobs = 1;
       nix.package = nixpkgs.nixUnstable;
       services.buildkite-agents.default = {
+        extraConfig = ''
+          no-git-submodules = true
+        '';
         hooks.environment = ''
           export PAGER=
         '';
