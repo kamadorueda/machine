@@ -1,0 +1,9 @@
+#! /bin/sh -eu
+
+nix \
+  --extra-experimental-features flakes \
+  --extra-experimental-features nix-command \
+  --verbose \
+  build \
+  --print-build-logs \
+  .#installer

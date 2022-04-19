@@ -1,3 +1,0 @@
-#! /bin/sh -eu
-
-nix -v build .#nixosConfigurations.machine.config.system.build.toplevel

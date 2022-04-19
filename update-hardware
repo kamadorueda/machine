@@ -1,4 +1,5 @@
 #! /usr/bin/env bash
 
-nixos-generate-config --show-hardware-config \
+nixos-generate-config \
+  --show-hardware-config \
   > nixos-modules/hardware/auto-detected.nix
