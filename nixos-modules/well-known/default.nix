@@ -2,14 +2,14 @@
   config,
   lib,
   ...
-}: let
-  strOption = lib.mkOption {type = lib.types.str;};
-in {
+}: {
   options = {
-    wellKnown.email = strOption;
-    wellKnown.home = strOption;
-    wellKnown.name = strOption;
-    wellKnown.username = strOption;
+    wellKnown.email = lib.mkOption {type = lib.types.str;};
+    wellKnown.home = lib.mkOption {type = lib.types.str;};
+    wellKnown.name = lib.mkOption {type = lib.types.str;};
+    wellKnown.username = lib.mkOption {type = lib.types.str;};
   };
-  config = {wellKnown.home = "/home/${config.wellKnown.username}";};
+  config = {
+    wellKnown.home = "/home/${config.wellKnown.username}";
+  };
 }

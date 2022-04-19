@@ -98,9 +98,9 @@
       (parted) set "${number}" esp on
 
       # Setup other partitions
-      (parted) mkpart data "${start}" "${end}" # 50 GiB
-      (parted) mkpart root "${start}" "${end}" # 50 GiB
-      (parted) mkpart nix "${start}" "${end}" # As much as possible
+      (parted) mkpart data "${start}" "${end}" # At least 50 GiB
+      (parted) mkpart root "${start}" "${end}" # At least 50 GiB
+      (parted) mkpart nix "${start}" "${end}" # At least 100GiB
     ```
 
     It should look like this:
@@ -149,10 +149,11 @@
 
     nixos-generate-config --root /mnt
     cat << EOF >> /mnt/etc/nixos/configuration.nix
-      // { boot.loader.efi.canTouchEfiVariables = true;
-          boot.loader.systemd-boot.enable = true;
-          environment.systemPackages = [ pkgs.wpa_supplicant ];
-          services.nscd.enable = true; }
+      // {  boot.kernelPackages = pkgs.linuxPackages_latest;
+            environment.systemPackages = [ pkgs.wpa_supplicant ];
+            hardware.enableAllFirmware = true;
+            nixpkgs.config.allowUnfree = true;
+            services.nscd.enable = true; }
     EOF
     if not_connected_to_the_internet; then
       ip a
@@ -165,8 +166,6 @@
 1.  Install NixOS, step two:
 
     ```bash
-    sudo chown -R $USER /data
-
     if not_connected_to_the_internet; then
       ip a
       wpa_supplicant -B -i "${interface}" -c <(wpa_passphrase "${ssid}" "{psk}")
@@ -175,7 +174,8 @@
     nix-shell -p git just
     git clone https://github.com/kamadorueda/machine
     cd machine
-    just rebuild switch
+    ./build
+    ./switch-to-configuration
     reboot
     ```
 

@@ -50,6 +50,10 @@
     services.xserver.displayManager.defaultSession = "none+i3";
     services.xserver.enable = true;
     services.xserver.exportConfiguration = true;
+    services.xserver.libinput.enable = true;
+    services.xserver.libinput.touchpad.naturalScrolling = true;
+    services.xserver.libinput.touchpad.scrollMethod = "twofinger";
+    services.xserver.libinput.touchpad.tapping = true;
     services.xserver.windowManager.i3.configFile = builtins.toFile "i3.conf" ''
       set $font ${config.ui.font}
       set $fontSize ${builtins.toString config.ui.fontSize}

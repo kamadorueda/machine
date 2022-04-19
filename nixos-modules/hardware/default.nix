@@ -1,23 +1,26 @@
 {
   config,
   lib,
+  nixosHardware,
   nixpkgs,
   ...
-} @ args: let
-  nvidiaPackage = let
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  in
-    builtins.trace "Nvidia driver version: ${package.version}" package;
-in {
-  swapDevices = [
-    {
-      device = "/swap";
-      size = 16384;
-    }
-  ];
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.package = nixpkgs.bluez;
-  hardware.nvidia.package = nvidiaPackage;
-  imports = [./auto-detected.nix];
-  services.xserver.videoDrivers = ["nvidia"];
+}: {
+  options = {
+    hardware.physicalCores = lib.mkOption {type = lib.types.int;};
+  };
+  imports = [nixosHardware.nixosModules.framework];
+  config = {
+    boot.kernelPackages = let
+      packages = nixpkgs.linuxPackages_latest;
+    in
+      builtins.trace "Linux kernel version: ${packages.kernel.version}"
+      packages;
+
+    hardware.enableAllFirmware = true;
+    # hardware.nvidia.package = let
+    #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # in
+    #   builtins.trace "Nvidia driver version: ${package.version}" package;
+    # services.xserver.videoDrivers = ["nvidia"];
+  };
 }

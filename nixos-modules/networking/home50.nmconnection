@@ -1,5 +1,5 @@
 [connection]
-id=503b89add5
+id=SPSETUP-2C38
 uuid=f59149fb-2d8e-4d85-bf22-2987bad620dd
 type=wifi
 autoconnect=true
@@ -8,11 +8,11 @@ permissions=
 [wifi]
 mac-address-blacklist=
 mode=infrastructure
-ssid=503b89add5
+ssid=SPSETUP-2C38
 
 [wifi-security]
 key-mgmt=wpa-psk
-psk=947bd77afe97
+psk=county6079dough
 
 [ipv4]
 dns=1.1.1.1;8.8.8.8;8.8.4.4;

@@ -67,6 +67,11 @@
           }
         ];
       }
+      {
+        name = "University of Calgary";
+        children = [
+        ];
+      }
     ];
     PasswordManagerEnabled = false;
     ShowAppsShortcutInBookmarkBar = false;

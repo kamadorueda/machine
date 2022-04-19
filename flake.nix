@@ -17,6 +17,8 @@
     nixosGenerators.url = "github:nix-community/nixos-generators";
     nixosGenerators.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixosHardware.url = "github:nixos/nixos-hardware/master";
+
     pythonOnNix.url = "github:on-nix/python/main";
     pythonOnNix.inputs.makes.follows = "makes";
     pythonOnNix.inputs.nixpkgs.follows = "nixpkgs";
@@ -30,6 +32,7 @@
         specialArgs = rec {
           alejandra = inputs.alejandra.defaultPackage.${system};
           fenix = inputs.fenix.packages.${system};
+          nixosHardware = inputs.nixosHardware;
           nixpkgs = import inputs.nixpkgs {
             config.allowUnfree = true;
             inherit system;
@@ -45,21 +48,51 @@
   in {
     nixosModules = {
       audio = import ./nixos-modules/audio;
-      boot = import ./nixos-modules/boot;
+
       browser = import ./nixos-modules/browser;
+
       buildkite = import ./nixos-modules/buildkite;
-      config = import ./nixos-modules/config;
+
       editor = import ./nixos-modules/editor;
+
       hardware = import ./nixos-modules/hardware;
+      hardwareConfig = {
+        hardware.physicalCores = 4;
+      };
+
       homeManager = inputs.homeManager.nixosModule;
+
       networking = import ./nixos-modules/networking;
+
       nix = import ./nixos-modules/nix;
+
       secrets = import ./nixos-modules/secrets;
+      secretsConfig = {
+        secrets.hashedPassword =
+          # mkpasswd -m sha-512
+          "$6$qQYhouD2P24RYK1H$Oc9BI/2wC7uydLXP5taS7LQgpTUbORwty/0sAGtwial7k9ZYQOmeyjZ5DxvmObdccPJHem2N/.afn/JtCJ2af.";
+        secrets.path = "/data/secrets";
+      };
+
+      system = import ./nixos-modules/system;
+
       terminal = import ./nixos-modules/terminal;
+
       ui = import ./nixos-modules/ui;
+      uiConfig = {
+        ui.timezone = "America/Edmonton";
+      };
+
       users = import ./nixos-modules/users;
+
       virtualisation = import ./nixos-modules/virtualisation;
+
       wellKnown = import ./nixos-modules/well-known;
+      wellKnownConfig = {
+        wellKnown.email = "kamadorueda@gmail.com";
+        wellKnown.name = "Kevin Amado";
+        wellKnown.username = "kamadorueda";
+      };
     };
 
     nixosConfigurations = {
@@ -67,71 +100,15 @@
     };
 
     packages."x86_64-linux" = {
-      isoInstaller = let
-        nixosSystem = mkNixosSystem (
-          [inputs.nixosGenerators.nixosModules.install-iso]
-          ++ (builtins.attrValues (builtins.removeAttrs inputs.self.nixosModules [
-            "boot"
-            "hardware"
-            "networking"
-            "virtualisation"
-          ]))
-        );
-      in
-        nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
-
-      # machineJson = let
-      #   isOption = value:
-      #     builtins.typeOf value
-      #     == "set"
-      #     && builtins.hasAttr "name" value
-      #     && builtins.hasAttr "description" value
-      #     && builtins.hasAttr "type" value
-      #     && builtins.hasAttr "_type" value.type
-      #     && value.type == "option-type";
-
-      #   maxDepth = 3;
-
-      #   recurse = path: value:
-      #     if builtins.typeOf value == "set"
-      #     then
-      #       builtins.foldl'
-      #       (result: name:
-      #         result
-      #         // (
-      #           if isOption value.${name}
-      #           then {
-      #             "${builtins.concatStringsSep "." path}" = value.${name}.value;
-      #           }
-      #           else if
-      #             builtins.length path
-      #             <= maxDepth
-      #             && (!isOption value.${name}
-      #               || (value.${name}.isDefined
-      #                 && value.${name}.visible))
-      #             && !builtins.elem name ["pkgs"]
-      #           then builtins.trace "${name}" (recurse (path ++ [name]) value.${name})
-      #           else {}
-      #         ))
-      #       {}
-      #       (builtins.attrNames value)
-      #     else {};
-
-      #   generate = config: recurse [] config.options;
-      # in
-      #   # makes.toFileJson "machine.json"
-      #   (generate inputs.self.nixosConfigurations.machine);
-
-      qemuKvm = let
-        nixosSystem = mkNixosSystem (
-          [inputs.nixosGenerators.nixosModules.vm-bootloader]
-          ++ (builtins.attrValues (builtins.removeAttrs inputs.self.nixosModules [
-            "boot"
-            "hardware"
-            "networking"
-            "virtualisation"
-          ]))
-        );
+      installer = let
+        nixosSystem = mkNixosSystem [
+          inputs.nixosGenerators.nixosModules.install-iso
+          inputs.self.nixosModules.hardware
+          inputs.self.nixosModules.hardwareConfig
+          inputs.self.nixosModules.nix
+          inputs.self.nixosModules.wellKnown
+          inputs.self.nixosModules.wellKnownConfig
+        ];
       in
         nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
     };

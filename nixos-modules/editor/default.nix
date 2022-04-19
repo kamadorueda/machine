@@ -23,24 +23,16 @@
     nixpkgs.vscode-extensions._4ops.terraform
     nixpkgs.vscode-extensions.bbenoist.nix
     nixpkgs.vscode-extensions.coolbear.systemd-unit-file
-    # nixpkgs.vscode-extensions.daohong-emilio.yash
+    nixpkgs.vscode-extensions.daohong-emilio.yash
     nixpkgs.vscode-extensions.eamodio.gitlens
     nixpkgs.vscode-extensions.hashicorp.terraform
     nixpkgs.vscode-extensions.haskell.haskell
-    (nixpkgs.vscode-utils.buildVscodeMarketplaceExtension {
-      mktplcRef = {
-        publisher = "daohong-emilio";
-        name = "yash";
-        version = "0.2.8";
-        sha256 = "ummOEBSXUI78hBb1AUh+x339T7ocB/evOVaz79geHRM=";
-      };
-    })
     nixpkgs.vscode-extensions.jkillian.custom-local-formatters
     nixpkgs.vscode-extensions.justusadam.language-haskell
     nixpkgs.vscode-extensions.kamadorueda.alejandra
     nixpkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
     nixpkgs.vscode-extensions.ms-python.python
-    nixpkgs.vscode-extensions.ms-python.vscode-pylance
+    # nixpkgs.vscode-extensions.ms-python.vscode-pylance
     nixpkgs.vscode-extensions.ms-toolsai.jupyter
     nixpkgs.vscode-extensions.ms-toolsai.jupyter-renderers
     nixpkgs.vscode-extensions.ms-vscode-remote.remote-ssh
