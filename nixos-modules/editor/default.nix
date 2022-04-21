@@ -135,14 +135,15 @@
     "editor.fontLigatures" = false;
     "editor.fontSize" = config.ui.fontSize;
     "editor.guides.bracketPairs" = "active";
+    "editor.minimap.enabled" = false;
     "editor.minimap.maxColumn" = 80;
-    "editor.minimap.renderCharacters" = false;
+    "editor.minimap.renderCharacters" = true;
     "editor.minimap.showSlider" = "always";
     "editor.minimap.side" = "left";
     "editor.minimap.size" = "fill";
     "editor.rulers" = [80];
     "editor.tabSize" = 2;
-    "editor.wordWrap" = "on";
+    "editor.wordWrap" = "off";
     "explorer.confirmDelete" = false;
     "explorer.confirmDragAndDrop" = false;
     "extensions.autoUpdate" = false;
@@ -177,7 +178,8 @@
     "telemetry.telemetryLevel" = "off";
     "update.mode" = "none";
     "update.showReleaseNotes" = false;
-    "window.zoomLevel" = 2;
+    "window.zoomLevel" = 3;
+    "workbench.activityBar.visible" = false;
     "workbench.colorTheme" = "Default High Contrast";
     "workbench.editor.enablePreview" = false;
     "workbench.editor.focusRecentEditorAfterClose" = false;

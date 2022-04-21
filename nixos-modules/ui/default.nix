@@ -66,6 +66,5 @@
     services.xserver.xkbVariant = "altgr-intl";
     time.timeZone = config.ui.timezone;
     ui.font = "JetBrains Mono";
-    ui.fontSize = 14;
   };
 }

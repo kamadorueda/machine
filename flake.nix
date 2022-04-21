@@ -80,6 +80,7 @@
 
       ui = import ./nixos-modules/ui;
       uiConfig = {
+        ui.fontSize = 16;
         ui.timezone = "America/Edmonton";
       };
 
