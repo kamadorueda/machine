@@ -70,6 +70,9 @@ in {
       bindMounts."/secrets/coveralls-kamadorueda-santiago" = {
         hostPath = "${config.secrets.path}/machine/coveralls-kamadorueda-santiago";
       };
+      bindMounts."/secrets/coveralls-kamadorueda-toros" = {
+        hostPath = "${config.secrets.path}/machine/coveralls-kamadorueda-toros";
+      };
       config.services.buildkite-agents.default = {
         hooks.environment = ''
           export PAGER=
@@ -94,6 +97,13 @@ in {
               case "$BUILDKITE_BRANCH" in
                 main)
                   export COVERALLS_REPO_TOKEN="$(cat /secrets/coveralls-kamadorueda-santiago)"
+                  ;;
+              esac
+              ;;
+            toros)
+              case "$BUILDKITE_BRANCH" in
+                main)
+                  export COVERALLS_REPO_TOKEN="$(cat /secrets/coveralls-kamadorueda-toros)"
                   ;;
               esac
               ;;
