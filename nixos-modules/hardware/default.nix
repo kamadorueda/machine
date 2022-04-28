@@ -13,7 +13,7 @@
     boot.kernelPackages = let
       packages = nixpkgs.linuxPackages_latest;
     in
-      builtins.trace "Linux kernel version: ${packages.kernel.version}"
+      builtins.trace "Linux: ${packages.kernel.version}"
       packages;
 
     hardware.enableAllFirmware = true;

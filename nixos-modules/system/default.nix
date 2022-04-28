@@ -10,8 +10,7 @@
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.useOSProber = true;
   boot.loader.timeout = 60;
-  # hardware.bluetooth.enable = true;
-  # hardware.bluetooth.package = nixpkgs.bluezFull;
+  hardware.bluetooth.enable = true;
   imports = [./auto-detected.nix];
   swapDevices = [
     {
