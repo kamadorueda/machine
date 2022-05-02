@@ -6,7 +6,7 @@
   baseConfig = {
     autoStart = false;
     bindMounts."/secrets/buildkite-token" = {
-      hostPath = "${config.secrets.path}/machine/buildkite-token";
+      hostPath = "${config.secrets.path}/buildkite-token";
     };
     bindMounts."/data/nixpkgs" = {
       hostPath = "/data/nixpkgs";
@@ -59,19 +59,19 @@ in {
     baseConfig
     {
       bindMounts."/secrets/cachix-auth-token-alejandra" = {
-        hostPath = "${config.secrets.path}/machine/cachix-auth-token-alejandra";
+        hostPath = "${config.secrets.path}/cachix-auth-token-alejandra";
       };
       bindMounts."/secrets/coveralls-kamadorueda-alejandra" = {
-        hostPath = "${config.secrets.path}/machine/coveralls-kamadorueda-alejandra";
+        hostPath = "${config.secrets.path}/coveralls-kamadorueda-alejandra";
       };
       bindMounts."/secrets/coveralls-kamadorueda-nixel" = {
-        hostPath = "${config.secrets.path}/machine/coveralls-kamadorueda-nixel";
+        hostPath = "${config.secrets.path}/coveralls-kamadorueda-nixel";
       };
       bindMounts."/secrets/coveralls-kamadorueda-santiago" = {
-        hostPath = "${config.secrets.path}/machine/coveralls-kamadorueda-santiago";
+        hostPath = "${config.secrets.path}/coveralls-kamadorueda-santiago";
       };
       bindMounts."/secrets/coveralls-kamadorueda-toros" = {
-        hostPath = "${config.secrets.path}/machine/coveralls-kamadorueda-toros";
+        hostPath = "${config.secrets.path}/coveralls-kamadorueda-toros";
       };
       config.services.buildkite-agents.default = {
         hooks.environment = ''

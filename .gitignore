@@ -1,1 +1,3 @@
 /result*
+/secrets/gpg/home/
+/secrets/gpg/pubring.kbx

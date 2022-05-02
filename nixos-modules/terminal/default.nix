@@ -79,6 +79,6 @@
   };
   programs.bash.interactiveShellInit = ''
     export DIRENV_WARN_TIMEOUT=1h
-    ssh-add ${config.secrets.path}/machine/ssh/kamadorueda
+    ssh-add ${config.secrets.path}/ssh/kamadorueda
   '';
 }
