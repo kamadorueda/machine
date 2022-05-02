@@ -1,4 +1,9 @@
 {config, ...}: {
+  environment.etc."NetworkManager/system-connections/airuc-secure.nmconnection" = {
+    enable = true;
+    mode = "0400";
+    source = "${config.secrets.path}/machine/airuc-secure.nmconnection";
+  };
   environment.etc."NetworkManager/system-connections/eduroam.nmconnection" = {
     enable = true;
     mode = "0400";

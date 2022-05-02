@@ -17,6 +17,7 @@
   };
   environment.systemPackages = [
     nixpkgs.coreutils
+    nixpkgs.git-crypt
     nixpkgs.gnugrep
     nixpkgs.parted
     nixpkgs.shadow

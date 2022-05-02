@@ -70,6 +70,14 @@
       {
         name = "University of Calgary";
         children = [
+          {
+            name = "Main";
+            url = "https://my.ucalgary.ca";
+          }
+          {
+            name = "Gym";
+            url = "https://active-living.ucalgary.ca/facilities/fitness-centre";
+          }
         ];
       }
     ];
