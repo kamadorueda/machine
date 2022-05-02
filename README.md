@@ -1,18 +1,36 @@
 # My development machine, as code
 
-- Powered by [NixOS](https://nixos.org/) and four partitions:
-  - `/`, ephemeral, **erased** at every boot.
-  - `/nix`, persistent, mounted as **read-only** for maximum immutability.
-  - `/data`, persistent, and backed up regularly.
-  - `/boot`, config files that start the system.
-- With the [Latest stable Linux Kernel](https://www.kernel.org/).
-- With [Nvidia](https://www.nvidia.com/) support.
-- With [Multi-booting](https://en.wikipedia.org/wiki/Multi-booting) support.
+This repository contains
+everything that is needed
+to create a clone of my operative system,
+Exactly as I use it every day.
+
+This is roughly a [NixOS](https://nixos.org/) with four partitions:
+
+- `/`, encrypted, ephemeral,
+  [**erased** at every boot](https://grahamc.com/blog/erase-your-darlings).
+- `/nix`, encrypted, persistent,
+  but mounted as **read-only** for maximum immutability.
+- `/data`, encrypted, persistent,
+  and backed up regularly.
+- `/boot`, an initial RAM disk to bootstrap the kernel and start the system.
+
+This system also has:
+
+- The [Latest stable Linux Kernel](https://www.kernel.org/),
+  updated regularly to avoid running a system with [known publicly disclosed cybersecurity vulnerabilities](https://cve.mitre.org/).
+- [Nvidia](https://www.nvidia.com/) drivers.
+- [Multi-booting](https://en.wikipedia.org/wiki/Multi-booting) support.
 
 ## Setup
 
 1.  Download `NixOS minimal ISO image` from the
     [NixOS's download page](https://nixos.org/download).
+    Or build from source code by cloning the repository and running:
+
+    ```bash
+    $ ./build-installer
+    ```
 
 1.  Burn it into a USB stick.
 
@@ -174,7 +192,7 @@
     nix-shell -p git just
     git clone https://github.com/kamadorueda/machine
     cd machine
-    ./build
+    ./build-system
     ./switch-to-configuration
     reboot
     ```
