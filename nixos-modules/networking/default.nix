@@ -1,18 +1,18 @@
 {config, ...}: {
-  environment.etc."NetworkManager/system-connections/airuc-secure.nmconnection" = {
+  environment.etc."NetworkManager/system-connections/wifi-airuc-secure" = {
     enable = true;
     mode = "0400";
-    source = "${config.secrets.path}/airuc-secure.nmconnection";
+    source = "${config.secrets.path}/wifi-airuc-secure";
   };
-  environment.etc."NetworkManager/system-connections/eduroam.nmconnection" = {
+  environment.etc."NetworkManager/system-connections/wifi-eduroam" = {
     enable = true;
     mode = "0400";
-    source = "${config.secrets.path}/eduroam.nmconnection";
+    source = "${config.secrets.path}/wifi-eduroam";
   };
-  environment.etc."NetworkManager/system-connections/SPSETUP-2C38.nmconnection" = {
+  environment.etc."NetworkManager/system-connections/wifi-SPSETUP-2C38" = {
     enable = true;
     mode = "0400";
-    source = "${config.secrets.path}/spsetup-2c38.nmconnection";
+    source = "${config.secrets.path}/wifi-spsetup-2c38";
   };
   networking.networkmanager.enable = true;
   users.users.${config.wellKnown.username}.extraGroups = ["networkmanager"];
