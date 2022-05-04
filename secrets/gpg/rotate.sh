@@ -1,6 +1,6 @@
 #! /bin/sh -eux
 
-pushd secrets/gpg/
+cd secrets/gpg/
 
 rm -rf home
 mkdir home
