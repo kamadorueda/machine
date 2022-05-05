@@ -32,10 +32,11 @@
     nixpkgs.vscode-extensions.kamadorueda.alejandra
     nixpkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
     nixpkgs.vscode-extensions.ms-python.python
-    # nixpkgs.vscode-extensions.ms-python.vscode-pylance
+    nixpkgs.vscode-extensions.ms-python.vscode-pylance
     nixpkgs.vscode-extensions.ms-toolsai.jupyter
     nixpkgs.vscode-extensions.ms-toolsai.jupyter-renderers
     nixpkgs.vscode-extensions.ms-vscode-remote.remote-ssh
+    nixpkgs.vscode-extensions.redhat.java
     nixpkgs.vscode-extensions.shardulm94.trailing-spaces
     nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
     nixpkgs.vscode-extensions.tamasfe.even-better-toml
@@ -56,6 +57,10 @@
       {
         command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser html";
         languages = ["html"];
+      }
+      {
+        command = "${nixpkgs.google-java-format}/bin/google-java-format -";
+        languages = ["java"];
       }
       {
         command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser babel";
