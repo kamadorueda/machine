@@ -2,7 +2,7 @@
   environment.systemPackages = [nixpkgs.google-chrome];
   programs.chromium.enable = true;
   programs.chromium.extensions = [
-    "pjbgfifennfhnbkhoidkdchbflppjncb" # Dark Mode for Chrome
+    # "pjbgfifennfhnbkhoidkdchbflppjncb" # Dark Mode for Chrome
     "clpapnmmlmecieknddelobgikompchkk" # Disable Automatic Gain Control
     "hdokiejnpimakedhajhdlcegeplioahd" # LastPass: Free Password Manager
   ];
