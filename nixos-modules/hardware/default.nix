@@ -16,6 +16,7 @@
       builtins.trace "Linux: ${packages.kernel.version}"
       packages;
 
+    hardware.bluetooth.enable = true;
     hardware.enableAllFirmware = true;
     # hardware.nvidia.package = let
     #   package = config.boot.kernelPackages.nvidiaPackages.stable;

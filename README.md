@@ -3,7 +3,7 @@
 This repository contains
 everything that is needed
 to create a clone of my operative system,
-Exactly as I use it every day.
+exactly as I use it every day.
 
 This is roughly a [NixOS](https://nixos.org/) with four partitions:
 
@@ -15,12 +15,45 @@ This is roughly a [NixOS](https://nixos.org/) with four partitions:
   and backed up regularly.
 - `/boot`, an initial RAM disk to bootstrap the kernel and start the system.
 
-This system also has:
+This system has:
 
-- The [Latest stable Linux Kernel](https://www.kernel.org/),
+- The [latest stable Linux Kernel](https://www.kernel.org/),
   updated regularly to avoid running a system with [known publicly disclosed cybersecurity vulnerabilities](https://cve.mitre.org/).
 - [Nvidia](https://www.nvidia.com/) drivers.
 - [Multi-booting](https://en.wikipedia.org/wiki/Multi-booting) support.
+
+In general, the system is made out of the following components:
+
+- [audio](./nixos-modules/audio/default.nix):
+  Specification of the sound system and controllers.
+- [browser](./nixos-modules/browser/default.nix):
+  Web browser, extensions, and bookmarks.
+- [buildkite](./nixos-modules/buildkite/default.nix):
+  Some https://buildkite.com/ agents that run in my computer
+  and serve as CI/CD of my open source projects.
+- [editor](./nixos-modules/editor/default.nix):
+  My code editor, extensions, theme, keyboard shortcuts, etc.
+- [hardware](./nixos-modules/hardware/default.nix):
+  Kernel, drivers, and firmware.
+- [networking](./nixos-modules/networking/default.nix):
+  Wifi settings, mostly.
+- [nix](./nixos-modules/nix/default.nix):
+  Configurations of the Nix daemon that powers this machine.
+- [secrets](./nixos-modules/secrets/default.nix):
+  SSH, GPG, system password and secrets locations.
+- [system](./nixos-modules/system/default.nix):
+  Boot loader and external devices identifiers (disks, swap, etc).
+- [terminal](./nixos-modules/terminal/default.nix):
+  My terminal configuration, shell aliases, installed packages,
+  and so on.
+- [ui](./nixos-modules/ui/default.nix):
+  The window manager, fonts, and graphical elements.
+- [users](./nixos-modules/users/default.nix):
+  Admin and user accounts.
+- [virtualisation](./nixos-modules/virtualisation/default.nix):
+  Containers, virtual machines and emulated architectures.
+- [well-known](./nixos-modules/well-known/default.nix):
+  My name, username and email.
 
 ## Setup
 
