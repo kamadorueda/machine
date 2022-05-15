@@ -5,9 +5,6 @@
   nixpkgs,
   ...
 }: {
-  options = {
-    hardware.physicalCores = lib.mkOption {type = lib.types.int;};
-  };
   imports = [nixosHardware.nixosModules.framework];
   config = {
     boot.kernelPackages = let
@@ -18,10 +15,12 @@
 
     hardware.bluetooth.enable = true;
     hardware.enableAllFirmware = true;
-    # hardware.nvidia.package = let
-    #   package = config.boot.kernelPackages.nvidiaPackages.stable;
-    # in
-    #   builtins.trace "Nvidia driver version: ${package.version}" package;
+    hardware.nvidia.package = let
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    in
+      builtins.trace "Nvidia driver version: ${package.version}" package;
     # services.xserver.videoDrivers = ["nvidia"];
+    hardware.pulseaudio.enable = true;
+    services.gnome.at-spi2-core.enable = true;
   };
 }

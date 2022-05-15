@@ -24,9 +24,7 @@
     exact = false;
     flake = nixpkgsSrc;
   };
-  nix.settings.cores =
-    config.hardware.physicalCores
-    / config.nix.settings.max-jobs;
+  nix.settings.cores = 0;
   nix.settings.max-jobs = 1;
   nix.settings.substituters = ["https://nix-community.cachix.org"];
   nix.settings.trusted-public-keys = ["nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="];

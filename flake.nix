@@ -46,7 +46,7 @@
         specialArgs = rec {
           alejandra = inputs.alejandra.defaultPackage.${system};
           fenix = inputs.fenix.packages.${system};
-          nixosHardware = inputs.nixosHardware;
+          inherit (inputs) nixosHardware;
           inherit nixpkgs;
           inherit nixpkgsSrc;
           makes = import "${inputs.makes}/src/args/agnostic.nix" {inherit system;};
@@ -58,18 +58,13 @@
       };
   in {
     nixosModules = {
-      audio = import ./nixos-modules/audio;
-
       browser = import ./nixos-modules/browser;
 
       buildkite = import ./nixos-modules/buildkite;
 
-      editor = import ./nixos-modules/editor;
+      controllers = import ./nixos-modules/controllers;
 
-      hardware = import ./nixos-modules/hardware;
-      hardwareConfig = {
-        hardware.physicalCores = 4;
-      };
+      editor = import ./nixos-modules/editor;
 
       homeManager = inputs.homeManager.nixosModule;
 
@@ -85,7 +80,7 @@
         secrets.path = "/data/machine/secrets";
       };
 
-      system = import ./nixos-modules/system;
+      physical = import ./nixos-modules/physical;
 
       terminal = import ./nixos-modules/terminal;
 
@@ -97,7 +92,7 @@
 
       users = import ./nixos-modules/users;
 
-      virtualisation = import ./nixos-modules/virtualisation;
+      virtualization = import ./nixos-modules/virtualization;
 
       wellKnown = import ./nixos-modules/well-known;
       wellKnownConfig = {
@@ -115,8 +110,7 @@
       installer = let
         nixosSystem = mkNixosSystem [
           inputs.nixosGenerators.nixosModules.install-iso
-          inputs.self.nixosModules.hardware
-          inputs.self.nixosModules.hardwareConfig
+          inputs.self.nixosModules.controllers
           inputs.self.nixosModules.nix
           inputs.self.nixosModules.wellKnown
           inputs.self.nixosModules.wellKnownConfig
