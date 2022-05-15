@@ -33,6 +33,7 @@
       gtk.font.name = config.ui.font;
       gtk.font.size = config.ui.fontSize;
       xdg.enable = true;
+      xdg.userDirs.createDirectories = true;
       xdg.userDirs.enable = true;
       xdg.userDirs.desktop = "/data/xdg/desktop";
       xdg.userDirs.documents = "/data/xdg/documents";
