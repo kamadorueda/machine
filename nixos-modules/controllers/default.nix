@@ -14,7 +14,10 @@
       packages;
 
     hardware.bluetooth.enable = true;
-    hardware.enableAllFirmware = true;
+    hardware.firmware = [
+      nixpkgs.linux-firmware
+      nixpkgs.wireless-regdb
+    ];
     hardware.nvidia.package = let
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     in
