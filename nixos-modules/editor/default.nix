@@ -12,7 +12,7 @@
   extensionsDir = "/data/vscode/extensions";
   userDataDir = "/data/vscode/data";
   bin = builtins.concatStringsSep " " [
-    "${nixpkgs.vscode}/bin/code"
+    "${nixpkgs.vscodium}/bin/codium"
     "--extensions-dir"
     extensionsDir
     "--user-data-dir"
@@ -32,10 +32,10 @@
     nixpkgs.vscode-extensions.kamadorueda.alejandra
     nixpkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
     nixpkgs.vscode-extensions.ms-python.python
-    nixpkgs.vscode-extensions.ms-python.vscode-pylance
+    nixpkgs.vscode-extensions.ms-python.vscode-pylance # unfree
     nixpkgs.vscode-extensions.ms-toolsai.jupyter
     nixpkgs.vscode-extensions.ms-toolsai.jupyter-renderers
-    nixpkgs.vscode-extensions.ms-vscode-remote.remote-ssh
+    nixpkgs.vscode-extensions.ms-vscode-remote.remote-ssh # unfree
     nixpkgs.vscode-extensions.redhat.java
     nixpkgs.vscode-extensions.shardulm94.trailing-spaces
     nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
@@ -178,7 +178,6 @@
     "python.linting.prospectorEnabled" = true;
     "python.linting.prospectorPath" = "${pythonOnNix.prospector-latest-python39-bin}/bin/prospector";
     "python.linting.pylintEnabled" = false;
-    "python.pythonPath" = "${nixpkgs.python38}/bin/python";
     "security.workspace.trust.enabled" = false;
     "telemetry.telemetryLevel" = "off";
     "update.mode" = "none";
@@ -195,7 +194,7 @@
 in {
   environment.variables.EDITOR = bin;
   environment.systemPackages = [
-    (nixpkgs.writeShellScriptBin "code" ''
+    (nixpkgs.writeShellScriptBin "editor" ''
       export PATH="${fenix.latest.toolchain}/bin:$PATH"
       exec ${bin} "$@"
     '')

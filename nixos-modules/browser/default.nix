@@ -1,8 +1,11 @@
 {nixpkgs, ...}: {
-  environment.systemPackages = [nixpkgs.google-chrome];
+  environment.systemPackages = [
+    (nixpkgs.writeShellScriptBin "browser" ''
+      exec ${nixpkgs.brave}/bin/brave "$@"
+    '')
+  ];
   programs.chromium.enable = true;
   programs.chromium.extensions = [
-    # "pjbgfifennfhnbkhoidkdchbflppjncb" # Dark Mode for Chrome
     "clpapnmmlmecieknddelobgikompchkk" # Disable Automatic Gain Control
     "hdokiejnpimakedhajhdlcegeplioahd" # LastPass: Free Password Manager
   ];
