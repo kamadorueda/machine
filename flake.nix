@@ -3,12 +3,10 @@
     alejandra.url = "github:kamadorueda/alejandra";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
 
-    # foo
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
-    # bar
 
     homeManager.url = "github:nix-community/home-manager/master";
     homeManager.inputs.nixpkgs.follows = "nixpkgs";
