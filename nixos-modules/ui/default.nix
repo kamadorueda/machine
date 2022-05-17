@@ -60,6 +60,8 @@
       set $fontSize ${builtins.toString config.ui.fontSize}
       set $i3status_conf ${./i3status.conf}
 
+      font pango:$font $fontSize
+
       include ${./i3.conf}
     '';
     services.xserver.windowManager.i3.enable = true;
