@@ -17,6 +17,8 @@
       '';
       nix.settings.cores = 1;
       nix.settings.max-jobs = 1;
+      nix.settings.substituters = config.nix.settings.substituters;
+      nix.settings.trusted-public-keys = config.nix.settings.trusted-public-keys;
       nix.package = nixpkgs.nixUnstable;
       services.buildkite-agents.default = {
         extraConfig = ''
