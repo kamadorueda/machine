@@ -6,6 +6,7 @@
   ];
   programs.chromium.enable = true;
   programs.chromium.extensions = [
+    "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly: Grammar Checker and Writing App
     "clpapnmmlmecieknddelobgikompchkk" # Disable Automatic Gain Control
     "hdokiejnpimakedhajhdlcegeplioahd" # LastPass: Free Password Manager
   ];
