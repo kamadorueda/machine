@@ -12,7 +12,7 @@
   extensionsDir = "/data/vscode/extensions";
   userDataDir = "/data/vscode/data";
   bin = builtins.concatStringsSep " " [
-    "${nixpkgs.vscodium}/bin/codium"
+    "${nixpkgs.vscode}/bin/code" # unfree
     "--extensions-dir"
     extensionsDir
     "--user-data-dir"
