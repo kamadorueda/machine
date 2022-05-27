@@ -3,7 +3,7 @@
   users.users.${config.wellKnown.username}.extraGroups = ["docker" "vboxusers"];
   virtualisation.docker.enable = true;
   virtualisation.virtualbox.guest.enable = false;
-  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enable = false;
   boot.binfmt.emulatedSystems = [
     "aarch64-linux"
     "armv6l-linux"
