@@ -15,6 +15,9 @@
     BookmarkBarEnabled = true;
     BrowserSignin = 0;
     DefaultBrowserSettingEnabled = false;
+    DefaultSearchProviderEnabled = true;
+    DefaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
+    HighContrastEnabled = true;
     ManagedBookmarks = [
       {toplevel_name = "Links";}
       {
