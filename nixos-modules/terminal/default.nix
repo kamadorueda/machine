@@ -71,11 +71,6 @@
       user.email = config.wellKnown.email;
       user.name = config.wellKnown.name;
     };
-    programs.vim.enable = true;
-    programs.vim.extraConfig = "";
-    programs.vim.plugins = [];
-    programs.vim.settings.background = "dark";
-    programs.vim.settings.mouse = "a";
   };
   programs.bash.interactiveShellInit = ''
     export DIRENV_WARN_TIMEOUT=1h
