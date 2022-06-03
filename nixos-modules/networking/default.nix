@@ -1,19 +1,30 @@
-{config, ...}: {
-  environment.etc."NetworkManager/system-connections/wifi-airuc-secure.nmconnection" = {
-    enable = true;
-    mode = "0400";
-    source = "${config.secrets.path}/wifi-airuc-secure";
-  };
-  environment.etc."NetworkManager/system-connections/wifi-eduroam.nmconnection" = {
-    enable = true;
-    mode = "0400";
-    source = "${config.secrets.path}/wifi-eduroam";
-  };
-  environment.etc."NetworkManager/system-connections/wifi-spsetup-2c38.nmconnection" = {
-    enable = true;
-    mode = "0400";
-    source = "${config.secrets.path}/wifi-spsetup-2c38";
-  };
+{
+  config,
+  nixpkgs,
+  ...
+}: {
   networking.networkmanager.enable = true;
+  systemd.services.NetworkManagerSecrets = {
+    description = "Put NetworkManager secrets in place";
+    script = ''
+      set -x
+      export PATH=${nixpkgs.lib.makeBinPath [nixpkgs.coreutils]}
+
+      mkdir -p /etc/NetworkManager/system-connections
+      cd /etc/NetworkManager/system-connections
+
+      for connection in \
+        wifi-airuc-secure \
+        wifi-eduroam \
+        wifi-spsetup-2c38 \
+
+      do
+        cp ${config.secrets.path}/$connection $connection
+        chmod 400 $connection
+      done
+    '';
+    serviceConfig.Type = "oneshot";
+    wantedBy = ["NetworkManager.service"];
+  };
   users.users.${config.wellKnown.username}.extraGroups = ["networkmanager"];
 }

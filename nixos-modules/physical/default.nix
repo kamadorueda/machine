@@ -20,7 +20,6 @@
       ${nixpkgs.utillinux}/bin/mount /dev/disk/by-label/root /tmp/root
       rm -fr /tmp/root/*
       ${nixpkgs.utillinux}/bin/umount /tmp/root
-      sleep 10
     '';
     swapDevices = [
       {
