@@ -5,11 +5,6 @@
     '')
   ];
   programs.chromium.enable = true;
-  programs.chromium.extensions = [
-    "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly: Grammar Checker and Writing App
-    "clpapnmmlmecieknddelobgikompchkk" # Disable Automatic Gain Control
-    "hdokiejnpimakedhajhdlcegeplioahd" # LastPass: Free Password Manager
-  ];
   # https://chromeenterprise.google/policies/
   programs.chromium.extraOpts = {
     BookmarkBarEnabled = true;
@@ -17,7 +12,13 @@
     DefaultBrowserSettingEnabled = false;
     DefaultSearchProviderEnabled = true;
     DefaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
+    ExtensionInstallForcelist = [
+      "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly: Grammar Checker and Writing App
+      "clpapnmmlmecieknddelobgikompchkk" # Disable Automatic Gain Control
+      "hdokiejnpimakedhajhdlcegeplioahd" # LastPass: Free Password Manager
+    ];
     HighContrastEnabled = true;
+    ImportBookmarks = false;
     ManagedBookmarks = [
       {toplevel_name = "Links";}
       {
@@ -90,5 +91,6 @@
     ];
     PasswordManagerEnabled = false;
     ShowAppsShortcutInBookmarkBar = false;
+    SyncDisabled = true;
   };
 }
