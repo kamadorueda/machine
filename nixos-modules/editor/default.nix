@@ -137,7 +137,7 @@
     "editor.formatOnSave" = true;
     "editor.formatOnType" = false;
     "editor.fontFamily" = config.ui.font;
-    "editor.fontLigatures" = false;
+    "editor.fontLigatures" = true;
     "editor.fontSize" = config.ui.fontSize;
     "editor.guides.bracketPairs" = "active";
     "editor.minimap.enabled" = false;
