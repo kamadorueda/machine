@@ -101,11 +101,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1654293986,
-        "narHash": "sha256-d1/nw7Pcwzc6DmC8S3ga/qPS36QmU9ocY4xjjTZw5wY=",
+        "lastModified": 1654530575,
+        "narHash": "sha256-2Qr3wGw009SHa/NFHYLZUQkoYyuxsSn6H1enjH5Ndtw=",
         "owner": "fluidattacks",
         "repo": "makes",
-        "rev": "0edb0dfb97dceed37fc785209b3a9732abbe752c",
+        "rev": "0ae2a40965eadcc19f6b9988d2ab1401fe665d70",
         "type": "github"
       },
       "original": {
