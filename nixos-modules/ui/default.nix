@@ -27,13 +27,16 @@
         exec ${nixpkgs.pavucontrol}/bin/pavucontrol "$@"
       '')
     ];
-    fonts.fontconfig.defaultFonts.emoji = [config.ui.font];
+    fonts.fontconfig.defaultFonts.emoji = ["Fira Code Symbol"];
     fonts.fontconfig.defaultFonts.monospace = [config.ui.font];
     fonts.fontconfig.defaultFonts.sansSerif = [config.ui.font];
     fonts.fontconfig.defaultFonts.serif = [config.ui.font];
     fonts.fontconfig.enable = true;
     fonts.enableDefaultFonts = false;
-    fonts.fonts = [nixpkgs.fira-code];
+    fonts.fonts = [
+      nixpkgs.fira-code
+      nixpkgs.fira-code-symbols
+    ];
     home-manager.users.${config.wellKnown.username} = {
       gtk.enable = true;
       gtk.font.name = config.ui.font;
