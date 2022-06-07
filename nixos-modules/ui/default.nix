@@ -27,17 +27,23 @@
         exec ${nixpkgs.pavucontrol}/bin/pavucontrol "$@"
       '')
     ];
-    fonts.fonts = [nixpkgs.jetbrains-mono];
+    fonts.fontconfig.defaultFonts.emoji = [config.ui.font];
+    fonts.fontconfig.defaultFonts.monospace = [config.ui.font];
+    fonts.fontconfig.defaultFonts.sansSerif = [config.ui.font];
+    fonts.fontconfig.defaultFonts.serif = [config.ui.font];
+    fonts.fontconfig.enable = true;
+    fonts.enableDefaultFonts = false;
+    fonts.fonts = [nixpkgs.fira-code];
     home-manager.users.${config.wellKnown.username} = {
       gtk.enable = true;
       gtk.font.name = config.ui.font;
       gtk.font.size = config.ui.fontSize;
       xdg.enable = true;
       xdg.userDirs.createDirectories = true;
-      xdg.userDirs.enable = true;
       xdg.userDirs.desktop = "/data/xdg/desktop";
       xdg.userDirs.documents = "/data/xdg/documents";
       xdg.userDirs.download = "/data/xdg/downloads";
+      xdg.userDirs.enable = true;
       xdg.userDirs.music = "/data/xdg/music";
       xdg.userDirs.pictures = "/data/xdg/pictures";
       xdg.userDirs.publicShare = "/data/xdg/public-share";
@@ -71,6 +77,6 @@
     ];
     services.xserver.xkbVariant = "altgr-intl";
     time.timeZone = config.ui.timezone;
-    ui.font = "JetBrains Mono";
+    ui.font = "Fira Code";
   };
 }
