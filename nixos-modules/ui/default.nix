@@ -27,19 +27,20 @@
         exec ${nixpkgs.pavucontrol}/bin/pavucontrol "$@"
       '')
     ];
-    fonts.fontconfig.defaultFonts.emoji = ["Fira Code Symbol"];
-    fonts.fontconfig.defaultFonts.monospace = [config.ui.font];
-    fonts.fontconfig.defaultFonts.sansSerif = [config.ui.font];
-    fonts.fontconfig.defaultFonts.serif = [config.ui.font];
-    fonts.fontconfig.enable = true;
     fonts.enableDefaultFonts = false;
+    fonts.fontconfig.defaultFonts.emoji = ["Noto Color Emoji"];
+    fonts.fontconfig.defaultFonts.monospace = ["Fira Code"];
+    fonts.fontconfig.defaultFonts.sansSerif = ["Fira Code"];
+    fonts.fontconfig.defaultFonts.serif = ["Fira Code"];
+    fonts.fontconfig.enable = true;
+    fonts.fontDir.enable = true;
     fonts.fonts = [
       nixpkgs.fira-code
-      nixpkgs.fira-code-symbols
+      nixpkgs.noto-fonts-emoji
     ];
     home-manager.users.${config.wellKnown.username} = {
       gtk.enable = true;
-      gtk.font.name = config.ui.font;
+      gtk.font.name = "monospace, emoji";
       gtk.font.size = config.ui.fontSize;
       xdg.enable = true;
       xdg.userDirs.createDirectories = true;
@@ -64,7 +65,7 @@
     services.xserver.libinput.touchpad.scrollMethod = "twofinger";
     services.xserver.libinput.touchpad.tapping = true;
     services.xserver.windowManager.i3.configFile = builtins.toFile "i3.conf" ''
-      set $font ${config.ui.font}
+      set $font 'monospace, emoji'
       set $fontSize ${builtins.toString config.ui.fontSize}
       set $i3status_conf ${./i3status.conf}
 

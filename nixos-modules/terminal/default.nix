@@ -46,7 +46,7 @@
       colors.bright.white = "#FFFFFF";
       colors.primary.background = "#000000";
       colors.primary.foreground = "#FFFFFF";
-      font.normal.family = config.ui.font;
+      font.normal.family = "monospace, emoji";
       font.size = config.ui.fontSize;
       live_config_reload = true;
       scrolling.history = 100000;
