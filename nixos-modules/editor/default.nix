@@ -40,6 +40,15 @@
     nixpkgs.vscode-extensions.shardulm94.trailing-spaces
     nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
     nixpkgs.vscode-extensions.tamasfe.even-better-toml
+
+    (nixpkgs.vscode-utils.buildVscodeMarketplaceExtension {
+      mktplcRef = {
+        name = "autodocstring";
+        publisher = "njpwerner";
+        version = "0.6.1";
+        sha256 = "sha256-NI0cbjsZPW8n6qRTRKoqznSDhLZRUguP7Sa/d0feeoc=";
+      };
+    })
   ];
   settings = {
     "[python]"."editor.tabSize" = 4;
