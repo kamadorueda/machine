@@ -16,6 +16,7 @@
     s = "git status";
   };
   environment.systemPackages = [
+    nixpkgs.comma
     nixpkgs.coreutils
     nixpkgs.git-crypt
     nixpkgs.gnugrep
