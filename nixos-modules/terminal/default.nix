@@ -3,19 +3,37 @@
   nixpkgs,
   ...
 }: {
-  environment.shellAliases = {
-    a = "git add -p";
-    c = "git commit --allow-empty";
-    ca = "git commit --amend --no-edit --allow-empty";
-    clip = "${nixpkgs.xclip}/bin/xclip -sel clip";
-    f = "git fetch --all";
-    l = "git log";
-    p = "git push -f";
-    ro = "git pull --autostash --progress --rebase --stat origin";
-    rf = "git pull --autostash --progress --rebase --stat fork";
-    s = "git status";
-  };
   environment.systemPackages = [
+    (nixpkgs.writeShellScriptBin "a" ''
+      git add -p "$@"
+    '')
+    (nixpkgs.writeShellScriptBin "c" ''
+      git commit --allow-empty "$@"
+    '')
+    (nixpkgs.writeShellScriptBin "ca" ''
+      git commit --amend --no-edit --allow-empty "$@"
+    '')
+    (nixpkgs.writeShellScriptBin "clip" ''
+      ${nixpkgs.xclip}/bin/xclip -sel clip "$@"
+    '')
+    (nixpkgs.writeShellScriptBin "f" ''
+      git fetch --all "$@"
+    '')
+    (nixpkgs.writeShellScriptBin "l" ''
+      git log "$@"
+    '')
+    (nixpkgs.writeShellScriptBin "p" ''
+      git push -f "$@"
+    '')
+    (nixpkgs.writeShellScriptBin "ro" ''
+      git pull --autostash --progress --rebase --stat origin "$@"
+    '')
+    (nixpkgs.writeShellScriptBin "rf" ''
+      git pull --autostash --progress --rebase --stat fork "$@"
+    '')
+    (nixpkgs.writeShellScriptBin "s" ''
+      git status "$@"
+    '')
     nixpkgs.comma
     nixpkgs.coreutils
     nixpkgs.git-crypt
@@ -61,8 +79,7 @@
       commit.gpgsign = true;
       diff.renamelimit = 16384;
       diff.sopsdiffer.textconv =
-        (nixpkgs.writeScript "sopsdiffer.sh" ''
-          #! ${nixpkgs.bash}/bin/bash
+        (nixpkgs.writeShellScript "sopsdiffer.sh" ''
           sops -d "$1" || cat "$1"
         '')
         .outPath;
