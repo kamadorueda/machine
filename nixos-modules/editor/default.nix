@@ -9,8 +9,8 @@
   pythonOnNix,
   ...
 }: let
-  extensionsDir = "/data/vscode/extensions";
-  userDataDir = "/data/vscode/data";
+  extensionsDir = "/data/editor/extensions";
+  userDataDir = "/data/editor/data";
   bin = builtins.concatStringsSep " " [
     "${nixpkgs.vscode}/bin/code" # unfree
     "--extensions-dir"
