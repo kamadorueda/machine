@@ -1,7 +1,9 @@
 {nixpkgs, ...}: {
   environment.systemPackages = [
     (nixpkgs.writeShellScriptBin "browser" ''
-      exec ${nixpkgs.brave}/bin/brave "$@"
+      exec ${nixpkgs.brave}/bin/brave \
+        --user-data-dir=/data/browser/data \
+        "$@"
     '')
   ];
   programs.chromium.enable = true;
