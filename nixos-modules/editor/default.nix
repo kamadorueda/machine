@@ -49,6 +49,14 @@
         sha256 = "sha256-NI0cbjsZPW8n6qRTRKoqznSDhLZRUguP7Sa/d0feeoc=";
       };
     })
+    (nixpkgs.vscode-utils.buildVscodeMarketplaceExtension {
+      mktplcRef = {
+        name = "gc-excelviewer";
+        publisher = "grapecity";
+        version = "4.2.54";
+        sha256 = "sha256-uMfCPk3ZwNCiHLVle7Slxw6n/FiIrlMR2T/jCggtK+s=";
+      };
+    })
   ];
   settings = {
     "[python]"."editor.tabSize" = 4;
