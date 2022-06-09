@@ -3,6 +3,7 @@
   nixpkgs,
   ...
 }: {
+  environment.shellAliases = nixpkgs.lib.mkForce {};
   environment.systemPackages = [
     (nixpkgs.writeShellScriptBin "a" ''
       git add -p "$@"
