@@ -28,7 +28,7 @@
       '')
     ];
     fonts.enableDefaultFonts = false;
-    fonts.fontconfig.defaultFonts.emoji = ["Noto Color Emoji"];
+    fonts.fontconfig.defaultFonts.emoji = ["Fira Code" "Noto Color Emoji"];
     fonts.fontconfig.defaultFonts.monospace = ["Fira Code"];
     fonts.fontconfig.defaultFonts.sansSerif = ["Fira Code"];
     fonts.fontconfig.defaultFonts.serif = ["Fira Code"];
