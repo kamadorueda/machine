@@ -1,6 +1,6 @@
 #! /bin/sh -eux
 
-cd secrets/gpg/
+cd secrets/ssh/
 
 chmod 700 .
 rm kamadorueda*
