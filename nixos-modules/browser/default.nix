@@ -59,6 +59,10 @@
             url = "https://search.nixos.org/packages";
           }
           {
+            name = "nixpkgs-manual";
+            url = "https://nixos.org/manual/nixpkgs/unstable";
+          }
+          {
             name = "nixpkgs-prs";
             url = "https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+is%3Apr+kamadorueda";
           }
