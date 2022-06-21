@@ -17,46 +17,43 @@
     "--user-data-dir"
     userDataDir
   ];
-  extensions = [
-    fenix.rust-analyzer-vscode-extension
-    nixpkgs.vscode-extensions._4ops.terraform
-    nixpkgs.vscode-extensions.bbenoist.nix
-    nixpkgs.vscode-extensions.coolbear.systemd-unit-file
-    nixpkgs.vscode-extensions.daohong-emilio.yash
-    nixpkgs.vscode-extensions.eamodio.gitlens
-    nixpkgs.vscode-extensions.hashicorp.terraform
-    nixpkgs.vscode-extensions.haskell.haskell
-    nixpkgs.vscode-extensions.jkillian.custom-local-formatters
-    nixpkgs.vscode-extensions.justusadam.language-haskell
-    nixpkgs.vscode-extensions.kamadorueda.alejandra
-    nixpkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
-    nixpkgs.vscode-extensions.ms-python.python
-    nixpkgs.vscode-extensions.ms-python.vscode-pylance # unfree
-    nixpkgs.vscode-extensions.ms-toolsai.jupyter
-    nixpkgs.vscode-extensions.ms-toolsai.jupyter-renderers
-    nixpkgs.vscode-extensions.ms-vscode-remote.remote-ssh # unfree
-    nixpkgs.vscode-extensions.redhat.java
-    nixpkgs.vscode-extensions.shardulm94.trailing-spaces
-    nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
-    nixpkgs.vscode-extensions.tamasfe.even-better-toml
+  extensions = nixpkgs.symlinkJoin {
+    name = "extensions";
+    paths = [
+      fenix.rust-analyzer-vscode-extension
+      nixpkgs.vscode-extensions._4ops.terraform
+      nixpkgs.vscode-extensions.bbenoist.nix
+      nixpkgs.vscode-extensions.coolbear.systemd-unit-file
+      nixpkgs.vscode-extensions.daohong-emilio.yash
+      nixpkgs.vscode-extensions.eamodio.gitlens
+      # nixpkgs.vscode-extensions.grapecity.gc-excelviewer
+      nixpkgs.vscode-extensions.hashicorp.terraform
+      nixpkgs.vscode-extensions.haskell.haskell
+      nixpkgs.vscode-extensions.jkillian.custom-local-formatters
+      nixpkgs.vscode-extensions.justusadam.language-haskell
+      nixpkgs.vscode-extensions.kamadorueda.alejandra
+      nixpkgs.vscode-extensions.njpwerner.autodocstring
+      nixpkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
+      nixpkgs.vscode-extensions.ms-python.python
+      nixpkgs.vscode-extensions.ms-python.vscode-pylance # unfree
+      nixpkgs.vscode-extensions.ms-toolsai.jupyter
+      nixpkgs.vscode-extensions.ms-toolsai.jupyter-renderers
+      nixpkgs.vscode-extensions.ms-vscode-remote.remote-ssh # unfree
+      nixpkgs.vscode-extensions.redhat.java
+      nixpkgs.vscode-extensions.shardulm94.trailing-spaces
+      nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
+      nixpkgs.vscode-extensions.tamasfe.even-better-toml
 
-    (nixpkgs.vscode-utils.buildVscodeMarketplaceExtension {
-      mktplcRef = {
-        name = "autodocstring";
-        publisher = "njpwerner";
-        version = "0.6.1";
-        sha256 = "sha256-NI0cbjsZPW8n6qRTRKoqznSDhLZRUguP7Sa/d0feeoc=";
-      };
-    })
-    (nixpkgs.vscode-utils.buildVscodeMarketplaceExtension {
-      mktplcRef = {
-        name = "gc-excelviewer";
-        publisher = "grapecity";
-        version = "4.2.54";
-        sha256 = "sha256-uMfCPk3ZwNCiHLVle7Slxw6n/FiIrlMR2T/jCggtK+s=";
-      };
-    })
-  ];
+      (nixpkgs.vscode-utils.buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "gc-excelviewer";
+          publisher = "grapecity";
+          version = "4.2.54";
+          sha256 = "sha256-uMfCPk3ZwNCiHLVle7Slxw6n/FiIrlMR2T/jCggtK+s=";
+        };
+      })
+    ];
+  };
   settings = {
     "[python]"."editor.tabSize" = 4;
     "[rust]"."editor.tabSize" = 4;
