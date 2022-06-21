@@ -75,24 +75,24 @@
     programs.bash.initExtra = "test -f /etc/bashrc && source /etc/bashrc";
     programs.direnv.enable = true;
     programs.direnv.enableBashIntegration = true;
-    programs.git.enable = true;
-    programs.git.extraConfig = {
-      commit.gpgsign = true;
-      diff.renamelimit = 16384;
-      diff.sopsdiffer.textconv =
-        (nixpkgs.writeShellScript "sopsdiffer.sh" ''
-          sops -d "$1" || cat "$1"
-        '')
-        .outPath;
-      gpg.progam = "${nixpkgs.gnupg}/bin/gpg2";
-      gpg.sign = true;
-      init.defaultbranch = "main";
-      user.email = config.wellKnown.email;
-      user.name = config.wellKnown.name;
-    };
   };
   programs.bash.interactiveShellInit = ''
     export DIRENV_WARN_TIMEOUT=1h
     ssh-add ${config.secrets.path}/ssh/kamadorueda
   '';
+  programs.git.config = {
+    commit.gpgsign = true;
+    diff.renamelimit = 16384;
+    diff.sopsdiffer.textconv =
+      (nixpkgs.writeShellScript "sopsdiffer.sh" ''
+        sops -d "$1" || cat "$1"
+      '')
+      .outPath;
+    gpg.progam = "${nixpkgs.gnupg}/bin/gpg2";
+    gpg.sign = true;
+    init.defaultbranch = "main";
+    user.email = config.wellKnown.email;
+    user.name = config.wellKnown.name;
+  };
+  programs.git.enable = true;
 }
