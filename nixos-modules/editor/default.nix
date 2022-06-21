@@ -219,4 +219,37 @@ in {
     merge.tool = "editor";
     mergetool.editor.cmd = "${bin} --wait $MERGED";
   };
+  systemd.user.services."machine-editor-setup" = {
+    description = "Machine's editor setup";
+    script = ''
+      ${nixpkgs.substitute {
+        src = nixpkgs.writeScript "machine-editor-setup.sh" ''
+          set -eux
+
+          export PATH=${nixpkgs.lib.makeSearchPath "bin" [nixpkgs.coreutils]}
+
+          rm -rf "@userDataDir@"
+          rm -rf "@extensionsDir@"
+
+          mkdir -p "@userDataDir@/User"
+          mkdir -p "@extensionsDir@"
+
+          cp --no-preserve=mode,ownership \
+            "@settings@" "@userDataDir@/User/settings.json"
+          # chmod +w "@userDataDir@/User/settings.json"
+          cp --no-preserve=mode,ownership -rT \
+            "@extensions@/share/vscode/extensions/" "@extensionsDir@"
+          # chmod -R +w "@extensionsDir@"
+        '';
+        replacements = [
+          ["--replace" "@extensions@" extensions]
+          ["--replace" "@extensionsDir@" extensionsDir]
+          ["--replace" "@settings@" (makes.toFileJson "settings.json" settings)]
+          ["--replace" "@userDataDir@" userDataDir]
+        ];
+        isExecutable = true;
+      }}
+    '';
+    serviceConfig.Type = "oneshot";
+  };
 }
