@@ -7,7 +7,7 @@
   systemd.services."machine-networking-setup" = {
     description = "Machine's networking setup";
     script = ''
-      set -x
+      set -eux
       export PATH=${nixpkgs.lib.makeBinPath [nixpkgs.coreutils]}
 
       mkdir -p /etc/NetworkManager/system-connections

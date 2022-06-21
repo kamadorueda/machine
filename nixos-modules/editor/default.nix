@@ -236,10 +236,8 @@ in {
 
           cp --no-preserve=mode,ownership \
             "@settings@" "@userDataDir@/User/settings.json"
-          # chmod +w "@userDataDir@/User/settings.json"
           cp --no-preserve=mode,ownership -rT \
             "@extensions@/share/vscode/extensions/" "@extensionsDir@"
-          # chmod -R +w "@extensionsDir@"
         '';
         replacements = [
           ["--replace" "@extensions@" extensions]
