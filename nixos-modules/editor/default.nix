@@ -2,7 +2,6 @@
   alejandra,
   config,
   fenix,
-  lib,
   makes,
   makesSrc,
   nixpkgs,

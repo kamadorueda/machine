@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  nixosHardware,
-  nixpkgs,
-  ...
-}: {
+{nixpkgs, ...}: {
   imports = [./auto-detected.nix];
 
   config = {

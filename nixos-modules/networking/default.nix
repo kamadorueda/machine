@@ -4,8 +4,8 @@
   ...
 }: {
   networking.networkmanager.enable = true;
-  systemd.services.NetworkManagerSecrets = {
-    description = "Put NetworkManager secrets in place";
+  systemd.services."machine-networking-setup" = {
+    description = "Machine's networking setup";
     script = ''
       set -x
       export PATH=${nixpkgs.lib.makeBinPath [nixpkgs.coreutils]}
