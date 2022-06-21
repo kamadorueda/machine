@@ -28,7 +28,11 @@
       '')
     ];
     fonts.enableDefaultFonts = false;
-    fonts.fontconfig.defaultFonts.emoji = ["Fira Code" "Noto Color Emoji"];
+    fonts.fontconfig.defaultFonts.emoji = [
+      "Fira Code"
+      "Twitter Color Emoji"
+      "Noto Color Emoji"
+    ];
     fonts.fontconfig.defaultFonts.monospace = ["Fira Code"];
     fonts.fontconfig.defaultFonts.sansSerif = ["Fira Code"];
     fonts.fontconfig.defaultFonts.serif = ["Fira Code"];
@@ -36,6 +40,7 @@
     fonts.fontDir.enable = true;
     fonts.fonts = [
       nixpkgs.fira-code
+      nixpkgs.twitter-color-emoji
       nixpkgs.noto-fonts-emoji
     ];
     home-manager.users.${config.wellKnown.username} = {
