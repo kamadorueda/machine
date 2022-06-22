@@ -3,6 +3,8 @@
   nixpkgs,
   ...
 }: {
+  networking.hostName = "machine";
+  networking.nameservers = ["1.1.1.1" "8.8.8.8" "8.8.4.4"];
   networking.networkmanager.enable = true;
   systemd.services."machine-networking-setup" = {
     description = "Machine's networking setup";
