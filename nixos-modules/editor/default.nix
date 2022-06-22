@@ -148,7 +148,7 @@
     "editor.bracketPairColorization.enabled" = true;
     "editor.formatOnPaste" = false;
     "editor.formatOnSave" = true;
-    "editor.formatOnType" = false;
+    "editor.formatOnType" = true;
     "editor.fontFamily" = "monospace, emoji";
     "editor.fontLigatures" = true;
     "editor.fontSize" = config.ui.fontSize;
