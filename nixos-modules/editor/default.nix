@@ -149,7 +149,7 @@
     "editor.formatOnPaste" = false;
     "editor.formatOnSave" = true;
     "editor.formatOnType" = true;
-    "editor.fontFamily" = "monospace, emoji";
+    "editor.fontFamily" = "monospace";
     "editor.fontLigatures" = true;
     "editor.fontSize" = config.ui.fontSize;
     "editor.guides.bracketPairs" = "active";

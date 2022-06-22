@@ -29,7 +29,6 @@
     ];
     fonts.enableDefaultFonts = false;
     fonts.fontconfig.defaultFonts.emoji = [
-      "Fira Code"
       "Twitter Color Emoji"
       "Noto Color Emoji"
     ];
@@ -41,11 +40,12 @@
     fonts.fonts = [
       nixpkgs.fira-code
       nixpkgs.twitter-color-emoji
+      nixpkgs.noto-fonts
       nixpkgs.noto-fonts-emoji
     ];
     home-manager.users.${config.wellKnown.username} = {
       gtk.enable = true;
-      gtk.font.name = "monospace, emoji";
+      gtk.font.name = "monospace";
       gtk.font.size = config.ui.fontSize;
       xdg.enable = true;
       xdg.userDirs.createDirectories = true;
@@ -70,7 +70,7 @@
     services.xserver.libinput.touchpad.scrollMethod = "twofinger";
     services.xserver.libinput.touchpad.tapping = true;
     services.xserver.windowManager.i3.configFile = builtins.toFile "i3.conf" ''
-      set $font 'monospace, emoji'
+      set $font 'monospace'
       set $fontSize ${builtins.toString config.ui.fontSize}
       set $i3status_conf ${./i3status.conf}
 
