@@ -38,10 +38,9 @@
     fonts.fontconfig.enable = true;
     fonts.fontDir.enable = true;
     fonts.fonts = [
-      nixpkgs.fira-code
-      nixpkgs.twitter-color-emoji
-      nixpkgs.noto-fonts
       nixpkgs.noto-fonts-emoji
+      nixpkgs.twitter-color-emoji
+      nixpkgs.fira-code
     ];
     home-manager.users.${config.wellKnown.username} = {
       gtk.enable = true;
