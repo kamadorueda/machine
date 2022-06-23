@@ -219,7 +219,7 @@ in {
     merge.tool = "editor";
     mergetool.editor.cmd = "${bin} --wait $MERGED";
   };
-  systemd.user.services."machine-editor-setup" = {
+  systemd.services."machine-editor-setup" = {
     description = "Machine's editor setup";
     script = ''
       ${nixpkgs.substitute {
@@ -248,6 +248,10 @@ in {
         isExecutable = true;
       }}
     '';
-    serviceConfig.Type = "oneshot";
+    serviceConfig = {
+      Group = config.users.users.${config.wellKnown.username}.group;
+      Type = "oneshot";
+      User = config.wellKnown.username;
+    };
   };
 }
