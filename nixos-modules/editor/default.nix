@@ -34,6 +34,7 @@
       nixpkgs.vscode-extensions.kamadorueda.alejandra
       nixpkgs.vscode-extensions.njpwerner.autodocstring
       nixpkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
+      # nixpkgs.vscode-extensions.mattn.lisp
       nixpkgs.vscode-extensions.ms-python.python
       nixpkgs.vscode-extensions.ms-python.vscode-pylance # unfree
       nixpkgs.vscode-extensions.ms-toolsai.jupyter
@@ -50,6 +51,14 @@
           publisher = "grapecity";
           version = "4.2.54";
           sha256 = "sha256-uMfCPk3ZwNCiHLVle7Slxw6n/FiIrlMR2T/jCggtK+s=";
+        };
+      })
+      (nixpkgs.vscode-utils.buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "lisp";
+          publisher = "mattn";
+          version = "0.1.12";
+          sha256 = "sha256-x6aFrcX0YElEFEr0qA669/LPlab15npmXd5Q585pIEw=";
         };
       })
     ];
