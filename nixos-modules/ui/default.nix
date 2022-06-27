@@ -14,6 +14,9 @@
       (nixpkgs.writeShellScriptBin "bluetooth" ''
         exec ${nixpkgs.bluez}/bin/bluetoothctl "$@"
       '')
+      (nixpkgs.writeShellScriptBin "book" ''
+        exec ${nixpkgs.foliate}/bin/foliate "$@"
+      '')
       (nixpkgs.writeShellScriptBin "files" ''
         exec ${nixpkgs.gnome.nautilus}/bin/nautilus "$@"
       '')
