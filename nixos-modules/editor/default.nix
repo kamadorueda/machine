@@ -44,23 +44,6 @@
       nixpkgs.vscode-extensions.shardulm94.trailing-spaces
       nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
       nixpkgs.vscode-extensions.tamasfe.even-better-toml
-
-      (nixpkgs.vscode-utils.buildVscodeMarketplaceExtension {
-        mktplcRef = {
-          name = "gc-excelviewer";
-          publisher = "grapecity";
-          version = "4.2.54";
-          sha256 = "sha256-uMfCPk3ZwNCiHLVle7Slxw6n/FiIrlMR2T/jCggtK+s=";
-        };
-      })
-      (nixpkgs.vscode-utils.buildVscodeMarketplaceExtension {
-        mktplcRef = {
-          name = "lisp";
-          publisher = "mattn";
-          version = "0.1.12";
-          sha256 = "sha256-x6aFrcX0YElEFEr0qA669/LPlab15npmXd5Q585pIEw=";
-        };
-      })
     ];
   };
   settings = {
