@@ -5,7 +5,6 @@
   ...
 }: {
   options = {
-    ui.font = lib.mkOption {type = lib.types.str;};
     ui.fontSize = lib.mkOption {type = lib.types.ints.positive;};
     ui.timezone = lib.mkOption {type = lib.types.str;};
   };
@@ -88,6 +87,5 @@
     ];
     services.xserver.xkbVariant = "altgr-intl";
     time.timeZone = config.ui.timezone;
-    ui.font = "Fira Code";
   };
 }
