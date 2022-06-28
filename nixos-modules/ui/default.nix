@@ -2,8 +2,16 @@
   config,
   lib,
   nixpkgs,
+  nixpkgsSrc2,
   ...
-}: {
+} @ args: let
+  lib = args.lib // {inherit types;};
+  types = import "${nixpkgsSrc2}/lib/types.nix" {inherit (args) lib;};
+  args' = args // {inherit lib;};
+in {
+  imports = [
+    (import "${nixpkgsSrc2}/nixos/modules/programs/foliate.nix" args')
+  ];
   options = {
     ui.fontSize = lib.mkOption {type = lib.types.ints.positive;};
     ui.timezone = lib.mkOption {type = lib.types.str;};
@@ -13,7 +21,7 @@
       (nixpkgs.writeShellScriptBin "bluetooth" ''
         exec ${nixpkgs.bluez}/bin/bluetoothctl "$@"
       '')
-      (nixpkgs.writeShellScriptBin "book" ''
+      (nixpkgs.writeShellScriptBin "books" ''
         exec ${nixpkgs.foliate}/bin/foliate "$@"
       '')
       (nixpkgs.writeShellScriptBin "files" ''
@@ -61,6 +69,11 @@
       xdg.userDirs.videos = "/data/xdg/videos";
     };
     programs.dconf.enable = true;
+    programs.foliate.enable = true;
+    programs.foliate.theme.bgColor = "#000000";
+    programs.foliate.theme.fgColor = "#FFFFFF";
+    programs.foliate.theme.linkColor = "#00FFFF";
+    programs.foliate.theme.font = "Fira Code Bold ${config.ui.fontSize}";
     services.xserver.displayManager.autoLogin.enable = true;
     services.xserver.displayManager.autoLogin.user = config.wellKnown.username;
     services.xserver.displayManager.defaultSession = "none+i3";

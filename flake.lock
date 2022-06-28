@@ -184,6 +184,22 @@
         "type": "github"
       }
     },
+    "nixpkgs2": {
+      "locked": {
+        "lastModified": 1656373476,
+        "narHash": "sha256-bL6YyPdmoDTtOhPRrO4JR3xr4j0xoLv+BYTZHNC9rVI=",
+        "owner": "kamadorueda",
+        "repo": "nixpkgs",
+        "rev": "9da9157b3c92855158568e70128f8b4c6a33b7e8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kamadorueda",
+        "ref": "nixos/foliate",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "pythonOnNix": {
       "inputs": {
         "flakeUtils": "flakeUtils",
@@ -218,6 +234,7 @@
         "nixosGenerators": "nixosGenerators",
         "nixosHardware": "nixosHardware",
         "nixpkgs": "nixpkgs",
+        "nixpkgs2": "nixpkgs2",
         "pythonOnNix": "pythonOnNix"
       }
     },

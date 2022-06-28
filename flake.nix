@@ -4,6 +4,7 @@
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs2.url = "github:kamadorueda/nixpkgs/nixos/foliate";
 
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
@@ -47,6 +48,7 @@
           inherit (inputs) nixosHardware;
           inherit nixpkgs;
           inherit nixpkgsSrc;
+          nixpkgsSrc2 = inputs.nixpkgs2.sourceInfo;
           makes = import "${inputs.makes}/src/args/agnostic.nix" {inherit system;};
           makesSrc = inputs.makes.sourceInfo;
           pkgs = nixpkgs;
