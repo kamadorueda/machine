@@ -68,12 +68,23 @@ in {
       xdg.userDirs.templates = "/data/xdg/templates";
       xdg.userDirs.videos = "/data/xdg/videos";
     };
-    programs.dconf.enable = true;
     programs.foliate.enable = true;
-    programs.foliate.theme.bgColor = "#000000";
-    programs.foliate.theme.fgColor = "#FFFFFF";
-    programs.foliate.theme.linkColor = "#00FFFF";
-    programs.foliate.theme.font = "Fira Code Bold ${config.ui.fontSize}";
+    programs.foliate.extraConfig = ''
+      [com/github/johnfactotum/Foliate]
+      footer-left='location'
+      footer-right='section-name'
+      selection-action-multiple='none'
+      selection-action-single='none'
+
+      [com/github/johnfactotum/Foliate/view]
+      bg-color='#000000'
+      fg-color='#FFFFFF'
+      font='Fira Code Bold ${builtins.toString config.ui.fontSize}'
+      link-color='#00FFFF'
+      layout='continuous'
+      margin=0
+      spacing=1.0
+    '';
     services.xserver.displayManager.autoLogin.enable = true;
     services.xserver.displayManager.autoLogin.user = config.wellKnown.username;
     services.xserver.displayManager.defaultSession = "none+i3";
