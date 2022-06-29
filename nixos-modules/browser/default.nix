@@ -94,6 +94,15 @@
           }
         ];
       }
+      {
+        name = "Weather";
+        children = [
+          {
+            name = "A";
+            url = "https://www.timeanddate.com/weather/@5892535/hourly";
+          }
+        ];
+      }
     ];
     PasswordManagerEnabled = false;
     ShowAppsShortcutInBookmarkBar = false;
