@@ -10,7 +10,8 @@
     description = "Machine's networking setup";
     script = ''
       set -eux
-      export PATH=${nixpkgs.lib.makeBinPath [nixpkgs.coreutils]}
+
+      export PATH=${nixpkgs.lib.makeSearchPath "bin" [nixpkgs.coreutils]}
 
       mkdir -p /etc/NetworkManager/system-connections
       cd /etc/NetworkManager/system-connections

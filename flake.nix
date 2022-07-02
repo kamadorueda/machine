@@ -25,29 +25,22 @@
     pythonOnNix.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs: let
-    nixpkgsSrc = let
-      nixpkgsSrc = inputs.nixpkgs.sourceInfo;
-    in
-      builtins.trace
-      "Nixpkgs: ${inputs.nixpkgs.sourceInfo.lastModifiedDate}"
-      nixpkgsSrc;
-
     system = "x86_64-linux";
 
-    nixpkgs = import nixpkgsSrc {
+    nixpkgs = import inputs.nixpkgs.sourceInfo {
       config.allowUnfree = true;
       inherit system;
     };
 
     mkNixosSystem = modules:
-      inputs.nixpkgs.lib.nixosSystem {
+      nixpkgs.lib.nixosSystem {
         inherit modules;
         specialArgs = rec {
           alejandra = inputs.alejandra.defaultPackage.${system};
           fenix = inputs.fenix.packages.${system};
           inherit (inputs) nixosHardware;
           inherit nixpkgs;
-          inherit nixpkgsSrc;
+          nixpkgsSrc = inputs.nixpkgs.sourceInfo;
           nixpkgsSrc2 = inputs.nixpkgs2.sourceInfo;
           makes = import "${inputs.makes}/src/args/agnostic.nix" {inherit system;};
           makesSrc = inputs.makes.sourceInfo;

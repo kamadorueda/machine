@@ -9,8 +9,7 @@
     boot.kernelPackages = let
       packages = nixpkgs.linuxPackages_latest;
     in
-      builtins.trace "Linux: ${packages.kernel.version}"
-      packages;
+      builtins.trace "Linux: ${packages.kernel.version}" packages;
 
     hardware.bluetooth.enable = true;
     hardware.firmware = [
@@ -21,9 +20,7 @@
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     in
       builtins.trace "Nvidia driver version: ${package.version}" package;
-    hardware.opengl.extraPackages = [
-      nixpkgs.intel-compute-runtime
-    ];
+    hardware.opengl.extraPackages = [nixpkgs.intel-compute-runtime];
     hardware.pulseaudio.enable = true;
     services.gnome.at-spi2-core.enable = true;
     # services.xserver.videoDrivers = ["nvidia"];
