@@ -99,7 +99,7 @@
         children = [
           {
             name = "A";
-            url = "https://www.timeanddate.com/weather/@5892535/hourly";
+            url = "https://www.accuweather.com/en/ca/banff-trail/t2m/minute-weather-forecast/3379926";
           }
         ];
       }
