@@ -27,23 +27,25 @@
   outputs = inputs: let
     system = "x86_64-linux";
 
-    nixpkgs = import inputs.nixpkgs.sourceInfo {
+    nixpkgs = import inputs.nixpkgs {
       config.allowUnfree = true;
       inherit system;
     };
 
     mkNixosSystem = modules:
-      nixpkgs.lib.nixosSystem {
+      import "${inputs.nixpkgs}/nixos/lib/eval-config.nix" {
+        lib = nixpkgs.lib.extend (_: lib: {
+          types = import "${inputs.nixpkgs2}/lib/types.nix" {inherit lib;};
+        });
         inherit modules;
         specialArgs = rec {
           alejandra = inputs.alejandra.defaultPackage.${system};
           fenix = inputs.fenix.packages.${system};
           inherit (inputs) nixosHardware;
           inherit nixpkgs;
-          nixpkgsSrc = inputs.nixpkgs.sourceInfo;
-          nixpkgsSrc2 = inputs.nixpkgs2.sourceInfo;
+          nixpkgsSrc = inputs.nixpkgs;
           makes = import "${inputs.makes}/src/args/agnostic.nix" {inherit system;};
-          makesSrc = inputs.makes.sourceInfo;
+          makesSrc = inputs.makes;
           pkgs = nixpkgs;
           pythonOnNix = inputs.pythonOnNix.packages.${system};
         };
@@ -58,6 +60,8 @@
       controllers = import ./nixos-modules/controllers;
 
       editor = import ./nixos-modules/editor;
+
+      foliate = "${inputs.nixpkgs2}/nixos/modules/programs/foliate.nix";
 
       homeManager = inputs.homeManager.nixosModule;
 

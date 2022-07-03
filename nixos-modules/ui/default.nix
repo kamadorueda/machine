@@ -2,16 +2,8 @@
   config,
   lib,
   nixpkgs,
-  nixpkgsSrc2,
   ...
-} @ args: let
-  lib = args.lib // {inherit types;};
-  types = import "${nixpkgsSrc2}/lib/types.nix" {inherit (args) lib;};
-  args' = args // {inherit lib;};
-in {
-  imports = [
-    (import "${nixpkgsSrc2}/nixos/modules/programs/foliate.nix" args')
-  ];
+}: {
   options = {
     ui.fontSize = lib.mkOption {type = lib.types.ints.positive;};
     ui.timezone = lib.mkOption {type = lib.types.str;};
