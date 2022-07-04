@@ -131,6 +131,10 @@
         languages = ["toml"];
       }
       {
+        command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser html";
+        languages = ["xml"];
+      }
+      {
         command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser yaml";
         languages = ["yaml"];
       }
