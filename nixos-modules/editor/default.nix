@@ -76,6 +76,10 @@
         languages = ["json" "jsonc"];
       }
       {
+        command = "${nixpkgs.texlive.combined.scheme-medium}/bin/latexindent";
+        languages = ["latex"];
+      }
+      {
         command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser markdown";
         languages = ["markdown"];
       }
