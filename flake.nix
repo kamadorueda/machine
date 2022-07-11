@@ -62,7 +62,9 @@
 
       editor = import ./nixos-modules/editor;
 
-      foliate = "${inputs.nixpkgs2}/nixos/modules/programs/foliate.nix";
+      foliate = {...}: {
+        imports = ["${inputs.nixpkgs2}/nixos/modules/programs/foliate.nix"];
+      };
 
       homeManager = inputs.homeManager.nixosModule;
 
