@@ -2,17 +2,20 @@
   "nodes": {
     "alejandra": {
       "inputs": {
+        "fenix": [
+          "fenix"
+        ],
         "flakeCompat": "flakeCompat",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1656623951,
-        "narHash": "sha256-EzcVpzocI9XzvrWOVKn7nohTlIsSAVlmGrRAIUYlv2I=",
+        "lastModified": 1657494821,
+        "narHash": "sha256-2edwC0zaITWgm+uh1RVI5r/PRYoGot3GYmDRj9iEhpk=",
         "owner": "kamadorueda",
         "repo": "alejandra",
-        "rev": "c685879cda91934f29f42574b8eb367496b09df1",
+        "rev": "58bcdf252e9e50639583864e6e821c6053ca8212",
         "type": "github"
       },
       "original": {

@@ -1,6 +1,7 @@
 {
   inputs = {
     alejandra.url = "github:kamadorueda/alejandra";
+    alejandra.inputs.fenix.follows = "fenix";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
