@@ -42,6 +42,7 @@
         specialArgs = rec {
           alejandra = inputs.alejandra.defaultPackage.${system};
           fenix = inputs.fenix.packages.${system};
+          fenixSrc = inputs.fenix;
           inherit (inputs) nixosHardware;
           inherit nixpkgs;
           nixpkgsSrc = inputs.nixpkgs;

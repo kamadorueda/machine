@@ -234,9 +234,9 @@ in {
           mkdir -p "@userDataDir@/User"
           mkdir -p "@extensionsDir@"
 
-          cp --no-preserve=mode,ownership \
+          cp --dereference --no-preserve=mode,ownership \
             "@settings@" "@userDataDir@/User/settings.json"
-          cp --no-preserve=mode,ownership -rT \
+          cp --dereference --no-preserve=mode,ownership -rT \
             "@extensions@/share/vscode/extensions/" "@extensionsDir@"
         '';
         replacements = [

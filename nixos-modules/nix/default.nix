@@ -1,5 +1,6 @@
 {
   config,
+  fenixSrc,
   nixpkgs,
   nixpkgsSrc,
   ...
@@ -23,6 +24,10 @@
   nix.registry.nixpkgs = {
     exact = false;
     flake = nixpkgsSrc;
+  };
+  nix.registry.fenix = {
+    exact = false;
+    flake = fenixSrc;
   };
   nix.settings.cores = 0;
   nix.settings.max-jobs = 1;
