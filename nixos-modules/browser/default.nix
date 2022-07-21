@@ -24,12 +24,34 @@
     ManagedBookmarks = [
       {toplevel_name = "Links";}
       {
-        name = "discord";
-        url = "https://discord.com";
+        name = "Comunications";
+        children = [
+          {
+            name = "discord";
+            url = "https://discord.com";
+          }
+          {
+            name = "matrix";
+            url = "https://app.element.io";
+          }
+        ];
       }
       {
-        name = "matrix";
-        url = "https://app.element.io";
+        name = "Learning";
+        children = [
+          {
+            name = "laurie blog";
+            url = "https://tratt.net/laurie/blog/archive.html";
+          }
+          {
+            name = "laurie essays";
+            url = "https://tratt.net/laurie/essays/archive.html";
+          }
+          {
+            name = "papers 1";
+            url = "https://github.com/facundoolano/software-papers";
+          }
+        ];
       }
       {
         name = "Nix";
