@@ -51,6 +51,10 @@
             name = "papers 1";
             url = "https://github.com/facundoolano/software-papers";
           }
+          {
+            name = "kernel";
+            url = "https://linux-kernel-labs.github.io/refs/heads/master/index.html";
+          }
         ];
       }
       {
