@@ -24,6 +24,8 @@ This system has:
 
 In general, the system is made out of the following components:
 
+- [books](./nixos-modules/books/default.nix):
+  An eBook reader with the theme that I like.
 - [browser](./nixos-modules/browser/default.nix):
   Web browser, extensions, and bookmarks.
 - [editor](./nixos-modules/editor/default.nix):

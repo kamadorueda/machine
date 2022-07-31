@@ -8,15 +8,10 @@
   pythonOnNix,
   ...
 }: let
-  pkg = nixpkgs.vscode.overrideAttrs (_: rec {
-    version = "1.69.2";
-    src = nixpkgs.fetchurl {
-      # https://code.visualstudio.com/updates
-      url = "https://update.code.visualstudio.com/${version}/linux-x64/stable";
-      name = "VSCode_${version}_linux-x64.tar.gz";
-      hash = "sha256-+HuajCfKBRlux8xlAGyAsDa2NwOuLGEz78AVYOILXzY=";
-    };
-  });
+  pkg = let
+    pkg = nixpkgs.vscode;
+  in
+    builtins.trace "VSCode: ${pkg.version}" pkg;
   extensionsDir = "/data/editor/extensions";
   userDataDir = "/data/editor/data";
   bin = builtins.concatStringsSep " " [

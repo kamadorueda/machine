@@ -5,7 +5,6 @@
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
-    nixpkgs2.url = "github:kamadorueda/nixpkgs/nixos/foliate";
 
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
@@ -35,9 +34,7 @@
 
     mkNixosSystem = modules:
       import "${inputs.nixpkgs}/nixos/lib/eval-config.nix" {
-        lib = nixpkgs.lib.extend (_: lib: {
-          types = import "${inputs.nixpkgs2}/lib/types.nix" {inherit lib;};
-        });
+        lib = nixpkgs.lib.extend (_: lib: {});
         inherit modules;
         specialArgs = rec {
           alejandra = inputs.alejandra.defaultPackage.${system};
@@ -55,6 +52,8 @@
       };
   in {
     nixosModules = {
+      books = import ./nixos-modules/books;
+
       browser = import ./nixos-modules/browser;
 
       buildkite = import ./nixos-modules/buildkite;
@@ -62,10 +61,6 @@
       controllers = import ./nixos-modules/controllers;
 
       editor = import ./nixos-modules/editor;
-
-      foliate = {...}: {
-        imports = ["${inputs.nixpkgs2}/nixos/modules/programs/foliate.nix"];
-      };
 
       homeManager = inputs.homeManager.nixosModule;
 
