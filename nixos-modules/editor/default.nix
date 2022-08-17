@@ -27,6 +27,7 @@
       fenix.rust-analyzer-vscode-extension
       nixpkgs.vscode-extensions._4ops.terraform
       nixpkgs.vscode-extensions.bbenoist.nix
+      nixpkgs.vscode-extensions.bierner.markdown-mermaid
       nixpkgs.vscode-extensions.coolbear.systemd-unit-file
       nixpkgs.vscode-extensions.daohong-emilio.yash
       nixpkgs.vscode-extensions.eamodio.gitlens
@@ -48,6 +49,7 @@
       nixpkgs.vscode-extensions.shardulm94.trailing-spaces
       nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
       nixpkgs.vscode-extensions.tamasfe.even-better-toml
+      nixpkgs.vscode-extensions.usernamehw.errorlens
     ];
   };
   settings = {
