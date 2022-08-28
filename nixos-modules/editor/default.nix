@@ -214,7 +214,6 @@ in {
   environment.variables.EDITOR = bin;
   environment.systemPackages = [
     (nixpkgs.writeShellScriptBin "editor" ''
-      export PATH="${fenix.latest.toolchain}/bin:$PATH"
       exec ${bin} "$@"
     '')
   ];
