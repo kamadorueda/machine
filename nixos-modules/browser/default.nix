@@ -17,7 +17,7 @@
     ExtensionInstallForcelist = [
       "clpapnmmlmecieknddelobgikompchkk" # Disable Automatic Gain Control
       "hdokiejnpimakedhajhdlcegeplioahd" # LastPass: Free Password Manager
-      "jlgnjgpggagefdhmnemjcahnfahhdmhc"
+      "jlgnjgpggagefdhmnemjcahnfahhdmhc" # Okta Browser Plugin
       "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly: Grammar Checker and Writing App
     ];
     HighContrastEnabled = true;
