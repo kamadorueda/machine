@@ -43,12 +43,14 @@
       nixpkgs.vscode-extensions.ms-python.vscode-pylance # unfree
       nixpkgs.vscode-extensions.ms-toolsai.jupyter
       nixpkgs.vscode-extensions.ms-toolsai.jupyter-renderers
+      nixpkgs.vscode-extensions.ms-vscode.cpptools
       nixpkgs.vscode-extensions.ms-vscode-remote.remote-ssh # unfree
       nixpkgs.vscode-extensions.njpwerner.autodocstring
       nixpkgs.vscode-extensions.redhat.java
       nixpkgs.vscode-extensions.shardulm94.trailing-spaces
       nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
       nixpkgs.vscode-extensions.tamasfe.even-better-toml
+      nixpkgs.vscode-extensions.tomoki1207.pdf
       nixpkgs.vscode-extensions.usernamehw.errorlens
     ];
   };
@@ -58,8 +60,8 @@
     "alejandra.program" = "${alejandra}/bin/alejandra";
     "customLocalFormatters.formatters" = [
       {
-        command = "${nixpkgs.clang-tools}/bin/clang-format --sort-includes";
-        languages = ["cpp"];
+        command = "${nixpkgs.clang-tools}/bin/clang-format --sort-includes --style=file:${./clang.yaml}";
+        languages = ["c" "cpp"];
       }
       {
         command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser css";
