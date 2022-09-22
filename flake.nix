@@ -68,6 +68,8 @@
 
       nix = import ./nixos-modules/nix;
 
+      physical = import ./nixos-modules/physical;
+
       secrets = import ./nixos-modules/secrets;
       secretsConfig = {
         secrets.hashedPassword =
@@ -76,7 +78,7 @@
         secrets.path = "/data/machine/secrets";
       };
 
-      physical = import ./nixos-modules/physical;
+      spark = import ./nixos-modules/spark;
 
       terminal = import ./nixos-modules/terminal;
 

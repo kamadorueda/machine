@@ -1,4 +1,5 @@
 ---
+# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
 Language: Cpp
 AccessModifierOffset: -1
 AlignAfterOpenBracket: BlockIndent
@@ -13,7 +14,7 @@ AlignTrailingComments: false
 AllowAllArgumentsOnNextLine: false
 AllowAllParametersOfDeclarationOnNextLine: false
 AllowShortEnumsOnASingleLine: true
-AllowShortBlocksOnASingleLine: Never
+AllowShortBlocksOnASingleLine: Empty
 AllowShortCaseLabelsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: All
 AllowShortLambdasOnASingleLine: Empty
