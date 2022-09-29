@@ -38,6 +38,19 @@
         ];
       }
       {
+        name = "Fluid Attacks";
+        children = [
+          {
+            name = "backlog-universe";
+            url = "https://gitlab.com/dashboard/issues?assignee_username=kamadoatfluid&sort=label_priority";
+          }
+          {
+            name = "backlog-makes";
+            url = "https://github.com/orgs/fluidattacks/projects/2/views/2";
+          }
+        ];
+      }
+      {
         name = "Learning";
         children = [
           {
