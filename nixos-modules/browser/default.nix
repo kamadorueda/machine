@@ -70,14 +70,25 @@
             url = "https://linux-kernel-labs.github.io/refs/heads/master/index.html";
           }
           {
+            name = "rust-embedded";
             url = "https://docs.rust-embedded.org/book/";
           }
           {
+            name = "rust-nomicon";
             url = "https://doc.rust-lang.org/nomicon";
           }
-          {url = "https://dwheeler.com/secure-programs/Secure-Programs-HOWTO.html";}
-          {url = "https://openssf.org/training/courses/";}
-          {url = "https://www.cisa.gov/uscert/bsi/articles/knowledge/principles";}
+          {
+            name = "scure-programs-how-to";
+            url = "https://dwheeler.com/secure-programs/Secure-Programs-HOWTO.html";
+          }
+          {
+            name = "OpenSSF courses";
+            url = "https://openssf.org/training/courses/";
+          }
+          {
+            name = "CISA knowledge";
+            url = "https://www.cisa.gov/uscert/bsi/articles/knowledge/principles";
+          }
           {
             name = "ISO/IEC/IEEE 12207";
             url = "http://bls.buu.ac.th/~se888321/2560/00Jan08/8100771-ISO12207-2017.pdf";
