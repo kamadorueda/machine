@@ -16,9 +16,9 @@
     DefaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
     ExtensionInstallForcelist = [
       "clpapnmmlmecieknddelobgikompchkk" # Disable Automatic Gain Control
+      "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly: Grammar Checker and Writing App
       "hdokiejnpimakedhajhdlcegeplioahd" # LastPass: Free Password Manager
       "jlgnjgpggagefdhmnemjcahnfahhdmhc" # Okta Browser Plugin
-      "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly: Grammar Checker and Writing App
     ];
     HighContrastEnabled = true;
     ImportBookmarks = false;
@@ -68,6 +68,19 @@
           {
             name = "kernel";
             url = "https://linux-kernel-labs.github.io/refs/heads/master/index.html";
+          }
+          {
+            url = "https://docs.rust-embedded.org/book/";
+          }
+          {
+            url = "https://doc.rust-lang.org/nomicon";
+          }
+          {url = "https://dwheeler.com/secure-programs/Secure-Programs-HOWTO.html";}
+          {url = "https://openssf.org/training/courses/";}
+          {url = "https://www.cisa.gov/uscert/bsi/articles/knowledge/principles";}
+          {
+            name = "ISO/IEC/IEEE 12207";
+            url = "http://bls.buu.ac.th/~se888321/2560/00Jan08/8100771-ISO12207-2017.pdf";
           }
         ];
       }
