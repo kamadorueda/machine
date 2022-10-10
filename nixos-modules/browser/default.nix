@@ -5,6 +5,9 @@
         --user-data-dir=/data/browser/data \
         "$@"
     '')
+    (nixpkgs.writeShellScriptBin "x-www-browser" ''
+      browser "$@"
+    '')
   ];
   programs.chromium.enable = true;
   # https://chromeenterprise.google/policies/
