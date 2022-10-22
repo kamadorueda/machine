@@ -64,6 +64,8 @@
 
       homeManager = inputs.homeManager.nixosModule;
 
+      k8s = import ./nixos-modules/k8s;
+
       networking = import ./nixos-modules/networking;
 
       nix = import ./nixos-modules/nix;

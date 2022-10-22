@@ -39,10 +39,14 @@ In general, the system is made out of the following components:
 - [buildkite](./nixos-modules/buildkite/default.nix):
   Some https://buildkite.com/ agents that run in my computer
   and serve as CI/CD of my open source projects.
+- [k8s](./nixos-modules/k8s/default.nix):
+  A Kubernetes cluster.
 - [networking](./nixos-modules/networking/default.nix):
   Wifi settings, mostly.
 - [nix](./nixos-modules/nix/default.nix):
   Configurations of the Nix daemon that powers this machine.
+- [spark](./nixos-modules/spark/default.nix):
+  An Apache Spark cluster.
 - [virtualization](./nixos-modules/virtualization/default.nix):
   Containers, virtual machines and emulated architectures.
 
