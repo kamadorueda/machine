@@ -6,4 +6,5 @@ nix \
   --verbose \
   build \
   --print-build-logs \
-  .#nixosConfigurations.machine.config.system.build.toplevel
+  .#nixosConfigurations.machine.config.system.build.toplevel \
+  "${@}"
