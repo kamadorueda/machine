@@ -3,6 +3,7 @@
   nixpkgs,
   ...
 }: {
+  networking.firewall.enable = true;
   networking.hostName = "machine";
   networking.nameservers = ["1.1.1.1" "8.8.8.8" "8.8.4.4"];
   networking.networkmanager.enable = true;
