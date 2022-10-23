@@ -1,5 +1,5 @@
 {nixpkgs, ...}: let
-  masterIP = "127.0.0.1";
+  masterIP = "0.0.0.0";
   masterPortsServer = "7077";
   masterPortsWeb = "10000";
 
@@ -30,6 +30,7 @@
       ];
     };
 in {
+  networking.firewall.allowedTCPPorts = [masterPortsWeb];
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers.sparkMaster = makeMaster;
   virtualisation.oci-containers.containers.sparkWorker1 = makeWorker "1";
