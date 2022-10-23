@@ -30,7 +30,10 @@
       ];
     };
 in {
-  networking.firewall.allowedTCPPorts = [masterPortsWeb];
+  networking.firewall.allowedTCPPorts = builtins.map builtins.fromJSON [
+    masterPortsServer
+    masterPortsWeb
+  ];
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers.sparkMaster = makeMaster;
   virtualisation.oci-containers.containers.sparkWorker1 = makeWorker "1";
