@@ -79,6 +79,14 @@ in {
     '')
     nixpkgs.tree
   ];
+
+  home-manager.users.${config.wellKnown.username} = {
+    home.file.".cache/nix-index/files".source = nixpkgs.fetchurl {
+      url = "https://github.com/Mic92/nix-index-database/releases/download/2022-10-23/index-x86_64-linux";
+      hash = "sha256-sD159LHIefbtZuAbCu6b+7cghjXTqg3ANCLHzyaNyRk=";
+    };
+  };
+
   programs.bash.interactiveShellInit = ''
     export DIRENV_WARN_TIMEOUT=1h
     source <(direnv hook bash)
