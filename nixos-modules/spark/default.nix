@@ -34,11 +34,10 @@
       };
     };
 in {
-  networking.firewall.allowedTCPPorts = builtins.map builtins.fromJSON [];
   virtualisation.oci-containers.backend = "docker";
-  virtualisation.oci-containers.containers.sparkMaster = makeMaster;
-  virtualisation.oci-containers.containers.sparkWorker1 = makeWorker "1";
-  virtualisation.oci-containers.containers.sparkWorker2 = makeWorker "2";
-  virtualisation.oci-containers.containers.sparkWorker3 = makeWorker "3";
-  virtualisation.oci-containers.containers.sparkWorker4 = makeWorker "4";
+  virtualisation.oci-containers.containers.spark-master = makeMaster;
+  virtualisation.oci-containers.containers.spark-worker1 = makeWorker "1";
+  virtualisation.oci-containers.containers.spark-worker2 = makeWorker "2";
+  virtualisation.oci-containers.containers.spark-worker3 = makeWorker "3";
+  virtualisation.oci-containers.containers.spark-worker4 = makeWorker "4";
 }

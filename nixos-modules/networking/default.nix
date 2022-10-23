@@ -4,9 +4,20 @@
   ...
 }: {
   networking.firewall.enable = true;
+  networking.firewall.allowedUDPPorts = [];
+  networking.firewall.allowedTCPPorts = [];
+
   networking.hostName = "machine";
   networking.nameservers = ["1.1.1.1" "8.8.8.8" "8.8.4.4"];
   networking.networkmanager.enable = true;
+
+  virtualisation.oci-containers.containers.cloudflared-tunnel = {
+    image = "cloudflare/cloudflared:latest";
+    cmd = ["tunnel" "--no-autoupdate" "run"];
+    extraOptions = ["--network" "host"];
+    environmentFiles = ["${config.secrets.path}/cloudflared-tunnel"];
+  };
+
   systemd.services."machine-networking-setup" = {
     description = "Machine's networking setup";
     script = ''
@@ -30,5 +41,6 @@
     serviceConfig.Type = "oneshot";
     wantedBy = ["NetworkManager.service"];
   };
+
   users.users.${config.wellKnown.username}.extraGroups = ["networkmanager"];
 }
