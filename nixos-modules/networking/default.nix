@@ -4,8 +4,8 @@
   ...
 }: {
   networking.firewall.enable = true;
-  # networking.firewall.allowedUDPPorts = [];
-  # networking.firewall.allowedTCPPorts = [];
+  networking.firewall.allowedUDPPorts = [];
+  networking.firewall.allowedTCPPorts = [40000];
 
   networking.hostName = "machine";
   networking.nameservers = ["1.1.1.1" "8.8.8.8" "8.8.4.4"];
