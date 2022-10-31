@@ -20,6 +20,7 @@
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     in
       builtins.trace "Nvidia driver version: ${package.version}" package;
+    hardware.opengl.enable = true;
     hardware.opengl.extraPackages = [nixpkgs.intel-compute-runtime];
     hardware.pulseaudio.enable = true;
     services.gnome.at-spi2-core.enable = true;

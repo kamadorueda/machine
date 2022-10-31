@@ -213,14 +213,13 @@
     "workbench.startupEditor" = "none";
   };
 in {
-  environment.variables.EDITOR = bin;
+  environment.variables.EDITOR = "${bin} --wait";
   environment.systemPackages = [
     (nixpkgs.writeShellScriptBin "editor" ''
       exec ${bin} "$@"
     '')
   ];
   programs.git.config = {
-    core.editor = "${bin} --wait";
     diff.tool = "editor";
     difftool.editor.cmd = "${bin} --diff $LOCAL $REMOTE --wait";
     merge.tool = "editor";
