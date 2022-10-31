@@ -23,6 +23,7 @@
     hardware.opengl.enable = true;
     hardware.opengl.extraPackages = [nixpkgs.intel-compute-runtime];
     hardware.pulseaudio.enable = true;
+    services.fwupd.enable = true;
     services.gnome.at-spi2-core.enable = true;
     # services.xserver.videoDrivers = ["nvidia"];
   };

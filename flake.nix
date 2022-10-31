@@ -104,17 +104,35 @@
 
     nixosConfigurations = {
       machine = mkNixosSystem (builtins.attrValues inputs.self.nixosModules);
+      installer = mkNixosSystem [
+        inputs.nixosGenerators.nixosModules.install-iso
+        inputs.self.nixosModules.controllers
+        inputs.self.nixosModules.nix
+        inputs.self.nixosModules.wellKnown
+        inputs.self.nixosModules.wellKnownConfig
+        {
+          boot.supportedFilesystems = nixpkgs.lib.mkForce [
+            "btrfs"
+            "reiserfs"
+            "vfat"
+            "f2fs"
+            "xfs"
+            "ntfs"
+            "cifs"
+            # "zfs"
+            "tmpfs"
+            "auto"
+            "squashfs"
+            "tmpfs"
+            "overlay"
+          ];
+        }
+      ];
     };
 
     packages."x86_64-linux" = {
       installer = let
-        nixosSystem = mkNixosSystem [
-          inputs.nixosGenerators.nixosModules.install-iso
-          inputs.self.nixosModules.controllers
-          inputs.self.nixosModules.nix
-          inputs.self.nixosModules.wellKnown
-          inputs.self.nixosModules.wellKnownConfig
-        ];
+        nixosSystem = inputs.self.nixosConfigurations.installer;
       in
         nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
     };
