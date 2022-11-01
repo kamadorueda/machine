@@ -21,7 +21,7 @@ EOF
 
   read -p "id> " id
 
-  echo "${id}" > gpg.id
+  echo "${id}" > "gpg-${email}.id"
   gpg --armor --export "${id}" > "gpg-${email}.pub"
   gpg --armor --export-secret-keys "${id}" > "gpg-${email}"
 done
