@@ -37,6 +37,12 @@
     fonts.fontconfig.enable = true;
     fonts.fontDir.enable = true;
     fonts.fonts = [
+      nixpkgs.dejavu_fonts
+      nixpkgs.freefont_ttf
+      nixpkgs.gyre-fonts # TrueType substitutes for standard PostScript fonts
+      nixpkgs.liberation_ttf
+      nixpkgs.unifont
+
       nixpkgs.noto-fonts-emoji
       nixpkgs.twitter-color-emoji
       nixpkgs.fira-code
