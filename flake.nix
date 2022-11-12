@@ -66,6 +66,8 @@
 
       k8s = import ./nixos-modules/k8s;
 
+      mysql = import ./nixos-modules/mysql;
+
       networking = import ./nixos-modules/networking;
 
       nix = import ./nixos-modules/nix;
