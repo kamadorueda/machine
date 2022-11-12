@@ -63,6 +63,7 @@
       xdg.userDirs.templates = "/data/xdg/templates";
       xdg.userDirs.videos = "/data/xdg/videos";
     };
+    services.gnome.gnome-keyring.enable = true;
     services.xserver.displayManager.autoLogin.enable = true;
     services.xserver.displayManager.autoLogin.user = config.wellKnown.username;
     services.xserver.displayManager.defaultSession = "none+i3";
