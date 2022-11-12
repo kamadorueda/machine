@@ -122,6 +122,10 @@
         languages = ["shellscript"];
       }
       {
+        command = "${nixpkgs.nodePackages.sql-formatter}/bin/sql-formatter";
+        languages = ["sql"];
+      }
+      {
         command = "${nixpkgs.terraform}/bin/terraform fmt -";
         languages = ["terraform"];
       }
