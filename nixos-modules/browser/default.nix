@@ -18,10 +18,9 @@
     DefaultSearchProviderEnabled = true;
     DefaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
     ExtensionInstallForcelist = [
-      "clpapnmmlmecieknddelobgikompchkk" # Disable Automatic Gain Control
       "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly: Grammar Checker and Writing App
       "hdokiejnpimakedhajhdlcegeplioahd" # LastPass: Free Password Manager
-      "jlgnjgpggagefdhmnemjcahnfahhdmhc" # Okta Browser Plugin
+      "mobhfbcgjoleoljhpkkdhopdiemlocka" # RPass
     ];
     HighContrastEnabled = true;
     ImportBookmarks = false;
