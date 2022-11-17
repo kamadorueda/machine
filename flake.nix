@@ -64,9 +64,9 @@
 
       homeManager = inputs.homeManager.nixosModule;
 
-      k8s = import ./nixos-modules/k8s;
+      # k8s = import ./nixos-modules/k8s;
 
-      mysql = import ./nixos-modules/mysql;
+      # mysql = import ./nixos-modules/mysql;
 
       networking = import ./nixos-modules/networking;
 
@@ -84,7 +84,7 @@
         secrets.path = "/data/machine/secrets";
       };
 
-      spark = import ./nixos-modules/spark;
+      # spark = import ./nixos-modules/spark;
 
       terminal = import ./nixos-modules/terminal;
 

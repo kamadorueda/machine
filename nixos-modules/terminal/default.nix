@@ -66,6 +66,7 @@ in {
     (nixpkgs.writeShellScriptBin "s" ''
       git status "$@"
     '')
+    nixpkgs.awscli2
     nixpkgs.comma
     nixpkgs.coreutils
     nixpkgs.direnv
@@ -89,10 +90,13 @@ in {
   };
 
   programs.bash.interactiveShellInit = ''
+    export AWS_CONFIG_FILE=${config.secrets.path}/aws-config
+    export AWS_SHARED_CREDENTIALS_FILE=${config.secrets.path}/aws-credentials
     export DIRENV_WARN_TIMEOUT=1h
     source <(direnv hook bash)
 
     ssh-add ${config.secrets.path}/ssh/kamadorueda
+
     ssh-add ${config.secrets.path}/ssh/kevinatholdings
     ${nixpkgs.cachix}/bin/cachix authtoken "$(cat ${config.secrets.path}/cachix-auth-token-holdings)"
     ${nixpkgs.cachix}/bin/cachix use holdings-cache
