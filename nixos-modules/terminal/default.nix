@@ -94,7 +94,8 @@ in {
 
     ssh-add ${config.secrets.path}/ssh/kamadorueda
     ssh-add ${config.secrets.path}/ssh/kevinatholdings
-    export CACHIX_AUTH_TOKEN=$(cat ${config.secrets.path}/cachix-auth-token-holdings)
+    ${nixpkgs.cachix}/bin/cachix authtoken "$(cat ${config.secrets.path}/cachix-auth-token-holdings)"
+    ${nixpkgs.cachix}/bin/cachix use holdings-cache
   '';
   programs.git.config = {
     commit.gpgsign = true;

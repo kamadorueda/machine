@@ -72,6 +72,8 @@
 
       nix = import ./nixos-modules/nix;
 
+      postgresql = import ./nixos-modules/postgresql;
+
       physical = import ./nixos-modules/physical;
 
       secrets = import ./nixos-modules/secrets;
