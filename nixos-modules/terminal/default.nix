@@ -93,6 +93,8 @@ in {
     source <(direnv hook bash)
 
     ssh-add ${config.secrets.path}/ssh/kamadorueda
+    ssh-add ${config.secrets.path}/ssh/kevinatholdings
+    export CACHIX_AUTH_TOKEN=$(cat ${config.secrets.path}/cachix-auth-token-holdings)
   '';
   programs.git.config = {
     commit.gpgsign = true;
