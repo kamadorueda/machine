@@ -93,9 +93,7 @@
       }
       {
         command =
-          (nixpkgs.writeScript "python-fmt" ''
-            #! ${nixpkgs.bash}/bin/bash
-
+          (nixpkgs.writeShellScript "python-fmt" ''
             ${pythonOnNix.black-latest-python39-bin}/bin/black \
               --config \
               ${makesSrc}/src/evaluator/modules/format-python/settings-black.toml \
@@ -110,7 +108,7 @@
         languages = ["python"];
       }
       {
-        command = "${fenix.latest.rustfmt}/bin/rustfmt --config-path ${./rustfmt.toml}";
+        command = "${fenix.latest.rustfmt}/bin/rustfmt";
         languages = ["rust"];
       }
       {
@@ -131,7 +129,7 @@
       }
       {
         command =
-          (nixpkgs.writeScript "toml-fmt" ''
+          (nixpkgs.writeShellScript "toml-fmt" ''
             #! ${nixpkgs.bash}/bin/bash
 
             NODE_PATH=${nixpkgs.nodePackages.prettier-plugin-toml}/lib/node_modules:$NODE_PATH \
@@ -223,6 +221,9 @@ in {
       exec ${bin} "$@"
     '')
   ];
+  home-manager.users.${config.wellKnown.username} = {
+    home.file.".config/rustfmt/rustfmt.toml".source = ./rustfmt.toml;
+  };
   programs.git.config = {
     diff.tool = "editor";
     difftool.editor.cmd = "${bin} --diff $LOCAL $REMOTE --wait";
@@ -233,7 +234,7 @@ in {
     description = "Machine's editor setup";
     script = ''
       ${nixpkgs.substitute {
-        src = nixpkgs.writeScript "machine-editor-setup.sh" ''
+        src = nixpkgs.writeShellScript "machine-editor-setup.sh" ''
           set -eux
 
           export PATH=${nixpkgs.lib.makeSearchPath "bin" [nixpkgs.coreutils]}
