@@ -1,4 +1,8 @@
-{nixpkgs, ...}: {
+{
+  config,
+  nixpkgs,
+  ...
+}: {
   services.postgresql = {
     package = nixpkgs.postgresql_15;
     enable = true;
@@ -16,4 +20,9 @@
       full_page_writes = false;
     };
   };
+
+  services.pgadmin.enable = true;
+  services.pgadmin.port = 10000 + config.services.postgresql.port;
+  services.pgadmin.initialEmail = config.wellKnown.email;
+  services.pgadmin.initialPasswordFile = builtins.toFile "password" "123456";
 }
