@@ -201,6 +201,16 @@
     "python.linting.prospectorEnabled" = true;
     "python.linting.prospectorPath" = "${pythonOnNix.prospector-latest-python39-bin}/bin/prospector";
     "python.linting.pylintEnabled" = false;
+    "rust-analyzer.imports.prefer.no.std" = true;
+    "rust-analyzer.imports.prefix" = "crate";
+    "rust-analyzer.inlayHints.bindingModeHints.enable" = true;
+    "rust-analyzer.inlayHints.closingBraceHints.minLines" = 0;
+    "rust-analyzer.inlayHints.closureReturnTypeHints.enable" = "always";
+    "rust-analyzer.inlayHints.expressionAdjustmentHints.enable" = "always";
+    "rust-analyzer.inlayHints.lifetimeElisionHints.enable" = "always";
+    "rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames" = true;
+    "rust-analyzer.inlayHints.maxLength" = null;
+    "rust-analyzer.lens.references.adt.enable" = true;
     "security.workspace.trust.enabled" = false;
     "telemetry.telemetryLevel" = "off";
     "update.mode" = "none";
