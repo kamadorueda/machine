@@ -52,7 +52,7 @@
       };
   in {
     nixosModules = {
-      books = import ./nixos-modules/books;
+      # books = import ./nixos-modules/books;
 
       browser = import ./nixos-modules/browser;
 
@@ -66,7 +66,7 @@
 
       # k8s = import ./nixos-modules/k8s;
 
-      mysql = import ./nixos-modules/mysql;
+      # mysql = import ./nixos-modules/mysql;
 
       networking = import ./nixos-modules/networking;
 
@@ -96,7 +96,7 @@
 
       users = import ./nixos-modules/users;
 
-      virtualization = import ./nixos-modules/virtualization;
+      # virtualization = import ./nixos-modules/virtualization;
 
       wellKnown = import ./nixos-modules/well-known;
       wellKnownConfig = {
