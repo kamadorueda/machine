@@ -7,7 +7,7 @@ mkdir home
 chmod 700 home
 gpgconf --kill gpg-agent
 
-for email in kamadorueda@gmail.com kamado@fluidattacks.com; do
+for email in kamadorueda@gmail.com; do
   cat | gpg --generate-key --batch << EOF
 Key-Type: rsa
 Key-Usage: auth encrypt sign

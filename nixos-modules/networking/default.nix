@@ -18,6 +18,11 @@
     environmentFiles = ["${config.secrets.path}/cloudflared-tunnel"];
   };
 
+  virtualisation.oci-containers.containers.bwapp = {
+    image = "hackersploit/bwapp-docker";
+    ports = ["48084:80"];
+  };
+
   systemd.services."machine-networking-setup" = {
     description = "Machine's networking setup";
     script = ''
