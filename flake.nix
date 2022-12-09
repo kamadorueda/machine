@@ -52,7 +52,7 @@
       };
   in {
     nixosModules = {
-      # books = import ./nixos-modules/books;
+      books = import ./nixos-modules/books;
 
       browser = import ./nixos-modules/browser;
 

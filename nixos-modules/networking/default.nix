@@ -5,7 +5,7 @@
 }: {
   networking.firewall.enable = true;
   networking.firewall.allowedUDPPorts = [];
-  networking.firewall.allowedTCPPorts = [40000];
+  networking.firewall.allowedTCPPorts = [];
 
   networking.hostName = "machine";
   networking.nameservers = ["1.1.1.1" "8.8.8.8" "8.8.4.4"];
@@ -16,11 +16,6 @@
     cmd = ["tunnel" "--no-autoupdate" "run"];
     extraOptions = ["--network" "host"];
     environmentFiles = ["${config.secrets.path}/cloudflared-tunnel"];
-  };
-
-  virtualisation.oci-containers.containers.bwapp = {
-    image = "hackersploit/bwapp-docker";
-    ports = ["48084:80"];
   };
 
   systemd.services."machine-networking-setup" = {
