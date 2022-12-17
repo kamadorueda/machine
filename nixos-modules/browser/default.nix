@@ -20,7 +20,6 @@
     ExtensionInstallForcelist = [
       "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly: Grammar Checker and Writing App
       "hdokiejnpimakedhajhdlcegeplioahd" # LastPass: Free Password Manager
-      "mobhfbcgjoleoljhpkkdhopdiemlocka" # RPass
     ];
     HighContrastEnabled = true;
     ImportBookmarks = false;
@@ -36,19 +35,6 @@
           {
             name = "matrix";
             url = "https://app.element.io";
-          }
-        ];
-      }
-      {
-        name = "Fluid Attacks";
-        children = [
-          {
-            name = "backlog-universe";
-            url = "https://gitlab.com/dashboard/issues?assignee_username=kamadoatfluid&sort=label_priority";
-          }
-          {
-            name = "backlog-makes";
-            url = "https://github.com/orgs/fluidattacks/projects/2/views/2";
           }
         ];
       }
@@ -153,19 +139,6 @@
           {
             name = "Main";
             url = "https://my.ucalgary.ca";
-          }
-          {
-            name = "Gym";
-            url = "https://active-living.ucalgary.ca/facilities/fitness-centre";
-          }
-        ];
-      }
-      {
-        name = "Weather";
-        children = [
-          {
-            name = "A";
-            url = "https://www.accuweather.com/en/ca/banff-trail/t2m/minute-weather-forecast/3379926";
           }
         ];
       }
