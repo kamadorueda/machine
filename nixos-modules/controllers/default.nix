@@ -11,11 +11,13 @@
     in
       builtins.trace "Linux: ${packages.kernel.version}" packages;
 
+    environment.systemPackages = [nixpkgs.wally-cli];
     hardware.bluetooth.enable = true;
     hardware.firmware = [
       nixpkgs.linux-firmware
       nixpkgs.wireless-regdb
     ];
+    hardware.keyboard.zsa.enable = true;
     hardware.nvidia.package = let
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     in
