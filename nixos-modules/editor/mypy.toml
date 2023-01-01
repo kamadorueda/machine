@@ -1,0 +1,7 @@
+[mypy]
+disallow_any_generics = false
+disallow_subclassing_any = false
+disallow_untyped_calls = false
+disallow_untyped_decorators = false
+ignore_missing_imports = true
+strict = true

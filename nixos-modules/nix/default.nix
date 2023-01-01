@@ -1,6 +1,5 @@
 {
   config,
-  fenixSrc,
   nixpkgs,
   nixpkgsSrc,
   ...
@@ -16,18 +15,11 @@
     extra-experimental-features = nix-command flakes
   '';
   nix.nixPath = ["nixpkgs=${nixpkgsSrc}"];
-  nix.package = let
-    package = nixpkgs.nixUnstable;
-  in
-    builtins.trace "Nix: ${package.version}" package;
+  nix.package = nixpkgs.nixUnstable;
   nix.readOnlyStore = false;
   nix.registry.nixpkgs = {
     exact = false;
     flake = nixpkgsSrc;
-  };
-  nix.registry.fenix = {
-    exact = false;
-    flake = fenixSrc;
   };
   nix.settings.cores = 0;
   nix.settings.max-jobs = 1;

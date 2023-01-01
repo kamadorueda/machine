@@ -1,6 +1,5 @@
 {
   config,
-  makes,
   nixpkgs,
   ...
 }: let

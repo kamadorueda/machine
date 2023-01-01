@@ -1,4 +1,4 @@
 steps:
-- label: test
-  command:
-  - nix flake check
+  - label: test
+    command:
+      - nix flake check

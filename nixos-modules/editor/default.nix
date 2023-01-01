@@ -1,19 +1,14 @@
 {
-  alejandra,
   config,
   fenix,
-  makes,
-  makesSrc,
   nixpkgs,
-  pythonOnNix,
   ...
 }: let
-  pkg = let
-    pkg = nixpkgs.vscode;
-  in
-    builtins.trace "VSCode: ${pkg.version}" pkg;
+  pkg = nixpkgs.vscode;
+
   extensionsDir = "/data/editor/extensions";
   userDataDir = "/data/editor/data";
+
   bin = builtins.concatStringsSep " " [
     "${pkg}/bin/code" # unfree
     "--extensions-dir"
@@ -21,6 +16,7 @@
     "--user-data-dir"
     userDataDir
   ];
+
   extensions = nixpkgs.symlinkJoin {
     name = "extensions";
     paths = [
@@ -44,7 +40,7 @@
       nixpkgs.vscode-extensions.ms-toolsai.jupyter
       nixpkgs.vscode-extensions.ms-toolsai.jupyter-renderers
       nixpkgs.vscode-extensions.ms-vscode.cpptools
-      nixpkgs.vscode-extensions.ms-vscode-remote.remote-ssh # unfree
+      # nixpkgs.vscode-extensions.ms-vscode-remote.remote-ssh # unfree
       nixpkgs.vscode-extensions.njpwerner.autodocstring
       nixpkgs.vscode-extensions.redhat.java
       nixpkgs.vscode-extensions.shardulm94.trailing-spaces
@@ -54,10 +50,11 @@
       nixpkgs.vscode-extensions.usernamehw.errorlens
     ];
   };
+
   settings = {
     "[python]"."editor.tabSize" = 4;
     "[rust]"."editor.tabSize" = 4;
-    "alejandra.program" = "${alejandra}/bin/alejandra";
+    "alejandra.program" = "${nixpkgs.alejandra}/bin/alejandra";
     "customLocalFormatters.formatters" = [
       {
         command = "${nixpkgs.clang-tools}/bin/clang-format --sort-includes --style=file:${./clang.yaml}";
@@ -94,15 +91,8 @@
       {
         command =
           (nixpkgs.writeShellScript "python-fmt" ''
-            ${pythonOnNix.black-latest-python39-bin}/bin/black \
-              --config \
-              ${makesSrc}/src/evaluator/modules/format-python/settings-black.toml \
-              - \
-              | \
-            ${pythonOnNix.isort-latest-python39-bin}/bin/isort \
-              --settings-path \
-              ${makesSrc}/src/evaluator/modules/format-python/settings-isort.toml \
-              -
+            ${nixpkgs.black}/bin/black --config ${./black.toml} - \
+            | ${nixpkgs.isort}/bin/isort --settings-path ${./isort.toml} -
           '')
           .outPath;
         languages = ["python"];
@@ -130,9 +120,7 @@
       {
         command =
           (nixpkgs.writeShellScript "toml-fmt" ''
-            #! ${nixpkgs.bash}/bin/bash
-
-            NODE_PATH=${nixpkgs.nodePackages.prettier-plugin-toml}/lib/node_modules:$NODE_PATH \
+            NODE_PATH=${nixpkgs.nodePackages.prettier-plugin-toml}/lib/node_modules \
             ${nixpkgs.nodePackages.prettier}/bin/prettier \
               --parser toml \
               --plugin prettier-plugin-toml
@@ -187,19 +175,13 @@
     "python.languageServer" = "Pylance";
     "python.linting.enabled" = true;
     "python.linting.lintOnSave" = true;
-    "python.linting.mypyArgs" = [
-      "--config-file"
-      "${makesSrc}/src/evaluator/modules/lint-python/settings-mypy.cfg"
-    ];
+    "python.linting.mypyArgs" = ["--config-file" ./mypy.toml];
     "python.linting.mypyEnabled" = true;
-    "python.linting.mypyPath" = "${pythonOnNix.mypy-latest-python39-bin}/bin/mypy";
-    "python.linting.prospectorArgs" = [
-      "--profile"
-      "${makesSrc}/src/evaluator/modules/lint-python/settings-prospector.yaml"
-    ];
+    "python.linting.mypyPath" = "${nixpkgs.mypy}/bin/mypy";
+    "python.linting.prospectorArgs" = ["--profile" ./prospector.yaml];
     "python.defaultInterpreterPath" = "/run/current-system/sw/bin/python";
     "python.linting.prospectorEnabled" = true;
-    "python.linting.prospectorPath" = "${pythonOnNix.prospector-latest-python39-bin}/bin/prospector";
+    "python.linting.prospectorPath" = "${nixpkgs.prospector}/bin/prospector";
     "python.linting.pylintEnabled" = false;
     "rust-analyzer.imports.prefer.no.std" = true;
     "rust-analyzer.imports.prefix" = "crate";
@@ -224,6 +206,13 @@
     "workbench.settings.editor" = "json";
     "workbench.startupEditor" = "none";
   };
+
+  settingsJson =
+    nixpkgs.runCommand "settings.json" {
+      passAsFile = ["settings"];
+      settings = builtins.toJSON settings;
+    }
+    "cp $settingsPath $out";
 in {
   environment.variables.EDITOR = "${bin} --wait";
   environment.systemPackages = [
@@ -263,7 +252,7 @@ in {
         replacements = [
           ["--replace" "@extensions@" extensions]
           ["--replace" "@extensionsDir@" extensionsDir]
-          ["--replace" "@settings@" (makes.toFileJson "settings.json" settings)]
+          ["--replace" "@settings@" settingsJson]
           ["--replace" "@userDataDir@" userDataDir]
         ];
         isExecutable = true;

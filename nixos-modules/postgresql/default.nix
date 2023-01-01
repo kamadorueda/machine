@@ -7,7 +7,7 @@
     autoStart = false;
     config = {
       services.postgresql = {
-        package = nixpkgs.postgresql_15;
+        package = nixpkgs.postgresql;
         enable = true;
         enableTCPIP = false;
         authentication = ''

@@ -6,10 +6,7 @@
 }: {
   imports = [nixosHardware.nixosModules.framework];
   config = {
-    boot.kernelPackages = let
-      packages = nixpkgs.linuxPackages_latest;
-    in
-      builtins.trace "Linux: ${packages.kernel.version}" packages;
+    boot.kernelPackages = nixpkgs.linuxPackages_latest;
 
     environment.systemPackages = [nixpkgs.wally-cli];
     hardware.bluetooth.enable = true;
@@ -18,10 +15,7 @@
       nixpkgs.wireless-regdb
     ];
     hardware.keyboard.zsa.enable = true;
-    hardware.nvidia.package = let
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-    in
-      builtins.trace "Nvidia driver version: ${package.version}" package;
+    hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
     hardware.opengl.enable = true;
     hardware.opengl.extraPackages = [nixpkgs.intel-compute-runtime];
     hardware.pulseaudio.enable = true;

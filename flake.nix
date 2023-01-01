@@ -1,10 +1,6 @@
 {
   inputs = {
-    alejandra.url = "github:kamadorueda/alejandra";
-    alejandra.inputs.fenix.follows = "fenix";
-    alejandra.inputs.nixpkgs.follows = "nixpkgs";
-
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/release-22.11";
 
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
@@ -12,17 +8,10 @@
     homeManager.url = "github:nix-community/home-manager/master";
     homeManager.inputs.nixpkgs.follows = "nixpkgs";
 
-    makes.url = "github:fluidattacks/makes/main";
-    makes.inputs.nixpkgs.follows = "nixpkgs";
-
     nixosGenerators.url = "github:nix-community/nixos-generators";
     nixosGenerators.inputs.nixpkgs.follows = "nixpkgs";
 
     nixosHardware.url = "github:nixos/nixos-hardware/master";
-
-    pythonOnNix.url = "github:on-nix/python/main";
-    pythonOnNix.inputs.makes.follows = "makes";
-    pythonOnNix.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs: let
     system = "x86_64-linux";
@@ -34,19 +23,14 @@
 
     mkNixosSystem = modules:
       import "${inputs.nixpkgs}/nixos/lib/eval-config.nix" {
-        lib = nixpkgs.lib.extend (_: lib: {});
+        lib = nixpkgs.lib.extend (_: _: {});
         inherit modules;
         specialArgs = rec {
-          alejandra = inputs.alejandra.defaultPackage.${system};
           fenix = inputs.fenix.packages.${system};
-          fenixSrc = inputs.fenix;
           inherit (inputs) nixosHardware;
           inherit nixpkgs;
           nixpkgsSrc = inputs.nixpkgs;
-          makes = import "${inputs.makes}/src/args/agnostic.nix" {inherit system;};
-          makesSrc = inputs.makes;
           pkgs = nixpkgs;
-          pythonOnNix = inputs.pythonOnNix.packages.${system};
         };
         inherit system;
       };
@@ -61,6 +45,16 @@
       controllers = import ./nixos-modules/controllers;
 
       editor = import ./nixos-modules/editor;
+
+      fhs = import ./nixos-modules/fhs;
+      fhsConfig = {
+        fhs.packages = [
+          nixpkgs.glibc.out
+          nixpkgs.glibc.dev
+          nixpkgs.openssl.out
+          nixpkgs.openssl.dev
+        ];
+      };
 
       homeManager = inputs.homeManager.nixosModule;
 
@@ -80,7 +74,7 @@
       secretsConfig = {
         secrets.hashedPassword =
           # mkpasswd -m sha-512
-          "$6$qQYhouD2P24RYK1H$Oc9BI/2wC7uydLXP5taS7LQgpTUbORwty/0sAGtwial7k9ZYQOmeyjZ5DxvmObdccPJHem2N/.afn/JtCJ2af.";
+          "$6$d2EgZoCE31IJeGzd$6.wZaD5iyqcMhTWdYhVuhDAwOlk4sCU.sB1vW.awZzpv.AlTYsNLXIVcJfDWkc7JZV9aJZ2tLO5gbjIwdCHbZ1";
         secrets.path = "/data/machine/secrets";
       };
 
