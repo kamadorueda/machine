@@ -35,6 +35,7 @@
       nixpkgs.vscode-extensions.kamadorueda.alejandra
       nixpkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
       nixpkgs.vscode-extensions.mattn.lisp
+      nixpkgs.vscode-extensions.mkhl.direnv
       nixpkgs.vscode-extensions.ms-python.python
       nixpkgs.vscode-extensions.ms-python.vscode-pylance # unfree
       nixpkgs.vscode-extensions.ms-toolsai.jupyter
