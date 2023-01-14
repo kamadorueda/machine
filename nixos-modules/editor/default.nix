@@ -184,7 +184,7 @@
     "python.linting.prospectorEnabled" = true;
     "python.linting.prospectorPath" = "${nixpkgs.prospector}/bin/prospector";
     "python.linting.pylintEnabled" = false;
-    "rust-analyzer.imports.prefer.no.std" = true;
+    "rust-analyzer.imports.prefer.no.std" = false;
     "rust-analyzer.imports.prefix" = "crate";
     "rust-analyzer.inlayHints.bindingModeHints.enable" = true;
     "rust-analyzer.inlayHints.closingBraceHints.minLines" = 0;
