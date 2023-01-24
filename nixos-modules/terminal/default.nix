@@ -73,6 +73,7 @@ in {
     nixpkgs.gnugrep
     nixpkgs.parted
     nixpkgs.shadow
+    nixpkgs.unzip
     (nixpkgs.writeShellScriptBin "terminal" ''
       exec ${nixpkgs.alacritty}/bin/alacritty \
         --config-file ${terminalConfigYml} \
