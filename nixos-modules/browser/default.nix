@@ -137,8 +137,16 @@
         name = "University of Calgary";
         children = [
           {
-            name = "Main";
+            name = "My";
             url = "https://my.ucalgary.ca";
+          }
+          {
+            name = "D2L";
+            url = "https://d2l.ucalgary.ca/d2l/home";
+          }
+          {
+            name = "github.com/rmsouza01/deep-learning";
+            url = "https://github.com/rmsouza01/deep-learning";
           }
         ];
       }
