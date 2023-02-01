@@ -4,6 +4,7 @@
   nixpkgsSrc,
   ...
 }: {
+  boot.readOnlyNixStore = false;
   environment.systemPackages = [
     (nixpkgs.writeShellScriptBin "nix" ''
       exec ${config.nix.package}/bin/nix \
@@ -16,7 +17,6 @@
   '';
   nix.nixPath = ["nixpkgs=${nixpkgsSrc}"];
   nix.package = nixpkgs.nixUnstable;
-  nix.readOnlyStore = false;
   nix.registry.nixpkgs = {
     exact = false;
     flake = nixpkgsSrc;

@@ -2,4 +2,4 @@
 
 nixos-generate-config \
   --show-hardware-config \
-  > nixos-modules/system/auto-detected.nix
+  | tee nixos-modules/physical/auto-detected.nix
