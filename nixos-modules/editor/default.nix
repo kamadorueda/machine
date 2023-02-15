@@ -54,7 +54,7 @@
 
   settings = {
     "[python]"."editor.tabSize" = 4;
-    "[rust]"."editor.tabSize" = 4;
+    "[rust]"."editor.tabSize" = 2;
     "alejandra.program" = "${nixpkgs.alejandra}/bin/alejandra";
     "customLocalFormatters.formatters" = [
       {
