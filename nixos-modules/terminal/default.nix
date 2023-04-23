@@ -71,15 +71,17 @@ in {
     nixpkgs.direnv
     nixpkgs.git-crypt
     nixpkgs.gnugrep
+    nixpkgs.jq
     nixpkgs.parted
     nixpkgs.shadow
+    nixpkgs.tree
     nixpkgs.unzip
     (nixpkgs.writeShellScriptBin "terminal" ''
       exec ${nixpkgs.alacritty}/bin/alacritty \
         --config-file ${terminalConfigYml} \
         "$@"
     '')
-    nixpkgs.tree
+    nixpkgs.zip
   ];
 
   home-manager.users.${config.wellKnown.username} = {
@@ -98,8 +100,6 @@ in {
     ssh-add ${config.secrets.path}/ssh/kamadorueda
 
     ssh-add ${config.secrets.path}/ssh/kevinatholdings
-    ${nixpkgs.cachix}/bin/cachix authtoken "$(cat ${config.secrets.path}/cachix-auth-token-holdings)"
-    ${nixpkgs.cachix}/bin/cachix use holdings-cache
   '';
   programs.git.config = {
     commit.gpgsign = true;

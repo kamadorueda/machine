@@ -21,7 +21,7 @@
     name = "extensions";
     paths = [
       fenix.rust-analyzer-vscode-extension
-      nixpkgs.vscode-extensions._4ops.terraform
+      nixpkgs.vscode-extensions."4ops".terraform
       nixpkgs.vscode-extensions.bbenoist.nix
       nixpkgs.vscode-extensions.bierner.markdown-mermaid
       nixpkgs.vscode-extensions.coolbear.systemd-unit-file
