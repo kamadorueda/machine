@@ -36,8 +36,6 @@
       };
   in {
     nixosModules = {
-      books = import ./nixos-modules/books;
-
       browser = import ./nixos-modules/browser;
 
       buildkite = import ./nixos-modules/buildkite;
@@ -74,7 +72,7 @@
       secretsConfig = {
         secrets.hashedPassword =
           # mkpasswd -m sha-512
-          "$6$d2EgZoCE31IJeGzd$6.wZaD5iyqcMhTWdYhVuhDAwOlk4sCU.sB1vW.awZzpv.AlTYsNLXIVcJfDWkc7JZV9aJZ2tLO5gbjIwdCHbZ1";
+          "$6$uDZpDg74HGXwOkrT$2AMzk03bGfI7eQSPIJi0T8GHprmm5/opYiFSjgRRZxbJTB1QbwrE4sxFteAvpeAXK.4V/3UhwbViFe68B3an//";
         secrets.path = "/data/machine/secrets";
       };
 

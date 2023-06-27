@@ -24,9 +24,11 @@
       nixpkgs.vscode-extensions."4ops".terraform
       nixpkgs.vscode-extensions.bbenoist.nix
       nixpkgs.vscode-extensions.bierner.markdown-mermaid
+      # nixpkgs.vscode-extensions.bpruitt-goddard.mermaid-markdown-syntax-highlighting
       nixpkgs.vscode-extensions.coolbear.systemd-unit-file
       nixpkgs.vscode-extensions.daohong-emilio.yash
       nixpkgs.vscode-extensions.eamodio.gitlens
+      nixpkgs.vscode-extensions.github.copilot
       nixpkgs.vscode-extensions.grapecity.gc-excelviewer
       nixpkgs.vscode-extensions.hashicorp.terraform
       nixpkgs.vscode-extensions.haskell.haskell
@@ -46,6 +48,7 @@
       nixpkgs.vscode-extensions.redhat.java
       nixpkgs.vscode-extensions.shardulm94.trailing-spaces
       nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
+      nixpkgs.vscode-extensions.styled-components.vscode-styled-components
       nixpkgs.vscode-extensions.tamasfe.even-better-toml
       nixpkgs.vscode-extensions.tomoki1207.pdf
       nixpkgs.vscode-extensions.usernamehw.errorlens
