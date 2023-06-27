@@ -98,8 +98,6 @@ in {
     source <(direnv hook bash)
 
     ssh-add ${config.secrets.path}/ssh/kamadorueda
-
-    ssh-add ${config.secrets.path}/ssh/kevinatholdings
   '';
   programs.git.config = {
     commit.gpgsign = true;
