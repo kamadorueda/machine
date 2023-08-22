@@ -197,6 +197,8 @@
     "rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames" = true;
     "rust-analyzer.inlayHints.maxLength" = null;
     "rust-analyzer.lens.references.adt.enable" = true;
+    "rust-analyzer.check.allTargets" = true;
+    "rust-analyzer.cargo.features" = "all";
     "security.workspace.trust.enabled" = false;
     "telemetry.telemetryLevel" = "off";
     "update.mode" = "none";
