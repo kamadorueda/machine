@@ -26,7 +26,7 @@
         exec ${nixpkgs.pavucontrol}/bin/pavucontrol "$@"
       '')
     ];
-    fonts.enableDefaultFonts = false;
+    fonts.enableDefaultPackages = false;
     fonts.fontconfig.defaultFonts.emoji = [
       "Twitter Color Emoji"
       "Noto Color Emoji"
@@ -36,7 +36,7 @@
     fonts.fontconfig.defaultFonts.serif = ["Fira Code"];
     fonts.fontconfig.enable = true;
     fonts.fontDir.enable = true;
-    fonts.fonts = [
+    fonts.packages = [
       nixpkgs.dejavu_fonts
       nixpkgs.freefont_ttf
       nixpkgs.gyre-fonts # TrueType substitutes for standard PostScript fonts

@@ -83,29 +83,35 @@ in {
             alejandra)
               case "$BUILDKITE_BRANCH" in
                 main)
-                  export CACHIX_AUTH_TOKEN="$(cat /secrets/cachix-auth-token-alejandra)"
-                  export COVERALLS_REPO_TOKEN="$(cat /secrets/coveralls-kamadorueda-alejandra)"
+                  CACHIX_AUTH_TOKEN="$(cat /secrets/cachix-auth-token-alejandra)"
+                  export CACHIX_AUTH_TOKEN
+
+                  COVERALLS_REPO_TOKEN="$(cat /secrets/coveralls-kamadorueda-alejandra)"
+                  export COVERALLS_REPO_TOKEN
                   ;;
               esac
               ;;
             nixel)
               case "$BUILDKITE_BRANCH" in
                 main)
-                  export COVERALLS_REPO_TOKEN="$(cat /secrets/coveralls-kamadorueda-nixel)"
+                  COVERALLS_REPO_TOKEN="$(cat /secrets/coveralls-kamadorueda-nixel)"
+                  export COVERALLS_REPO_TOKEN
                   ;;
               esac
               ;;
             santiago)
               case "$BUILDKITE_BRANCH" in
                 main)
-                  export COVERALLS_REPO_TOKEN="$(cat /secrets/coveralls-kamadorueda-santiago)"
+                  COVERALLS_REPO_TOKEN="$(cat /secrets/coveralls-kamadorueda-santiago)"
+                  export COVERALLS_REPO_TOKEN
                   ;;
               esac
               ;;
             toros)
               case "$BUILDKITE_BRANCH" in
                 main)
-                  export COVERALLS_REPO_TOKEN="$(cat /secrets/coveralls-kamadorueda-toros)"
+                  COVERALLS_REPO_TOKEN="$(cat /secrets/coveralls-kamadorueda-toros)"
+                  export COVERALLS_REPO_TOKEN
                   ;;
               esac
               ;;
