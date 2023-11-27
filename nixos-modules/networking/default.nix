@@ -32,11 +32,7 @@ in {
       mkdir -p /etc/NetworkManager/system-connections
       cd /etc/NetworkManager/system-connections
 
-      for connection in \
-        wifi-airuc-secure \
-        wifi-eduroam \
-        wifi-spsetup-2c38 \
-
+      for connection in wifi-*
       do
         cp ${config.secrets.path}/$connection $connection
         chmod 400 $connection
