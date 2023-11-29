@@ -29,13 +29,16 @@ in {
 
       export PATH=${nixpkgs.lib.makeSearchPath "bin" [nixpkgs.coreutils]}
 
-      mkdir -p /etc/NetworkManager/system-connections
-      cd /etc/NetworkManager/system-connections
+      system_conections=/etc/NetworkManager/system-connections
 
-      for connection in wifi-*
+      mkdir -p "$system_conections"
+
+      for connection_config in ${config.secrets.path}/wifi-*
       do
-        cp ${config.secrets.path}/$connection $connection
-        chmod 400 $connection
+        connection_name=$(basename "$connection_config")
+
+        cp "$connection_config" "$system_conections/$connection_name"
+        chmod 400 "$system_conections/$connection_name"
       done
     '';
     serviceConfig.Type = "oneshot";
