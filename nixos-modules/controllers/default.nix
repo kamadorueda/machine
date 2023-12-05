@@ -4,7 +4,7 @@
   nixpkgs,
   ...
 }: {
-  imports = [nixosHardware.nixosModules.framework];
+  imports = [nixosHardware.nixosModules.framework-11th-gen-intel];
   config = {
     boot.kernelPackages = nixpkgs.linuxPackages_latest;
 
