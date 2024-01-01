@@ -83,7 +83,7 @@
       ui = import ./nixos-modules/ui;
       uiConfig = {
         ui.fontSize = 16;
-        ui.timezone = "America/New_York";
+        ui.timezone = "America/Edmonton";
       };
 
       users = import ./nixos-modules/users;
