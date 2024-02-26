@@ -176,6 +176,7 @@
     "gitlens.showWhatsNewAfterUpgrades" = false;
     "python.analysis.autoSearchPaths" = false;
     "python.analysis.diagnosticMode" = "openFilesOnly";
+    "python.defaultInterpreterPath" = "/run/current-system/sw/bin/python";
     "python.formatting.provider" = "none";
     "python.languageServer" = "Pylance";
     "python.linting.enabled" = true;
@@ -183,10 +184,9 @@
     "python.linting.mypyArgs" = ["--config-file" ./mypy.toml];
     "python.linting.mypyEnabled" = true;
     "python.linting.mypyPath" = "${nixpkgs.mypy}/bin/mypy";
-    "python.linting.prospectorArgs" = ["--profile" ./prospector.yaml];
-    "python.defaultInterpreterPath" = "/run/current-system/sw/bin/python";
-    "python.linting.prospectorEnabled" = true;
-    "python.linting.prospectorPath" = "${nixpkgs.prospector}/bin/prospector";
+    # "python.linting.prospectorArgs" = ["--profile" ./prospector.yaml];
+    # "python.linting.prospectorEnabled" = true;
+    # "python.linting.prospectorPath" = "${nixpkgs.prospector}/bin/prospector";
     "python.linting.pylintEnabled" = false;
     "rust-analyzer.assist.emitMustUse" = true;
     "rust-analyzer.cargo.buildScripts.useRustcWrapper" = false;
