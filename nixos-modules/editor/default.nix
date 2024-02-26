@@ -58,6 +58,7 @@
   settings = {
     "[python]"."editor.tabSize" = 4;
     "[rust]"."editor.tabSize" = 2;
+    "[toml]"."editor.defaultFormatter" = "tamasfe.even-better-toml";
     "alejandra.program" = "${nixpkgs.alejandra}/bin/alejandra";
     "customLocalFormatters.formatters" = [
       {
@@ -121,17 +122,17 @@
         command = "${nixpkgs.terraform}/bin/terraform fmt -";
         languages = ["terraform"];
       }
-      {
-        command =
-          (nixpkgs.writeShellScript "toml-fmt" ''
-            NODE_PATH=${nixpkgs.nodePackages.prettier-plugin-toml}/lib/node_modules \
-            ${nixpkgs.nodePackages.prettier}/bin/prettier \
-              --parser toml \
-              --plugin prettier-plugin-toml
-          '')
-          .outPath;
-        languages = ["toml"];
-      }
+      # {
+      #   command =
+      #     (nixpkgs.writeShellScript "toml-fmt" ''
+      #       NODE_PATH=${nixpkgs.nodePackages.prettier-plugin-toml}/lib/node_modules \
+      #       ${nixpkgs.nodePackages.prettier}/bin/prettier \
+      #         --parser toml \
+      #         --plugin prettier-plugin-toml
+      #     '')
+      #     .outPath;
+      #   languages = ["toml"];
+      # }
       {
         command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser html";
         languages = ["xml"];
