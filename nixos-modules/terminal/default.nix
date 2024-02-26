@@ -30,8 +30,7 @@
     working_directory = "/data";
   };
   terminalConfigYml =
-    (builtins.toFile "alacritty-config.yml")
-    (builtins.toJSON terminalConfig);
+    (nixpkgs.formats.toml {}).generate "alacritty-config.toml" terminalConfig;
 in {
   environment.shellAliases = nixpkgs.lib.mkForce {};
   environment.systemPackages = [
