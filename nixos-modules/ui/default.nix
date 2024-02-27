@@ -10,18 +10,27 @@
   };
   config = {
     environment.systemPackages = [
+      nixpkgs.bluez
       (nixpkgs.writeShellScriptBin "bluetooth" ''
         exec ${nixpkgs.bluez}/bin/bluetoothctl "$@"
       '')
-      (nixpkgs.writeShellScriptBin "files" ''
-        exec ${nixpkgs.gnome.nautilus}/bin/nautilus "$@"
-      '')
+
+      nixpkgs.gnome.eog
       (nixpkgs.writeShellScriptBin "images" ''
         exec ${nixpkgs.gnome.eog}/bin/eog "$@"
       '')
+
+      nixpkgs.gnome.gnome-screenshot
       (nixpkgs.writeShellScriptBin "screenshot" ''
         exec ${nixpkgs.gnome.gnome-screenshot}/bin/gnome-screenshot "$@"
       '')
+
+      nixpkgs.gnome.nautilus
+      (nixpkgs.writeShellScriptBin "files" ''
+        exec ${nixpkgs.gnome.nautilus}/bin/nautilus "$@"
+      '')
+
+      nixpkgs.pavucontrol
       (nixpkgs.writeShellScriptBin "sound" ''
         exec ${nixpkgs.pavucontrol}/bin/pavucontrol "$@"
       '')
@@ -91,5 +100,9 @@
     ];
     services.xserver.xkbVariant = "altgr-intl";
     time.timeZone = config.ui.timezone;
+    xdg.mime.addedAssociations = {
+      # "application/pdf" = "brave-browser.desktop";
+    };
+    xdg.mime.enable = true;
   };
 }

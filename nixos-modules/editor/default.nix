@@ -237,6 +237,7 @@
 in {
   environment.variables.EDITOR = "${bin} --wait";
   environment.systemPackages = [
+    pkg
     (nixpkgs.writeShellScriptBin "editor" ''
       exec ${bin} "$@"
     '')
