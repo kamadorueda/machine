@@ -98,7 +98,8 @@
       nixpkgs.i3lock
       nixpkgs.i3status
     ];
-    services.xserver.xkbVariant = "altgr-intl";
+    services.xserver.xkb.layout = "us";
+    services.xserver.xkb.variant = "altgr-intl";
     time.timeZone = config.ui.timezone;
     xdg.mime.addedAssociations = {
       # "application/pdf" = "brave-browser.desktop";
