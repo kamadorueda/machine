@@ -1,15 +1,37 @@
-{nixpkgs, ...}: {
+{
+  config,
+  nixpkgs,
+  ...
+}: {
   environment.systemPackages = [
     nixpkgs.brave
     (nixpkgs.writeShellScriptBin "browser" ''
-      exec ${nixpkgs.brave}/bin/brave \
-        --user-data-dir=/data/browser/data \
-        "$@"
-    '')
-    (nixpkgs.writeShellScriptBin "x-www-browser" ''
-      browser "$@"
+      brave "$@"
     '')
   ];
+
+  systemd.services."machine-browser-user-data-dir" = {
+    path = [nixpkgs.util-linux];
+
+    # Brave uses this specific path for their config
+    environment.USER_DATA_DIR = "/home/${config.wellKnown.username}/.config/BraveSoftware/Brave-Browser";
+
+    serviceConfig = {
+      ExecStart = nixpkgs.writeShellScript "exec-start.sh" ''
+        mkdir -p "$USER_DATA_DIR"
+        chown ${nixpkgs.lib.escapeShellArg config.wellKnown.username} "$USER_DATA_DIR"
+        mount --bind /data/browser/data "$USER_DATA_DIR"
+      '';
+      ExecStop = nixpkgs.writeShellScript "exec-stop.sh" ''
+        umount "$USER_DATA_DIR"
+      '';
+      RemainAfterExit = true;
+      Type = "oneshot";
+    };
+
+    after = ["multi-user.target"];
+    wantedBy = ["multi-user.target"];
+  };
 
   programs.chromium.enable = true;
   # https://chromeenterprise.google/policies/
@@ -27,19 +49,6 @@
     ImportBookmarks = false;
     ManagedBookmarks = [
       {toplevel_name = "Links";}
-      {
-        name = "Comunications";
-        children = [
-          {
-            name = "discord";
-            url = "https://discord.com";
-          }
-          {
-            name = "matrix";
-            url = "https://app.element.io";
-          }
-        ];
-      }
       {
         name = "Nix";
         children = [

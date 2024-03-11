@@ -34,6 +34,21 @@
 in {
   environment.shellAliases = nixpkgs.lib.mkForce {};
   environment.systemPackages = [
+    nixpkgs.alacritty
+    nixpkgs.awscli2
+    nixpkgs.comma
+    nixpkgs.coreutils
+    nixpkgs.direnv
+    nixpkgs.git-crypt
+    nixpkgs.gnugrep
+    nixpkgs.jq
+    nixpkgs.parted
+    nixpkgs.shadow
+    nixpkgs.tree
+    nixpkgs.unzip
+    nixpkgs.xclip
+    nixpkgs.zip
+
     (nixpkgs.writeShellScriptBin "a" ''
       git add -p "$@"
     '')
@@ -44,7 +59,7 @@ in {
       git commit --amend --no-edit --allow-empty "$@"
     '')
     (nixpkgs.writeShellScriptBin "clip" ''
-      ${nixpkgs.xclip}/bin/xclip -sel clip "$@"
+      xclip -sel clip "$@"
     '')
     (nixpkgs.writeShellScriptBin "f" ''
       git fetch --all "$@"
@@ -64,23 +79,11 @@ in {
     (nixpkgs.writeShellScriptBin "s" ''
       git status "$@"
     '')
-    nixpkgs.awscli2
-    nixpkgs.comma
-    nixpkgs.coreutils
-    nixpkgs.direnv
-    nixpkgs.git-crypt
-    nixpkgs.gnugrep
-    nixpkgs.jq
-    nixpkgs.parted
-    nixpkgs.shadow
-    nixpkgs.tree
-    nixpkgs.unzip
     (nixpkgs.writeShellScriptBin "terminal" ''
-      exec ${nixpkgs.alacritty}/bin/alacritty \
+      alacritty \
         --config-file ${terminalConfigYml} \
         "$@"
     '')
-    nixpkgs.zip
   ];
 
   home-manager.users.${config.wellKnown.username} = {

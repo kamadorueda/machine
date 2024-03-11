@@ -23,7 +23,6 @@ in {
   security.pki.certificateFiles = ["${mkcert.certs}/rootCA.pem"];
 
   systemd.services."machine-networking-setup" = {
-    description = "Machine's networking setup";
     script = ''
       set -eux
 
