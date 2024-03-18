@@ -25,8 +25,8 @@ nixpkgs.symlinkJoin {
     nixpkgs.vscode-extensions.mkhl.direnv
     nixpkgs.vscode-extensions.ms-python.python
     nixpkgs.vscode-extensions.ms-python.vscode-pylance # unfree
-    nixpkgs.vscode-extensions.ms-toolsai.jupyter
-    nixpkgs.vscode-extensions.ms-toolsai.jupyter-renderers
+    # nixpkgs.vscode-extensions.ms-toolsai.jupyter
+    # nixpkgs.vscode-extensions.ms-toolsai.jupyter-renderers
     nixpkgs.vscode-extensions.ms-vscode.cpptools
     # nixpkgs.vscode-extensions.ms-vscode-remote.remote-ssh # unfree
     nixpkgs.vscode-extensions.njpwerner.autodocstring

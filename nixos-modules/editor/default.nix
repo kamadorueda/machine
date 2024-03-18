@@ -17,8 +17,8 @@
       ["--user-data-dir" userDataDir]
     ]
     [
-      nixpkgs.lib.flatten
-      nixpkgs.lib.escapeShellArgs
+      (nixpkgs.lib.flatten)
+      (nixpkgs.lib.concatStringsSep " ")
     ];
 
   extensions = import ./extensions.nix {inherit fenix nixpkgs;};

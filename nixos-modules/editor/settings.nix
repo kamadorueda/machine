@@ -67,7 +67,7 @@
     }
     {
       command = "${nixpkgs.terraform}/bin/terraform fmt -";
-      languages = ["terraform"];
+      languages = ["tf"];
     }
     # {
     #   command =
