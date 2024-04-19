@@ -36,6 +36,8 @@
       };
   in {
     nixosModules = {
+      av = import ./nixos-modules/av;
+
       browser = import ./nixos-modules/browser;
 
       buildkite = import ./nixos-modules/buildkite;
