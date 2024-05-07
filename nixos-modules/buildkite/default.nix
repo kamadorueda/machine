@@ -19,7 +19,7 @@
       nix.settings.max-jobs = 1;
       nix.settings.substituters = config.nix.settings.substituters;
       nix.settings.trusted-public-keys = config.nix.settings.trusted-public-keys;
-      nix.package = nixpkgs.nixUnstable;
+      nix.package = config.nix.package;
       services.buildkite-agents.default = {
         extraConfig = ''
           no-git-submodules = true
@@ -36,13 +36,13 @@
           nixpkgs.gnutar
           nixpkgs.gzip
           (nixpkgs.writeShellScriptBin "nix-env" ''
-            exec ${nixpkgs.nixUnstable}/bin/nix-env "$@"
+            exec ${config.nix.package}/bin/nix-env "$@"
           '')
           (nixpkgs.writeShellScriptBin "nix-store" ''
-            exec ${nixpkgs.nixUnstable}/bin/nix-store "$@"
+            exec ${config.nix.package}/bin/nix-store "$@"
           '')
           (nixpkgs.writeShellScriptBin "nix" ''
-            exec ${nixpkgs.nixUnstable}/bin/nix --print-build-logs "$@"
+            exec ${config.nix.package}/bin/nix --print-build-logs "$@"
           '')
         ];
         shell = "${nixpkgs.bash}/bin/bash -euo pipefail -c";

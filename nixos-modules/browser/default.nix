@@ -18,11 +18,15 @@
 
     serviceConfig = {
       ExecStart = nixpkgs.writeShellScript "exec-start.sh" ''
+        set -eux
+
         mkdir -p "$USER_DATA_DIR"
         chown ${nixpkgs.lib.escapeShellArg config.wellKnown.username} "$USER_DATA_DIR"
         mount --bind /data/browser/data "$USER_DATA_DIR"
       '';
       ExecStop = nixpkgs.writeShellScript "exec-stop.sh" ''
+        set -eux
+
         umount "$USER_DATA_DIR"
       '';
       RemainAfterExit = true;

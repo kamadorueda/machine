@@ -16,7 +16,7 @@
     extra-experimental-features = nix-command flakes
   '';
   nix.nixPath = ["nixpkgs=${nixpkgsSrc}"];
-  nix.package = nixpkgs.nixUnstable;
+  nix.package = nixpkgs.nixVersions.latest;
   nix.registry.nixpkgs = {
     exact = false;
     flake = nixpkgsSrc;
