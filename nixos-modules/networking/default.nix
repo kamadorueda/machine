@@ -23,6 +23,7 @@ in {
   security.pki.certificateFiles = ["${mkcert.certs}/rootCA.pem"];
 
   systemd.services."machine-networking-setup" = {
+    after = ["basic.target"];
     script = ''
       set -eux
 

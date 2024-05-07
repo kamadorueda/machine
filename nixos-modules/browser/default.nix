@@ -33,7 +33,7 @@
       Type = "oneshot";
     };
 
-    after = ["multi-user.target"];
+    after = ["basic.target"];
     wantedBy = ["multi-user.target"];
   };
 
