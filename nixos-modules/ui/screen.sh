@@ -1,9 +1,9 @@
 #!/bin/sh -eux
 
-command="${1}"
+command="${1:-}"
 brightness="${2:-0.5}"
 
-case "${1}" in
+case "${command}" in
   dual-calgary)
     viewport=1600x900
 

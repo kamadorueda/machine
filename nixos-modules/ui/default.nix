@@ -104,26 +104,18 @@
     services.xserver.xkb.layout = "us";
     services.xserver.xkb.variant = "altgr-intl";
 
-    systemd.services."machine-ui-setup" = {
-      path = [nixpkgs.dbus nixpkgs.xorg.xrandr];
+    systemd.user.services."machine-ui-setup" = {
+      path = [nixpkgs.xorg.xrandr];
 
       serviceConfig = {
-        ExecStart = nixpkgs.writeShellScript "machine-ui-setup.sh" ''
-          set -eux
-
-          systemctl --user import-environment DISPLAY XAUTHORITY
-          dbus-update-activation-environment DISPLAY XAUTHORITY
-
-          ${builtins.readFile ./screen.sh}
-        '';
-        Group = config.users.users.${config.wellKnown.username}.group;
+        ExecStart =
+          nixpkgs.writeShellScript "machine-ui-setup.sh"
+          (builtins.readFile ./screen.sh);
         Type = "oneshot";
-        User = config.wellKnown.username;
       };
       requiredBy = ["graphical.target"];
       unitConfig = {
         After = ["multi-user.target"];
-        # BindsTo = ["graphical.target"];
       };
     };
 
