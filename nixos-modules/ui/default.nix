@@ -73,16 +73,16 @@
       xdg.userDirs.videos = "/data/xdg/videos";
     };
     programs.dconf.enable = true;
+    services.displayManager.autoLogin.enable = true;
+    services.displayManager.autoLogin.user = config.wellKnown.username;
+    services.displayManager.defaultSession = "none+i3";
     services.gnome.gnome-keyring.enable = true;
-    services.xserver.displayManager.autoLogin.enable = true;
-    services.xserver.displayManager.autoLogin.user = config.wellKnown.username;
-    services.xserver.displayManager.defaultSession = "none+i3";
+    services.libinput.enable = true;
+    services.libinput.touchpad.naturalScrolling = true;
+    services.libinput.touchpad.scrollMethod = "twofinger";
+    services.libinput.touchpad.tapping = true;
     services.xserver.enable = true;
     services.xserver.exportConfiguration = true;
-    services.xserver.libinput.enable = true;
-    services.xserver.libinput.touchpad.naturalScrolling = true;
-    services.xserver.libinput.touchpad.scrollMethod = "twofinger";
-    services.xserver.libinput.touchpad.tapping = true;
     services.xserver.windowManager.i3.configFile = builtins.toFile "i3.conf" ''
       set $font 'monospace'
       set $fontSize ${builtins.toString config.ui.fontSize}

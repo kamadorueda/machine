@@ -52,7 +52,6 @@ in {
   };
 
   systemd.services."machine-editor-setup" = {
-    after = ["basic.target"];
     script = toString (nixpkgs.substitute {
       src = nixpkgs.writeShellScript "machine-editor-setup.sh" ''
         set -eux
@@ -83,6 +82,8 @@ in {
       Type = "oneshot";
       User = config.wellKnown.username;
     };
-    wantedBy = ["multi-user.target"];
+
+    after = ["multi-user.target"];
+    requiredBy = ["graphical.target"];
   };
 }

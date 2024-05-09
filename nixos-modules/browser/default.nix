@@ -33,8 +33,8 @@
       Type = "oneshot";
     };
 
-    after = ["basic.target"];
-    wantedBy = ["multi-user.target"];
+    after = ["multi-user.target"];
+    requiredBy = ["graphical.target"];
   };
 
   programs.chromium.enable = true;
