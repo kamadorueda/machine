@@ -32,8 +32,9 @@
       RemainAfterExit = true;
       Type = "oneshot";
     };
-
-    after = ["multi-user.target"];
+    unitConfig = {
+      After = ["multi-user.target"];
+    };
     requiredBy = ["graphical.target"];
   };
 

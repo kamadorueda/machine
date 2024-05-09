@@ -20,6 +20,9 @@
         exec ${nixpkgs.gnome.eog}/bin/eog "$@"
       '')
 
+      (nixpkgs.writeShellScriptBin "screen"
+        (builtins.readFile ./screen.sh))
+
       nixpkgs.gnome.gnome-screenshot
       (nixpkgs.writeShellScriptBin "screenshot" ''
         exec ${nixpkgs.gnome.gnome-screenshot}/bin/gnome-screenshot "$@"
@@ -100,6 +103,30 @@
     ];
     services.xserver.xkb.layout = "us";
     services.xserver.xkb.variant = "altgr-intl";
+
+    systemd.services."machine-ui-setup" = {
+      path = [nixpkgs.dbus nixpkgs.xorg.xrandr];
+
+      serviceConfig = {
+        ExecStart = nixpkgs.writeShellScript "machine-ui-setup.sh" ''
+          set -eux
+
+          systemctl --user import-environment DISPLAY XAUTHORITY
+          dbus-update-activation-environment DISPLAY XAUTHORITY
+
+          ${builtins.readFile ./screen.sh}
+        '';
+        Group = config.users.users.${config.wellKnown.username}.group;
+        Type = "oneshot";
+        User = config.wellKnown.username;
+      };
+      requiredBy = ["graphical.target"];
+      unitConfig = {
+        After = ["multi-user.target"];
+        # BindsTo = ["graphical.target"];
+      };
+    };
+
     time.timeZone = config.ui.timezone;
     xdg.mime.addedAssociations = {
       # "application/pdf" = "brave-browser.desktop";

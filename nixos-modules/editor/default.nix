@@ -56,8 +56,6 @@ in {
       src = nixpkgs.writeShellScript "machine-editor-setup.sh" ''
         set -eux
 
-        export PATH=${nixpkgs.lib.makeSearchPath "bin" [nixpkgs.coreutils]}
-
         rm -rf "@userDataDir@"
         rm -rf "@extensionsDir@"
 
@@ -79,11 +77,13 @@ in {
     });
     serviceConfig = {
       Group = config.users.users.${config.wellKnown.username}.group;
+      RemainAfterExit = true;
       Type = "oneshot";
       User = config.wellKnown.username;
     };
-
-    after = ["multi-user.target"];
+    unitConfig = {
+      After = ["multi-user.target"];
+    };
     requiredBy = ["graphical.target"];
   };
 }

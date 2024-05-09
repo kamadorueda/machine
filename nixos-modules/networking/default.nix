@@ -23,24 +23,25 @@ in {
   security.pki.certificateFiles = ["${mkcert.certs}/rootCA.pem"];
 
   systemd.services."machine-networking-setup" = {
-    script = ''
-      set -eux
+    serviceConfig = {
+      ExecStart = nixpkgs.writeShellScript "exec-start.sh" ''
+        set -eux
 
-      export PATH=${nixpkgs.lib.makeSearchPath "bin" [nixpkgs.coreutils]}
+        system_conections=/etc/NetworkManager/system-connections
 
-      system_conections=/etc/NetworkManager/system-connections
+        mkdir -p "$system_conections"
 
-      mkdir -p "$system_conections"
+        for connection_config in ${config.secrets.path}/wifi-*
+        do
+          connection_name=$(basename "$connection_config")
 
-      for connection_config in ${config.secrets.path}/wifi-*
-      do
-        connection_name=$(basename "$connection_config")
-
-        cp "$connection_config" "$system_conections/$connection_name"
-        chmod 400 "$system_conections/$connection_name"
-      done
-    '';
-    serviceConfig.Type = "oneshot";
+          cp "$connection_config" "$system_conections/$connection_name"
+          chmod 400 "$system_conections/$connection_name"
+        done
+      '';
+      RemainAfterExit = true;
+      Type = "oneshot";
+    };
 
     requiredBy = ["NetworkManager.service"];
   };
