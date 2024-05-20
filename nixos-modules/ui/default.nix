@@ -104,21 +104,6 @@
     services.xserver.xkb.layout = "us";
     services.xserver.xkb.variant = "altgr-intl";
 
-    systemd.user.services."machine-ui-setup" = {
-      path = [nixpkgs.xorg.xrandr];
-
-      serviceConfig = {
-        ExecStart =
-          nixpkgs.writeShellScript "machine-ui-setup.sh"
-          (builtins.readFile ./screen.sh);
-        Type = "oneshot";
-      };
-      requiredBy = ["graphical.target"];
-      unitConfig = {
-        After = ["multi-user.target"];
-      };
-    };
-
     time.timeZone = config.ui.timezone;
     xdg.mime.addedAssociations = {
       # "application/pdf" = "brave-browser.desktop";

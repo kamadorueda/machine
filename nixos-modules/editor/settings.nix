@@ -111,6 +111,7 @@
   "editor.minimap.size" = "fill";
   "editor.rulers" = [80];
   "editor.tabSize" = 2;
+  "editor.wrappingIndent" = "deepIndent";
   "editor.wordWrap" = "off";
   "explorer.confirmDelete" = false;
   "explorer.confirmDragAndDrop" = false;
