@@ -4,7 +4,7 @@ command="${1:-}"
 brightness="${2:-0.5}"
 
 case "${command}" in
-  dual-calgary)
+  dual)
     viewport=1600x900
 
     xrandr \
