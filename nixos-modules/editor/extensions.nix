@@ -9,6 +9,7 @@ nixpkgs.symlinkJoin {
     nixpkgs.vscode-extensions."4ops".terraform
     nixpkgs.vscode-extensions.bbenoist.nix
     nixpkgs.vscode-extensions.bierner.markdown-mermaid
+    nixpkgs.vscode-extensions.bradlc.vscode-tailwindcss
     # nixpkgs.vscode-extensions.bpruitt-goddard.mermaid-markdown-syntax-highlighting
     nixpkgs.vscode-extensions.coolbear.systemd-unit-file
     nixpkgs.vscode-extensions.daohong-emilio.yash
