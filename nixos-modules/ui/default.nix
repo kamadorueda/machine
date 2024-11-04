@@ -15,22 +15,22 @@
         exec ${nixpkgs.bluez}/bin/bluetoothctl "$@"
       '')
 
-      nixpkgs.gnome.eog
+      nixpkgs.nautilus
+      (nixpkgs.writeShellScriptBin "files" ''
+        exec ${nixpkgs.nautilus}/bin/nautilus "$@"
+      '')
+
+      nixpkgs.eog
       (nixpkgs.writeShellScriptBin "images" ''
-        exec ${nixpkgs.gnome.eog}/bin/eog "$@"
+        exec ${nixpkgs.eog}/bin/eog "$@"
       '')
 
       (nixpkgs.writeShellScriptBin "screen"
         (builtins.readFile ./screen.sh))
 
-      nixpkgs.gnome.gnome-screenshot
+      nixpkgs.gnome-screenshot
       (nixpkgs.writeShellScriptBin "screenshot" ''
-        exec ${nixpkgs.gnome.gnome-screenshot}/bin/gnome-screenshot "$@"
-      '')
-
-      nixpkgs.gnome.nautilus
-      (nixpkgs.writeShellScriptBin "files" ''
-        exec ${nixpkgs.gnome.nautilus}/bin/nautilus "$@"
+        exec ${nixpkgs.gnome-screenshot}/bin/gnome-screenshot "$@"
       '')
 
       nixpkgs.pavucontrol

@@ -67,11 +67,11 @@ in {
         cp --dereference --no-preserve=mode,ownership -rT \
           "@extensions@/share/vscode/extensions/" "@extensionsDir@"
       '';
-      replacements = [
-        ["--replace" "@extensions@" extensions]
-        ["--replace" "@extensionsDir@" extensionsDir]
-        ["--replace" "@settings@" settingsJson]
-        ["--replace" "@userDataDir@" userDataDir]
+      substitutions = nixpkgs.lib.concatLists [
+        ["--replace-fail" "@extensions@" extensions]
+        ["--replace-fail" "@extensionsDir@" extensionsDir]
+        ["--replace-fail" "@settings@" settingsJson]
+        ["--replace-fail" "@userDataDir@" userDataDir]
       ];
       isExecutable = true;
     });

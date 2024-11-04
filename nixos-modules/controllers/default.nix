@@ -14,11 +14,10 @@
       nixpkgs.linux-firmware
       nixpkgs.wireless-regdb
     ];
+    hardware.graphics.enable = true;
+    hardware.graphics.extraPackages = [nixpkgs.intel-compute-runtime];
     hardware.keyboard.zsa.enable = true;
     hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-    hardware.opengl.enable = true;
-    hardware.opengl.extraPackages = [nixpkgs.intel-compute-runtime];
-    hardware.pulseaudio.enable = true;
     services.fwupd.enable = true;
     services.gnome.at-spi2-core.enable = true;
     # services.xserver.videoDrivers = ["nvidia"];
