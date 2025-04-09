@@ -34,6 +34,7 @@
   fileSystems."/data" = {
     device = "/dev/disk/by-uuid/be0f0ce0-944d-4f9d-8ff5-cb22db4543a2";
     fsType = "ext4";
+    neededForBoot = true;
   };
 
   boot.initrd.luks.devices."cryptdata".device = "/dev/disk/by-uuid/51ef0c8e-2671-4df1-bf92-3f2e1a868a26";
