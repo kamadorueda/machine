@@ -1,11 +1,8 @@
-{
-  fenix,
-  nixpkgs,
-}:
+{nixpkgs}:
 nixpkgs.symlinkJoin {
   name = "extensions";
   paths = [
-    fenix.rust-analyzer-vscode-extension
+    nixpkgs.fenix.rust-analyzer-vscode-extension
     nixpkgs.vscode-extensions."4ops".terraform
     nixpkgs.vscode-extensions.bbenoist.nix
     nixpkgs.vscode-extensions.bierner.markdown-mermaid

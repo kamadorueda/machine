@@ -1,9 +1,10 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
+    fenix.inputs.rust-analyzer-src.follows = "rustAnalyzer";
 
     homeManager.url = "github:nix-community/home-manager/master";
     homeManager.inputs.nixpkgs.follows = "nixpkgs";
@@ -12,30 +13,14 @@
     nixosGenerators.inputs.nixpkgs.follows = "nixpkgs";
 
     nixosHardware.url = "github:nixos/nixos-hardware/master";
+
+    rustAnalyzer.url = "github:rust-lang/rust-analyzer";
+    rustAnalyzer.flake = false;
   };
-  outputs = inputs: let
-    system = "x86_64-linux";
-
-    nixpkgs = import inputs.nixpkgs {
-      config.allowUnfree = true;
-      inherit system;
-    };
-
-    mkNixosSystem = modules:
-      import "${inputs.nixpkgs}/nixos/lib/eval-config.nix" {
-        lib = nixpkgs.lib.extend (_: _: {});
-        inherit modules;
-        specialArgs = rec {
-          fenix = inputs.fenix.packages.${system};
-          inherit (inputs) nixosHardware;
-          inherit nixpkgs;
-          nixpkgsSrc = inputs.nixpkgs;
-          pkgs = nixpkgs;
-        };
-        inherit system;
-      };
-  in {
+  outputs = inputs: {
     nixosModules = {
+      _meta = import ./nixos-modules/_meta {inherit inputs;};
+
       browser = import ./nixos-modules/browser;
 
       buildkite = import ./nixos-modules/buildkite;
@@ -45,7 +30,7 @@
       editor = import ./nixos-modules/editor;
 
       fhs = import ./nixos-modules/fhs;
-      fhsConfig = {
+      fhsConfig = {nixpkgs, ...}: {
         fhs.packages = [
           nixpkgs.glibc.out
           nixpkgs.glibc.dev
@@ -54,7 +39,9 @@
         ];
       };
 
-      homeManager = inputs.homeManager.nixosModule;
+      framework = inputs.nixosHardware.nixosModules.framework-11th-gen-intel;
+
+      homeManager = inputs.homeManager.nixosModules.default;
 
       # k8s = import ./nixos-modules/k8s;
 
@@ -99,31 +86,37 @@
     };
 
     nixosConfigurations = {
-      machine = mkNixosSystem (builtins.attrValues inputs.self.nixosModules);
-      installer = mkNixosSystem [
-        inputs.nixosGenerators.nixosModules.install-iso
-        inputs.self.nixosModules.controllers
-        inputs.self.nixosModules.nix
-        inputs.self.nixosModules.wellKnown
-        inputs.self.nixosModules.wellKnownConfig
-        {
-          boot.supportedFilesystems = nixpkgs.lib.mkForce [
-            "btrfs"
-            "reiserfs"
-            "vfat"
-            "f2fs"
-            "xfs"
-            "ntfs"
-            "cifs"
-            # "zfs"
-            "tmpfs"
-            "auto"
-            "squashfs"
-            "tmpfs"
-            "overlay"
-          ];
-        }
-      ];
+      machine = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = builtins.attrValues inputs.self.nixosModules;
+      };
+      installer = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          inputs.nixosGenerators.nixosModules.install-iso
+          inputs.self.nixosModules.controllers
+          inputs.self.nixosModules.nix
+          inputs.self.nixosModules.wellKnown
+          inputs.self.nixosModules.wellKnownConfig
+          ({nixpkgs, ...}: {
+            boot.supportedFilesystems = nixpkgs.lib.mkForce [
+              "btrfs"
+              "reiserfs"
+              "vfat"
+              "f2fs"
+              "xfs"
+              "ntfs"
+              "cifs"
+              # "zfs"
+              "tmpfs"
+              "auto"
+              "squashfs"
+              "tmpfs"
+              "overlay"
+            ];
+          })
+        ];
+      };
     };
 
     packages."x86_64-linux" = {

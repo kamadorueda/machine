@@ -1,6 +1,5 @@
 {
   config,
-  fenix,
   nixpkgs,
 }: {
   "[python]"."editor.tabSize" = 4;
@@ -50,7 +49,7 @@
       languages = ["python"];
     }
     {
-      command = "${fenix.latest.rustfmt}/bin/rustfmt";
+      command = "${nixpkgs.fenix.latest.rustfmt}/bin/rustfmt";
       languages = ["rust"];
     }
     {

@@ -1,6 +1,5 @@
 {
   config,
-  fenix,
   nixpkgs,
   ...
 }: let
@@ -21,9 +20,9 @@
       (nixpkgs.lib.concatStringsSep " ")
     ];
 
-  extensions = import ./extensions.nix {inherit fenix nixpkgs;};
+  extensions = import ./extensions.nix {inherit nixpkgs;};
 
-  settings = import ./settings.nix {inherit config fenix nixpkgs;};
+  settings = import ./settings.nix {inherit config nixpkgs;};
 
   settingsJson =
     nixpkgs.runCommand "settings.json" {
