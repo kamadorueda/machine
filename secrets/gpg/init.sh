@@ -6,4 +6,3 @@ rm -rf home
 mkdir home
 chmod 700 home
 gpgconf --kill gpg-agent
-gpg --import < gpg-kamadorueda@gmail.com

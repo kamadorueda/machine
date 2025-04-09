@@ -7,11 +7,11 @@
 
   users.mutableUsers = false;
   users.users.root = {
-    inherit (config.secrets) hashedPassword;
+    inherit (config.secrets) hashedPasswordFile;
   };
   users.users.${config.wellKnown.username} = {
     extraGroups = ["wheel"];
-    inherit (config.secrets) hashedPassword;
+    inherit (config.secrets) hashedPasswordFile;
     isNormalUser = true;
   };
 }

@@ -1,3 +1,4 @@
+nixos-modules/sops/secrets.yaml diff=sopsdiffer
 secrets/** diff=git-crypt filter=git-crypt
 secrets/gpg/init.sh !filter !diff
 secrets/gpg/rotate.sh !filter !diff

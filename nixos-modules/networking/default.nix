@@ -22,36 +22,12 @@ in {
 
   security.pki.certificateFiles = ["${mkcert.certs}/rootCA.pem"];
 
-  systemd.services."machine-networking-setup" = {
-    serviceConfig = {
-      ExecStart = pkgs.writeShellScript "exec-start.sh" ''
-        set -eux
-
-        system_conections=/etc/NetworkManager/system-connections
-
-        mkdir -p "$system_conections"
-
-        for connection_config in ${config.secrets.path}/wifi-*
-        do
-          connection_name=$(basename "$connection_config")
-
-          cp "$connection_config" "$system_conections/$connection_name"
-          chmod 400 "$system_conections/$connection_name"
-        done
-      '';
-      RemainAfterExit = true;
-      Type = "oneshot";
-    };
-
-    requiredBy = ["NetworkManager.service"];
-  };
-
   users.users.${config.wellKnown.username}.extraGroups = ["networkmanager"];
 
   virtualisation.oci-containers.containers.cloudflared-tunnel = {
     image = "cloudflare/cloudflared:latest";
     cmd = ["tunnel" "--no-autoupdate" "run"];
     extraOptions = ["--network" "host"];
-    environmentFiles = ["${config.secrets.path}/cloudflared-tunnel"];
+    environmentFiles = [config.sops.secrets.cloudflared-tunnel.path];
   };
 }

@@ -119,7 +119,8 @@
         "nixosGenerators": "nixosGenerators",
         "nixosHardware": "nixosHardware",
         "nixpkgs": "nixpkgs",
-        "rustAnalyzer": "rustAnalyzer"
+        "rustAnalyzer": "rustAnalyzer",
+        "sopsNix": "sopsNix"
       }
     },
     "rustAnalyzer": {
@@ -135,6 +136,26 @@
       "original": {
         "owner": "rust-lang",
         "repo": "rust-analyzer",
+        "type": "github"
+      }
+    },
+    "sopsNix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1744103455,
+        "narHash": "sha256-SR6+qjkPjGQG+8eM4dCcVtss8r9bre/LAxFMPJpaZeU=",
+        "owner": "mic92",
+        "repo": "sops-nix",
+        "rev": "69d5a5a4635c27dae5a742f36108beccc506c1ba",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mic92",
+        "repo": "sops-nix",
         "type": "github"
       }
     }

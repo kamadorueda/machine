@@ -1,27 +1,23 @@
 #! /bin/sh -eux
 
-cd secrets/gpg/
+export GNUPGHOME="${PWD}/secrets/gpg/home"
 
-rm -rf home
-mkdir home
-chmod 700 home
-gpgconf --kill gpg-agent
+secrets="${PWD}/nixos-modules/sops/secrets.yaml"
 
 for email in kamadorueda@gmail.com; do
-  cat | gpg --generate-key --batch << EOF
-Key-Type: rsa
-Key-Usage: auth encrypt sign
-Expire-Date: 1m
-Name-Email: ${email}
-Name-Real: Kevin Amado
-%no-protection
-%commit
-EOF
-  gpg --list-secret-keys --keyid-format=long
+  echo "
+    Key-Type: rsa
+    Key-Usage: auth encrypt sign
+    Expire-Date: 1m
+    Name-Email: ${email}
+    Name-Real: Kevin Amado
+    %no-protection
+    %commit
+  " | gpg --generate-key --batch
 
-  read -p "id> " id
+  sops set "${secrets}" '["gpg"]'"[\"${email}\"]"'["public"]' \
+    "$(jq --arg value "$(gpg --armor --export "${email}")" --exit-status --null-input '$value')"
 
-  echo "${id}" > "gpg-${email}.id"
-  gpg --armor --export "${id}" > "gpg-${email}.pub"
-  gpg --armor --export-secret-keys "${id}" > "gpg-${email}"
+  sops set "${secrets}" '["gpg"]'"[\"${email}\"]"'["private"]' \
+    "$(jq --arg value "$(gpg --armor --export-secret-keys "${email}")" --exit-status --null-input '$value')"
 done

@@ -25,9 +25,9 @@
     env.TERM = "xterm-256color";
     font.normal.family = "monospace";
     font.size = config.ui.fontSize;
-    live_config_reload = true;
+    general.live_config_reload = true;
+    general.working_directory = "/data";
     scrolling.history = 100000;
-    working_directory = "/data";
   };
   terminalConfigYml =
     (pkgs.formats.toml {}).generate "alacritty-config.toml" terminalConfig;
@@ -94,19 +94,20 @@ in {
   };
 
   programs.bash.interactiveShellInit = ''
-    export AWS_CONFIG_FILE=${config.secrets.path}/aws-config
-    export AWS_SHARED_CREDENTIALS_FILE=${config.secrets.path}/aws-credentials
+    export AWS_CONFIG_FILE=/data/aws-config
+    export AWS_SHARED_CREDENTIALS_FILE=/data/aws-credentials
     export DIRENV_WARN_TIMEOUT=1h
     source <(direnv hook bash)
 
-    ssh-add ${config.secrets.path}/ssh/kamadorueda
+    gpg --import < ${config.secrets."gpg/kamadorueda@gmail.com/private".path}
+    ssh-add ${config.secrets."ssh/kamadorueda/private".path}
   '';
   programs.git.config = {
     commit.gpgsign = true;
     diff.renamelimit = 16384;
     diff.sopsdiffer.textconv =
       (pkgs.writeShellScript "sopsdiffer.sh" ''
-        sops -d "$1" || cat "$1"
+        sops decrypt "$1" || cat "$1"
       '')
       .outPath;
     gpg.progam = "${pkgs.gnupg}/bin/gpg2";

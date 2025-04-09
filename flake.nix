@@ -16,6 +16,9 @@
 
     rustAnalyzer.url = "github:rust-lang/rust-analyzer";
     rustAnalyzer.flake = false;
+
+    sopsNix.url = "github:mic92/sops-nix";
+    sopsNix.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs: {
     nixosModules = {
@@ -50,12 +53,15 @@
       physical = import ./nixos-modules/physical;
 
       secrets = import ./nixos-modules/secrets;
-      secretsConfig = {
-        secrets.hashedPassword =
-          # mkpasswd -m sha-512
-          "$6$uDZpDg74HGXwOkrT$2AMzk03bGfI7eQSPIJi0T8GHprmm5/opYiFSjgRRZxbJTB1QbwrE4sxFteAvpeAXK.4V/3UhwbViFe68B3an//";
-        secrets.path = "/data/machine/secrets";
+      secretsConfig = {config, ...}: {
+        secrets.ageKeyPath = "/data/age-key.txt";
+
+        # mkpasswd -m sha-512
+        secrets.hashedPasswordFile = config.sops.secrets.user-password.path;
       };
+
+      sops = inputs.sopsNix.nixosModules.sops;
+      sopsConfig = import ./nixos-modules/sops;
 
       terminal = import ./nixos-modules/terminal;
 
