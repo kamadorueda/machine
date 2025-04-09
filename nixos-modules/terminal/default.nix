@@ -99,8 +99,8 @@ in {
     export DIRENV_WARN_TIMEOUT=1h
     source <(direnv hook bash)
 
-    gpg --import < ${config.secrets."gpg/kamadorueda@gmail.com/private".path}
-    ssh-add ${config.secrets."ssh/kamadorueda/private".path}
+    gpg --import < ${config.sops.secrets."gpg/kamadorueda@gmail.com/private".path}
+    ssh-add ${config.sops.secrets."ssh/kamadorueda/private".path}
   '';
   programs.git.config = {
     commit.gpgsign = true;
