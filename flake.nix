@@ -9,6 +9,9 @@
     homeManager.url = "github:nix-community/home-manager/master";
     homeManager.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixIndex.url = "github:Mic92/nix-index-database";
+    nixIndex.flake = false;
+
     nixosGenerators.url = "github:nix-community/nixos-generators";
     nixosGenerators.inputs.nixpkgs.follows = "nixpkgs";
 

@@ -1,5 +1,6 @@
 {
   config,
+  flakeInputs,
   pkgs,
   ...
 }: let
@@ -35,6 +36,7 @@ in {
   environment.shellAliases = pkgs.lib.mkForce {};
   environment.systemPackages = [
     pkgs.alacritty
+    pkgs.age
     pkgs.awscli2
     pkgs.comma
     pkgs.coreutils
@@ -44,6 +46,7 @@ in {
     pkgs.jq
     pkgs.parted
     pkgs.shadow
+    pkgs.sops
     pkgs.tree
     pkgs.unzip
     pkgs.xclip
@@ -87,10 +90,7 @@ in {
   ];
 
   home-manager.users.${config.wellKnown.username} = {
-    home.file.".cache/nix-index/files".source = pkgs.fetchurl {
-      url = "https://github.com/Mic92/nix-index-database/releases/download/2022-10-23/index-x86_64-linux";
-      hash = "sha256-sD159LHIefbtZuAbCu6b+7cghjXTqg3ANCLHzyaNyRk=";
-    };
+    home.file.".cache/nix-index/files".source = flakeInputs.nixIndex;
   };
 
   programs.bash.interactiveShellInit = ''
