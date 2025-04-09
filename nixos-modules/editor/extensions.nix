@@ -2,13 +2,13 @@
 nixpkgs.symlinkJoin {
   name = "extensions";
   paths = [
-    nixpkgs.fenix.rust-analyzer-vscode-extension
     nixpkgs.vscode-extensions."4ops".terraform
     nixpkgs.vscode-extensions.bbenoist.nix
     nixpkgs.vscode-extensions.bierner.markdown-mermaid
     nixpkgs.vscode-extensions.bradlc.vscode-tailwindcss
     # nixpkgs.vscode-extensions.bpruitt-goddard.mermaid-markdown-syntax-highlighting
     nixpkgs.vscode-extensions.coolbear.systemd-unit-file
+    nixpkgs.vscode-extensions.cspellX.systemd-unit-file
     nixpkgs.vscode-extensions.daohong-emilio.yash
     nixpkgs.vscode-extensions.eamodio.gitlens
     nixpkgs.vscode-extensions.github.copilot
@@ -29,6 +29,7 @@ nixpkgs.symlinkJoin {
     # nixpkgs.vscode-extensions.ms-vscode-remote.remote-ssh # unfree
     nixpkgs.vscode-extensions.njpwerner.autodocstring
     nixpkgs.vscode-extensions.redhat.java
+    nixpkgs.vscode-extensions.rust-lang.rust-analyzer
     nixpkgs.vscode-extensions.shardulm94.trailing-spaces
     nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
     nixpkgs.vscode-extensions.styled-components.vscode-styled-components

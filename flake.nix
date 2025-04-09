@@ -43,15 +43,9 @@
 
       homeManager = inputs.homeManager.nixosModules.default;
 
-      # k8s = import ./nixos-modules/k8s;
-
-      mysql = import ./nixos-modules/mysql;
-
       networking = import ./nixos-modules/networking;
 
       nix = import ./nixos-modules/nix;
-
-      postgresql = import ./nixos-modules/postgresql;
 
       physical = import ./nixos-modules/physical;
 
@@ -62,8 +56,6 @@
           "$6$uDZpDg74HGXwOkrT$2AMzk03bGfI7eQSPIJi0T8GHprmm5/opYiFSjgRRZxbJTB1QbwrE4sxFteAvpeAXK.4V/3UhwbViFe68B3an//";
         secrets.path = "/data/machine/secrets";
       };
-
-      spark = import ./nixos-modules/spark;
 
       terminal = import ./nixos-modules/terminal;
 
