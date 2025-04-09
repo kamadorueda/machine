@@ -105,11 +105,15 @@ in {
   programs.git.config = {
     commit.gpgsign = true;
     diff.renamelimit = 16384;
-    diff.sopsdiffer.textconv =
-      (pkgs.writeShellScript "sopsdiffer.sh" ''
-        sops decrypt "$1" || cat "$1"
-      '')
-      .outPath;
+    diff.sopsdiffer.textconv = let
+      app = pkgs.writeShellApplication {
+        name = "sopsdiffer.sh";
+        runtimeInputs = [pkgs.sops];
+        text = ''
+          sops decrypt "$1"
+        '';
+      };
+    in "${app}/bin/${app.name}";
     gpg.progam = "${pkgs.gnupg}/bin/gpg2";
     gpg.sign = true;
     init.defaultbranch = "main";
