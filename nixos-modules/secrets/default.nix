@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  nixpkgs,
+  pkgs,
   ...
 }: {
   options = {
@@ -10,7 +10,7 @@
   };
   config = {
     environment.variables.GNUPGHOME = "${config.secrets.path}/gpg/home";
-    environment.systemPackages = [nixpkgs.gnupg];
+    environment.systemPackages = [pkgs.gnupg];
     programs.ssh.startAgent = true;
   };
 }

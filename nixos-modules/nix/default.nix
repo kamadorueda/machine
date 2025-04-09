@@ -1,12 +1,12 @@
 {
   config,
-  nixpkgs,
-  nixpkgsSrc,
+  flakeInputs,
+  pkgs,
   ...
 }: {
   boot.readOnlyNixStore = false;
   environment.systemPackages = [
-    (nixpkgs.writeShellScriptBin "nix" ''
+    (pkgs.writeShellScriptBin "nix" ''
       exec ${config.nix.package}/bin/nix \
         --print-build-logs \
         "$@"
@@ -15,11 +15,11 @@
   nix.extraOptions = ''
     extra-experimental-features = nix-command flakes
   '';
-  nix.nixPath = ["nixpkgs=${nixpkgsSrc}"];
-  nix.package = nixpkgs.nixVersions.latest;
+  nix.nixPath = ["nixpkgs=${flakeInputs.nixpkgs}"];
+  nix.package = pkgs.nixVersions.latest;
   nix.registry.nixpkgs = {
     exact = false;
-    flake = nixpkgsSrc;
+    flake = flakeInputs.nixpkgs;
   };
   nix.settings.cores = 0;
   nix.settings.max-jobs = 1;
@@ -37,4 +37,7 @@
   nixpkgs.config.allowBroken = false;
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.android_sdk.accept_license = true;
+  nixpkgs.overlays = [
+    flakeInputs.fenix.overlays.default
+  ];
 }

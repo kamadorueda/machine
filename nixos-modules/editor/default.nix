@@ -1,31 +1,31 @@
 {
   config,
-  nixpkgs,
+  pkgs,
   ...
 }: let
-  pkg = nixpkgs.vscode;
+  pkg = pkgs.vscode;
 
   extensionsDir = "/data/editor/extensions";
   userDataDir = "/data/editor/data";
 
   bin =
-    nixpkgs.lib.pipe
+    pkgs.lib.pipe
     [
       ["${pkg}/bin/code"] # unfree
       ["--extensions-dir" extensionsDir]
       ["--user-data-dir" userDataDir]
     ]
     [
-      (nixpkgs.lib.flatten)
-      (nixpkgs.lib.concatStringsSep " ")
+      (pkgs.lib.flatten)
+      (pkgs.lib.concatStringsSep " ")
     ];
 
-  extensions = import ./extensions.nix {inherit nixpkgs;};
+  extensions = import ./extensions.nix {inherit pkgs;};
 
-  settings = import ./settings.nix {inherit config nixpkgs;};
+  settings = import ./settings.nix {inherit config pkgs;};
 
   settingsJson =
-    nixpkgs.runCommand "settings.json" {
+    pkgs.runCommand "settings.json" {
       passAsFile = ["settings"];
       settings = builtins.toJSON settings;
     }
@@ -34,7 +34,7 @@ in {
   environment.variables.EDITOR = "${bin} --wait";
   environment.systemPackages = [
     pkg
-    (nixpkgs.writeShellScriptBin "editor" ''
+    (pkgs.writeShellScriptBin "editor" ''
       exec ${bin} "$@"
     '')
   ];
@@ -51,8 +51,8 @@ in {
   };
 
   systemd.services."machine-editor-setup" = {
-    script = toString (nixpkgs.substitute {
-      src = nixpkgs.writeShellScript "machine-editor-setup.sh" ''
+    script = toString (pkgs.substitute {
+      src = pkgs.writeShellScript "machine-editor-setup.sh" ''
         set -eux
 
         rm -rf "@userDataDir@"
@@ -66,7 +66,7 @@ in {
         cp --dereference --no-preserve=mode,ownership -rT \
           "@extensions@/share/vscode/extensions/" "@extensionsDir@"
       '';
-      substitutions = nixpkgs.lib.concatLists [
+      substitutions = pkgs.lib.concatLists [
         ["--replace-fail" "@extensions@" extensions]
         ["--replace-fail" "@extensionsDir@" extensionsDir]
         ["--replace-fail" "@settings@" settingsJson]

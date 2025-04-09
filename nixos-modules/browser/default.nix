@@ -1,30 +1,30 @@
 {
   config,
-  nixpkgs,
+  pkgs,
   ...
 }: {
   environment.systemPackages = [
-    nixpkgs.brave
-    (nixpkgs.writeShellScriptBin "browser" ''
+    pkgs.brave
+    (pkgs.writeShellScriptBin "browser" ''
       brave "$@"
     '')
   ];
 
   systemd.services."machine-browser-user-data-dir" = {
-    path = [nixpkgs.util-linux];
+    path = [pkgs.util-linux];
 
     # Brave uses this specific path for their config
     environment.USER_DATA_DIR = "/home/${config.wellKnown.username}/.config/BraveSoftware/Brave-Browser";
 
     serviceConfig = {
-      ExecStart = nixpkgs.writeShellScript "exec-start.sh" ''
+      ExecStart = pkgs.writeShellScript "exec-start.sh" ''
         set -eux
 
         mkdir -p "$USER_DATA_DIR"
-        chown ${nixpkgs.lib.escapeShellArg config.wellKnown.username} "$USER_DATA_DIR"
+        chown ${pkgs.lib.escapeShellArg config.wellKnown.username} "$USER_DATA_DIR"
         mount --bind /data/browser/data "$USER_DATA_DIR"
       '';
-      ExecStop = nixpkgs.writeShellScript "exec-stop.sh" ''
+      ExecStop = pkgs.writeShellScript "exec-stop.sh" ''
         set -eux
 
         umount "$USER_DATA_DIR"

@@ -1,10 +1,10 @@
 {
   config,
-  nixpkgs,
+  pkgs,
   ...
 }: let
-  mkcert.certs = nixpkgs.runCommand "mkcert-certs" {} ''
-    CAROOT=$out ${nixpkgs.mkcert}/bin/mkcert -install
+  mkcert.certs = pkgs.runCommand "mkcert-certs" {} ''
+    CAROOT=$out ${pkgs.mkcert}/bin/mkcert -install
   '';
 in {
   home-manager.users.${config.wellKnown.username} = {
@@ -24,7 +24,7 @@ in {
 
   systemd.services."machine-networking-setup" = {
     serviceConfig = {
-      ExecStart = nixpkgs.writeShellScript "exec-start.sh" ''
+      ExecStart = pkgs.writeShellScript "exec-start.sh" ''
         set -eux
 
         system_conections=/etc/NetworkManager/system-connections

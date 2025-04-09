@@ -30,12 +30,12 @@
       editor = import ./nixos-modules/editor;
 
       fhs = import ./nixos-modules/fhs;
-      fhsConfig = {nixpkgs, ...}: {
+      fhsConfig = {pkgs, ...}: {
         fhs.packages = [
-          nixpkgs.glibc.out
-          nixpkgs.glibc.dev
-          nixpkgs.openssl.out
-          nixpkgs.openssl.dev
+          pkgs.glibc.out
+          pkgs.glibc.dev
+          pkgs.openssl.out
+          pkgs.openssl.dev
         ];
       };
 
@@ -86,12 +86,13 @@
         system = "x86_64-linux";
         modules = [
           inputs.nixosGenerators.nixosModules.install-iso
+          inputs.self.nixosModules._meta
           inputs.self.nixosModules.controllers
           inputs.self.nixosModules.nix
           inputs.self.nixosModules.wellKnown
           inputs.self.nixosModules.wellKnownConfig
-          ({nixpkgs, ...}: {
-            boot.supportedFilesystems = nixpkgs.lib.mkForce [
+          ({pkgs, ...}: {
+            boot.supportedFilesystems = pkgs.lib.mkForce [
               "btrfs"
               "reiserfs"
               "vfat"

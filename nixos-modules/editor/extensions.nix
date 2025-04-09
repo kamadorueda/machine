@@ -1,40 +1,39 @@
-{nixpkgs}:
-nixpkgs.symlinkJoin {
+{pkgs}:
+pkgs.symlinkJoin {
   name = "extensions";
   paths = [
-    nixpkgs.vscode-extensions."4ops".terraform
-    nixpkgs.vscode-extensions.bbenoist.nix
-    nixpkgs.vscode-extensions.bierner.markdown-mermaid
-    nixpkgs.vscode-extensions.bradlc.vscode-tailwindcss
-    # nixpkgs.vscode-extensions.bpruitt-goddard.mermaid-markdown-syntax-highlighting
-    nixpkgs.vscode-extensions.coolbear.systemd-unit-file
-    nixpkgs.vscode-extensions.cspellX.systemd-unit-file
-    nixpkgs.vscode-extensions.daohong-emilio.yash
-    nixpkgs.vscode-extensions.eamodio.gitlens
-    nixpkgs.vscode-extensions.github.copilot
-    nixpkgs.vscode-extensions.grapecity.gc-excelviewer
-    nixpkgs.vscode-extensions.hashicorp.terraform
-    nixpkgs.vscode-extensions.haskell.haskell
-    nixpkgs.vscode-extensions.jkillian.custom-local-formatters
-    nixpkgs.vscode-extensions.justusadam.language-haskell
-    nixpkgs.vscode-extensions.kamadorueda.alejandra
-    nixpkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
-    nixpkgs.vscode-extensions.mattn.lisp
-    nixpkgs.vscode-extensions.mkhl.direnv
-    nixpkgs.vscode-extensions.ms-python.python
-    nixpkgs.vscode-extensions.ms-python.vscode-pylance # unfree
-    # nixpkgs.vscode-extensions.ms-toolsai.jupyter
-    # nixpkgs.vscode-extensions.ms-toolsai.jupyter-renderers
-    nixpkgs.vscode-extensions.ms-vscode.cpptools
-    # nixpkgs.vscode-extensions.ms-vscode-remote.remote-ssh # unfree
-    nixpkgs.vscode-extensions.njpwerner.autodocstring
-    nixpkgs.vscode-extensions.redhat.java
-    nixpkgs.vscode-extensions.rust-lang.rust-analyzer
-    nixpkgs.vscode-extensions.shardulm94.trailing-spaces
-    nixpkgs.vscode-extensions.streetsidesoftware.code-spell-checker
-    nixpkgs.vscode-extensions.styled-components.vscode-styled-components
-    nixpkgs.vscode-extensions.tamasfe.even-better-toml
-    nixpkgs.vscode-extensions.tomoki1207.pdf
-    nixpkgs.vscode-extensions.usernamehw.errorlens
+    pkgs.vscode-extensions."4ops".terraform
+    pkgs.vscode-extensions.bbenoist.nix
+    pkgs.vscode-extensions.bierner.markdown-mermaid
+    pkgs.vscode-extensions.bradlc.vscode-tailwindcss
+    # pkgs.vscode-extensions.bpruitt-goddard.mermaid-markdown-syntax-highlighting
+    pkgs.vscode-extensions.coolbear.systemd-unit-file
+    pkgs.vscode-extensions.daohong-emilio.yash
+    pkgs.vscode-extensions.eamodio.gitlens
+    pkgs.vscode-extensions.github.copilot
+    pkgs.vscode-extensions.grapecity.gc-excelviewer
+    pkgs.vscode-extensions.hashicorp.terraform
+    pkgs.vscode-extensions.haskell.haskell
+    pkgs.vscode-extensions.jkillian.custom-local-formatters
+    pkgs.vscode-extensions.justusadam.language-haskell
+    pkgs.vscode-extensions.kamadorueda.alejandra
+    pkgs.vscode-extensions.mads-hartmann.bash-ide-vscode
+    pkgs.vscode-extensions.mattn.lisp
+    pkgs.vscode-extensions.mkhl.direnv
+    pkgs.vscode-extensions.ms-python.python
+    pkgs.vscode-extensions.ms-python.vscode-pylance # unfree
+    # pkgs.vscode-extensions.ms-toolsai.jupyter
+    # pkgs.vscode-extensions.ms-toolsai.jupyter-renderers
+    pkgs.vscode-extensions.ms-vscode.cpptools
+    # pkgs.vscode-extensions.ms-vscode-remote.remote-ssh # unfree
+    pkgs.vscode-extensions.njpwerner.autodocstring
+    pkgs.vscode-extensions.redhat.java
+    pkgs.vscode-extensions.rust-lang.rust-analyzer
+    pkgs.vscode-extensions.shardulm94.trailing-spaces
+    pkgs.vscode-extensions.streetsidesoftware.code-spell-checker
+    pkgs.vscode-extensions.styled-components.vscode-styled-components
+    pkgs.vscode-extensions.tamasfe.even-better-toml
+    pkgs.vscode-extensions.tomoki1207.pdf
+    pkgs.vscode-extensions.usernamehw.errorlens
   ];
 }

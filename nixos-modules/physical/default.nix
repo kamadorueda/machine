@@ -1,4 +1,4 @@
-{nixpkgs, ...}: {
+{pkgs, ...}: {
   imports = [./auto-detected.nix];
 
   config = {
@@ -11,9 +11,9 @@
     boot.initrd.postDeviceCommands = ''
       echo wiping root device...
       mkdir /tmp/root
-      ${nixpkgs.util-linux}/bin/mount /dev/disk/by-label/root /tmp/root
+      ${pkgs.util-linux}/bin/mount /dev/disk/by-label/root /tmp/root
       rm -fr /tmp/root/*
-      ${nixpkgs.util-linux}/bin/umount /tmp/root
+      ${pkgs.util-linux}/bin/umount /tmp/root
     '';
     swapDevices = [
       {

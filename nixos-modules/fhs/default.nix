@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  nixpkgs,
+  pkgs,
   ...
 }: {
   options = {
@@ -16,12 +16,12 @@
 
   config = {
     fileSystems = let
-      fhsLinks = nixpkgs.buildEnv {
+      fhsLinks = pkgs.buildEnv {
         name = "fhs-links";
         paths = config.fhs.packages;
       };
 
-      fhs = nixpkgs.runCommand "fhs" {} "cp -rL ${fhsLinks} $out";
+      fhs = pkgs.runCommand "fhs" {} "cp -rL ${fhsLinks} $out";
     in
       builtins.listToAttrs
       (builtins.map

@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  nixpkgs,
+  pkgs,
   ...
 }: {
   options = {
@@ -10,32 +10,32 @@
   };
   config = {
     environment.systemPackages = [
-      nixpkgs.bluez
-      (nixpkgs.writeShellScriptBin "bluetooth" ''
-        exec ${nixpkgs.bluez}/bin/bluetoothctl "$@"
+      pkgs.bluez
+      (pkgs.writeShellScriptBin "bluetooth" ''
+        exec ${pkgs.bluez}/bin/bluetoothctl "$@"
       '')
 
-      nixpkgs.nautilus
-      (nixpkgs.writeShellScriptBin "files" ''
-        exec ${nixpkgs.nautilus}/bin/nautilus "$@"
+      pkgs.nautilus
+      (pkgs.writeShellScriptBin "files" ''
+        exec ${pkgs.nautilus}/bin/nautilus "$@"
       '')
 
-      nixpkgs.eog
-      (nixpkgs.writeShellScriptBin "images" ''
-        exec ${nixpkgs.eog}/bin/eog "$@"
+      pkgs.eog
+      (pkgs.writeShellScriptBin "images" ''
+        exec ${pkgs.eog}/bin/eog "$@"
       '')
 
-      (nixpkgs.writeShellScriptBin "screen"
+      (pkgs.writeShellScriptBin "screen"
         (builtins.readFile ./screen.sh))
 
-      nixpkgs.gnome-screenshot
-      (nixpkgs.writeShellScriptBin "screenshot" ''
-        exec ${nixpkgs.gnome-screenshot}/bin/gnome-screenshot "$@"
+      pkgs.gnome-screenshot
+      (pkgs.writeShellScriptBin "screenshot" ''
+        exec ${pkgs.gnome-screenshot}/bin/gnome-screenshot "$@"
       '')
 
-      nixpkgs.pavucontrol
-      (nixpkgs.writeShellScriptBin "sound" ''
-        exec ${nixpkgs.pavucontrol}/bin/pavucontrol "$@"
+      pkgs.pavucontrol
+      (pkgs.writeShellScriptBin "sound" ''
+        exec ${pkgs.pavucontrol}/bin/pavucontrol "$@"
       '')
     ];
     fonts.enableDefaultPackages = false;
@@ -49,15 +49,15 @@
     fonts.fontconfig.enable = true;
     fonts.fontDir.enable = true;
     fonts.packages = [
-      nixpkgs.dejavu_fonts
-      nixpkgs.freefont_ttf
-      nixpkgs.gyre-fonts # TrueType substitutes for standard PostScript fonts
-      nixpkgs.liberation_ttf
-      nixpkgs.unifont
+      pkgs.dejavu_fonts
+      pkgs.freefont_ttf
+      pkgs.gyre-fonts # TrueType substitutes for standard PostScript fonts
+      pkgs.liberation_ttf
+      pkgs.unifont
 
-      nixpkgs.noto-fonts-emoji
-      nixpkgs.twitter-color-emoji
-      nixpkgs.fira-code
+      pkgs.noto-fonts-emoji
+      pkgs.twitter-color-emoji
+      pkgs.fira-code
     ];
     home-manager.users.${config.wellKnown.username} = {
       gtk.enable = true;
@@ -97,9 +97,9 @@
     '';
     services.xserver.windowManager.i3.enable = true;
     services.xserver.windowManager.i3.extraPackages = [
-      nixpkgs.dmenu
-      nixpkgs.i3lock
-      nixpkgs.i3status
+      pkgs.dmenu
+      pkgs.i3lock
+      pkgs.i3status
     ];
     services.xserver.xkb.layout = "us";
     services.xserver.xkb.variant = "altgr-intl";

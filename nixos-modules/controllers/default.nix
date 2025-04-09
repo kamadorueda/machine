@@ -1,19 +1,19 @@
 {
   config,
-  nixpkgs,
+  pkgs,
   ...
 }: {
   config = {
-    boot.kernelPackages = nixpkgs.linuxPackages_latest;
+    boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    environment.systemPackages = [nixpkgs.wally-cli];
+    environment.systemPackages = [pkgs.wally-cli];
     hardware.bluetooth.enable = true;
     hardware.firmware = [
-      nixpkgs.linux-firmware
-      nixpkgs.wireless-regdb
+      pkgs.linux-firmware
+      pkgs.wireless-regdb
     ];
     hardware.graphics.enable = true;
-    hardware.graphics.extraPackages = [nixpkgs.intel-compute-runtime];
+    hardware.graphics.extraPackages = [pkgs.intel-compute-runtime];
     hardware.keyboard.zsa.enable = true;
     hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
     services.fwupd.enable = true;

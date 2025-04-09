@@ -1,5 +1,5 @@
-{nixpkgs, ...}: {
-  environment.systemPackages = [nixpkgs.clamav];
+{pkgs, ...}: {
+  environment.systemPackages = [pkgs.clamav];
 
   # ClamAV clamd daemon.
   services.clamav.daemon.enable = true;

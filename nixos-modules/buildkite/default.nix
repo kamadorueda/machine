@@ -1,6 +1,6 @@
 {
   config,
-  nixpkgs,
+  pkgs,
   ...
 }: let
   baseConfig = {
@@ -28,24 +28,24 @@
           export PAGER=
         '';
         runtimePackages = [
-          nixpkgs.bash
-          nixpkgs.cachix
-          nixpkgs.direnv
-          nixpkgs.git
-          nixpkgs.gnugrep
-          nixpkgs.gnutar
-          nixpkgs.gzip
-          (nixpkgs.writeShellScriptBin "nix-env" ''
+          pkgs.bash
+          pkgs.cachix
+          pkgs.direnv
+          pkgs.git
+          pkgs.gnugrep
+          pkgs.gnutar
+          pkgs.gzip
+          (pkgs.writeShellScriptBin "nix-env" ''
             exec ${config.nix.package}/bin/nix-env "$@"
           '')
-          (nixpkgs.writeShellScriptBin "nix-store" ''
+          (pkgs.writeShellScriptBin "nix-store" ''
             exec ${config.nix.package}/bin/nix-store "$@"
           '')
-          (nixpkgs.writeShellScriptBin "nix" ''
+          (pkgs.writeShellScriptBin "nix" ''
             exec ${config.nix.package}/bin/nix --print-build-logs "$@"
           '')
         ];
-        shell = "${nixpkgs.bash}/bin/bash -euo pipefail -c";
+        shell = "${pkgs.bash}/bin/bash -euo pipefail -c";
         tokenPath = "/secrets/buildkite-token";
       };
     };
@@ -53,11 +53,11 @@
   };
 in {
   containers.buildkite-public =
-    nixpkgs.lib.attrsets.recursiveUpdate
+    pkgs.lib.attrsets.recursiveUpdate
     baseConfig
     {};
   containers.buildkite-private =
-    nixpkgs.lib.attrsets.recursiveUpdate
+    pkgs.lib.attrsets.recursiveUpdate
     baseConfig
     {
       bindMounts."/secrets/cachix-auth-token-alejandra" = {

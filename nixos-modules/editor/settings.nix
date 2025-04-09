@@ -1,78 +1,78 @@
 {
   config,
-  nixpkgs,
+  pkgs,
 }: {
   "[python]"."editor.tabSize" = 4;
   "[rust]"."editor.tabSize" = 2;
   "[toml]"."editor.defaultFormatter" = "tamasfe.even-better-toml";
-  "alejandra.program" = "${nixpkgs.alejandra}/bin/alejandra";
+  "alejandra.program" = "${pkgs.alejandra}/bin/alejandra";
   "customLocalFormatters.formatters" = [
     {
-      command = "${nixpkgs.clang-tools}/bin/clang-format --sort-includes --style=file:${./clang.yaml}";
+      command = "${pkgs.clang-tools}/bin/clang-format --sort-includes --style=file:${./clang.yaml}";
       languages = ["c" "cpp"];
     }
     {
-      command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser css";
+      command = "${pkgs.nodePackages.prettier}/bin/prettier --parser css";
       languages = ["css"];
     }
     {
-      command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser html";
+      command = "${pkgs.nodePackages.prettier}/bin/prettier --parser html";
       languages = ["html"];
     }
     {
-      command = "${nixpkgs.google-java-format}/bin/google-java-format -";
+      command = "${pkgs.google-java-format}/bin/google-java-format -";
       languages = ["java"];
     }
     {
-      command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser babel";
+      command = "${pkgs.nodePackages.prettier}/bin/prettier --parser babel";
       languages = ["javascript"];
     }
     {
-      command = "${nixpkgs.jq}/bin/jq -S";
+      command = "${pkgs.jq}/bin/jq -S";
       languages = ["json" "jsonc"];
     }
     {
-      command = "${nixpkgs.texlive.combined.scheme-medium}/bin/latexindent";
+      command = "${pkgs.texlive.combined.scheme-medium}/bin/latexindent";
       languages = ["latex"];
     }
     {
-      command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser markdown";
+      command = "${pkgs.nodePackages.prettier}/bin/prettier --parser markdown";
       languages = ["markdown"];
     }
     {
       command =
-        (nixpkgs.writeShellScript "python-fmt" ''
-          ${nixpkgs.black}/bin/black --config ${./black.toml} - \
-          | ${nixpkgs.isort}/bin/isort --settings-path ${./isort.toml} -
+        (pkgs.writeShellScript "python-fmt" ''
+          ${pkgs.black}/bin/black --config ${./black.toml} - \
+          | ${pkgs.isort}/bin/isort --settings-path ${./isort.toml} -
         '')
         .outPath;
       languages = ["python"];
     }
     {
-      command = "${nixpkgs.fenix.latest.rustfmt}/bin/rustfmt";
+      command = "${pkgs.fenix.latest.rustfmt}/bin/rustfmt";
       languages = ["rust"];
     }
     {
-      command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser scss";
+      command = "${pkgs.nodePackages.prettier}/bin/prettier --parser scss";
       languages = ["scss"];
     }
     {
-      command = "${nixpkgs.shfmt}/bin/shfmt -bn -ci -i 2 -s -sr -";
+      command = "${pkgs.shfmt}/bin/shfmt -bn -ci -i 2 -s -sr -";
       languages = ["shellscript"];
     }
     {
-      command = "${nixpkgs.nodePackages.sql-formatter}/bin/sql-formatter";
+      command = "${pkgs.nodePackages.sql-formatter}/bin/sql-formatter";
       languages = ["sql"];
     }
     {
-      command = "${nixpkgs.terraform}/bin/terraform fmt -";
+      command = "${pkgs.terraform}/bin/terraform fmt -";
       languages = ["tf"];
     }
     # {
     #   command =
-    #     (nixpkgs.writeShellScript "toml-fmt" ''
-    #       NODE_PATH=${nixpkgs.nodePackages.prettier-plugin-toml}/lib/node_modules \
-    #       ${nixpkgs.nodePackages.prettier}/bin/prettier \
+    #     (pkgs.writeShellScript "toml-fmt" ''
+    #       NODE_PATH=${pkgs.nodePackages.prettier-plugin-toml}/lib/node_modules \
+    #       ${pkgs.nodePackages.prettier}/bin/prettier \
     #         --parser toml \
     #         --plugin prettier-plugin-toml
     #     '')
@@ -80,11 +80,11 @@
     #   languages = ["toml"];
     # }
     {
-      command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser html";
+      command = "${pkgs.nodePackages.prettier}/bin/prettier --parser html";
       languages = ["xml"];
     }
     {
-      command = "${nixpkgs.nodePackages.prettier}/bin/prettier --parser yaml";
+      command = "${pkgs.nodePackages.prettier}/bin/prettier --parser yaml";
       languages = ["yaml"];
     }
   ];
@@ -130,10 +130,10 @@
   "python.linting.lintOnSave" = true;
   "python.linting.mypyArgs" = ["--config-file" ./mypy.toml];
   "python.linting.mypyEnabled" = true;
-  "python.linting.mypyPath" = "${nixpkgs.mypy}/bin/mypy";
+  "python.linting.mypyPath" = "${pkgs.mypy}/bin/mypy";
   # "python.linting.prospectorArgs" = ["--profile" ./prospector.yaml];
   # "python.linting.prospectorEnabled" = true;
-  # "python.linting.prospectorPath" = "${nixpkgs.prospector}/bin/prospector";
+  # "python.linting.prospectorPath" = "${pkgs.prospector}/bin/prospector";
   "python.linting.pylintEnabled" = false;
   "rust-analyzer.assist.emitMustUse" = true;
   "rust-analyzer.cargo.buildScripts.useRustcWrapper" = false;

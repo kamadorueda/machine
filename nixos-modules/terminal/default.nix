@@ -1,6 +1,6 @@
 {
   config,
-  nixpkgs,
+  pkgs,
   ...
 }: let
   terminalConfig = {
@@ -30,56 +30,56 @@
     working_directory = "/data";
   };
   terminalConfigYml =
-    (nixpkgs.formats.toml {}).generate "alacritty-config.toml" terminalConfig;
+    (pkgs.formats.toml {}).generate "alacritty-config.toml" terminalConfig;
 in {
-  environment.shellAliases = nixpkgs.lib.mkForce {};
+  environment.shellAliases = pkgs.lib.mkForce {};
   environment.systemPackages = [
-    nixpkgs.alacritty
-    nixpkgs.awscli2
-    nixpkgs.comma
-    nixpkgs.coreutils
-    nixpkgs.direnv
-    nixpkgs.git-crypt
-    nixpkgs.gnugrep
-    nixpkgs.jq
-    nixpkgs.parted
-    nixpkgs.shadow
-    nixpkgs.tree
-    nixpkgs.unzip
-    nixpkgs.xclip
-    nixpkgs.zip
+    pkgs.alacritty
+    pkgs.awscli2
+    pkgs.comma
+    pkgs.coreutils
+    pkgs.direnv
+    pkgs.git-crypt
+    pkgs.gnugrep
+    pkgs.jq
+    pkgs.parted
+    pkgs.shadow
+    pkgs.tree
+    pkgs.unzip
+    pkgs.xclip
+    pkgs.zip
 
-    (nixpkgs.writeShellScriptBin "a" ''
+    (pkgs.writeShellScriptBin "a" ''
       git add -p "$@"
     '')
-    (nixpkgs.writeShellScriptBin "c" ''
+    (pkgs.writeShellScriptBin "c" ''
       git commit --allow-empty "$@"
     '')
-    (nixpkgs.writeShellScriptBin "ca" ''
+    (pkgs.writeShellScriptBin "ca" ''
       git commit --amend --no-edit --allow-empty "$@"
     '')
-    (nixpkgs.writeShellScriptBin "clip" ''
+    (pkgs.writeShellScriptBin "clip" ''
       xclip -sel clip "$@"
     '')
-    (nixpkgs.writeShellScriptBin "f" ''
+    (pkgs.writeShellScriptBin "f" ''
       git fetch --all "$@"
     '')
-    (nixpkgs.writeShellScriptBin "l" ''
+    (pkgs.writeShellScriptBin "l" ''
       git log "$@"
     '')
-    (nixpkgs.writeShellScriptBin "p" ''
+    (pkgs.writeShellScriptBin "p" ''
       git push -f "$@"
     '')
-    (nixpkgs.writeShellScriptBin "ro" ''
+    (pkgs.writeShellScriptBin "ro" ''
       git pull --autostash --progress --rebase --stat origin "$@"
     '')
-    (nixpkgs.writeShellScriptBin "rf" ''
+    (pkgs.writeShellScriptBin "rf" ''
       git pull --autostash --progress --rebase --stat fork "$@"
     '')
-    (nixpkgs.writeShellScriptBin "s" ''
+    (pkgs.writeShellScriptBin "s" ''
       git status "$@"
     '')
-    (nixpkgs.writeShellScriptBin "terminal" ''
+    (pkgs.writeShellScriptBin "terminal" ''
       alacritty \
         --config-file ${terminalConfigYml} \
         "$@"
@@ -87,7 +87,7 @@ in {
   ];
 
   home-manager.users.${config.wellKnown.username} = {
-    home.file.".cache/nix-index/files".source = nixpkgs.fetchurl {
+    home.file.".cache/nix-index/files".source = pkgs.fetchurl {
       url = "https://github.com/Mic92/nix-index-database/releases/download/2022-10-23/index-x86_64-linux";
       hash = "sha256-sD159LHIefbtZuAbCu6b+7cghjXTqg3ANCLHzyaNyRk=";
     };
@@ -105,11 +105,11 @@ in {
     commit.gpgsign = true;
     diff.renamelimit = 16384;
     diff.sopsdiffer.textconv =
-      (nixpkgs.writeShellScript "sopsdiffer.sh" ''
+      (pkgs.writeShellScript "sopsdiffer.sh" ''
         sops -d "$1" || cat "$1"
       '')
       .outPath;
-    gpg.progam = "${nixpkgs.gnupg}/bin/gpg2";
+    gpg.progam = "${pkgs.gnupg}/bin/gpg2";
     gpg.sign = true;
     init.defaultbranch = "main";
     user.email = config.wellKnown.email;
