@@ -7,11 +7,12 @@
 
   users.mutableUsers = false;
   users.users.root = {
-    inherit (config.secrets) hashedPasswordFile;
+    # mkpasswd -m sha-512
+    hashedPasswordFile = config.sops.secrets.user-password.path;
   };
   users.users.${config.wellKnown.username} = {
     extraGroups = ["wheel"];
-    inherit (config.secrets) hashedPasswordFile;
+    hashedPasswordFile = config.sops.secrets.user-password.path;
     isNormalUser = true;
   };
 }

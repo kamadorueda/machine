@@ -2,9 +2,6 @@
 
 secrets="${PWD}/nixos-modules/sops/secrets.yaml"
 
-cd secrets/ssh/
-
-chmod 700 .
 ssh-keygen -t ed25519 -C kamadorueda@gmail.com -f kamadorueda -N ''
 ssh-add kamadorueda
 

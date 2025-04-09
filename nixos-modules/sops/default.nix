@@ -13,7 +13,9 @@
   sops.secrets.coveralls-kamadorueda-toros = {};
   sops.secrets.cloudflared-tunnel = {};
 
-  sops.secrets."gpg/kamadorueda@gmail.com/private" = {};
+  sops.secrets."gpg/kamadorueda@gmail.com/private" = {
+    owner = config.wellKnown.username;
+  };
 
   sops.secrets."wifi/24f42fdc30" = {
     mode = "400";
@@ -26,7 +28,9 @@
     restartUnits = ["home-assistant.service"];
   };
 
-  sops.secrets."ssh/kamadorueda/private" = {};
+  sops.secrets."ssh/kamadorueda/private" = {
+    owner = config.wellKnown.username;
+  };
 
   sops.secrets.user-password.neededForUsers = true;
 }

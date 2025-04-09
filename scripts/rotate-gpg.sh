@@ -1,8 +1,13 @@
 #! /bin/sh -eux
 
-export GNUPGHOME="${PWD}/secrets/gpg/home"
+export GNUPGHOME="${PWD}/scripts/gpg-home"
 
 secrets="${PWD}/nixos-modules/sops/secrets.yaml"
+
+rm -rf "${GNUPGHOME}"
+mkdir -p "${GNUPGHOME}"
+chmod 700 "${GNUPGHOME}"
+gpgconf --kill gpg-agent
 
 for email in kamadorueda@gmail.com; do
   echo "
@@ -21,3 +26,5 @@ for email in kamadorueda@gmail.com; do
   sops set "${secrets}" '["gpg"]'"[\"${email}\"]"'["private"]' \
     "$(jq --arg value "$(gpg --armor --export-secret-keys "${email}")" --exit-status --null-input '$value')"
 done
+
+rm -rf "${GNUPGHOME}"

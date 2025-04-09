@@ -55,9 +55,6 @@
       secrets = import ./nixos-modules/secrets;
       secretsConfig = {config, ...}: {
         secrets.ageKeyPath = "/data/age-key.txt";
-
-        # mkpasswd -m sha-512
-        secrets.hashedPasswordFile = config.sops.secrets.user-password.path;
       };
 
       sops = inputs.sopsNix.nixosModules.sops;

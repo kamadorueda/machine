@@ -5,7 +5,6 @@
   ...
 }: {
   options = {
-    secrets.hashedPasswordFile = lib.mkOption {type = lib.types.str;};
     secrets.ageKeyPath = lib.mkOption {type = lib.types.str;};
   };
   config = {
