@@ -1,4 +1,6 @@
-#! /bin/sh -eux
+#! /usr/bin/env bash
+
+set -euo pipefail
 
 agent="${1:-}"
 shift

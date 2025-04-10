@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+set -euo pipefail
+
 nix profile wipe-history
 nix store gc
 nix store optimise

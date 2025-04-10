@@ -2,16 +2,7 @@
   config,
   pkgs,
   ...
-}: let
-  mkcert.certs = pkgs.runCommand "mkcert-certs" {} ''
-    CAROOT=$out ${pkgs.mkcert}/bin/mkcert -install
-  '';
-in {
-  home-manager.users.${config.wellKnown.username} = {
-    home.file.".local/share/mkcert/rootCA.pem".source = "${mkcert.certs}/rootCA.pem";
-    home.file.".local/share/mkcert/rootCA-key.pem".source = "${mkcert.certs}/rootCA-key.pem";
-  };
-
+}: {
   networking.firewall.enable = true;
   networking.firewall.allowedUDPPorts = [];
   networking.firewall.allowedTCPPorts = [];
@@ -20,7 +11,19 @@ in {
   networking.nameservers = ["1.1.1.1" "8.8.8.8" "8.8.4.4"];
   networking.networkmanager.enable = true;
 
-  security.pki.certificateFiles = ["${mkcert.certs}/rootCA.pem"];
+  sops.secrets."cloudflared-tunnel" = {
+    restartUnits = ["docker-cloudflared-tunnel.service"];
+  };
+  sops.secrets."wifi/24f42fdc30" = {
+    mode = "400";
+    path = "/etc/NetworkManager/system-connections/24f42fdc30";
+    restartUnits = ["NetworkManager.service"];
+  };
+  sops.secrets."wifi/spsetup-2c38" = {
+    mode = "400";
+    path = "/etc/NetworkManager/system-connections/spsetup-2c38";
+    restartUnits = ["NetworkManager.service"];
+  };
 
   users.users.${config.wellKnown.username}.extraGroups = ["networkmanager"];
 
@@ -28,6 +31,6 @@ in {
     image = "cloudflare/cloudflared:latest";
     cmd = ["tunnel" "--no-autoupdate" "run"];
     extraOptions = ["--network" "host"];
-    environmentFiles = [config.sops.secrets.cloudflared-tunnel.path];
+    environmentFiles = [config.sops.secrets."cloudflared-tunnel".path];
   };
 }

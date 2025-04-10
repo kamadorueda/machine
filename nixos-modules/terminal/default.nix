@@ -121,4 +121,11 @@ in {
     user.name = config.wellKnown.name;
   };
   programs.git.enable = true;
+
+  sops.secrets."gpg/kamadorueda@gmail.com/private" = {
+    owner = config.wellKnown.username;
+  };
+  sops.secrets."ssh/kamadorueda/private" = {
+    owner = config.wellKnown.username;
+  };
 }

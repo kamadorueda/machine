@@ -1,8 +1,8 @@
-#! /bin/sh -eux
+#! /usr/bin/env bash
+
+set -euo pipefail
 
 export GNUPGHOME="${PWD}/scripts/gpg-home"
-
-secrets="${PWD}/secrets/machine.yaml"
 
 rm -rf "${GNUPGHOME}"
 mkdir -p "${GNUPGHOME}"
@@ -20,10 +20,10 @@ for email in kamadorueda@gmail.com; do
     %commit
   " | gpg --generate-key --batch
 
-  sops set "${secrets}" '["gpg"]'"[\"${email}\"]"'["public"]' \
+  sops set secrets/machine.yaml '["gpg"]'"[\"${email}\"]"'["public"]' \
     "$(jq --arg value "$(gpg --armor --export "${email}")" --exit-status --null-input '$value')"
 
-  sops set "${secrets}" '["gpg"]'"[\"${email}\"]"'["private"]' \
+  sops set secrets/machine.yaml '["gpg"]'"[\"${email}\"]"'["private"]' \
     "$(jq --arg value "$(gpg --armor --export-secret-keys "${email}")" --exit-status --null-input '$value')"
 done
 

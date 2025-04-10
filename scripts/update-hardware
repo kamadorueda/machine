@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+set -euo pipefail
+
 nixos-generate-config \
   --show-hardware-config \
   | tee nixos-modules/physical/auto-detected.nix

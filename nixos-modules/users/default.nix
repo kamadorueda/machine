@@ -5,6 +5,10 @@
     home.stateVersion = config.system.stateVersion;
   };
 
+  sops.secrets."user-password" = {
+    neededForUsers = true;
+  };
+
   users.mutableUsers = false;
   users.users.root = {
     # mkpasswd -m sha-512

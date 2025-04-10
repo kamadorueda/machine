@@ -1,4 +1,6 @@
-#! /bin/sh -eu
+#! /usr/bin/env bash
+
+set -euo pipefail
 
 nix \
   --extra-experimental-features flakes \
