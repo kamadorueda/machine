@@ -11,6 +11,7 @@
     bindMounts."/data/nixpkgs".hostPath = "/data/nixpkgs";
     ephemeral = true;
   };
+
   baseConfig = {
     imports = [flakeInputs.sopsNix.nixosModules.sops];
 
@@ -90,41 +91,22 @@ in {
         sops.secrets.coveralls-kamadorueda-nixel = {};
         sops.secrets.coveralls-kamadorueda-santiago = {};
         sops.secrets.coveralls-kamadorueda-toros = {};
-        sops.templates.environment-hook.content = ''
-          export PAGER=
-
-          case "$BUILDKITE_PIPELINE_NAME" in
-            alejandra)
-              case "$BUILDKITE_BRANCH" in
-                main)
-                  export CACHIX_AUTH_TOKEN="${config.sops.placeholder.cachix-auth-token-alejandra}"
-                  export COVERALLS_REPO_TOKEN="${config.sops.placeholder.coveralls-kamadorueda-alejandra}"
-                  ;;
-              esac
-              ;;
-            nixel)
-              case "$BUILDKITE_BRANCH" in
-                main)
-                  export COVERALLS_REPO_TOKEN="${config.sops.placeholder.coveralls-kamadorueda-nixel}"
-                  ;;
-              esac
-              ;;
-            santiago)
-              case "$BUILDKITE_BRANCH" in
-                main)
-                  export COVERALLS_REPO_TOKEN="${config.sops.placeholder.coveralls-kamadorueda-santiago}"
-                  ;;
-              esac
-              ;;
-            toros)
-              case "$BUILDKITE_BRANCH" in
-                main)
-                  export COVERALLS_REPO_TOKEN="${config.sops.placeholder.coveralls-kamadorueda-toros}"
-                  ;;
-              esac
-              ;;
-          esac
-        '';
+        sops.templates.environment-hook = {
+          file = let
+            app = pkgs.writeShellApplication {
+              name = "buildkite-environment-hook";
+              runtimeEnv = {
+                CACHIX_AUTH_TOKEN_ALEJANDRA = config.sops.placeholder.cachix-auth-token-alejandra;
+                COVERALLS_KAMADORUEDA_ALEJANDRA = config.sops.placeholder.coveralls-kamadorueda-alejandra;
+                COVERALLS_KAMADORUEDA_NIXEL = config.sops.placeholder.coveralls-kamadorueda-nixel;
+                COVERALLS_KAMADORUEDA_SANTIAGO = config.sops.placeholder.coveralls-kamadorueda-santiago;
+                COVERALLS_KAMADORUEDA_TOROS = config.sops.placeholder.coveralls-kamadorueda-toros;
+              };
+              text = builtins.readFile ./environment-hook.sh;
+            };
+          in "${app}/bin/${app.name}";
+          owner = "buildkite-agent-default";
+        };
       };
   };
 }
