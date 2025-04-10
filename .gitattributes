@@ -1,2 +1,2 @@
-/nixos-modules/sops/secrets.yaml diff=sopsdiffer
+/secrets/*.yaml diff=sopsdiffer
 /.gitattributes !filter !diff

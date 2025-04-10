@@ -61,7 +61,6 @@
       };
 
       sops = inputs.sopsNix.nixosModules.sops;
-      sopsConfig = import ./nixos-modules/sops;
 
       terminal = import ./nixos-modules/terminal;
 

@@ -2,7 +2,7 @@
 
 export GNUPGHOME="${PWD}/scripts/gpg-home"
 
-secrets="${PWD}/nixos-modules/sops/secrets.yaml"
+secrets="${PWD}/secrets/machine.yaml"
 
 rm -rf "${GNUPGHOME}"
 mkdir -p "${GNUPGHOME}"

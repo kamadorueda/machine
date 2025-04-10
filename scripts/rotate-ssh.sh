@@ -1,6 +1,6 @@
 #! /bin/sh -eux
 
-secrets="${PWD}/nixos-modules/sops/secrets.yaml"
+secrets="${PWD}/secrets/machine.yaml"
 
 ssh-keygen -t ed25519 -C kamadorueda@gmail.com -f kamadorueda -N ''
 ssh-add kamadorueda
