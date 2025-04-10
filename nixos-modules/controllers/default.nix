@@ -18,6 +18,7 @@
     hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
     services.fwupd.enable = true;
     services.gnome.at-spi2-core.enable = true;
+    services.pcscd.enable = true;
     # services.xserver.videoDrivers = ["nvidia"];
   };
 }
