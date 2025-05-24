@@ -4,6 +4,9 @@
   pkgs,
   ...
 }: let
+  inherit (pkgs.lib.meta) getExe getExe';
+  inherit (pkgs.lib.modules) mkForce;
+
   terminalConfig = {
     colors.normal.black = "#000000";
     colors.normal.red = "#CD0000";
@@ -30,12 +33,11 @@
     general.working_directory = "/data";
     scrolling.history = 100000;
   };
-  terminalConfigYml =
+  terminalConfigToml =
     (pkgs.formats.toml {}).generate "alacritty-config.toml" terminalConfig;
 in {
-  environment.shellAliases = pkgs.lib.mkForce {};
+  environment.shellAliases = mkForce {};
   environment.systemPackages = [
-    pkgs.alacritty
     pkgs.age
     pkgs.awscli2
     pkgs.comma
@@ -49,44 +51,19 @@ in {
     pkgs.sops
     pkgs.tree
     pkgs.unzip
-    pkgs.xclip
     pkgs.zip
 
-    (pkgs.writeShellScriptBin "a" ''
-      git add -p "$@"
-    '')
-    (pkgs.writeShellScriptBin "c" ''
-      git commit --allow-empty "$@"
-    '')
-    (pkgs.writeShellScriptBin "ca" ''
-      git commit --amend --no-edit --allow-empty "$@"
-    '')
-    (pkgs.writeShellScriptBin "clip" ''
-      xclip -sel clip "$@"
-    '')
-    (pkgs.writeShellScriptBin "f" ''
-      git fetch --all "$@"
-    '')
-    (pkgs.writeShellScriptBin "l" ''
-      git log "$@"
-    '')
-    (pkgs.writeShellScriptBin "p" ''
-      git push -f "$@"
-    '')
-    (pkgs.writeShellScriptBin "ro" ''
-      git pull --autostash --progress --rebase --stat origin "$@"
-    '')
-    (pkgs.writeShellScriptBin "rf" ''
-      git pull --autostash --progress --rebase --stat fork "$@"
-    '')
-    (pkgs.writeShellScriptBin "s" ''
-      git status "$@"
-    '')
-    (pkgs.writeShellScriptBin "terminal" ''
-      alacritty \
-        --config-file ${terminalConfigYml} \
-        "$@"
-    '')
+    (pkgs.alias "terminal" pkgs.alacritty ["--config-file" terminalConfigToml])
+    (pkgs.alias "a" pkgs.git ["add" "-p"])
+    (pkgs.alias "c" pkgs.git ["commit" "--allow-empty"])
+    (pkgs.alias "ca" pkgs.git ["commit" "--allow-empty" "--amend" "--no-edit"])
+    (pkgs.alias "f" pkgs.git ["fetch" "--all" "--tags" "--force"])
+    (pkgs.alias "l" pkgs.git ["log"])
+    (pkgs.alias "p" pkgs.git ["push" "--force"])
+    (pkgs.alias "ro" pkgs.git ["pull" "--autostash" "--progress" "--rebase" "--stat" "origin"])
+    (pkgs.alias "rf" pkgs.git ["pull" "--autostash" "--progress" "--rebase" "--stat" "fork"])
+    (pkgs.alias "s" pkgs.git ["status"])
+    (pkgs.alias "clip" pkgs.xclip [])
   ];
 
   home-manager.users.${config.wellKnown.username} = {
@@ -105,16 +82,14 @@ in {
   programs.git.config = {
     commit.gpgsign = true;
     diff.renamelimit = 16384;
-    diff.sopsdiffer.textconv = let
-      app = pkgs.writeShellApplication {
-        name = "sopsdiffer.sh";
-        runtimeInputs = [pkgs.sops];
-        text = ''
-          sops decrypt "$1"
-        '';
-      };
-    in "${app}/bin/${app.name}";
-    gpg.progam = "${pkgs.gnupg}/bin/gpg2";
+    diff.sopsdiffer.textconv = getExe (pkgs.writeShellApplication {
+      name = "sopsdiffer.sh";
+      runtimeInputs = [pkgs.sops];
+      text = ''
+        sops decrypt "$1"
+      '';
+    });
+    gpg.progam = getExe' pkgs.gnupg "gpg2";
     gpg.sign = true;
     init.defaultbranch = "main";
     user.email = config.wellKnown.email;

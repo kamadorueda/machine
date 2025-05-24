@@ -52,6 +52,7 @@
       networking = import ./nixos-modules/networking;
 
       nix = import ./nixos-modules/nix;
+      nixpkgs = import ./nixos-modules/nixpkgs;
 
       physical = import ./nixos-modules/physical;
 

@@ -2,12 +2,11 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  inherit (pkgs.lib.strings) escapeShellArg;
+in {
   environment.systemPackages = [
-    pkgs.brave
-    (pkgs.writeShellScriptBin "browser" ''
-      brave "$@"
-    '')
+    (pkgs.alias "browser" pkgs.brave [])
   ];
 
   systemd.services."machine-browser-user-data-dir" = {
@@ -21,7 +20,7 @@
         set -eux
 
         mkdir -p "$USER_DATA_DIR"
-        chown ${pkgs.lib.escapeShellArg config.wellKnown.username} "$USER_DATA_DIR"
+        chown ${escapeShellArg config.wellKnown.username} "$USER_DATA_DIR"
         mount --bind /data/browser/data "$USER_DATA_DIR"
       '';
       ExecStop = pkgs.writeShellScript "exec-stop.sh" ''

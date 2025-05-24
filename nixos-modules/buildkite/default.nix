@@ -5,6 +5,7 @@
   ...
 }: let
   inherit (pkgs.lib.attrsets) recursiveUpdate;
+  inherit (pkgs.lib.meta) getExe;
 
   baseContainer = {
     autoStart = false;
@@ -38,17 +39,11 @@
         pkgs.gnugrep
         pkgs.gnutar
         pkgs.gzip
-        (pkgs.writeShellScriptBin "nix-env" ''
-          exec ${config.nix.package}/bin/nix-env "$@"
-        '')
-        (pkgs.writeShellScriptBin "nix-store" ''
-          exec ${config.nix.package}/bin/nix-store "$@"
-        '')
-        (pkgs.writeShellScriptBin "nix" ''
-          exec ${config.nix.package}/bin/nix --print-build-logs "$@"
-        '')
+        (pkgs.alias' "nix-env" config.nix.package "nix-env" [])
+        (pkgs.alias' "nix-store" config.nix.package "nix-store" [])
+        (pkgs.alias "nix" config.nix.package ["--print-build-logs"])
       ];
-      shell = "${pkgs.bash}/bin/bash -euo pipefail -c";
+      shell = "${getExe pkgs.bash} -euo pipefail -c";
       tokenPath = "/run/secrets/buildkite-token";
     };
 
@@ -92,19 +87,17 @@ in {
         sops.secrets.coveralls-kamadorueda-santiago = {};
         sops.secrets.coveralls-kamadorueda-toros = {};
         sops.templates.environment-hook = {
-          file = let
-            app = pkgs.writeShellApplication {
-              name = "buildkite-environment-hook";
-              runtimeEnv = {
-                CACHIX_AUTH_TOKEN_ALEJANDRA = config.sops.placeholder.cachix-auth-token-alejandra;
-                COVERALLS_KAMADORUEDA_ALEJANDRA = config.sops.placeholder.coveralls-kamadorueda-alejandra;
-                COVERALLS_KAMADORUEDA_NIXEL = config.sops.placeholder.coveralls-kamadorueda-nixel;
-                COVERALLS_KAMADORUEDA_SANTIAGO = config.sops.placeholder.coveralls-kamadorueda-santiago;
-                COVERALLS_KAMADORUEDA_TOROS = config.sops.placeholder.coveralls-kamadorueda-toros;
-              };
-              text = builtins.readFile ./environment-hook.sh;
+          file = getExe (pkgs.writeShellApplication {
+            name = "buildkite-environment-hook";
+            runtimeEnv = {
+              CACHIX_AUTH_TOKEN_ALEJANDRA = config.sops.placeholder.cachix-auth-token-alejandra;
+              COVERALLS_KAMADORUEDA_ALEJANDRA = config.sops.placeholder.coveralls-kamadorueda-alejandra;
+              COVERALLS_KAMADORUEDA_NIXEL = config.sops.placeholder.coveralls-kamadorueda-nixel;
+              COVERALLS_KAMADORUEDA_SANTIAGO = config.sops.placeholder.coveralls-kamadorueda-santiago;
+              COVERALLS_KAMADORUEDA_TOROS = config.sops.placeholder.coveralls-kamadorueda-toros;
             };
-          in "${app}/bin/${app.name}";
+            text = builtins.readFile ./environment-hook.sh;
+          });
           owner = "buildkite-agent-default";
         };
       };

@@ -3,41 +3,26 @@
   pkgs,
   ...
 }: let
-  pkg = pkgs.vscode;
+  inherit (pkgs.lib.lists) concatLists;
+  inherit (pkgs.lib.meta) getExe;
 
   extensionsDir = "/data/editor/extensions";
   userDataDir = "/data/editor/data";
 
-  bin =
-    pkgs.lib.pipe
-    [
-      ["${pkg}/bin/code"] # unfree
-      ["--extensions-dir" extensionsDir]
-      ["--user-data-dir" userDataDir]
-    ]
-    [
-      (pkgs.lib.flatten)
-      (pkgs.lib.concatStringsSep " ")
-    ];
+  pkg = pkgs.alias "editor" pkgs.vscode (concatLists [
+    ["--extensions-dir" extensionsDir]
+    ["--user-data-dir" userDataDir]
+  ]);
+  bin = getExe pkg;
 
   extensions = import ./extensions.nix {inherit pkgs;};
 
   settings = import ./settings.nix {inherit config pkgs;};
 
-  settingsJson =
-    pkgs.runCommand "settings.json" {
-      passAsFile = ["settings"];
-      settings = builtins.toJSON settings;
-    }
-    "cp $settingsPath $out";
+  settingsJson = (pkgs.formats.json {}).generate "settings.json" settings;
 in {
   environment.variables.EDITOR = "${bin} --wait";
-  environment.systemPackages = [
-    pkg
-    (pkgs.writeShellScriptBin "editor" ''
-      exec ${bin} "$@"
-    '')
-  ];
+  environment.systemPackages = [pkg];
 
   home-manager.users.${config.wellKnown.username} = {
     home.file.".config/rustfmt/rustfmt.toml".source = ./rustfmt.toml;
@@ -66,7 +51,7 @@ in {
         cp --dereference --no-preserve=mode,ownership -rT \
           "@extensions@/share/vscode/extensions/" "@extensionsDir@"
       '';
-      substitutions = pkgs.lib.concatLists [
+      substitutions = concatLists [
         ["--replace-fail" "@extensions@" extensions]
         ["--replace-fail" "@extensionsDir@" extensionsDir]
         ["--replace-fail" "@settings@" settingsJson]

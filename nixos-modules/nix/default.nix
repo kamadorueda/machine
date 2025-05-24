@@ -6,14 +6,10 @@
 }: {
   boot.readOnlyNixStore = false;
   environment.systemPackages = [
-    (pkgs.writeShellScriptBin "nix" ''
-      exec ${config.nix.package}/bin/nix \
-        --print-build-logs \
-        "$@"
-    '')
+    (pkgs.alias "nix" config.nix.package ["--print-build-logs"])
   ];
   nix.extraOptions = ''
-    extra-experimental-features = nix-command flakes
+    extra-experimental-features = flakes nix-command pipe-operators
   '';
   nix.nixPath = ["nixpkgs=${flakeInputs.nixpkgs}"];
   nix.package = pkgs.nixVersions.latest;
@@ -34,10 +30,4 @@
     "alejandra.cachix.org-1:NjZ8kI0mf4HCq8yPnBfiTurb96zp1TBWl8EC54Pzjm0="
   ];
   nix.settings.trusted-users = ["root" config.wellKnown.username];
-  nixpkgs.config.allowBroken = false;
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.android_sdk.accept_license = true;
-  nixpkgs.overlays = [
-    flakeInputs.fenix.overlays.default
-  ];
 }

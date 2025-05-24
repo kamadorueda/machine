@@ -1,71 +1,75 @@
 {
   config,
   pkgs,
-}: {
+}: let
+  inherit (pkgs.lib.meta) getExe getExe';
+in {
   "[python]"."editor.tabSize" = 4;
   "[rust]"."editor.tabSize" = 2;
   "[toml]"."editor.defaultFormatter" = "tamasfe.even-better-toml";
-  "alejandra.program" = "${pkgs.alejandra}/bin/alejandra";
+  "alejandra.program" = getExe pkgs.alejandra;
   "customLocalFormatters.formatters" = [
     {
-      command = "${pkgs.clang-tools}/bin/clang-format --sort-includes --style=file:${./clang.yaml}";
+      command = "${getExe' pkgs.clang-tools "clang-format"} --sort-includes --style=file:${./clang.yaml}";
       languages = ["c" "cpp"];
     }
     {
-      command = "${pkgs.nodePackages.prettier}/bin/prettier --parser css";
+      command = "${getExe pkgs.nodePackages.prettier} --parser css";
       languages = ["css"];
     }
     {
-      command = "${pkgs.nodePackages.prettier}/bin/prettier --parser html";
+      command = "${getExe pkgs.nodePackages.prettier} --parser html";
       languages = ["html"];
     }
     {
-      command = "${pkgs.google-java-format}/bin/google-java-format -";
+      command = "${getExe pkgs.google-java-format} -";
       languages = ["java"];
     }
     {
-      command = "${pkgs.nodePackages.prettier}/bin/prettier --parser babel";
+      command = "${getExe pkgs.nodePackages.prettier} --parser babel";
       languages = ["javascript"];
     }
     {
-      command = "${pkgs.jq}/bin/jq -S";
+      command = "${getExe pkgs.jq} -S";
       languages = ["json" "jsonc"];
     }
     {
-      command = "${pkgs.texlive.combined.scheme-medium}/bin/latexindent";
+      command = getExe' pkgs.texlive.combined.scheme-medium "latexindent";
       languages = ["latex"];
     }
     {
-      command = "${pkgs.nodePackages.prettier}/bin/prettier --parser markdown";
+      command = "${getExe pkgs.nodePackages.prettier} --parser markdown";
       languages = ["markdown"];
     }
     {
-      command =
-        (pkgs.writeShellScript "python-fmt" ''
-          ${pkgs.black}/bin/black --config ${./black.toml} - \
-          | ${pkgs.isort}/bin/isort --settings-path ${./isort.toml} -
-        '')
-        .outPath;
+      command = getExe (pkgs.writeShellApplication {
+        name = "python-fmt";
+        runtimeInputs = [pkgs.black pkgs.isort];
+        text = ''
+          black --config ${./black.toml} - \
+            | isort --settings-path ${./isort.toml} -
+        '';
+      });
       languages = ["python"];
     }
     {
-      command = "${pkgs.fenix.latest.rustfmt}/bin/rustfmt";
+      command = getExe' pkgs.fenix.latest.rustfmt "rust-fmt";
       languages = ["rust"];
     }
     {
-      command = "${pkgs.nodePackages.prettier}/bin/prettier --parser scss";
+      command = "${getExe pkgs.nodePackages.prettier} --parser scss";
       languages = ["scss"];
     }
     {
-      command = "${pkgs.shfmt}/bin/shfmt -bn -ci -i 2 -s -sr -";
+      command = "${getExe pkgs.shfmt} -bn -ci -i 2 -s -sr -";
       languages = ["shellscript"];
     }
     {
-      command = "${pkgs.nodePackages.sql-formatter}/bin/sql-formatter";
+      command = getExe pkgs.nodePackages.sql-formatter;
       languages = ["sql"];
     }
     {
-      command = "${pkgs.terraform}/bin/terraform fmt -";
+      command = "${getExe pkgs.terraform} fmt -";
       languages = ["tf"];
     }
     # {
@@ -80,11 +84,11 @@
     #   languages = ["toml"];
     # }
     {
-      command = "${pkgs.nodePackages.prettier}/bin/prettier --parser html";
+      command = "${getExe pkgs.nodePackages.prettier} --parser html";
       languages = ["xml"];
     }
     {
-      command = "${pkgs.nodePackages.prettier}/bin/prettier --parser yaml";
+      command = "${getExe pkgs.nodePackages.prettier} --parser yaml";
       languages = ["yaml"];
     }
   ];
@@ -130,10 +134,10 @@
   "python.linting.lintOnSave" = true;
   "python.linting.mypyArgs" = ["--config-file" ./mypy.toml];
   "python.linting.mypyEnabled" = true;
-  "python.linting.mypyPath" = "${pkgs.mypy}/bin/mypy";
+  "python.linting.mypyPath" = getExe pkgs.mypy;
   # "python.linting.prospectorArgs" = ["--profile" ./prospector.yaml];
   # "python.linting.prospectorEnabled" = true;
-  # "python.linting.prospectorPath" = "${pkgs.prospector}/bin/prospector";
+  # "python.linting.prospectorPath" = getExe pkgs.prospector";
   "python.linting.pylintEnabled" = false;
   "rust-analyzer.assist.emitMustUse" = true;
   "rust-analyzer.cargo.buildScripts.useRustcWrapper" = false;

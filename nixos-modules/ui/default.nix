@@ -10,33 +10,15 @@
   };
   config = {
     environment.systemPackages = [
-      pkgs.bluez
-      (pkgs.writeShellScriptBin "bluetooth" ''
-        exec ${pkgs.bluez}/bin/bluetoothctl "$@"
-      '')
-
-      pkgs.nautilus
-      (pkgs.writeShellScriptBin "files" ''
-        exec ${pkgs.nautilus}/bin/nautilus "$@"
-      '')
-
-      pkgs.eog
-      (pkgs.writeShellScriptBin "images" ''
-        exec ${pkgs.eog}/bin/eog "$@"
-      '')
-
-      (pkgs.writeShellScriptBin "screen"
-        (builtins.readFile ./screen.sh))
-
-      pkgs.gnome-screenshot
-      (pkgs.writeShellScriptBin "screenshot" ''
-        exec ${pkgs.gnome-screenshot}/bin/gnome-screenshot "$@"
-      '')
-
-      pkgs.pavucontrol
-      (pkgs.writeShellScriptBin "sound" ''
-        exec ${pkgs.pavucontrol}/bin/pavucontrol "$@"
-      '')
+      (pkgs.alias' "bluetooth" pkgs.bluez "bluetoothctl" [])
+      (pkgs.alias "files" pkgs.nautilus [])
+      (pkgs.alias "images" pkgs.eog [])
+      (pkgs.writeShellApplication {
+        name = "screen";
+        text = builtins.readFile ./screen.sh;
+      })
+      (pkgs.alias "screenshot" pkgs.gnome-screenshot [])
+      (pkgs.alias "sound" pkgs.pavucontrol [])
     ];
     fonts.enableDefaultPackages = false;
     fonts.fontconfig.defaultFonts.emoji = [

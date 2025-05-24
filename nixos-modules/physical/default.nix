@@ -1,4 +1,6 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  inherit (pkgs.lib.meta) getExe';
+in {
   imports = [./auto-detected.nix];
 
   config = {
@@ -11,9 +13,9 @@
     boot.initrd.postDeviceCommands = ''
       echo wiping root device...
       mkdir /tmp/root
-      ${pkgs.util-linux}/bin/mount /dev/disk/by-label/root /tmp/root
+      ${getExe' pkgs.util-linux "mount"} /dev/disk/by-label/root /tmp/root
       rm -fr /tmp/root/*
-      ${pkgs.util-linux}/bin/umount /tmp/root
+      ${getExe' pkgs.util-linux "umount"} /tmp/root
     '';
     swapDevices = [
       {
