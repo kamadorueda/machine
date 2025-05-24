@@ -52,6 +52,7 @@
       networking = import ./nixos-modules/networking;
 
       nix = import ./nixos-modules/nix;
+
       nixpkgs = import ./nixos-modules/nixpkgs;
 
       physical = import ./nixos-modules/physical;
@@ -95,6 +96,7 @@
           inputs.self.nixosModules._meta
           inputs.self.nixosModules.controllers
           inputs.self.nixosModules.nix
+          inputs.self.nixosModules.nixpkgs
           inputs.self.nixosModules.wellKnown
           inputs.self.nixosModules.wellKnownConfig
           ({pkgs, ...}: {

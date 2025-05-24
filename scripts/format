@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+nix run nixpkgs#shfmt -- --binary-next-line --case-indent --indent 2 --simplify --space-redirects --write .
+nix run nixpkgs#alejandra -- .
