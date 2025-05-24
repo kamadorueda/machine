@@ -82,13 +82,8 @@ in {
   programs.git.config = {
     commit.gpgsign = true;
     diff.renamelimit = 16384;
-    diff.sopsdiffer.textconv = getExe (pkgs.writeShellApplication {
-      name = "sopsdiffer.sh";
-      runtimeInputs = [pkgs.sops];
-      text = ''
-        sops decrypt "$1"
-      '';
-    });
+    diff.sopsdiffer.textconv =
+      getExe (pkgs.alias "sopsdiffer" pkgs.sops ["decrypt"]);
     gpg.progam = getExe' pkgs.gnupg "gpg2";
     gpg.sign = true;
     init.defaultbranch = "main";
