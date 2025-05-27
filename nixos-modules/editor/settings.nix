@@ -3,9 +3,15 @@
   pkgs,
 }: let
   inherit (pkgs.lib.meta) getExe getExe';
+
+  prettier = pkgs.writeShellApplication {
+    name = "prettier";
+    runtimeInputs = [pkgs.nodejs pkgs.nodePackages.prettier];
+    text = ''prettier "$@"'';
+  };
 in {
   "[python]"."editor.tabSize" = 4;
-  "[rust]"."editor.tabSize" = 2;
+  "[rust]"."editor.tabSize" = 4;
   "[toml]"."editor.defaultFormatter" = "tamasfe.even-better-toml";
   "alejandra.program" = getExe pkgs.alejandra;
   "customLocalFormatters.formatters" = [
@@ -14,11 +20,11 @@ in {
       languages = ["c" "cpp"];
     }
     {
-      command = "${getExe pkgs.nodePackages.prettier} --parser css";
+      command = "${getExe prettier} --parser css";
       languages = ["css"];
     }
     {
-      command = "${getExe pkgs.nodePackages.prettier} --parser html";
+      command = "${getExe prettier} --parser html";
       languages = ["html"];
     }
     {
@@ -26,7 +32,7 @@ in {
       languages = ["java"];
     }
     {
-      command = "${getExe pkgs.nodePackages.prettier} --parser babel";
+      command = "${getExe prettier} --parser babel";
       languages = ["javascript"];
     }
     {
@@ -38,7 +44,7 @@ in {
       languages = ["latex"];
     }
     {
-      command = "${getExe pkgs.nodePackages.prettier} --parser markdown";
+      command = "${getExe prettier} --parser markdown";
       languages = ["markdown"];
     }
     {
@@ -53,11 +59,11 @@ in {
       languages = ["python"];
     }
     {
-      command = getExe' pkgs.fenix.latest.rustfmt "rust-fmt";
+      command = getExe' pkgs.fenix.latest.rustfmt "rustfmt";
       languages = ["rust"];
     }
     {
-      command = "${getExe pkgs.nodePackages.prettier} --parser scss";
+      command = "${getExe prettier} --parser scss";
       languages = ["scss"];
     }
     {
@@ -84,11 +90,11 @@ in {
     #   languages = ["toml"];
     # }
     {
-      command = "${getExe pkgs.nodePackages.prettier} --parser html";
+      command = "${getExe prettier} --parser html";
       languages = ["xml"];
     }
     {
-      command = "${getExe pkgs.nodePackages.prettier} --parser yaml";
+      command = "${getExe prettier} --parser yaml";
       languages = ["yaml"];
     }
   ];
