@@ -7,6 +7,7 @@
 in {
   environment.systemPackages = [
     (pkgs.alias "browser" pkgs.brave [])
+    (pkgs.alias "x-www-browser" pkgs.brave [])
   ];
 
   systemd.services."machine-browser-user-data-dir" = {
