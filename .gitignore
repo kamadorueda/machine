@@ -1,3 +1,4 @@
+.direnv/
 /result*
 /scripts/gpg/home/
 /scripts/gpg/pubring.kbx

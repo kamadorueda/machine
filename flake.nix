@@ -120,11 +120,19 @@
       };
     };
 
-    packages."x86_64-linux" = {
+    packages."x86_64-linux" = let
+      pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
+    in {
       installer = let
         nixosSystem = inputs.self.nixosConfigurations.installer;
       in
         nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
+
+      shell = pkgs.writeShellApplication {
+        name = "shell";
+        runtimeInputs = [pkgs.coreutils];
+        text = "";
+      };
     };
   };
 }

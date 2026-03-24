@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  boot.readOnlyNixStore = false;
+  # boot.readOnlyNixStore = false;
   environment.systemPackages = [
     (pkgs.alias "nix" config.nix.package ["--print-build-logs"])
   ];
