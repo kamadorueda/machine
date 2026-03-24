@@ -9,9 +9,7 @@ in
     runtimeInputs = [pkgs.nodejs];
     runtimeEnv = {
       NODEMODULES = "${nodeModules}";
-      XDG_CACHE_HOME = "/data/.claude/cache";
-      XDG_CONFIG_HOME = "/data/.claude/config";
-      XDG_DATA_HOME = "/data/.claude/data";
+      CLAUDE_CONFIG_DIR = "/data/.claude";
     };
     text = builtins.readFile ./run.sh;
   }
