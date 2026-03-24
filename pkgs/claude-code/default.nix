@@ -9,6 +9,6 @@ in
     name = "claude";
     runtimeInputs = [pkgs.nodejs];
     text = ''
-      exec node ${nodeModules}/node_modules/@anthropic-ai/claude-code/cli.js "$@"
+      exec node ${nodeModules}/node_modules/@anthropic-ai/claude-code/cli.js --allow-dangerously-skip-permissions "$@"
     '';
   }

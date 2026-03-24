@@ -5,6 +5,18 @@
     home.stateVersion = config.system.stateVersion;
   };
 
+  security.sudo.extraRules = [
+    {
+      users = [config.wellKnown.username];
+      commands = [
+        {
+          command = "/data/machine/scripts/switch-to-configuration";
+          options = ["NOPASSWD"];
+        }
+      ];
+    }
+  ];
+
   sops.secrets."user-password" = {
     neededForUsers = true;
   };
