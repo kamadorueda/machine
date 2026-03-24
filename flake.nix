@@ -127,6 +127,8 @@
     in {
       claude-code = pkgs.callPackage ./pkgs/claude-code {};
 
+      claude-code-status-line = pkgs.callPackage ./pkgs/claude-code-status-line {};
+
       installer = let
         nixosSystem = inputs.self.nixosConfigurations.installer;
       in
