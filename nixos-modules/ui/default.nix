@@ -86,6 +86,14 @@
     services.xserver.xkb.layout = "us";
     services.xserver.xkb.variant = "altgr-intl";
 
+    location.latitude = 0.0;
+    location.longitude = 0.0;
+    services.redshift = {
+      enable = true;
+      temperature.day = 3500;
+      temperature.night = 3500;
+    };
+
     time.timeZone = config.ui.timezone;
     xdg.mime.addedAssociations = {
       # "application/pdf" = "brave-browser.desktop";
