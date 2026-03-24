@@ -123,6 +123,8 @@
     packages."x86_64-linux" = let
       pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
     in {
+      claude-code = pkgs.callPackage ./pkgs/claude-code {};
+
       installer = let
         nixosSystem = inputs.self.nixosConfigurations.installer;
       in
