@@ -1,3 +1,9 @@
+---
+name: nixos-workflow
+description: Build and test NixOS configuration changes safely
+user-invocable: true
+---
+
 # NixOS Configuration Workflow
 
 When modifying nixos-modules, follow this workflow to build and test changes.

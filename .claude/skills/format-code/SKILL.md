@@ -1,3 +1,9 @@
+---
+name: format-code
+description: Format Nix and shell files in the repository
+user-invocable: true
+---
+
 # Format Code
 
 Formats Nix and shell files in the repository.

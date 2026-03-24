@@ -1,3 +1,9 @@
+---
+name: update-system
+description: Update flake.lock to latest versions of all dependencies
+user-invocable: true
+---
+
 # Update System Dependencies
 
 Update the flake.lock to the latest versions of all inputs (nixpkgs, fenix, home-manager, etc).
