@@ -14,7 +14,7 @@
     environment.systemPackages = [pkgs.gnupg];
     environment.variables.SOPS_AGE_KEY_FILE = config.secrets.ageKeyPath;
 
-    programs.ssh.startAgent = true;
+    programs.ssh.startAgent = false;
 
     sops.age.keyFile = config.secrets.ageKeyPath;
 

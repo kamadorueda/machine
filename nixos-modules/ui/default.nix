@@ -37,7 +37,7 @@
       pkgs.liberation_ttf
       pkgs.unifont
 
-      pkgs.noto-fonts-emoji
+      pkgs.noto-fonts-color-emoji
       pkgs.twitter-color-emoji
       pkgs.fira-code
     ];

@@ -1,5 +1,4 @@
-{pkgs}:
-let
+{pkgs}: let
   nodeModules = pkgs.importNpmLock.buildNodeModules {
     npmRoot = ./.;
     nodejs = pkgs.nodejs;
