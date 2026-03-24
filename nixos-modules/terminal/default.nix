@@ -50,6 +50,7 @@ in {
     pkgs.parted
     pkgs.shadow
     pkgs.sops
+    pkgs.sox
     pkgs.tree
     pkgs.unzip
     pkgs.zip
