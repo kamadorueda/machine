@@ -38,6 +38,7 @@
 in {
   environment.shellAliases = mkForce {};
   environment.systemPackages = [
+    flakeInputs.self.packages."x86_64-linux".claude-code
     pkgs.age
     pkgs.awscli2
     pkgs.comma
