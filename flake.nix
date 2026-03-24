@@ -35,6 +35,8 @@
 
       editor = import ./nixos-modules/editor;
 
+      zed = import ./nixos-modules/editor-new;
+
       fhs = import ./nixos-modules/fhs;
       fhsConfig = {pkgs, ...}: {
         fhs.packages = [
