@@ -26,5 +26,8 @@
           '';
         };
     })
+    (final: prev: {
+      superset = final.callPackage ../../pkgs/superset {};
+    })
   ];
 }

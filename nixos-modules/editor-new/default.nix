@@ -1,3 +1,3 @@
 {pkgs, ...}: {
-  environment.systemPackages = [pkgs.zed-editor];
+  environment.systemPackages = [pkgs.superset pkgs.zed-editor];
 }
