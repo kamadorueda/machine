@@ -55,22 +55,16 @@ in {
     ManagedBookmarks = [
       {toplevel_name = "Links";}
       {
-        name = "Nix";
-        children = [
-          {
-            name = "nixos-forum";
-            url = "https://discourse.nixos.org/latest";
-          }
-        ];
+        name = "gemini";
+        url = "https://gemini.google.com";
       }
       {
-        name = "Rust";
-        children = [
-          {
-            name = "forum";
-            url = "https://users.rust-lang.org";
-          }
-        ];
+        name = "claude";
+        url = "https://claude.ai/new";
+      }
+      {
+        name = "claude-usage";
+        url = "https://claude.ai/settings/usage";
       }
     ];
     PasswordManagerEnabled = false;
