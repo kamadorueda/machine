@@ -13,6 +13,10 @@
           command = "/data/machine/scripts/switch-to-configuration";
           options = ["NOPASSWD"];
         }
+        {
+          command = "/run/current-system/sw/bin/nixos-container";
+          options = ["NOPASSWD"];
+        }
       ];
     }
   ];
