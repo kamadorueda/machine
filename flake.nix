@@ -139,6 +139,8 @@
         runtimeInputs = [pkgs.coreutils];
         text = "";
       };
+
+      superset = pkgs.callPackage ./pkgs/superset {};
     };
   };
 }
