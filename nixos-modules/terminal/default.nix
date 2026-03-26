@@ -78,6 +78,7 @@ in {
     export DIRENV_WARN_TIMEOUT=1h
     source <(direnv hook bash)
 
+    export SSH_AUTH_SOCK=/run/user/$(id -u)/ssh-agent
     gpg --import < ${config.sops.secrets."gpg/kamadorueda@gmail.com/private".path}
     ssh-add ${config.sops.secrets."ssh/kamadorueda/private".path}
   '';
