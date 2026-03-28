@@ -17,20 +17,20 @@ if git rev-parse --git-dir > /dev/null 2>&1; then
   fi
 
   while IFS=$'\t' read -r a d _f; do
-    if [[ "${a}" =~ ^[0-9]+$ ]]; then
-      lines_added=$(( lines_added + a ))
-      lines_deleted=$(( lines_deleted + d ))
-      files_changed=$(( files_changed + 1 ))
+    if [[ ${a} =~ ^[0-9]+$ ]]; then
+      lines_added=$((lines_added + a))
+      lines_deleted=$((lines_deleted + d))
+      files_changed=$((files_changed + 1))
     fi
-  done < <(git diff "${diff_ref}" --numstat 2>/dev/null || true)
+  done < <(git diff "${diff_ref}" --numstat 2> /dev/null || true)
 
   while IFS= read -r uf; do
-    if [[ -f "${uf}" ]]; then
-      uf_lines=$(wc -l < "${uf}" 2>/dev/null || echo 0)
-      lines_added=$(( lines_added + uf_lines ))
-      files_changed=$(( files_changed + 1 ))
+    if [[ -f ${uf} ]]; then
+      uf_lines=$(wc -l < "${uf}" 2> /dev/null || echo 0)
+      lines_added=$((lines_added + uf_lines))
+      files_changed=$((files_changed + 1))
     fi
-  done < <(git ls-files --others --exclude-standard 2>/dev/null || true)
+  done < <(git ls-files --others --exclude-standard 2> /dev/null || true)
 fi
 
 echo "${model} | 🧠 ${ctx_pct}% | \$${cost} | 🌿 ~${files_changed} (+${lines_added} -${lines_deleted})"
