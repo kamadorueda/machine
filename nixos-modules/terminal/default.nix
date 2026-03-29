@@ -57,8 +57,11 @@ in {
 
     (pkgs.alias "terminal" pkgs.alacritty ["--config-file" terminalConfigToml])
     (pkgs.alias "a" pkgs.git ["add" "-p"])
+    (pkgs.alias "b" pkgs.git ["branch"])
     (pkgs.alias "c" pkgs.git ["commit" "--allow-empty"])
     (pkgs.alias "ca" pkgs.git ["commit" "--allow-empty" "--amend" "--no-edit"])
+    (pkgs.alias "code" config.wellKnown.editor [])
+    (pkgs.alias "editor" config.wellKnown.editor [])
     (pkgs.alias "f" pkgs.git ["fetch" "--all" "--tags" "--force"])
     (pkgs.alias "l" pkgs.git ["log"])
     (pkgs.alias "p" pkgs.git ["push" "--force"])

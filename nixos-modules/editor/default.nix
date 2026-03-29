@@ -21,19 +21,7 @@
 
   settingsJson = (pkgs.formats.json {}).generate "settings.json" settings;
 in {
-  environment.variables.EDITOR = "${bin} --wait";
   environment.systemPackages = [pkg];
-
-  home-manager.users.${config.wellKnown.username} = {
-    home.file.".config/rustfmt/rustfmt.toml".source = ./rustfmt.toml;
-  };
-
-  programs.git.config = {
-    diff.tool = "editor";
-    difftool.editor.cmd = "${bin} --diff $LOCAL $REMOTE --wait";
-    merge.tool = "editor";
-    mergetool.editor.cmd = "${bin} --wait $MERGED";
-  };
 
   systemd.services."machine-editor-setup" = {
     script = toString (pkgs.substitute {
