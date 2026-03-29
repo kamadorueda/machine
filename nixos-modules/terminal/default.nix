@@ -35,6 +35,14 @@
   };
   terminalConfigToml =
     (pkgs.formats.toml {}).generate "alacritty-config.toml" terminalConfig;
+
+  rcloneWrapped = pkgs.writeShellApplication {
+    name = "rclone";
+    runtimeEnv = {
+      RCLONE_CONFIG_DIR = "/data/.rclone";
+    };
+    text = ''exec ${getExe pkgs.rclone} "$@"'';
+  };
 in {
   environment.shellAliases = mkForce {};
   environment.systemPackages = [
@@ -48,7 +56,7 @@ in {
     pkgs.gnugrep
     pkgs.jq
     pkgs.parted
-    pkgs.rclone
+    rcloneWrapped
     pkgs.shadow
     pkgs.sops
     pkgs.sox
