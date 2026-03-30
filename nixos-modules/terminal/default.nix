@@ -39,7 +39,7 @@
   rcloneWrapped = pkgs.writeShellApplication {
     name = "rclone";
     runtimeEnv = {
-      RCLONE_CONFIG_DIR = "/data/.rclone";
+      RCLONE_CONFIG = "/data/.rclone/rclone.conf";
     };
     text = ''exec ${getExe pkgs.rclone} "$@"'';
   };
