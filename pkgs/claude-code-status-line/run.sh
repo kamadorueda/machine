@@ -5,6 +5,9 @@ ctx_pct=$(jq -r '(.context_window.used_percentage // 0) | floor' <<< "$json")
 cost_raw=$(jq -r '.cost.total_cost_usd // 0' <<< "$json")
 cost=$(printf "%.2f" "$cost_raw")
 
+tokens_in=$(jq -r '.context_window.total_input_tokens // 0' <<< "$json")
+tokens_out=$(jq -r '.context_window.total_output_tokens // 0' <<< "$json")
+
 files_changed=0
 lines_added=0
 lines_deleted=0
@@ -33,4 +36,4 @@ if git rev-parse --git-dir > /dev/null 2>&1; then
   done < <(git ls-files --others --exclude-standard 2> /dev/null || true)
 fi
 
-echo "${model} | 🧠 ${ctx_pct}% | \$${cost} | 🌿 ~${files_changed} (+${lines_added} -${lines_deleted})"
+echo "${model} | 🧠 ${ctx_pct}% | \$${cost} | ⬆️ ${tokens_in} ⬇️ ${tokens_out} | 🌿 ~${files_changed} (+${lines_added} -${lines_deleted})"
