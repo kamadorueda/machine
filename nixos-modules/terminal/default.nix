@@ -52,6 +52,7 @@ in {
     pkgs.comma
     pkgs.coreutils
     pkgs.direnv
+    pkgs.gh
     pkgs.git-crypt
     pkgs.gnugrep
     pkgs.jq
