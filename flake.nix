@@ -122,12 +122,17 @@
       };
     };
 
-    packages."x86_64-linux" = let
-      pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
-    in {
-      claude-code = pkgs.callPackage ./pkgs/claude-code {};
+    overlays.default = final: prev: {
+      claude-code = final.callPackage ./pkgs/claude-code {};
+      claude-code-status-line = final.callPackage ./pkgs/claude-code-status-line {};
+    };
 
-      claude-code-status-line = pkgs.callPackage ./pkgs/claude-code-status-line {};
+    packages."x86_64-linux" = let
+      pkgs = (inputs.nixpkgs.legacyPackages."x86_64-linux").extend inputs.self.overlays.default;
+    in {
+      claude-code = pkgs.claude-code;
+
+      claude-code-status-line = pkgs.claude-code-status-line;
 
       installer = let
         nixosSystem = inputs.self.nixosConfigurations.installer;
@@ -139,8 +144,6 @@
         runtimeInputs = [pkgs.coreutils];
         text = "";
       };
-
-      superset = pkgs.callPackage ./pkgs/superset {};
     };
   };
 }

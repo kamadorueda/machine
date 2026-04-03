@@ -9,6 +9,7 @@
   nixpkgs.config.android_sdk.accept_license = true;
   nixpkgs.overlays = [
     flakeInputs.fenix.overlays.default
+    flakeInputs.self.overlays.default
     (final: prev: let
       inherit (final.lib.meta) getExe getExe';
       inherit (final.lib.strings) escapeShellArgs;
@@ -25,9 +26,6 @@
             exec ${getExe' pkg from} "''${EXTRA_ARGS[@]}" "$@"
           '';
         };
-    })
-    (final: prev: {
-      superset = final.callPackage ../../pkgs/superset {};
     })
   ];
 }

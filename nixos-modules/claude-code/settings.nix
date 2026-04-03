@@ -11,7 +11,7 @@ in {
   };
   skipDangerousModePermissionPrompt = true;
   statusLine = {
-    command = "${getExe (pkgs.callPackage ../../pkgs/claude-code-status-line {})}";
+    command = getExe pkgs.claude-code-status-line;
     type = "command";
   };
   voiceEnabled = true;
