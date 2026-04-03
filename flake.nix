@@ -31,6 +31,8 @@
 
       buildkite = import ./nixos-modules/buildkite;
 
+      claude-code = import ./nixos-modules/claude-code;
+
       controllers = import ./nixos-modules/controllers;
 
       editor = import ./nixos-modules/editor;
