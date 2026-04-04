@@ -47,6 +47,8 @@
 
       framework = inputs.nixosHardware.nixosModules.framework-11th-gen-intel;
 
+      git = import ./nixos-modules/git;
+
       homeManager = inputs.homeManager.nixosModules.default;
 
       networking = import ./nixos-modules/networking;
