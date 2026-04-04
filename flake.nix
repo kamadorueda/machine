@@ -25,8 +25,6 @@
   };
   outputs = inputs: {
     nixosModules = {
-      _meta = import ./nixos-modules/_meta {inherit inputs;};
-
       browser = import ./nixos-modules/browser;
 
       buildkite = import ./nixos-modules/buildkite;
@@ -89,13 +87,14 @@
     nixosConfigurations = {
       machine = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = {flakeInputs = inputs;};
         modules = builtins.attrValues inputs.self.nixosModules;
       };
       installer = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = {flakeInputs = inputs;};
         modules = [
           inputs.nixosGenerators.nixosModules.install-iso
-          inputs.self.nixosModules._meta
           inputs.self.nixosModules.controllers
           inputs.self.nixosModules.nix
           inputs.self.nixosModules.nixpkgs
