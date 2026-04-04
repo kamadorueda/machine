@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+exec nix \
+  --extra-experimental-features flakes \
+  --extra-experimental-features nix-command \
+  --extra-experimental-features pipe-operators \
+  --verbose \
+  build \
+  --print-build-logs \
+  "$@"

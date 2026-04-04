@@ -2,12 +2,6 @@
 
 set -euo pipefail
 
-nix \
-  --extra-experimental-features flakes \
-  --extra-experimental-features nix-command \
-  --extra-experimental-features pipe-operators \
-  --verbose \
-  build \
-  --print-build-logs \
+scripts/_nix-build \
   .#nixosConfigurations.machine.config.system.build.toplevel \
   "${@}"
