@@ -34,7 +34,7 @@ in {
     wellKnown.editor = zed;
 
     environment.variables.EDITOR = "editor";
-    environment.systemPackages = [pkgs.superset zed];
+    environment.systemPackages = [zed];
 
     home-manager.users.${config.wellKnown.username} = {
       home.file.".config/rustfmt/rustfmt.toml".source = ./rustfmt.toml;

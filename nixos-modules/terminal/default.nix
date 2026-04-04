@@ -100,7 +100,7 @@ in {
     diff.renamelimit = 16384;
     diff.sopsdiffer.textconv =
       getExe (pkgs.alias "sopsdiffer" pkgs.sops ["decrypt"]);
-    gpg.progam = getExe' pkgs.gnupg "gpg2";
+    gpg.program = getExe' pkgs.gnupg "gpg2";
     gpg.sign = true;
     init.defaultbranch = "main";
     user.email = config.wellKnown.email;
