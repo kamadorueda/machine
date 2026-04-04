@@ -6,7 +6,7 @@
 }: let
   inherit (pkgs.lib.lists) concatLists;
 
-  configDir = "/data/.claude";
+  configDir = "${config.wellKnown.dataDir}/.claude";
 
   settings = import ./settings.nix {inherit config pkgs;};
 

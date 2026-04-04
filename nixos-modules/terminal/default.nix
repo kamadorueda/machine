@@ -30,7 +30,7 @@
     font.normal.family = "monospace";
     font.size = config.ui.fontSize;
     general.live_config_reload = true;
-    general.working_directory = "/data";
+    general.working_directory = config.wellKnown.dataDir;
     scrolling.history = 100000;
   };
   terminalConfigToml =
@@ -39,7 +39,7 @@
   rcloneWrapped = pkgs.writeShellApplication {
     name = "rclone";
     runtimeEnv = {
-      RCLONE_CONFIG = "/data/.rclone/rclone.conf";
+      RCLONE_CONFIG = "${config.wellKnown.dataDir}/.rclone/rclone.conf";
     };
     text = ''exec ${getExe pkgs.rclone} "$@"'';
   };
@@ -75,8 +75,8 @@ in {
   };
 
   programs.bash.interactiveShellInit = ''
-    export AWS_CONFIG_FILE=/data/aws-config
-    export AWS_SHARED_CREDENTIALS_FILE=/data/aws-credentials
+    export AWS_CONFIG_FILE=${config.wellKnown.dataDir}/aws-config
+    export AWS_SHARED_CREDENTIALS_FILE=${config.wellKnown.dataDir}/aws-credentials
     export DIRENV_WARN_TIMEOUT=1h
     source <(direnv hook bash)
   '';

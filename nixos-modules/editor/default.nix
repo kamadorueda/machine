@@ -6,7 +6,7 @@
   inherit (pkgs.lib.lists) concatLists;
   inherit (pkgs.lib.meta) getExe;
 
-  configDir = "/data/editor/config";
+  configDir = "${config.wellKnown.dataDir}/editor/config";
 
   basePackage = pkgs.zed-editor;
 

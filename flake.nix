@@ -61,7 +61,7 @@
 
       secrets = import ./nixos-modules/secrets;
       secretsConfig = {config, ...}: {
-        secrets.ageKeyPath = "/data/age-key.txt";
+        secrets.ageKeyPath = "${config.wellKnown.dataDir}/age-key.txt";
       };
 
       sops = inputs.sopsNix.nixosModules.sops;
