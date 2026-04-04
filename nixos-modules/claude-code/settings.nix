@@ -1,4 +1,7 @@
-{config, pkgs}: let
+{
+  config,
+  pkgs,
+}: let
   inherit (pkgs.lib.meta) getExe;
 in {
   attribution = {

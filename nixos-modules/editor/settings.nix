@@ -1,4 +1,7 @@
-{config, pkgs}: {
+{
+  config,
+  pkgs,
+}: {
   git_panel.tree_view = true;
   preview_tabs.enabled = false;
   session.trust_all_worktrees = true;

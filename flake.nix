@@ -146,5 +146,18 @@
         text = "";
       };
     };
+
+    checks."x86_64-linux" = let
+      pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
+    in {
+      build = inputs.self.nixosConfigurations.machine.config.system.build.toplevel;
+
+      formatting =
+        pkgs.runCommand "check-formatting" {
+          nativeBuildInputs = [pkgs.alejandra];
+        } ''
+          alejandra --check ${inputs.self} && touch $out
+        '';
+    };
   };
 }
