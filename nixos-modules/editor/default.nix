@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   ...
 }: let
@@ -23,13 +22,6 @@
 
   settingsJson = (pkgs.formats.json {}).generate "settings.json" settings;
 in {
-  options = {
-    wellKnown.editor = lib.mkOption {
-      type = lib.types.package;
-      description = "The zed editor package with config directory preconfigured";
-    };
-  };
-
   config = {
     wellKnown.editor = zed;
 
