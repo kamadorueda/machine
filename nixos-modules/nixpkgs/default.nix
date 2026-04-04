@@ -19,12 +19,7 @@
       alias' = to: pkg: from: extraArgs:
         final.writeShellApplication {
           name = to;
-          runtimeEnv = {
-            EXTRA_ARGS = extraArgs;
-          };
-          text = ''
-            exec ${getExe' pkg from} "''${EXTRA_ARGS[@]}" "$@"
-          '';
+          text = ''exec ${getExe' pkg from} ${escapeShellArgs extraArgs} "$@"'';
         };
     })
   ];
