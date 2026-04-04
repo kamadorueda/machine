@@ -139,13 +139,14 @@
         nixosSystem = inputs.self.nixosConfigurations.installer;
       in
         nixosSystem.config.system.build.${nixosSystem.config.formatAttr};
-
-      shell = pkgs.writeShellApplication {
-        name = "shell";
-        runtimeInputs = [pkgs.coreutils];
-        text = "";
-      };
     };
+
+    devShells."x86_64-linux".default = let
+      pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
+    in
+      pkgs.mkShell {
+        packages = [pkgs.coreutils];
+      };
 
     checks."x86_64-linux" = let
       pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
