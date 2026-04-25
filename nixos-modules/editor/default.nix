@@ -17,7 +17,7 @@ in {
   config = {
     wellKnown.editor = zed;
 
-    environment.variables.EDITOR = "editor";
+    environment.variables.EDITOR = "editor --wait";
     environment.systemPackages = [zed];
 
     home-manager.users.${config.wellKnown.username} = {
