@@ -19,11 +19,6 @@
     path = "/etc/NetworkManager/system-connections/24f42fdc30";
     restartUnits = ["NetworkManager.service"];
   };
-  sops.secrets."wifi/spsetup-2c38" = {
-    mode = "400";
-    path = "/etc/NetworkManager/system-connections/spsetup-2c38";
-    restartUnits = ["NetworkManager.service"];
-  };
   sops.secrets."wifi/wifi-5394" = {
     mode = "400";
     path = "/etc/NetworkManager/system-connections/wifi-5394";
