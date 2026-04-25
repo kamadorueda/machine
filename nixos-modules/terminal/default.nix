@@ -35,14 +35,6 @@
   };
   terminalConfigToml =
     (pkgs.formats.toml {}).generate "alacritty-config.toml" terminalConfig;
-
-  rcloneWrapped = pkgs.writeShellApplication {
-    name = "rclone";
-    runtimeEnv = {
-      RCLONE_CONFIG = "${config.wellKnown.dataDir}/.rclone/rclone.conf";
-    };
-    text = ''exec ${getExe pkgs.rclone} "$@"'';
-  };
 in {
   environment.shellAliases = mkForce {};
   environment.systemPackages = [
@@ -56,7 +48,8 @@ in {
     pkgs.gnugrep
     pkgs.jq
     pkgs.parted
-    rcloneWrapped
+    pkgs.obsidian
+    pkgs.rclone
     pkgs.shadow
     pkgs.sops
     pkgs.sox
@@ -77,6 +70,8 @@ in {
   programs.bash.interactiveShellInit = ''
     export AWS_CONFIG_FILE=${config.wellKnown.dataDir}/aws-config
     export AWS_SHARED_CREDENTIALS_FILE=${config.wellKnown.dataDir}/aws-credentials
+    export RCLONE_CONFIG="${config.wellKnown.dataDir}/.rclone/rclone.conf
+
     export DIRENV_WARN_TIMEOUT=1h
     source <(direnv hook bash)
   '';
