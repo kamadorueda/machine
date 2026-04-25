@@ -6,17 +6,9 @@
   inherit (pkgs.lib.lists) concatLists;
   inherit (pkgs.lib.meta) getExe;
 
-  configDir = "${config.wellKnown.dataDir}/editor/config";
+  dataDir = "${config.wellKnown.dataDir}/editor";
 
-  basePackage = pkgs.zed-editor;
-
-  zed = pkgs.writeShellApplication {
-    name = "zed";
-    runtimeEnv = {
-      ZED_CONFIG_DIR = configDir;
-    };
-    text = ''exec ${getExe basePackage} "$@"'';
-  };
+  zed = pkgs.alias "zed" pkgs.zed-editor ["--user-data-dir" dataDir];
 
   settings = import ./settings.nix {inherit config pkgs;};
 
@@ -44,14 +36,14 @@ in {
         src = pkgs.writeShellScript "machine-editor-setup.sh" ''
           set -eux
 
-          rm -rf "@configDir@"
-          mkdir -p "@configDir@"
+          rm -rf "@dataDir@/config"
+          mkdir -p "@dataDir@/config"
 
           cp --dereference --no-preserve=mode,ownership \
-            "@settings@" "@configDir@/settings.json"
+            "@settings@" "@dataDir@/config/settings.json"
         '';
         substitutions = concatLists [
-          ["--replace-fail" "@configDir@" configDir]
+          ["--replace-fail" "@dataDir@" dataDir]
           ["--replace-fail" "@settings@" settingsJson]
         ];
         isExecutable = true;
