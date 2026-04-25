@@ -4,10 +4,12 @@
 }: let
   inherit (pkgs.lib.meta) getExe;
 in {
+  alwaysThinkingEnabled = false;
   attribution = {
     commit = "";
     pr = "";
   };
+  effortLevel = "low";
   model = "haiku";
   permissions = {
     defaultMode = "bypassPermissions";
