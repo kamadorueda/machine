@@ -70,7 +70,7 @@ in {
   programs.bash.interactiveShellInit = ''
     export AWS_CONFIG_FILE=${config.wellKnown.dataDir}/aws-config
     export AWS_SHARED_CREDENTIALS_FILE=${config.wellKnown.dataDir}/aws-credentials
-    export RCLONE_CONFIG="${config.wellKnown.dataDir}/.rclone/rclone.conf
+    export RCLONE_CONFIG=${config.wellKnown.dataDir}/.rclone/rclone.conf
 
     export DIRENV_WARN_TIMEOUT=1h
     source <(direnv hook bash)
