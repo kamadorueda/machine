@@ -15,9 +15,11 @@ in {
     defaultMode = "bypassPermissions";
   };
   skipDangerousModePermissionPrompt = true;
+  showTurnDuration = false;
   statusLine = {
     command = getExe pkgs.claude-code-status-line;
     type = "command";
   };
+  tui = "fullscreen";
   voiceEnabled = true;
 }
