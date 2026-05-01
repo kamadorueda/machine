@@ -29,6 +29,7 @@
           name = path;
           value = {
             device = "${fhs}${path}";
+            fsType = "none";
             options = ["bind"];
           };
         })

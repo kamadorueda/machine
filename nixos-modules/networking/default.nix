@@ -11,6 +11,11 @@
   networking.nameservers = ["1.1.1.1" "8.8.8.8" "8.8.4.4"];
   networking.networkmanager.enable = true;
 
+  services.tor.enable = true;
+  services.tor.openFirewall = true;
+
+  environment.systemPackages = [pkgs.tor];
+
   sops.secrets."cloudflared-tunnel" = {
     restartUnits = ["docker-cloudflared-tunnel.service"];
   };
