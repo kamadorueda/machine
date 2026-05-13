@@ -13,6 +13,11 @@
 
   services.tor.enable = true;
   services.tor.openFirewall = true;
+  services.tor.settings = {
+    SocksPort = [
+      "127.0.0.1:9050"
+    ];
+  };
 
   environment.systemPackages = [pkgs.tor];
 
