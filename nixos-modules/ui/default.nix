@@ -39,6 +39,8 @@
 
       pkgs.noto-fonts-color-emoji
       pkgs.twitter-color-emoji
+      pkgs.noto-fonts-cjk-sans
+      pkgs.noto-fonts-cjk-serif
       pkgs.fira-code
     ];
     home-manager.users.${config.wellKnown.username} = {
