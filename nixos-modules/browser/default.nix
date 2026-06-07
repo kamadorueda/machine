@@ -11,6 +11,15 @@ in {
     pkgs.tor-browser
   ];
 
+  home-manager.users.${config.wellKnown.username}.xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "x-scheme-handler/http" = "Brave-browser.desktop";
+      "x-scheme-handler/https" = "Brave-browser.desktop";
+      "text/html" = "Brave-browser.desktop";
+    };
+  };
+
   systemd.services."machine-browser-user-data-dir" = {
     path = [pkgs.util-linux];
 

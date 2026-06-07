@@ -1,4 +1,5 @@
-.direnv/
-/result*
+/**/result*
+/.claude/*.lock
+/.direnv/
 /scripts/gpg/home/
 /scripts/gpg/pubring.kbx

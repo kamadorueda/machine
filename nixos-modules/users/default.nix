@@ -1,6 +1,7 @@
 {config, ...}: {
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
+  home-manager.backupFileExtension = "backup";
   home-manager.users.${config.wellKnown.username} = {
     home.stateVersion = config.system.stateVersion;
   };
