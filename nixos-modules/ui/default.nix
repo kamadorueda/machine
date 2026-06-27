@@ -100,6 +100,10 @@
     xdg.mime.addedAssociations = {
       # "application/pdf" = "brave-browser.desktop";
     };
+    xdg.mime.defaultApplications = {
+      "x-scheme-handler/http" = "brave-browser.desktop";
+      "x-scheme-handler/https" = "brave-browser.desktop";
+    };
     xdg.mime.enable = true;
   };
 }
