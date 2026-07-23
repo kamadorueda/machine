@@ -1,6 +1,10 @@
 json=$(cat)
 
 model=$(jq -r '.model.display_name // .model.id // "unknown"' <<< "$json")
+effort=$(jq -r '.effort.level // empty' <<< "$json")
+if [[ -n ${effort} ]]; then
+  model="${model} (${effort})"
+fi
 ctx_pct=$(jq -r '(.context_window.used_percentage // 0) | floor' <<< "$json")
 cost_raw=$(jq -r '.cost.total_cost_usd // 0' <<< "$json")
 cost=$(printf "%.2f" "$cost_raw")
