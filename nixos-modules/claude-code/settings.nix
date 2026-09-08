@@ -4,15 +4,17 @@
 }: let
   inherit (pkgs.lib.meta) getExe;
 in {
-  alwaysThinkingEnabled = false;
+  alwaysThinkingEnabled = true;
   agentPushNotifEnabled = true;
   attribution = {
     commit = "";
     pr = "";
   };
+  autoCompactEnabled = false;
   autoMemoryEnabled = false;
-  effortLevel = "low";
-  model = "haiku";
+  effortLevel = "high";
+  model = "sonnet";
+  outputStyle = "concise";
   permissions = {
     defaultMode = "bypassPermissions";
   };
