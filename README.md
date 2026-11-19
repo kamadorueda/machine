@@ -2,7 +2,7 @@
 
 This repository contains
 everything that is needed
-to create a clone of my operative system,
+to create a clone of my operating system,
 exactly as I use it every day.
 
 This is roughly a [NixOS](https://nixos.org/) with four partitions:
@@ -24,13 +24,14 @@ This system has:
 
 In general, the system is made out of the following components:
 
-- [av](./nixos-modules/av/default.nix):
-  Antivirus.
 - [browser](./nixos-modules/browser/default.nix):
   Web browser, extensions, and bookmarks.
 - [buildkite](./nixos-modules/buildkite/default.nix):
   Some https://buildkite.com/ agents that run in my computer
   and serve as CI/CD of my open source projects.
+- [claude-code](./nixos-modules/claude-code/default.nix):
+  My [Claude Code](https://claude.com/claude-code) settings:
+  model, effort level, status line, and permissions.
 - [editor](./nixos-modules/editor/default.nix):
   My code editor, extensions, theme, keyboard shortcuts, etc.
 - [terminal](./nixos-modules/terminal/default.nix):
@@ -39,13 +40,20 @@ In general, the system is made out of the following components:
 - [ui](./nixos-modules/ui/default.nix):
   The window manager, fonts, and graphical elements.
 
+- [fhs](./nixos-modules/fhs/default.nix):
+  A few [FHS](https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard)
+  paths, bind-mounted so that non-Nix toolchains find their libraries.
 - [networking](./nixos-modules/networking/default.nix):
   Wifi settings, mostly.
 - [nix](./nixos-modules/nix/default.nix):
   Configurations of the Nix daemon that powers this machine.
+- [nixpkgs](./nixos-modules/nixpkgs/default.nix):
+  Overlays and the package set this machine is built from.
 - [virtualization](./nixos-modules/virtualization/default.nix):
-  Containers, virtual machines and emulated architectures.
+  Docker, and the containers that run on it.
 
+- [git](./nixos-modules/git/default.nix):
+  Git configuration, aliases, and signing.
 - [secrets](./nixos-modules/secrets/default.nix):
   SSH, GPG, system password and secrets locations.
 - [users](./nixos-modules/users/default.nix):
@@ -58,6 +66,57 @@ In general, the system is made out of the following components:
 - [physical](./nixos-modules/physical/default.nix):
   Boot loader and external devices identifiers (disks, swap, etc).
 
+Everything is wired together in [flake.nix](./flake.nix),
+which exposes each component as a NixOS module
+and composes them into the `machine` configuration.
+
+A couple of packages live in this repository as well:
+
+- [claude-code](./pkgs/claude-code/default.nix):
+  [Claude Code](https://claude.com/claude-code),
+  pinned through an npm lock file
+  so that upgrades are explicit and reproducible.
+- [claude-code-status-line](./pkgs/claude-code-status-line/default.nix):
+  The status line it renders.
+
+## Day to day
+
+These are the scripts I use to operate the machine,
+all of them in [scripts](./scripts):
+
+- `scripts/build-system`:
+  Build the system, without applying it.
+- `scripts/switch-to-configuration`:
+  Apply what `scripts/build-system` produced, permanently.
+  Pass `test` to apply it until the next reboot only.
+- `scripts/rollback`:
+  Go back to the previous generation and activate it.
+- `scripts/update-hardware`:
+  Regenerate the auto-detected hardware configuration.
+- `scripts/build-installer`:
+  Build the custom NixOS installer ISO.
+- `scripts/format`:
+  Format the Nix and shell files in the repository, with
+  [Alejandra](https://github.com/kamadorueda/alejandra)
+  and [shfmt](https://github.com/mvdan/sh).
+- `scripts/gc-generations` and `scripts/gc-store`:
+  Reclaim disk space, by dropping old generations
+  and garbage collecting the Nix store.
+- `scripts/rotate-gpg` and `scripts/rotate-ssh`:
+  Rotate my keys.
+- `scripts/with-buildkite-age-key`:
+  Run a command with the age key of one of the Buildkite agents,
+  handy for editing their secrets.
+
+Secrets are encrypted with [sops](https://github.com/getsops/sops)
+and live in [secrets](./secrets):
+
+```bash
+sops secrets/machine.yaml
+scripts/with-buildkite-age-key public sops secrets/buildkite-public.yaml
+scripts/with-buildkite-age-key private sops secrets/buildkite-private.yaml
+```
+
 ## Setup
 
 1.  Download `NixOS minimal ISO image` from the
@@ -65,14 +124,14 @@ In general, the system is made out of the following components:
     Or build from source code by cloning the repository and running:
 
     ```bash
-    $ ./build-installer
+    $ scripts/build-installer
     ```
 
 1.  Burn it into a USB stick.
 
     - If you are currently on Windows use [Rufus](https://rufus.ie).
 
-    - If you are on an unix-like operative system,
+    - If you are on an unix-like operating system,
       you can do so from the command line:
 
       ```bash
@@ -114,7 +173,7 @@ In general, the system is made out of the following components:
 
     After this tutorial
     you'll be able to pick
-    which Operative System you want to use
+    which operating system you want to use
     when the computer starts.
 
 1.  Boot from the USB stick,
@@ -225,11 +284,11 @@ In general, the system is made out of the following components:
       wpa_supplicant -B -i "${interface}" -c <(wpa_passphrase "${ssid}" "{psk}")
     fi
     cd "$(mktemp -d)"
-    nix-shell -p git just
+    nix-shell -p git
     git clone https://github.com/kamadorueda/machine
     cd machine
-    ./build-system
-    ./switch-to-configuration
+    scripts/build-system
+    scripts/switch-to-configuration
     reboot
     ```
 
@@ -262,7 +321,7 @@ In general, the system is made out of the following components:
 
 1.  Add it to your configuration.
 
-    You can see the `hardware` NixOS module in this repository for an example.
+    You can see the `controllers` NixOS module in this repository for an example.
 
 1.  Switch and reboot.
 
