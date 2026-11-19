@@ -12,8 +12,8 @@ in {
   };
   autoCompactEnabled = false;
   autoMemoryEnabled = false;
-  effortLevel = "high";
-  model = "sonnet";
+  effortLevel = "medium";
+  model = "opus";
   outputStyle = "concise";
   permissions = {
     defaultMode = "bypassPermissions";
