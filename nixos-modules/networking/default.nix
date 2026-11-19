@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{config, ...}: {
   networking.firewall.enable = true;
   networking.firewall.allowedUDPPorts = [];
   networking.firewall.allowedTCPPorts = [];
@@ -11,19 +7,6 @@
   networking.nameservers = ["1.1.1.1" "8.8.8.8" "8.8.4.4"];
   networking.networkmanager.enable = true;
 
-  services.tor.enable = true;
-  services.tor.openFirewall = true;
-  services.tor.settings = {
-    SocksPort = [
-      "127.0.0.1:9050"
-    ];
-  };
-
-  environment.systemPackages = [pkgs.tor];
-
-  sops.secrets."cloudflared-tunnel" = {
-    restartUnits = ["docker-cloudflared-tunnel.service"];
-  };
   sops.secrets."wifi/24f42fdc30" = {
     mode = "400";
     path = "/etc/NetworkManager/system-connections/24f42fdc30";
@@ -36,11 +19,4 @@
   };
 
   users.users.${config.wellKnown.username}.extraGroups = ["networkmanager"];
-
-  virtualisation.oci-containers.containers.cloudflared-tunnel = {
-    image = "cloudflare/cloudflared:latest";
-    cmd = ["tunnel" "--no-autoupdate" "run"];
-    extraOptions = ["--network" "host"];
-    environmentFiles = [config.sops.secrets."cloudflared-tunnel".path];
-  };
 }

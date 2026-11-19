@@ -8,7 +8,6 @@ in {
   environment.systemPackages = [
     (pkgs.alias "browser" pkgs.brave [])
     (pkgs.alias "x-www-browser" pkgs.brave [])
-    pkgs.tor-browser
   ];
 
   home-manager.users.${config.wellKnown.username}.xdg.mimeApps = {
@@ -57,7 +56,6 @@ in {
     DefaultSearchProviderEnabled = true;
     DefaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
     ExtensionInstallForcelist = [
-      "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly: Grammar Checker and Writing App
       "hdokiejnpimakedhajhdlcegeplioahd" # LastPass: Free Password Manager
     ];
     HighContrastEnabled = true;

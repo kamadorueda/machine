@@ -1,6 +1,6 @@
 # sops secrets/machine.yaml
-# scripts/with-buildkite-age-key.sh public sops secrets/buildkite-public.yaml
-# scripts/with-buildkite-age-key.sh private sops secrets/buildkite-private.yaml
+# scripts/with-buildkite-age-key public sops secrets/buildkite-public.yaml
+# scripts/with-buildkite-age-key private sops secrets/buildkite-private.yaml
 {
   config,
   lib,

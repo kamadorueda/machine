@@ -48,7 +48,6 @@ in {
     pkgs.gnugrep
     pkgs.jq
     pkgs.parted
-    pkgs.obsidian
     pkgs.rclone
     pkgs.shadow
     pkgs.sops
